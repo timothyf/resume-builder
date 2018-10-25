@@ -4,19 +4,22 @@
     <% data.resume.jobs.each do |job| %>
     <div class="item">
         <div class="meta">
-            <div class="upper-row">
-                <h3 class="job-title"><%= job.title %></h3>
-                <div class="time">
-                    <span class="dtstart" title="<%= job.dates.start %>"><%= display_date(job.dates.start) %></span> -
-                    <span class="dtend" title="<%= job.dates.end %>"><%= display_date(job.dates.end) %></span>
-                </div>
-            </div>
             <div class="company">
                 <% if job.url? %>
                   <h2 class="location"><a href="<%= job.url%>" target=_blank><%= job.company %></a></h2>
                 <% else %>
                   <h2 class="location"><%= job.company %></h2>
                 <% end %>
+            </div>
+            <div class="company-location">
+              <%= job.location.city %>, <%= job.location.state %>
+            </div>
+            <div class="upper-row">
+                <h3 class="job-title"><%= job.title %></h3>
+                <div class="time">
+                    <span class="dtstart" title="<%= job.dates.start %>"><%= display_date(job.dates.start) %></span> -
+                    <span class="dtend" title="<%= job.dates.end %>"><%= display_date(job.dates.end) %></span>
+                </div>
             </div>
         </div>
         <div class="details">

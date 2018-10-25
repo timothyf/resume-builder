@@ -1,5 +1,11 @@
 <div class="contact-container container-block">
     <ul class="list-unstyled contact-list">
+        <li class="address">
+          <%= data.resume.info.address.street %><br/>
+          <%= data.resume.info.address.city %>,
+          <%= data.resume.info.address.state %>&nbsp;&nbsp;
+          <%= data.resume.info.address.postal_code %>
+        </li>
         <li class="email"><i class="fa fa-envelope"></i><a href="mailto:<%= data.resume.info.email %>"><%= data.resume.info.email %></a></li>
         <% if data.resume.info.phone %>
             <li class="phone"><i class="fa fa-phone"></i><a href="tel:<%= data.resume.info.phone %>"><%= data.resume.info.phone %></a></li>
