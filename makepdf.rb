@@ -6,8 +6,7 @@ module PdfMaker
                     require 'pdfkit'
 
                     kit = PDFKit.new(File.new('build/index.html'),
-                                :print_media_type => true,
-                                :background => true,
+                                :print_media_type => false,
                                 :viewport_size => '2480x3508',
                                 :zoom => 0.8,
                                 :dpi => 300)
