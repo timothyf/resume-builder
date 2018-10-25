@@ -5,7 +5,7 @@ module PdfMaker
                 begin
                     require 'pdfkit'
 
-                    kit = PDFKit.new(File.new('build/index.html'),
+                    kit = PDFKit.new(File.new('build/pdf.html'),
                                 :print_media_type => false,
                                 :viewport_size => '2480x3508',
                                 :zoom => 0.8,
@@ -19,7 +19,6 @@ module PdfMaker
                     end
                     builder.say_status "PDF Maker",  "PDF file available at build/resume.pdf"
                 end
-
 
             end
             alias :included :registered

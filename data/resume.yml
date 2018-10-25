@@ -26,13 +26,22 @@ info:
         state: MI # not mandatory
         postal_code: 48134 # not mandatory
     desc: |
-        I am a passionate technologist and leader with 27 years of software development experience in roles including Chief Technology Officer, VP of Engineering, Chief Architect, Director of Mobile Development, and Senior Architect, along with many years of hands-on software development.
+        I am a passionate technologist and leader with 27 years of software development experience in roles
+        including Chief Technology Officer, VP of Engineering, Chief Architect, and Director of Mobile Development,
+        along with many years of hands-on software development.
 
-        My skill-set ranges from business and management experience and knowledge to hands-on development expertise. While at heart I will always be a developer, I am also passionate about innovation, growing and leading teams and  setting a technical vision for a company.
+        My skill-set ranges from business and management experience and knowledge to hands-on development expertise.
+        While at heart I will always be a developer, I am also passionate about innovation, growing and leading teams
+        and setting a technical vision for a company.
 
-        I have a great deal of experience in the areas of full-stack web development, mobile development and scalable architecture. I am also well versed in Agile methodologies. My wide breadth of knowledge of both current and emerging technologies allows me to often identify innovative technology solutions to customer problems.
+        I have a great deal of experience in the areas of full-stack web development, mobile development and scalable
+        architecture. I am also well versed in Agile methodologies. My wide breadth of knowledge of both current and
+        emerging technologies allows me to often identify innovative technology solutions to customer problems.
 
-        I am also passionate about educating, mentoring, and building teams and communities of practice. I have been an evangelist for great software development in the Detroit area for many years. I am the founder and organizer of the Technology Mentorship Community for Michigan. I also enjoys technical writing. I am the author of two published books, the Java Phrasebook and the Ruby on Rails Bible.
+        I am also passionate about educating, mentoring, and building teams and communities of practice. I have been an
+        evangelist for great software development in the Detroit area for many years. I am the founder and organizer of
+        the Technology Mentorship Community for Michigan. I also enjoys technical writing. I am the author of two published
+        books, the Java Phrasebook and the Ruby on Rails Bible.
 
 skills:
     - name: Web design
@@ -81,7 +90,9 @@ jobs:
           start: 2018, March
           end: 2018, October
       desc: |
-        Connect Space is an Ann Arbor, MI based startup with a web and mobile opportunity ecosystem and event management platform. As CTO at Connect Space, I was responsible for leading all aspects of the company’s technology development initiatives and collaborating with the CEO in developing the strategic vision for the Connect Space product.
+        Connect Space is an Ann Arbor, MI based startup with a web and mobile opportunity ecosystem and event management
+        platform. As CTO at Connect Space, I was responsible for leading all aspects of the company’s technology development
+        initiatives and collaborating with the CEO in developing the strategic vision for the Connect Space product.
 
         Responsibilities included:
           <ul>
@@ -102,7 +113,12 @@ jobs:
           start: 2017, September
           end: 2018, March
       desc: |
-        Powerley is a startup in the Smart Grid and Smart Home space. The Powerley platform includes a cloud-based web services infrastructure, native iOS and Android apps, and a dedicated in-home hardware platform, all able to communicate with a network of IOT smart devices. As VP of Engineering, my responsibilities included technology leadership, management, platform architecture, and managing process. A strategic initiative I took responsibility for was to redefine the product development process in order to improve predictability of deliverables, bring transparency into product development, and insure that the team is focused on strategic improvement efforts.
+        Powerley is a startup in the Smart Grid and Smart Home space. The Powerley platform includes a cloud-based web
+        services infrastructure, native iOS and Android apps, and a dedicated in-home hardware platform, all able to
+        communicate with a network of IOT smart devices. As VP of Engineering, my responsibilities included technology
+        leadership, management, platform architecture, and managing process. A strategic initiative I took responsibility
+        for was to redefine the product development process in order to improve predictability of deliverables, bring
+        transparency into product development, and insure that the team is focused on strategic improvement efforts.
 
         Responsibilities also include:
           <ul>
@@ -121,7 +137,8 @@ jobs:
           start: 2016, March
           end: 2017, August
       desc: |
-        Quikly is a start-up in the retail promotional marketing space, based in Detroit. As VP of Engineering, my responsibilities included:
+        Quikly is a start-up in the retail promotional marketing space, based in Detroit. As VP of Engineering, my
+        responsibilities included:
         <ul>
           <li>Architect scalability into the Quikly platform</li>
           <li>Define, execute and deliver on a vision and roadmap for the future growth of Quikly.</li>
@@ -141,7 +158,8 @@ jobs:
           start: 2006, May
           end: 2016, March
       desc: |
-        Spent nearly 10 years with Compuware, which later became Lochbridge, in a variety of roles within both product and professional services divisions. Highlights of that experience are below.
+        Spent nearly 10 years with Compuware, which later became Lochbridge, in a variety of roles within both product
+        and professional services divisions. Highlights of that experience are below.
 
         <div class="job-title">Director of Mobile Development</div>
         Responsible for leading a team that delivers solutions for iOS, Android, Windows, and HTML5/Hybrid platforms that run on phones, tablets, and in-vehicle systems. In this role I also served as the lead mobile architect. Responsibilities included responding to RFPs, setting mobile technology direction for the company, conducting regular 1-on-1 sessions with development staff, mentoring development staff, conducting performance reviews and career planning sessions, architecting and estimating solutions, leading development projects, and participating in mobile development coding. I was also responsible for identifying staffing needs, leading the interview process, and hiring candidates.
@@ -169,9 +187,13 @@ jobs:
           start: 2003, February
           end: 2006, May
       desc: |
-        Worked on a Web-based single login project for Ford Motor Company. Responsibilities include assisting with architecture, analysis, design, coding, and testing. Environment consisted of Websphere Application Server and Websphere Studio Application Developer (WSAD) development environment.
+        Worked on a Web-based single login project for Ford Motor Company. Responsibilities include assisting with
+        architecture, analysis, design, coding, and testing. Environment consisted of Websphere Application Server
+        and Websphere Studio Application Developer (WSAD) development environment.
 
-        Software design architect on Ford APS (Authorization Policy Server) project. The intent of this project is to provide a web application authorization solution for corporate-wide use. Implemented in J2EE technology, IBM Websphere, IBM WSAD environment. My role included assisting with analysis, design, and coding.
+        Software design architect on Ford APS (Authorization Policy Server) project. The intent of this project is
+        to provide a web application authorization solution for corporate-wide use. Implemented in J2EE technology,
+        IBM Websphere, IBM WSAD environment. My role included assisting with analysis, design, and coding.
 
     - title: Development Team Lead
       company: MedCharge
@@ -182,7 +204,13 @@ jobs:
           start: 2002, February
           end: 2003, January
       desc: |
-        Leader of the J2EE development team at MedCharge, a startup whose product was a health care application used within the University of Michigan Medical Center. The product allows hospital staff to capture all charges related to a patient's care and to dictate medical notes. The application is a multi-tiered Java application running on the WebSphere app server with an Oracle database. My responsibilities included serving as the lead java architect, software design, lead developer, task planning, mentoring,preparing and monitoring schedules. The web application featured a thin rich-client front-end that used dynamic HTML and AJAX techniques prior to the coining of the term AJAX.
+        Leader of the J2EE development team at MedCharge, a startup whose product was a health care application
+        used within the University of Michigan Medical Center. The product allows hospital staff to capture all
+        charges related to a patient's care and to dictate medical notes. The application is a multi-tiered Java
+        application running on the WebSphere app server with an Oracle database. My responsibilities included
+        serving as the lead java architect, software design, lead developer, task planning, mentoring,preparing
+        and monitoring schedules. The web application featured a thin rich-client front-end that used dynamic HTML
+        and AJAX techniques prior to the coining of the term AJAX.
 
     - title: Senior Java Architect
       company: Spherion
@@ -193,9 +221,13 @@ jobs:
           start: 2001, May
           end: 2002, January
       desc: |
-        Lead architect on web based applications, primarily using J2EE technologies. Responsibilities include architecture and design including object modeling, managing development team, creating and monitoring development schedule, gathering requirements, turning business requirements into technical requirements, writing technical specifications, development, and mentoring junior developers.
+        Lead architect on web based applications, primarily using J2EE technologies. Responsibilities include architecture
+        and design including object modeling, managing development team, creating and monitoring development schedule,
+        gathering requirements, turning business requirements into technical requirements, writing technical specifications,
+        development, and mentoring junior developers.
 
-        Developed white papers on Java technology and object oriented design and methodologies for internal distribution. Served as technical lead in sales presentations to clients.
+        Developed white papers on Java technology and object oriented design and methodologies for internal distribution.
+        Served as technical lead in sales presentations to clients.
 
     - title: Security Consultant
       company: PriceWaterhouseCoopers

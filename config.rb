@@ -28,6 +28,8 @@ activate :livereload
 #
 # With no layout
 page "index.html", :layout => false
+
+page "pdf.html", :layout => false
 #
 # With alternative layout
 # page "/path/to/file.html", :layout => :otherlayout

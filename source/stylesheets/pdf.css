@@ -1,0 +1,13 @@
+body {
+  background: none !important;
+}
+
+.wrapper {
+    background: #42a8c0;
+    max-width: 960px;
+    margin: 0 auto;
+    position: relative;
+    -webkit-box-shadow: none; 
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
