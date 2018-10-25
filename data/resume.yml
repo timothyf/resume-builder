@@ -42,22 +42,27 @@ skills:
     - name: Project Direction
       desc: Proven ability to lead and manage a wide variety of design and development projects in team and independent situations.
 
-languages:
-    - name: Gibberish
-      level: Native language
-    - name: Manager Speak
-      level: Fluent
+# languages:
+#     - name: Gibberish
+#       level: Native language
+#     - name: Manager Speak
+#       level: Fluent
 
 alphabetsoup:
-    - XHTML
-    - CSS
-    - Javascript
-    - Jquery
-    - PHP
-    - CVS / Subversion
-    - OS X
-    - Windows XP/Vista
-    - Linux
+    - Team Leadership & Management
+    - Mentorship & Community building
+    - Agile Processes
+    - Process management
+    - Web & Mobile Development
+    - Web & Mobile Scalability
+    - Microservices Architecture
+    - Amazon Web Services (AWS)
+    - Heroku, EngineYard
+    - Ruby, Rails, JavaScript, Node.js, React, ReactNative, Java, Swift, HTML, CSS
+    - GraphQL, JSON
+    - Internet of Things (IOT)
+    - Security (Encryption, Digital Signature, PKI)
+
 
 # links: # this section is not mandatory
 #     - name: Link1
@@ -91,7 +96,7 @@ jobs:
     - title: VP of Engineering
       company: Powerley
       location:
-        city: Ann Arbor
+        city: Royal Oak
         state: MI
       dates:
           start: 2017, September
@@ -110,7 +115,7 @@ jobs:
     - title: VP of Engineering
       company: Quikly
       location:
-        city: Ann Arbor
+        city: Detroit
         state: MI
       dates:
           start: 2016, March
@@ -130,7 +135,7 @@ jobs:
     - title:
       company: Lochbridge / Compuware
       location:
-        city: Ann Arbor
+        city: Detroit
         state: MI
       dates:
           start: 2006, May
@@ -158,7 +163,7 @@ jobs:
     - title: Senior Java Architect
       company: LogicaCMG
       location:
-        city: Ann Arbor
+        city: Southfield
         state: MI
       dates:
           start: 2003, February
@@ -182,7 +187,7 @@ jobs:
     - title: Senior Java Architect
       company: Spherion
       location:
-        city: Ann Arbor
+        city: Troy
         state: MI
       dates:
           start: 2001, May
@@ -195,7 +200,7 @@ jobs:
     - title: Security Consultant
       company: PriceWaterhouseCoopers
       location:
-        city: Ann Arbor
+        city: Detroit
         state: MI
       dates:
           start: 2000, October
@@ -206,8 +211,8 @@ jobs:
     - title: Lead Developer & Architect
       company: Cyclone Commerce
       location:
-        city: Ann Arbor
-        state: MI
+        city: Scottsdale
+        state: AZ
       dates:
           start: 1997, March
           end: 2000, October
@@ -222,8 +227,8 @@ jobs:
     - title: Senior Software Engineer
       company: Motorola
       location:
-        city: Ann Arbor
-        state: MI
+        city: Chandler
+        state: AZ
       dates:
           start: 1991, June
           end: 1997, March
@@ -232,30 +237,53 @@ jobs:
 
 
 education: # this section is not mandatory
-    - name: Indiana University
-      url: http://indiana.edu # not mandatory
-      city: Bloomington
-      region: Indiana
-      country: USA # not mandatory
+    - name: University of Michigan
+      #url: http://indiana.edu # not mandatory
+      #city: Bloomington
+      #region: Indiana
+      #country: USA # not mandatory
       dates:
-          start: 2001-01-01
-          end: 2010-01-01 # not mandatory
-      title: Dual Major, Economics and English
-      grade: 4.0 GPA # not mandatory
+          start: 1986-09
+          end: 1991-05 # not mandatory
+      title: B.S. Electrical Engineering
+      #grade: 4.0 GPA # not mandatory
 
-projects: # this section is not mandatory
-    - name: ResumeMan
-      desc: |
-          Resume Man is an HTML and PDF resume builder made in Ruby with Middleman.
-      url: https://github.com/reefab/ResumeMan # not mandatory
-      dates: # not mandatory
-          start: 2013-02-18
-          end: 2014-04-05 # not mandatory
-      location: # not mandatory
-          city: Florence
-          region: Tuscany
-          country: Italy # not mandatory
+    - name: Capella University
+      #url: http://indiana.edu # not mandatory
+      #city: Bloomington
+      #region: Indiana
+      #country: USA # not mandatory
+      dates:
+          start: 1986-09
+          end: 1991-05 # not mandatory
+      title: M.S. Education
+      #grade: 4.0 GPA # not mandatory
 
-interests: # this section is not mandatory
-    - Underwater basket weaving
-    - Competitive Rock Paper Scissors
+    - name: Arizona State University
+      #url: http://indiana.edu # not mandatory
+      #city: Bloomington
+      #region: Indiana
+      #country: USA # not mandatory
+      dates:
+          start: 1986-09
+          end: 1991-05 # not mandatory
+      title: M.S. Computer Science
+      #grade: 4.0 GPA # not mandatory
+
+
+# projects: # this section is not mandatory
+#     - name: ResumeMan
+#       desc: |
+#           Resume Man is an HTML and PDF resume builder made in Ruby with Middleman.
+#       url: https://github.com/reefab/ResumeMan # not mandatory
+#       dates: # not mandatory
+#           start: 2013-02-18
+#           end: 2014-04-05 # not mandatory
+#       location: # not mandatory
+#           city: Florence
+#           region: Tuscany
+#           country: Italy # not mandatory
+
+# interests: # this section is not mandatory
+#     - Underwater basket weaving
+#     - Competitive Rock Paper Scissors
