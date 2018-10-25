@@ -1,3 +1,2 @@
 * linguist-vendored
 *.rb linguist-vendored=false
-*.erb linguist-vendored=false
