@@ -7,9 +7,12 @@ module PdfMaker
 
                     kit = PDFKit.new(File.new('build/pdf.html'),
                                 :print_media_type => false,
+                                :page_size => 'Letter',
                                 :viewport_size => '2480x3508',
-                                :zoom => 0.8,
-                                :dpi => 300)
+                                #:viewport_size => '2750x3508',
+                                :zoom => 0.7
+                                #:dpi => 300
+                              )
 
                     file = kit.to_file('build/resume.pdf')
 

@@ -1,13 +1,22 @@
 body {
   background: none !important;
+  padding: 0px;
 }
 
 .wrapper {
-    background: #42a8c0;
-    max-width: 960px;
-    margin: 0 auto;
+    max-width: none;
+    background-color: white;
+    margin: none;
     position: relative;
-    -webkit-box-shadow: none; 
+    -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
+}
+
+.main-wrapper {
+  padding-left: 0px;
+}
+
+.hidden-print {
+  display: none;
 }
