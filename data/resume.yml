@@ -275,8 +275,8 @@ education: # this section is not mandatory
       #region: Indiana
       #country: USA # not mandatory
       dates:
-          start: 1986-09
-          end: 1991-05 # not mandatory
+          start: Sept 1986
+          end: May 1991 # not mandatory
       title: B.S. Electrical Engineering
       #grade: 4.0 GPA # not mandatory
 
@@ -286,8 +286,8 @@ education: # this section is not mandatory
       #region: Indiana
       #country: USA # not mandatory
       dates:
-          start: 1986-09
-          end: 1991-05 # not mandatory
+          start: Sept 2001
+          end: May 2003 # not mandatory
       title: M.S. Education
       #grade: 4.0 GPA # not mandatory
 
@@ -297,8 +297,8 @@ education: # this section is not mandatory
       #region: Indiana
       #country: USA # not mandatory
       dates:
-          start: 1986-09
-          end: 1991-05 # not mandatory
+          start: Sept 1992
+          end: May 1994 # not mandatory
       title: M.S. Computer Science
       #grade: 4.0 GPA # not mandatory
 
