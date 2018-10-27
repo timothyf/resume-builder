@@ -5,6 +5,7 @@ headers:
     techs: Technical
     jobs: Experience
     education: Education
+    #links: Links
     download: Download PDF
     projects: Projects
     interests: Interests
@@ -12,8 +13,10 @@ headers:
 info:
     name: Timothy Fisher
     photo: false
+    #shortdesc: Job Title
     email: timothyf@gmail.com
     phone: (734) - 790-7235 # not mandatory
+    #homepage: http://example.com/ # not mandatory
     github: https://github.com/timothyf # Not mandatory
     linkedin: https://linkedin.com/in/timothyfisher/ # not mandatory
     twitter: http://twitter.com/tfisher # not mandatory
@@ -35,12 +38,26 @@ info:
         architecture. I am also well versed in Agile methodologies. My wide breadth of knowledge of both current and
         emerging technologies allows me to often identify innovative technology solutions to customer problems.
 
-        I am also passionate about educating, mentoring, and building communities of practice. I have been an
+        I am also passionate about educating, mentoring, and building teams and communities of practice. I have been an
         evangelist for great software development in the Detroit area for many years. I am the founder and organizer of
-        the Technology Mentorship Community for Michigan. I also enjoy technical writing. I am the author of two published
+        the Technology Mentorship Community for Michigan. I also enjoys technical writing. I am the author of two published
         books, the Java Phrasebook and the Ruby on Rails Bible.
 
 skills:
+    - name: Web design
+      desc: Assertively exploit wireless initiatives rather than synergistic core competencies.
+    - name: Interface Design
+      desc: Credibly streamline mission-critical value with multifunctional functionalities.
+    - name: Project Direction
+      desc: Proven ability to lead and manage a wide variety of design and development projects in team and independent situations.
+
+# languages:
+#     - name: Gibberish
+#       level: Native language
+#     - name: Manager Speak
+#       level: Fluent
+
+alphabetsoup:
     - Team Leadership & Management
     - Mentorship & Community building
     - Agile Processes
@@ -55,12 +72,20 @@ skills:
     - Internet of Things (IOT)
     - Security (Encryption, Digital Signature, PKI)
 
+
+# links: # this section is not mandatory
+#     - name: Link1
+#       url: http://example.com/
+#     - name: Another link
+#       url: https://example.com/
+
 jobs:
     - title: Chief Technology Officer
       company: Connect Space
       location:
         city: Ann Arbor
         state: MI
+      #url: https://connectspaceinc.com/
       dates:
           start: 2018, March
           end: 2018, October
@@ -213,11 +238,7 @@ jobs:
           start: 2000, October
           end: 2001, May
       desc: |
-        Provided consulting in the areas of information security and public key infrastructure (PKI) to clients of
-        PricewaterhouseCoopers. Developed internal security and PKI educational presentations and training materials.
-        Served as PKI subject matter expert within the midwest region. Clients included U.S. Postal service, K-Mart,
-        and Transora e-commerce exchange. Provided review and consulting on web application security, web portal
-        security, and Certification Practice Statement creation.
+        Provided consulting in the areas of information security and public key infrastructure (PKI) to clients of PricewaterhouseCoopers. Developed internal security and PKI educational presentations and training materials. Served as PKI subject matter expert within the midwest region. Clients included U.S. Postal service, K-Mart, and Transora e-commerce exchange. Provided review and consulting on web application security, web portal security, and Certification Practice Statement creation.
 
     - title: Lead Developer & Architect
       company: Cyclone Commerce
@@ -228,18 +249,11 @@ jobs:
           start: 1997, March
           end: 2000, October
       desc: |
-        Responsible for information security related to Cyclone's software products and services. One of three
-        responsible for overall product architecture and design. Cyclone’s product is a B2B integration engine
-        which allowed businesses to securely exchange documents with partners. All development was Java based.
-        Lead the architecture, design, and implementation of a java security toolkit which integrated PKI,
-        Encryption, digital signature, LDAP, and XML technologies. Named on patents in the area of distributed
-        computing.
+        Responsible for information security related to Cyclone's software products and services. One of three responsible for overall product architecture and design. Cyclone’s product is a B2B integration engine which allowed businesses to securely exchange documents with partners. All development was Java based. Lead the architecture, design, and implementation of a java security toolkit which integrated PKI, Encryption, digital signature, LDAP, and XML technologies. Named on patents in the area of distributed computing.
 
-        Also participated in business development and pre-sales activities. This included serving as the technical
-        lead in sales presentations.
+        Also participated in business development and pre-sales activities. This included serving as the technical lead in sales presentations.
 
-        Day to day responsibilities included leading development team, creating and monitoring development
-        schedule, technical architecture, and writing code.
+        Day to day responsibilities included leading development team, creating and monitoring development schedule, technical architecture, and writing code.
 
 
     - title: Senior Software Engineer
@@ -251,29 +265,57 @@ jobs:
           start: 1991, June
           end: 1997, March
       desc: |
-        Worked in the Government Electronics group of Motorola. Worked primarily on large C/C++ projects for
-        government contracts. Many relating to security. Designed and developed information security toolkits
-        in C, C++, and Java. Designed and developed public key infrastructure components such as a Certificate
-        Authority and a Registrar product. Served as technical and development lead on several projects.
-        Integrated PKI into Motorola applications. Interfaced with customers, partners, and managed contractors
-        on a regular basis.
+        Worked in the Government Electronics group of Motorola. Worked primarily on large C/C++ projects for government contracts. Many relating to security. Designed and developed information security toolkits in C, C++, and Java. Designed and developed public key infrastructure components such as a Certificate Authority and a Registrar product. Served as technical and development lead on several projects. Integrated PKI into Motorola applications. Interfaced with customers, partners, and managed contractors on a regular basis.
 
 
 education: # this section is not mandatory
     - name: University of Michigan
+      #url: http://indiana.edu # not mandatory
+      #city: Bloomington
+      #region: Indiana
+      #country: USA # not mandatory
       dates:
           start: Sept 1986
           end: May 1991 # not mandatory
       title: B.S. Electrical Engineering
+      #grade: 4.0 GPA # not mandatory
 
     - name: Capella University
+      #url: http://indiana.edu # not mandatory
+      #city: Bloomington
+      #region: Indiana
+      #country: USA # not mandatory
       dates:
           start: Sept 2001
           end: May 2003 # not mandatory
       title: M.S. Education
+      #grade: 4.0 GPA # not mandatory
 
     - name: Arizona State University
+      #url: http://indiana.edu # not mandatory
+      #city: Bloomington
+      #region: Indiana
+      #country: USA # not mandatory
       dates:
           start: Sept 1992
           end: May 1994 # not mandatory
       title: M.S. Computer Science
+      #grade: 4.0 GPA # not mandatory
+
+
+# projects: # this section is not mandatory
+#     - name: ResumeMan
+#       desc: |
+#           Resume Man is an HTML and PDF resume builder made in Ruby with Middleman.
+#       url: https://github.com/reefab/ResumeMan # not mandatory
+#       dates: # not mandatory
+#           start: 2013-02-18
+#           end: 2014-04-05 # not mandatory
+#       location: # not mandatory
+#           city: Florence
+#           region: Tuscany
+#           country: Italy # not mandatory
+
+# interests: # this section is not mandatory
+#     - Underwater basket weaving
+#     - Competitive Rock Paper Scissors
