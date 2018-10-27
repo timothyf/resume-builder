@@ -1,8 +1,6 @@
 # Resume Builder
 
-[![Build Status](https://travis-ci.org/reefab/ResumeMan.svg?branch=master)](https://travis-ci.org/reefab/ResumeMan)
-
-Resume Man is an HTML and PDF resume builder made in Ruby with [Middleman](http://middlemanapp.com/).
+Resume Builder is an HTML and PDF resume builder made in Ruby with [Middleman](http://middlemanapp.com/).
 
 It has the following features:
 
@@ -15,19 +13,9 @@ It has the following features:
  * Automatic PDF generation using [wkhtmltopdf](http://wkhtmltopdf.org).
  * Turnkey deployment to a `http://yourusername.github.com/resume` page with no configuration necessary. 
 
-## Template used
-
-[Orbit](https://github.com/xriley/Orbit-Theme) is the template used.
-
-It was created by UX/UI designer Xiaoying Riley for developers and is 100% FREE under the Creative Commons Attribution 3.0 License (CC BY 3.0)
-
-If you'd like to use the template without the attribution, you can check out other license options via the [theme website](http://themes.3rdwavemedia.com/website-templates/orbit-free-resume-cv-template-for-developers/) and edit `source/_footer.erb`.
-
-There is multiple alternate colors available that you can select by modifying `source/stylesheets/style.less`.
-
 ## Preview
 
-See the result: [sample resume](http://reefab.github.com/ResumeMan/).
+See the result: [sample resume](http://timothyf.github.com/resume-builder/).
 
 ## In practice
 
