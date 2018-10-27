@@ -1,4 +1,4 @@
-# Resume Man
+# Resume Builder
 
 [![Build Status](https://travis-ci.org/reefab/ResumeMan.svg?branch=master)](https://travis-ci.org/reefab/ResumeMan)
 
@@ -8,11 +8,10 @@ It has the following features:
 
  * Separation between content and data, all your resume information is an YAML
    file.
- * Uses your Gravatar picture.
+ * Uses your Gravatar picture. (OPTIONAL)
  * Fork this project for maintaining multiple versions of your resume in sync.
- * Markdown for formatting of the longer paragraphs.
- * You can preview your changes with Middleman's included server (with
-   livereload).
+ * Markdown/HTML for formatting of the longer paragraphs.
+ * You can preview your changes with Middleman's included server (with livereload).
  * Automatic PDF generation using [wkhtmltopdf](http://wkhtmltopdf.org).
  * Turnkey deployment to a `http://yourusername.github.com/resume` page with no configuration necessary. 
 
