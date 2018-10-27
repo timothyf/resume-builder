@@ -59,13 +59,13 @@ If you forked to your own repo:
 
 Otherwise:
 
-    git clone https://github.com/reefab/ResumeMan.git
+    git clone https://github.com/timothyf/resume-builder.git
     cd ResumeMan
 
 Install all dependencies:
 
     sudo gem install bundler
-    bundle install --path vendor/bundle
+    bundle install
 
 Launch the previewing server:
 
