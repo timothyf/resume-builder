@@ -40,7 +40,7 @@ info:
         You can put Markdown in here [like this](http://daringfireball.net/projects/markdown/).
 ```
 
-You can preview your changes via `http://resume.dev/` if using Pow or `http://localhost:4567/` otherwise.
+You can preview your resume at `http://localhost:4567/`
 
     bundle exec middleman build
 
