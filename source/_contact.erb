@@ -14,7 +14,7 @@
         <% if data.resume.info.homepage? %>
             <li class="website"><i class="fa fa-globe"></i><a href="<%= data.resume.info.homepage %>" target="_blank"><%= data.resume.info.homepage %></a></li>
         <% end %>
-        <% %w[github linkedin twitter].each do |site| %>
+        <% %w[linkedin github twitter].each do |site| %>
             <% if data.resume.info.include?(site) %>
                 <li class="<%= site %>"><i class="fa fa-<%= site %>"></i><a href="<%= data.resume.info[site] %>" target="_blank"><%= data.resume.info[site].gsub(/^https?\:\/\//, "") %></a></li>
             <% end %>

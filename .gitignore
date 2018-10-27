@@ -17,3 +17,6 @@
 /Gemfile.lock
 /.ruby-version
 /vendor
+
+.DS_store
+source/CNAME
