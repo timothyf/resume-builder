@@ -1,6 +1,6 @@
 # Resume Builder
 
-Resume Builder is an HTML and PDF resume builder made in Ruby with [Middleman](http://middlemanapp.com/).
+Resume Builder is an HTML and PDF resume builder made in Ruby with [Middleman](http://middlemanapp.com/). Allows you to keep your resume content in a text-based YAML file, that can be be rendered as an HTML view for the web, and as a PDF view for download and printing.
 
 It has the following features:
 
