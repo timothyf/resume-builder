@@ -10,9 +10,9 @@
               <h5 class="meta fn org"><%= edu.name %>,
             <% end %>
             <div class="time">
-                <abbr class="dtstart" title="<%= edu.dates.start %>"><%= display_date(edu.dates.start) %></abbr>
+                <span class="dtstart" title="<%= edu.dates.start %>"><%= display_date(edu.dates.start) %></span>
                 <% if edu.dates.end? %>
-                    - <abbr class="dtend" title="<%= edu.dates.end %>"><%= display_date(edu.dates.end) %></abbr>
+                    - <span class="dtend" title="<%= edu.dates.end %>"><%= display_date(edu.dates.end) %></span>
                 <% end %>
             </div>
         </div>
