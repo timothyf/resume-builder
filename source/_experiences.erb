@@ -13,14 +13,22 @@
             </div>
             <div class="company-location">
               <%= job.location.city %>, <%= job.location.state %>
-            </div>
-            <div class="upper-row">
-                <h3 class="job-title"><%= job.title %></h3>
+              <% if !job.title %>
                 <div class="time">
                     <span class="dtstart" title="<%= job.dates.start %>"><%= display_date(job.dates.start) %></span> -
                     <span class="dtend" title="<%= job.dates.end %>"><%= display_date(job.dates.end) %></span>
                 </div>
+              <% end %>
             </div>
+            <% if job.title %>
+              <div class="job-title-row">
+                  <h3 class="job-title"><%= job.title %></h3>
+                  <div class="time">
+                      <span class="dtstart" title="<%= job.dates.start %>"><%= display_date(job.dates.start) %></span> -
+                      <span class="dtend" title="<%= job.dates.end %>"><%= display_date(job.dates.end) %></span>
+                  </div>
+              </div>
+            <% end %>
         </div>
         <div class="details">
             <p><%= Maruku.new(job.desc).to_html %></p>

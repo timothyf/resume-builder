@@ -9,7 +9,6 @@ module PdfMaker
                                 :print_media_type => false,
                                 :page_size => 'Letter',
                                 :viewport_size => '2480x3508',
-                                #:viewport_size => '2750x3508',
                                 :zoom => 0.7
                                 #:dpi => 300
                               )
