@@ -16,6 +16,7 @@
 /tmp/
 /Gemfile.lock
 /.ruby-version
+/.ruby-gemset
 /vendor
 
 .DS_store

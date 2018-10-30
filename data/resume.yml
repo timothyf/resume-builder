@@ -1,31 +1,27 @@
 headers:
     profile: Summary
-    skills: Skills
-    languages: Languages
-    techs: Technical
     jobs: Experience
     education: Education
+    skills: Skills
     download: Download PDF
-    projects: Projects
-    interests: Interests
 
 info:
     name: Timothy Fisher
     photo: false
     email: timothyf@gmail.com
-    phone: (734) - 790-7235 # not mandatory
-    github: https://github.com/timothyf # Not mandatory
-    linkedin: https://linkedin.com/in/timothyfisher/ # not mandatory
-    twitter: http://twitter.com/tfisher # not mandatory
+    phone: (734) 790-7235
+    github: https://github.com/timothyf
+    linkedin: https://linkedin.com/in/timothyfisher/
+    twitter: http://twitter.com/tfisher
     address:
         street: 25296 Hunter Lane
         city: Flat Rock
-        state: MI # not mandatory
-        postal_code: 48134 # not mandatory
+        state: MI
+        postal_code: 48134
     desc: |
-        I am a passionate technologist and leader with 27 years of software development experience in roles
+        I am a passionate developer and leader with 27 years of software development experience in roles
         including Chief Technology Officer, VP of Engineering, Chief Architect, and Director of Mobile Development,
-        along with many years of hands-on software development.
+        along with many years of hands-on development experience.
 
         My skill-set ranges from business and management experience and knowledge to hands-on development expertise.
         While at heart I will always be a developer, I am also passionate about innovation, growing and leading teams
@@ -95,11 +91,10 @@ jobs:
         for was to redefine the product development process in order to improve predictability of deliverables, bring
         transparency into product development, and insure that the team is focused on strategic improvement efforts.
 
-        Responsibilities also include:
+        Additional responsibilities included:
           <ul>
-            <li>Lead development team of 20, including professional growth and mentoring.</li>
+            <li>Manage development team of 20, including professional growth and mentoring.</li>
             <li>Driving strategic improvement across the development team.</li>
-            <li>Managing development interaction with other departments</li>
             <li>Drive solutions to tactical product issues.</li>
           </ul>
 
@@ -201,11 +196,11 @@ jobs:
           start: 2002, February
           end: 2003, January
       desc: |
-        Leader of the J2EE development team at MedCharge, a startup whose product was a health care application
+        Led the J2EE development team at MedCharge, a startup whose product was a health care application
         used within the University of Michigan Medical Center. The product allows hospital staff to capture all
         charges related to a patient's care and to dictate medical notes. The application is a multi-tiered Java
         application running on the WebSphere app server with an Oracle database. My responsibilities included
-        serving as the lead java architect, software design, lead developer, task planning, mentoring,preparing
+        serving as the lead java architect, software design, lead developer, task planning, mentoring, preparing
         and monitoring schedules. The web application featured a thin rich-client front-end that used dynamic HTML
         and AJAX techniques prior to the coining of the term AJAX.
 
@@ -218,13 +213,10 @@ jobs:
           start: 2001, May
           end: 2002, January
       desc: |
-        Lead architect on web based applications, primarily using J2EE technologies. Responsibilities include architecture
-        and design including object modeling, managing development team, creating and monitoring development schedule,
-        gathering requirements, turning business requirements into technical requirements, writing technical specifications,
-        development, and mentoring junior developers.
-
-        Developed white papers on Java technology and object oriented design and methodologies for internal distribution.
-        Served as technical lead in sales presentations to clients.
+        Lead architect on web based applications, primarily using J2EE technologies. Responsibilities included development,
+        object modeling, managing development team, creating and monitoring development schedule, gathering requirements,
+        turning business requirements into technical requirements, writing technical specifications, technical sales, and
+        mentoring junior developers.
 
     - title: Security Consultant
       company: PriceWaterhouseCoopers
@@ -250,19 +242,18 @@ jobs:
           start: 1997, March
           end: 2000, October
       desc: |
-        Responsible for information security related to Cyclone's software products and services. One of three
-        responsible for overall product architecture and design. Cyclone’s product is a B2B integration engine
-        which allowed businesses to securely exchange documents with partners. All development was Java based.
-        Lead the architecture, design, and implementation of a java security toolkit which integrated PKI,
-        Encryption, digital signature, LDAP, and XML technologies. Named on patents in the area of distributed
-        computing.
+        Cyclone Commerce was an eCommerce startup based on Scottsdale, AZ. Cyclone’s product is a B2B
+        integration engine which allowed businesses to securely exchange documents with partners. Responsible
+        for information security related to Cyclone's products and services. Also responsible for overall product
+        architecture and design. All development was Java based. Lead the architecture, design, and implementation
+        of a java security toolkit which integrated PKI, Encryption, digital signature, LDAP, and XML technologies.
+        Named on patents in the area of distributed computing.
 
         Also participated in business development and pre-sales activities. This included serving as the technical
         lead in sales presentations.
 
         Day to day responsibilities included leading development team, creating and monitoring development
         schedule, technical architecture, and writing code.
-
 
     - title: Senior Software Engineer
       company: Motorola
@@ -274,28 +265,28 @@ jobs:
           end: 1997, March
       desc: |
         Worked in the Government Electronics group of Motorola. Worked primarily on large C/C++ projects for
-        government contracts. Many relating to security. Designed and developed information security toolkits
-        in C, C++, and Java. Designed and developed public key infrastructure components such as a Certificate
-        Authority and a Registrar product. Served as technical and development lead on several projects.
+        aerospace and defense industries. Many projects were related to security. Designed and developed information
+        security toolkits in C, C++, and Java. Designed and developed public key infrastructure components such
+        as a Certificate Authority and a Registrar product. Served as technical and development lead on several projects.
         Integrated PKI into Motorola applications. Interfaced with customers, partners, and managed contractors
         on a regular basis.
 
 
-education: # this section is not mandatory
+education:
     - name: University of Michigan
+      degree: B.S. Electrical Engineering
       dates:
           start: Sept 1986
-          end: May 1991 # not mandatory
-      title: B.S. Electrical Engineering
+          end: May 1991
 
     - name: Capella University
+      degree: M.S. Education
       dates:
           start: Sept 2001
-          end: May 2003 # not mandatory
-      title: M.S. Education
+          end: May 2003
 
     - name: Arizona State University
+      degree: M.S. Computer Science
       dates:
           start: Sept 1992
-          end: May 1994 # not mandatory
-      title: M.S. Computer Science
+          end: May 1994
