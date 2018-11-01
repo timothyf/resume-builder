@@ -1,3 +1,6 @@
+pdf:
+  filename: MyName-Resume
+
 headers:
     profile: Summary
     skills: Skills
