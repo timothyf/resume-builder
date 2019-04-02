@@ -13,7 +13,7 @@ module PdfMaker
                                 #:dpi => 300
                               )
 
-                    file = kit.to_file("build/#{data.resume.pdf.filename}.pdf")
+                    kit.to_file("build/#{data.resume.pdf.filename}.pdf")
 
                     rescue Exception =>e
                         builder.say_status "PDF Maker",  "Error: #{e.message}", Thor::Shell::Color::RED
