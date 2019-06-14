@@ -50,6 +50,25 @@ skills:
     - Security (Encryption, Digital Signature, PKI)
 
 jobs:
+    - title: Technical Lead
+      company: Alfa Jango
+      location:
+        city: Ann Arbor
+        state: MI
+      dates:
+          start: 2018, November
+          end: Present
+      desc: |
+        Alfa Jango provides services to startups around the globe. We specifically offer experienced
+        development, CTO as-a-service, technical strategy and leadership consulting. In my role as a
+        Technical Lead, my responsibilities include:
+          <ul>
+            <li>Meeting with entrepreneurs to asses technical challenges</li>
+            <li>Estimation of POC and MVP product development</li>
+            <li>Development, primarily in Ruby and JavaScript</li>
+            <li>Provide CTO services to startup companies</li>
+          </ul>
+
     - title: Chief Technology Officer
       company: Connect Space
       location:
