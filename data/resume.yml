@@ -22,7 +22,7 @@ info:
         state: MI
         postal_code: 48134
     desc: |
-        I am a passionate developer and leader with 27 years of software development experience in roles
+        I am a passionate developer and leader with 29 years of software development experience in roles
         including Chief Technology Officer, VP of Engineering, Chief Architect, and Director of Mobile Development,
         along with many years of hands-on development experience.
 
@@ -48,16 +48,17 @@ skills:
     - GraphQL, JSON
     - Internet of Things (IOT)
     - Security (Encryption, Digital Signature, PKI)
+    - eCommerce (Shopify, Stripe)
 
 jobs:
-    - title: Technical Lead
+    - title: Technical Lead / Developer
       company: Alfa Jango
       location:
         city: Ann Arbor
         state: MI
       dates:
           start: 2018, November
-          end: Present
+          end: 2020, September
       desc: |
         Alfa Jango provides services to startups around the globe. We specifically offer experienced
         development, CTO as-a-service, technical strategy and leadership consulting. In my role as a
@@ -68,6 +69,9 @@ jobs:
             <li>Development, primarily in Ruby and JavaScript</li>
             <li>Provide CTO services to startup companies</li>
           </ul>
+        Projects that I developed in this role include an online learning portal, an e-commerce site,
+        and a healthcare application. Clients I worked with include the University of Michigan, the
+        Internet2 organization, and several startup companies.
 
     - title: Chief Technology Officer
       company: Connect Space

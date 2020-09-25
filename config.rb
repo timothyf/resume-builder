@@ -28,7 +28,6 @@ activate :livereload
 #
 # With no layout
 page "index.html", :layout => false
-
 page "pdf.html", :layout => false
 #
 # With alternative layout
@@ -83,9 +82,7 @@ helpers do
 end
 
 set :css_dir, 'stylesheets'
-
 set :js_dir, 'javascripts'
-
 set :images_dir, 'images'
 
 # Build-specific configuration
