@@ -102,7 +102,7 @@ jobs:
 
     - title: VP of Engineering
       company: Powerley
-      brief: true 
+      brief: true
       location:
         city: Royal Oak
         state: MI
@@ -126,6 +126,7 @@ jobs:
 
     - title: VP of Engineering
       company: Quikly
+      brief: true
       location:
         city: Detroit
         state: MI
@@ -151,6 +152,7 @@ jobs:
 
     - title:
       company: Lochbridge / Compuware
+      brief: true
       location:
         city: Detroit
         state: MI
@@ -198,6 +200,7 @@ jobs:
 
     - title: Senior Java Architect
       company: LogicaCMG
+      brief: true
       location:
         city: Southfield
         state: MI
@@ -215,6 +218,7 @@ jobs:
 
     - title: Development Team Lead
       company: MedCharge
+      brief: true
       location:
         city: Ann Arbor
         state: MI
@@ -232,6 +236,7 @@ jobs:
 
     - title: Senior Java Architect
       company: Spherion
+      brief: false
       location:
         city: Troy
         state: MI
@@ -246,6 +251,7 @@ jobs:
 
     - title: Security Consultant
       company: PriceWaterhouseCoopers
+      brief: false
       location:
         city: Detroit
         state: MI
@@ -261,6 +267,7 @@ jobs:
 
     - title: Lead Developer & Architect
       company: Cyclone Commerce
+      brief: false
       location:
         city: Scottsdale
         state: AZ
@@ -283,6 +290,7 @@ jobs:
 
     - title: Senior Software Engineer
       company: Motorola
+      brief: false
       location:
         city: Chandler
         state: AZ
