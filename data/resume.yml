@@ -53,6 +53,7 @@ skills:
 jobs:
     - title: Technical Lead / Developer
       company: Alfa Jango
+      brief: true
       location:
         city: Ann Arbor
         state: MI
@@ -75,6 +76,7 @@ jobs:
 
     - title: Chief Technology Officer
       company: Connect Space
+      brief: true
       location:
         city: Ann Arbor
         state: MI
@@ -100,6 +102,7 @@ jobs:
 
     - title: VP of Engineering
       company: Powerley
+      brief: true 
       location:
         city: Royal Oak
         state: MI
