@@ -1,70 +1,74 @@
 <section class="section experiences-section">
-    <h2 class="section-title"><i class="fa fa-briefcase"></i><%= data.resume.headers.jobs %></h2>
+  <h2 class="section-title"><i class="fa fa-briefcase"></i><%= data.resume.headers.jobs %></h2>
 
-    <% data.resume.jobs.each do |job| %>
-      <% if job.brief %>
-        <div class="item">
-            <div class="meta">
-                <div class="company">
-                    <% if job.url? %>
-                      <h2 class="location"><a href="<%= job.url%>" target=_blank><%= job.company %></a></h2>
-                    <% else %>
-                      <h2 class="location"><%= job.company %></h2>
-                    <% end %>
-                </div>
-                <div class="company-location">
-                  <%= job.location.city %>, <%= job.location.state %>
-                  <% if !job.title %>
+  <% data.resume.jobs.each do |job| %>
+    <% if job.brief %>
+      <div class="item">
+          <div class="meta">
+              <div class="company">
+                  <% if job.url? %>
+                    <h2 class="location"><a href="<%= job.url%>" target=_blank><%= job.company %></a></h2>
+                  <% else %>
+                    <h2 class="location"><%= job.company %></h2>
+                  <% end %>
+              </div>
+              <div class="company-location">
+                <%= job.location.city %>, <%= job.location.state %>
+                <% if !job.title %>
+                  <div class="time">
+                      <span class="dtstart" title="<%= job.dates.start %>"><%= display_date(job.dates.start) %></span> -
+                      <span class="dtend" title="<%= job.dates.end %>"><%= display_date(job.dates.end) %></span>
+                  </div>
+                <% end %>
+              </div>
+              <% if job.title %>
+                <div class="job-title-row">
+                    <h3 class="job-title"><%= job.title %></h3>
                     <div class="time">
                         <span class="dtstart" title="<%= job.dates.start %>"><%= display_date(job.dates.start) %></span> -
                         <span class="dtend" title="<%= job.dates.end %>"><%= display_date(job.dates.end) %></span>
                     </div>
-                  <% end %>
                 </div>
-                <% if job.title %>
-                  <div class="job-title-row">
-                      <h3 class="job-title"><%= job.title %></h3>
-                      <div class="time">
-                          <span class="dtstart" title="<%= job.dates.start %>"><%= display_date(job.dates.start) %></span> -
-                          <span class="dtend" title="<%= job.dates.end %>"><%= display_date(job.dates.end) %></span>
-                      </div>
-                  </div>
-                <% end %>
-            </div>
-            <div class="details">
-                <p><%= Maruku.new(job.desc).to_html %></p>
-            </div>
-        </div>
-      <% else %>
-        <div class="item">
-            <div class="meta">
-                <div class="company">
-                    <% if job.url? %>
-                      <h2 class="location"><a href="<%= job.url%>" target=_blank><%= job.company %></a></h2>
-                    <% else %>
-                      <h2 class="location"><%= job.company %></h2>
-                    <% end %>
-                </div>
-                <div class="company-location">
-                  <%= job.location.city %>, <%= job.location.state %>
-                  <% if !job.title %>
-                    <div class="time">
-                        <span class="dtstart" title="<%= job.dates.start %>"><%= display_date(job.dates.start) %></span> -
-                        <span class="dtend" title="<%= job.dates.end %>"><%= display_date(job.dates.end) %></span>
-                    </div>
-                  <% end %>
-                </div>
-                <% if job.title %>
-                  <div class="job-title-row">
-                      <h3 class="job-title"><%= job.title %></h3>
-                      <div class="time">
-                          <span class="dtstart" title="<%= job.dates.start %>"><%= display_date(job.dates.start) %></span> -
-                          <span class="dtend" title="<%= job.dates.end %>"><%= display_date(job.dates.end) %></span>
-                      </div>
-                  </div>
-                <% end %>
-            </div>
-        </div>
-      <% end %>
+              <% end %>
+          </div>
+          <div class="details">
+              <p><%= Maruku.new(job.desc).to_html %></p>
+          </div>
+      </div>
     <% end %>
+  <% end %>
+  <div id="additionalExperience">Additional Past Experiences</div>
+  <% data.resume.jobs.each do |job| %>
+    <% if !job.brief %>
+      <div class="item">
+          <div class="meta">
+              <div class="company">
+                  <% if job.url? %>
+                    <h2 class="location"><a href="<%= job.url%>" target=_blank><%= job.company %></a></h2>
+                  <% else %>
+                    <h2 class="location"><%= job.company %></h2>
+                  <% end %>
+              </div>
+              <div class="company-location">
+                <%= job.location.city %>, <%= job.location.state %>
+                <% if !job.title %>
+                  <div class="time">
+                      <span class="dtstart" title="<%= job.dates.start %>"><%= display_date(job.dates.start) %></span> -
+                      <span class="dtend" title="<%= job.dates.end %>"><%= display_date(job.dates.end) %></span>
+                  </div>
+                <% end %>
+              </div>
+              <% if job.title %>
+                <div class="job-title-row">
+                    <h3 class="job-title"><%= job.title %></h3>
+                    <div class="time">
+                        <span class="dtstart" title="<%= job.dates.start %>"><%= display_date(job.dates.start) %></span> -
+                        <span class="dtend" title="<%= job.dates.end %>"><%= display_date(job.dates.end) %></span>
+                    </div>
+                </div>
+              <% end %>
+          </div>
+      </div>
+    <% end %>
+  <% end %>
 </section>
