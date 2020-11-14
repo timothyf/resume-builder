@@ -10,7 +10,9 @@
         <% if data.resume.info.phone %>
             <li class="phone"><i class="fa fa-phone"></i><a href="tel:<%= data.resume.info.phone %>"><%= data.resume.info.phone %></a></li>
         <% end %>
-        <hr/>
+        <% if data.resume.info.homepage? || data.resume.links? %>
+          <hr/>
+        <% end %>
         <% if data.resume.info.homepage? %>
             <li class="website"><i class="fa fa-globe"></i><a href="<%= data.resume.info.homepage %>" target="_blank"><%= data.resume.info.homepage %></a></li>
         <% end %>

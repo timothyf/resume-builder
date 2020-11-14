@@ -1,5 +1,8 @@
+sidebar-color:
+sidebar-accent-color:
+
 pdf:
-  filename: TimothyFisher-Resume
+  filename: KerryFisher-Resume
 
 headers:
     profile: Summary
@@ -9,318 +12,304 @@ headers:
     download: Download PDF
 
 info:
-    name: Timothy Fisher
+    name: Kerry Fisher
     photo: false
-    email: timothyf@gmail.com
-    phone: (734) 790-7235
-    github: https://github.com/timothyf
-    linkedin: https://linkedin.com/in/timothyfisher/
-    twitter: http://twitter.com/tfisher
+    email: kerryfisher41@gmail.com
+    phone: (734) 925-0572
     address:
         street: 25296 Hunter Lane
         city: Flat Rock
         state: MI
         postal_code: 48134
     desc: |
-        I am a passionate developer and leader with 29 years of software development experience in roles
-        including Chief Technology Officer, VP of Engineering, Chief Architect, and Director of Mobile Development,
-        along with many years of hands-on development experience.
 
-        My skill-set ranges from business and management experience and knowledge to hands-on development expertise.
-        While at heart I will always be a developer, I am also passionate about innovation, growing and leading teams
-        and setting a technical vision for a company. I have a great deal of experience in the areas of full-stack
-        web development, mobile development and scalable architecture. I am also well versed in Agile methodologies.
+        My background includes several years of experience in an office setting
+        where I performed customer service, and administrative support tasks
+        including data entry. I am proficient with the Microsoft Office suite
+        of applications including Word, Excel, and Powerpoint.
 
-        I am also passionate about educating, mentoring, and building communities of practice. I have been an
-        evangelist for great software development in the Detroit area for many years. I am the founder and organizer of
-        the Technology Mentorship Community for Michigan. I also enjoy technical writing. I am the author of two published
-        books, the Java Phrasebook and the Ruby on Rails Bible.
+        I have worked in the healthcare, insurance, automotive, and education
+        industries. I hold a bachelor’s degree in social work, an
+        associate’s degree in early education, and a nurse aide certification.
+
+        All of the positions that I have held have allowed me to work with
+        people as either customers or patients. Taking responsibility for and
+        showing leadership in solving problems is a strength that I bring to any
+        position I am in.
 
 skills:
-    - Team Leadership & Management
-    - Mentorship
-    - Agile Process Management
-    - Web & Mobile Development
-    - Web & Mobile Scalability
-    - Microservices Architecture
-    - Amazon Web Services (AWS), Heroku, EngineYard
-    - Ruby, Rails, JavaScript, Node.js, React, ReactNative, Java, Swift, HTML, CSS
-    - GraphQL, JSON
-    - Internet of Things (IOT)
-    - Security (Encryption, Digital Signature, PKI)
-    - eCommerce (Shopify, Stripe)
+    - Microsoft Office Applications (Word, Excel, Powerpoint)
+    - Customer Service & Client Relations
+    - Excellent verbal and written communication
+    - Medical Terminology
+    - Patient Care
+
 
 jobs:
-    - title: Technical Lead / Developer
-      company: Alfa Jango
+    - title: Home Health Aide
+      company: Home Health Care
       brief: true
       location:
-        city: Ann Arbor
+        city: Southeast
         state: MI
       dates:
-          start: 2018, November
-          end: 2020, September
+          start: 2019, February
+          end: Present
       desc: |
-        Alfa Jango provides services to startups around the globe. We specifically offer experienced
-        development, CTO as-a-service, technical strategy and leadership consulting. In my role as a
-        Technical Lead, my responsibilities include:
+        Since early 2019, I have provided full-time nurse-aid care to a family
+        member who has been going through late-stage Alzheimer’s Disease.
+        My responsibilities include:
           <ul>
-            <li>Meeting with entrepreneurs to asses technical challenges</li>
-            <li>Estimation of POC and MVP product development</li>
-            <li>Development, primarily in Ruby and JavaScript</li>
-            <li>Provide CTO services to startup companies</li>
+            <li>Assisting with activities of daily living (ADL)</li>
+            <li>Taking and recording vital signs</li>
+            <li>Medication reminders</li>
+            <li>Provide caring companionship</li>
+            <li>Work on building patient independence</li>
+            <li>Accompany and provide transportation to daily appointments and
+            other out of the home excursions.</li>
           </ul>
-        Projects that I developed in this role include an online learning portal, an e-commerce site,
-        and a healthcare application. Clients I worked with include the University of Michigan, the
-        Internet2 organization, and several startup companies.
 
-    - title: Chief Technology Officer
-      company: Connect Space
+
+    - title: Community & Patient Liaison
+      company: Critical Signal Technologies
       brief: true
       location:
-        city: Ann Arbor
+        city: Novi
         state: MI
       dates:
-          start: 2018, March
-          end: 2018, October
+          start: 2019, March
+          end: 2019, April
       desc: |
-        Connect Space is an Ann Arbor, MI based startup with a web and mobile opportunity ecosystem and event management
-        platform. As CTO at Connect Space, I was responsible for leading all aspects of the company’s technology development
-        initiatives and collaborating with the CEO in developing the strategic vision for the Connect Space product.
+        I provided information on Personal Emergency Medical Alarm Systems for
+        clients, which may include families, care providers, and healthcare
+        companies in an inbound/outbound care call center.
+
+        <ul>
+          <li>Find solutions for customer issues and problems encountered with
+          the alarm system.</li>
+          <li>Collaborated with installers to assist with installation of medical
+          alarms in client homes.</li>
+          <li>Assisted with data entry of vital medical information and Emergency
+          personal data.</li>
+          <li>Guided Technicians in testing of medical alarms, medical
+          management dispensers and troubleshooting of patient's medical
+          personal emergency response system.</li>
+        </ul>
+
+    - title: Certified Nurse Aide
+      company: Sister Servants Immaculate Heart of Mary
+      brief: true
+      location:
+        city: Monroe
+        state: MI
+      dates:
+          start: 2013, March
+          end: 2017, October
+      desc: |
+        My job was to provide resident care to retired nuns and lay-residents in
+        a manner that was compassionate and dignified.
 
         Responsibilities included:
-          <ul>
-            <li>Leadership and management of the development and design teams.</li>
-            <li>Provide mentorship, guidance and create professional development opportunities for team members.</li>
-            <li>Hands-on coding. Our platform consists of a Ruby on Rails backend, a web interface, and native mobile
-              apps for iOS and Android.</li>
-            <li>Re-architect the Connect Space application for scalability and performance.</li>
-            <li>Define and manage development process</li>
-            <li>Responsibility for the management, design, architecture and operability of the complete technology platform,
-                ensuring scalability and performance while minimizing all operational risks.</li>
-          </ul>
-
-    - title: VP of Engineering
-      company: Powerley
-      brief: true
-      location:
-        city: Royal Oak
-        state: MI
-      dates:
-          start: 2017, September
-          end: 2018, March
-      desc: |
-        Powerley is a startup in the Smart Grid and Smart Home space. The Powerley platform includes a cloud-based web
-        services infrastructure, native iOS and Android apps, and a dedicated in-home hardware platform, all able to
-        communicate with a network of IOT smart devices. As VP of Engineering, my responsibilities included technology
-        leadership, management, platform architecture, and managing process. A strategic initiative I took responsibility
-        for was to redefine the product development process in order to improve predictability of deliverables, bring
-        transparency into product development, and insure that the team is focused on strategic improvement efforts.
-
-        Additional responsibilities included:
-          <ul>
-            <li>Manage development team of 20, including professional growth and mentoring.</li>
-            <li>Driving strategic improvement across the development team.</li>
-            <li>Drive solutions to tactical product issues.</li>
-          </ul>
-
-    - title: VP of Engineering
-      company: Quikly
-      brief: true
-      location:
-        city: Detroit
-        state: MI
-      dates:
-          start: 2016, March
-          end: 2017, August
-      desc: |
-        Quikly is a start-up in the retail promotional marketing space, based in Detroit. As VP of Engineering, my
-        responsibilities included:
         <ul>
-          <li>Architect scalability into the Quikly platform</li>
-          <li>Define, execute and deliver on a vision and roadmap for the future growth of Quikly.</li>
-          <li>Manage the development team. Hire, evaluate, and mentor new teams members</li>
-          <li>Driving force behind creating a technical roadmap plan with dates and targets for future features and
-              functionality for the product.</li>
-          <li>Ruby, Rails, Node.js, AWS hands-on development</li>
-          <li>Establishing a learning-centric culture with the goal of making Quikly an awesome place for technologists
-              to work.</li>
+          <li>Assisting in activities of daily living care, taking vitals, and
+          tracking patient nutrition.</li>
+          <li>Assisting in rehabilitation procedures including  range of motion,
+          ambulating, repositioning and use of assistive devices</li>
+          <li>Used Point Click Care electronic charting for patients</li>
+          <li>Provided suggestion to add a Vision Board  related
+          to empowering encouragement to employees, residents and families. My
+          suggestion was adopted in 2016.</li>
         </ul>
-        Hands-on work included transitioning a large Ruby on Rails based monolith application into a microservices based
-        architecture. Developing an auto-scaler microservice on AWS Lambda to manage server load on the Heroku platform.
-        Using technologies including Ruby, Rails, Node.js, Heroku, AWS EC2, AWS SNS, AWS Lambda, AWS ECS, Redis, Memcached.
 
-    - title:
-      company: Lochbridge / Compuware
+    - title: Social Work Intern
+      company: Mercy St. Vincent Medical Center
       brief: true
       location:
-        city: Detroit
+        city: Toledo
+        state: OH
+      dates:
+          start: 2015, April
+          end: 2015, October
+      desc: |
+        Provided social care and counseling to patients and their families. To
+        achieve this, I worked with multidisciplinary care teams to plan and
+        coordinate care services.
+
+        Responsibilities included:
+        <ul>
+          <li>Building relationships with patients and their families to assist
+          in achieving positive medical care, and lifestyle adjustment.</li>
+          <li>Observing medical team reviews on patient care plans and goals.</li>
+          <li>Help patients determine eligibility for skilled nursing and
+          alternative care facilities.</li>
+          <li>Contact extended care facilities, homecare, or inpatient rehab to
+          setup patient pre-certifications, referrals, and placements.</li>
+          <li>Identify available community resources and assist patients in
+          connecting with them.</li>
+          <li>Maintained daily care notes in EPIC electronic medical system.</li>
+        </ul>
+
+    - title: Assistant Teacher Substitute
+      company: The Guidance Center
+      brief: true
+      location:
+        city: Taylor
         state: MI
       dates:
-          start: 2006, May
-          end: 2016, March
+          start: 2009, January
+          end: 2010, June
       desc: |
-        Spent nearly 10 years with Compuware, which later became Lochbridge, in a variety of roles within both product
-        and professional services divisions. Highlights of that experience are below.
+        Helped plan and implement classroom lessons, while modeling the High
+        Scope educational approach.
+        <ul>
+          <li>Assisted teacher in facilitating and supervising students during
+          educational lessons and free play.</li>
+          <li>Contributed to teaching related activities, record keeping,
+          material set-up, student assistance, and tutoring</li>
+          <li>Encouraged parents volunteer in the classrooms and school events.</li>
+          <li>Documented students progress using the Child Observation Record
+          Assessment.</li>
+          <li>Initiated communication with parents  to encourage volunteering in
+          classrooms and school events.</li>
+        </ul>
 
-        <div class="job-title">Director of Mobile Development</div>
-        Responsible for leading a team that delivers solutions for iOS, Android, Windows, and HTML5/Hybrid platforms
-        that run on phones, tablets, and in-vehicle systems. In this role I also served as the lead mobile architect.
-        Responsibilities included responding to RFPs, setting mobile technology direction for the company, conducting
-        regular 1-on-1 sessions with development staff, mentoring development staff, conducting performance reviews and
-        career planning sessions, architecting and estimating solutions, leading development projects, and participating
-        in mobile development coding. I was also responsible for identifying staffing needs, leading the interview process,
-        and hiring candidates.
+    - title: Independent Sales Consultant
+      company: The Body Shop at Home
+      brief: true
+      location:
+        city: Flat Rock
+        state: MI
+      dates:
+          start: 2007, September
+          end: 2009, March
+      desc: |
+        As a sales consultant with The Body Shop at Home, I helped to bring Body
+        Shop products to new and existing customers.
+        <ul>
+          <li>Planning, organizing and conducting in-home beauty spa parties</li>
+          <li>Promoted the company’s mission and values related to chemical-free
+          makeup, skincare, and spa products for customers.</li>
+          <li>Analyzed the needs of customers via surveys to develop data driven
+          pitches to increase sales.</li>
+          <li>Developed creative marketing techniques to increase sales to new
+          and existing customers.</li>
+        </ul>
 
-        I also regularly engaged with all levels of management and staff within Lochbridge, and with current and
-        prospective customers. Work alongside sales team to engage new customers and pitch solutions and services.
-        Identify new opportunities for mobile business and manage pipeline and asset planning.
+    - title: Customer Service Representative
+      company: AIG Specialty Auto
+      brief: true
+      location:
+        city: Phoenix
+        state: AZ
+      dates:
+          start: 1996, September
+          end: 2000, February
+      desc: |
+        Responsible for providing customer service in a team call center
+        environment. Consistently met daily quota of over 75 calls per day.
+        Primary responsibility was reconciling at-risk insureds’ auto
+        insurance policies.
 
-        <div class="job-title">Principal Architect - Advanced Solutions &amp; Innovation</div>
-        As a member of the Advanced Solutions & Innovation Group, I led company-wide efforts related to open source
-        initiatives and collaborative innovation. As a part of this team, I developed an internal Innovation Forum
-        portal allowing Lochbridge to adopt more of an internal open source culture to build assets, share knowledge,
-        and innovate on advanced technologies that we can successfully bring to market. This web app was built using
-        Ruby and the Ruby on Rails framework. The Advanced Solutions & Innovation Group is part of a CTO office within
-        Lochbridge.
+        Responsibilities included:
+        <ul>
+          <li>Conducted preliminary rate quotes; error-checking, data entry, and
+          policy file setup for underwriters.</li>
+          <li>Make calls to insurance agents to review customer policies in order
+          to perform needs analysis.</li>
+          <li>Processed endorsement changes.</li>
+        </ul>
 
-        <div class="job-title">Technical Architect</div>
-        I worked across as a technical architect across several organizations within Compuware. These included the Compuware
-        products team, the professional services group, the CTO office, and the Covisint subsidiary.
-
-        With the professional services group, I primarily worked with automotive clients including GM, GM Onstar, and
-        Chrysler. This included experience developing and leading development of mobile apps for the headunits of GM
-        vehicles.
-
-        My experience here included development roles utilized Java, Ruby, Perl, and JavaScript.  Also team management
-        and leadership responsibilities along with leading architecture on many professional services projects.
-
-        Also an active part of seeking new business through RFP responses and proposals. Defined solutions, work plans,
-        and architecture for proposed business.
-
-    - title: Senior Java Architect
-      company: LogicaCMG
+    - title: Customer Service Representative
+      company: Meadowbrook Insurance
       brief: true
       location:
         city: Southfield
         state: MI
       dates:
-          start: 2003, February
-          end: 2006, May
+          start: 1989, February
+          end: 1995, May
       desc: |
-        Worked on a Web-based single login project for Ford Motor Company. Responsibilities include assisting with
-        architecture, analysis, design, coding, and testing. Environment consisted of Websphere Application Server
-        and Websphere Studio Application Developer (WSAD) development environment.
+        As a Policy Services Representative, I researched applications for
+        discrepancies. Contacted insurance agents to verify coverages or policy
+        endorsement changes.
 
-        Software design architect on Ford APS (Authorization Policy Server) project. The intent of this project is
-        to provide a web application authorization solution for corporate-wide use. Implemented in J2EE technology,
-        IBM Websphere, IBM WSAD environment. My role included assisting with analysis, design, and coding.
+        Responsibilities included:
+        <ul>
+          <li>Respond to telephone and written inquiries about processing, policy
+          changes, requests, billing status, and new applications.</li>
+          <li>Handle customer service and data entry on insured’s accounts.</li>
+        </ul>
 
-    - title: Development Team Lead
-      company: MedCharge
+
+    - title: Computer Operator
+      company: Meadowbrook Insurance
       brief: true
       location:
-        city: Ann Arbor
+        city: Southfield
         state: MI
       dates:
-          start: 2002, February
-          end: 2003, January
+          start: 1989, February
+          end: 1994, April
       desc: |
-        Led the J2EE development team at MedCharge, a startup whose product was a health care application
-        used within the University of Michigan Medical Center. The product allows hospital staff to capture all
-        charges related to a patient's care and to dictate medical notes. The application is a multi-tiered Java
-        application running on the WebSphere app server with an Oracle database. My responsibilities included
-        serving as the lead java architect, software design, lead developer, task planning, mentoring, preparing
-        and monitoring schedules. The web application featured a thin rich-client front-end that used dynamic HTML
-        and AJAX techniques prior to the coining of the term AJAX.
+        Identify and resolve processing problems, complete reports, handle user
+        support, and general maintenance of computer equipment.
+        <ul>
+          <li>Provide help desk support to computer systems users.</li>
+          <li>Provide monitoring and operation of AS400 Mainframe, storage and
+          peripheral equipment.</li>
+          <li>Contact service technicians.</li>
+          <li>Operate and manage high-speed printers.</li>
+          <li>Delivery of data reels to off-site recovery centers.</li>
+        </ul>
 
-    - title: Senior Java Architect
-      company: Spherion
-      brief: false
+    - title: Administrative Assistant
+      company: Michigan Safe Deposit Company
+      brief: true
       location:
-        city: Troy
+        city: Farmington Hills
         state: MI
       dates:
-          start: 2001, May
-          end: 2002, January
+          start: 1992, June
+          end: 1995, May
       desc: |
-        Lead architect on web based applications, primarily using J2EE technologies. Responsibilities included development,
-        object modeling, managing development team, creating and monitoring development schedule, gathering requirements,
-        turning business requirements into technical requirements, writing technical specifications, technical sales, and
-        mentoring junior developers.
-
-    - title: Security Consultant
-      company: PriceWaterhouseCoopers
-      brief: false
-      location:
-        city: Detroit
-        state: MI
-      dates:
-          start: 2000, October
-          end: 2001, May
-      desc: |
-        Provided consulting in the areas of information security and public key infrastructure (PKI) to clients of
-        PricewaterhouseCoopers. Developed internal security and PKI educational presentations and training materials.
-        Served as PKI subject matter expert within the midwest region. Clients included U.S. Postal service, K-Mart,
-        and Transora e-commerce exchange. Provided review and consulting on web application security, web portal
-        security, and Certification Practice Statement creation.
-
-    - title: Lead Developer & Architect
-      company: Cyclone Commerce
-      brief: false
-      location:
-        city: Scottsdale
-        state: AZ
-      dates:
-          start: 1997, March
-          end: 2000, October
-      desc: |
-        Cyclone Commerce was an eCommerce startup based on Scottsdale, AZ. Cyclone’s product is a B2B
-        integration engine which allowed businesses to securely exchange documents with partners. Responsible
-        for information security related to Cyclone's products and services. Also responsible for overall product
-        architecture and design. All development was Java based. Lead the architecture, design, and implementation
-        of a java security toolkit which integrated PKI, Encryption, digital signature, LDAP, and XML technologies.
-        Named on patents in the area of distributed computing.
-
-        Also participated in business development and pre-sales activities. This included serving as the technical
-        lead in sales presentations.
-
-        Day to day responsibilities included leading development team, creating and monitoring development
-        schedule, technical architecture, and writing code.
-
-    - title: Senior Software Engineer
-      company: Motorola
-      brief: false
-      location:
-        city: Chandler
-        state: AZ
-      dates:
-          start: 1991, June
-          end: 1997, March
-      desc: |
-        Worked in the Government Electronics group of Motorola. Worked primarily on large C/C++ projects for
-        aerospace and defense industries. Many projects were related to security. Designed and developed information
-        security toolkits in C, C++, and Java. Designed and developed public key infrastructure components such
-        as a Certificate Authority and a Registrar product. Served as technical and development lead on several projects.
-        Integrated PKI into Motorola applications. Interfaced with customers, partners, and managed contractors
-        on a regular basis.
+        As an Administrative Assistant, I followed strict secure security
+        protocols to open and close safety deposit boxes.
+        Responsibilities included:
+        <ul>
+          <li>Meet with new clients and review privacy/confidential policy</li>
+          <li>Setup contract and show clients the safety deposit box and tour of
+          the area they will be using.</li>
+          <li>Respond to telephone and written inquiries for new clients, billing
+          status, and new applications.</li>
+        </ul>
 
 
 education:
-    - name: University of Michigan
-      degree: B.S. Electrical Engineering
+    - name: Spring Arbor University
+      degree: B.S.W. Social Work
       dates:
-          start: Sept 1986
-          end: May 1991
+          start: Aug 2013
+          end: Nov 2015
 
-    - name: Capella University
-      degree: M.S. Education
+    - name: Monroe County Community College
+      degree: A.A.S. Education
       dates:
-          start: Sept 2001
-          end: May 2003
+          start: Aug 2010
+          end: May 2012
 
-    - name: Arizona State University
-      degree: M.S. Computer Science
-      dates:
-          start: Sept 1992
-          end: May 1994
+
+certifications:
+  - title: CNA - Certified Nurse Aide
+  - title: LLBSW - Limited License - Social Work
+
+
+volunteering:
+  - title: Advocacy and Fundraising
+    organization: Alzheimer’s Association
+    desc: |
+      Participate in fundraising, advocacy, and awareness events throughout the
+      state. Advocacy Day takes place once a year in Lansing. On this day, I
+      participate with other advocates in speaking with state senators and
+      representatives about issues surrounding the need for great Alzheimer’s
+      awareness and funding. In addition to ongoing event fundraising, and
+      constant communication with Michigan state representatives for change.

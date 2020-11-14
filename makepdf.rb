@@ -10,7 +10,7 @@ module PdfMaker
                       :page_size => 'Letter',
                       :viewport_size => '2480x3508',
                       :zoom => 0.7
-                      #:dpi => 300
+                      # :dpi => 300
                     )
 
           kit.to_file("build/#{data.resume.pdf.filename}.pdf")
@@ -26,7 +26,7 @@ module PdfMaker
                       :page_size => 'Letter',
                       :viewport_size => '2480x3508',
                       :zoom => 0.7
-                      #:dpi => 300
+                      # :dpi => 300
                     )
 
           kit.to_file("build/#{data.resume.pdf.filename}-brief.pdf")

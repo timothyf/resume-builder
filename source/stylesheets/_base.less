@@ -188,26 +188,24 @@ p {
         }
     }
     .job-title-row {
-        position: relative;
-        overflow: hidden;
-        margin-bottom: 2px;
-    }
-    .job-title {
-        color: @text-color;
-        font-size: 16px;
-        margin-top: 0;
-        margin-bottom: 0;
-        font-weight: 500;
-    }
-    .time {
-        position: absolute;
-        right: 0;
-        top: 0;
+      display: flex;
+      justify-content: space-between;
+
+      .job-title {
+          color: @text-color;
+          font-size: 16px;
+          margin-top: 0;
+          margin-bottom: 0;
+          font-weight: 500;
+      }
+      .time {
         color: @text-grey;
+      }
     }
+
     .company {
-        margin-bottom: 10px;
-        color: @text-grey;
+      margin-bottom: 10px;
+      color: @text-grey;
     }
 
     .project-title {
