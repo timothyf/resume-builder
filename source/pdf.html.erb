@@ -43,10 +43,12 @@
             <%= partial 'summary' %>
             <%= partial 'experiences' %>
             <%= partial 'projects' %>
-            <%= partial 'volunteering' %>
+            <% if data.resume.volunteering %>
+              <%= partial 'volunteering' %>
+            <% end %>
         </div>
     </div>
-    <%= partial 'footer' %>
+    <%= partial 'footer.pdf' %>
 </body>
 
 </html>

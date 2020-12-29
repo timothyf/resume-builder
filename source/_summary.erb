@@ -1,6 +1,14 @@
 <section class="section summary-section">
+  <% if data.resume.pdf.useicons %>
     <h2 class="section-title"><i class="fa fa-user"></i><%= data.resume.headers.profile %></h2>
-    <div class="summary">
-        <p><%= Maruku.new(data.resume.info.desc).to_html %></p>
-    </div>
+  <% else %>
+    <h2 class="section-title"><%= data.resume.headers.profile %></h2>
+  <% end %>
+  <div class="summary">
+      <% if data.resume.pdf.role == 'developer' %>
+        <p><%= Maruku.new(data.resume.info.desc.developer).to_html %></p>
+      <% else %>
+        <p><%= Maruku.new(data.resume.info.desc.leader).to_html %></p>
+      <% end %>
+  </div>
 </section>

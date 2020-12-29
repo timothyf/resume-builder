@@ -42,11 +42,15 @@
         <div class="main-wrapper">
             <%= partial 'summary' %>
             <%= partial 'experience-brief' %>
-            <%= partial 'projects' %>
-            <%= partial 'volunteering' %>
+            <% if data.resume.projects? %>
+              <%= partial 'projects' %>
+            <% end %>
+            <% if data.resume.volunteering %>
+              <%= partial 'volunteering' %>
+            <% end %>
         </div>
     </div>
-    <%= partial 'footer' %>
+    <%= partial 'footer.pdf' %>
 </body>
 
 </html>
