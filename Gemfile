@@ -12,6 +12,7 @@ gem 'pdfkit', '~> 0.8.2'
 gem 'less', '~> 2.6.0'
 gem 'therubyracer'
 gem 'wkhtmltopdf_binary_provider', '~> 0.12.0'
+gem 'hexapdf'
 
 # if /linux|bsd/ =~ RUBY_PLATFORM
 #     gem 'execjs'

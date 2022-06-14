@@ -6,11 +6,11 @@ module PdfMaker
           require 'pdfkit'
 
           kit = PDFKit.new(File.new('build/pdf.html'),
-                      :print_media_type => false,
                       :page_size => 'Letter',
                       :viewport_size => '2480x3508',
-                      :zoom => 0.7
+                      :zoom => 0.7,
                       # :dpi => 300
+                      :print_media_type => false
                     )
 
           kit.to_file("build/#{data.resume.pdf.filename}.pdf")
@@ -22,11 +22,11 @@ module PdfMaker
 
         begin
           kit = PDFKit.new(File.new('build/pdf-brief.html'),
-                      :print_media_type => false,
                       :page_size => 'Letter',
                       :viewport_size => '2480x3508',
-                      :zoom => 0.7
+                      :zoom => 0.7,
                       # :dpi => 300
+                      :print_media_type => false
                     )
 
           kit.to_file("build/#{data.resume.pdf.filename}-brief.pdf")

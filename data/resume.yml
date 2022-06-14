@@ -73,6 +73,42 @@ skills:
     - eCommerce (Shopify, Stripe)
 
 jobs:
+    - title:
+      company: Roostify
+      brief: true
+      location:
+        city:
+        state: Remote
+      dates:
+          start: 2021, February
+          end: 2022, June
+      desc: |
+        I was hired into Roostify as a Senior Developer and was promoted to the
+        role of Engineering Manager in October of 2021. The Roostify product is
+        a mortgage application and processing engine that is white-labeled by financial
+        customers including Chase Bank. The tech stack used consists of Ruby on Rails,
+        JavaScript, React, AWS, and Heroku.
+
+        <div class="job-title">Senior Developer</div>
+        As a senior developer, I was responsible for leading and developing the
+        implentation of new features within the core Roostify platform.
+
+        <div class="job-title">Software Engineering Manager</div>
+        In this management role, I had a team of 6-10 software developers and QA
+        engineers reporting to me. My responsiblities included:
+          <ul>
+            <li>Conducting 1-on-1 meetings with my team members to build relationships,
+            assist with challenges, and provide mentorship and growth opportunties.</li>
+            <li>Manage an agile (scrum) development process</li>
+            <li>Work with team to provide estimates and schedules for new projects</li>
+            <li>Assist team with technical chalenges that occur during development</li>
+            <li>Interview and hire additional team members</li>
+            <li>Provide continuing feedback to team members along with periodic reviews</li>
+            <li>Plan for salary, raises and promotions for team members.</li>
+          </ul>
+
+
+
     - title: Technical Lead / Developer
       company: Alfa Jango
       brief: true
