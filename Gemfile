@@ -3,7 +3,9 @@ source 'https://rubygems.org'
 # Gems to support Middleman
 gem "middleman", "~>3.3.3"
 gem 'middleman-livereload', '~> 3.3.3'
-gem 'middleman-deploy', '~> 0.2.4'
+#gem 'middleman-deploy', '~> 0.2.4'
+gem 'middleman-deploy', '~> 1.0'
+
 
 # A pure-Ruby Markdown-superset interpreter
 gem 'maruku', '~> 0.7.2'
