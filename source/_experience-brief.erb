@@ -6,6 +6,8 @@
     <%= data.resume.headers.jobs %>
   </h2>
   <% data.resume.jobs.each do |job| %>
+  <% if !(job.key?("include")) || (job.include === true) %>
+
     <% if job.brief %>
       <div class="item">
           <div class="meta">
@@ -44,6 +46,7 @@
           </div>
       </div>
     <% end %>
+  <% end %>
   <% end %>
   <div id="additionalExperience">Additional Past Experiences</div>
   <% data.resume.jobs.each do |job| %>

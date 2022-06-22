@@ -134,6 +134,7 @@ jobs:
 
     - title: Chief Technology Officer
       company: Connect Space
+      include: false
       brief: true
       location:
         city: Ann Arbor
