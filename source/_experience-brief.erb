@@ -5,79 +5,45 @@
     <% end %>
     <%= data.resume.headers.jobs %>
   </h2>
-  <% data.resume.jobs.each do |job| %>
-  <% if !(job.key?("include")) || (job.include === true) %>
 
-    <% if job.brief %>
-      <div class="item">
-          <div class="meta">
-              <div class="company">
-                  <% if job.url? %>
-                    <h2 class="location"><a href="<%= job.url%>" target=_blank><%= job.company %></a></h2>
-                  <% else %>
-                    <h2 class="location"><%= job.company %></h2>
-                  <% end %>
-              </div>
-              <div class="company-location">
-                <% if job.location.city %>
-                  <%= job.location.city %>, <%= job.location.state %>
-                <% else %>
-                  <%= job.location.state %>
-                <% end %>
-                <% if !job.title %>
-                  <div class="time">
-                      <span class="dtstart" title="<%= job.dates.start %>"><%= display_date(job.dates.start) %></span> -
-                      <span class="dtend" title="<%= job.dates.end %>"><%= display_date(job.dates.end) %></span>
-                  </div>
-                <% end %>
-              </div>
-              <% if job.title %>
-                <div class="job-title-row">
-                    <h3 class="job-title"><%= job.title %></h3>
-                    <div class="time">
-                        <span class="dtstart" title="<%= job.dates.start %>"><%= display_date(job.dates.start) %></span> -
-                        <span class="dtend" title="<%= job.dates.end %>"><%= display_date(job.dates.end) %></span>
-                    </div>
-                </div>
-              <% end %>
-          </div>
-          <div class="details">
-              <p><%= Maruku.new(job.desc).to_html %></p>
-          </div>
-      </div>
+  <% data.resume.jobs.each do |job| %>
+    <% if !(job.key?("include")) || (job.include === true) %>
+      <% if job.brief %>
+        <div class="item">
+            <div class="meta">
+              <%= partial 'experience/company_name', :locals => {:job => job} %>
+              <%= partial 'experience/company_location', :locals => {:job => job} %>
+              <%= partial 'experience/job_title', :locals => {:job => job} %>
+            </div>
+            <div class="details">
+                <p><%= Maruku.new(job.desc).to_html %></p>
+            </div>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
   <% end %>
   <div id="additionalExperience">Additional Past Experiences</div>
   <% data.resume.jobs.each do |job| %>
     <% if !job.brief %>
       <div class="item">
           <div class="meta">
-              <div class="company">
-                  <% if job.url? %>
-                    <h2 class="location"><a href="<%= job.url%>" target=_blank><%= job.company %></a></h2>
-                  <% else %>
-                    <h2 class="location"><%= job.company %></h2>
-                  <% end %>
-              </div>
-              <div class="company-location">
+            <%= partial 'experience/company_name', :locals => {:job => job} %>
+            <div class="company-location">
+              <% if job.location.city %>
                 <%= job.location.city %>, <%= job.location.state %>
-                <% if !job.title %>
+              <% else %>
+                <%= job.location.state %>
+              <% end %>
+              <% if !job.title %>
+                <% if job.dates %>
                   <div class="time">
                       <span class="dtstart" title="<%= job.dates.start %>"><%= display_date(job.dates.start) %></span> -
                       <span class="dtend" title="<%= job.dates.end %>"><%= display_date(job.dates.end) %></span>
                   </div>
                 <% end %>
-              </div>
-              <% if job.title %>
-                <div class="job-title-row">
-                    <h3 class="job-title"><%= job.title %></h3>
-                    <div class="time">
-                        <span class="dtstart" title="<%= job.dates.start %>"><%= display_date(job.dates.start) %></span> -
-                        <span class="dtend" title="<%= job.dates.end %>"><%= display_date(job.dates.end) %></span>
-                    </div>
-                </div>
               <% end %>
+            </div>
+            <%= partial 'experience/job_title', :locals => {:job => job} %>
           </div>
       </div>
     <% end %>

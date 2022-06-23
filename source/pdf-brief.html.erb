@@ -41,7 +41,7 @@
 
         <div class="main-wrapper">
             <%= partial 'summary' %>
-            <%= partial 'experience-brief' %>
+            <%= partial 'experience-brief', locals: {brief: true} %>
             <% if data.resume.projects? %>
               <%= partial 'projects' %>
             <% end %>

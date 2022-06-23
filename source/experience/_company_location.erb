@@ -1,0 +1,15 @@
+<div class="company-location">
+  <% if job.location.city %>
+    <%= job.location.city %>, <%= job.location.state %>
+  <% else %>
+    <%= job.location.state %>
+  <% end %>
+  <% if !job.title %>
+    <% if job.dates %>
+      <div class="time">
+          <span class="dtstart" title="<%= job.dates.start %>"><%= display_date(job.dates.start) %></span> -
+          <span class="dtend" title="<%= job.dates.end %>"><%= display_date(job.dates.end) %></span>
+      </div>
+    <% end %>
+  <% end %>
+</div>
