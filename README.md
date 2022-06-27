@@ -11,7 +11,7 @@ It has the following features:
  * Markdown/HTML for formatting of the longer paragraphs.
  * You can preview your changes with Middleman's included server (with livereload).
  * Automatic PDF generation using [wkhtmltopdf](http://wkhtmltopdf.org).
- * Turnkey deployment to a `http://yourusername.github.com/resume` page with no configuration necessary. 
+ * Turnkey deployment to a `http://yourusername.github.com/resume` page with no configuration necessary.
 
 ## Preview
 
@@ -19,7 +19,7 @@ See the result: [sample resume](http://timothyf.github.com/resume-builder/).
 
 ## In practice
 
-Fork this project and name it `resume` for example. 
+Fork this project and name it `resume` for example.
 Follow the installation instructions below.
 
 To create/update your resume, you'll just need to edit the [`data/resume.yml`](https://github.com/reefab/ResumeMan/blob/master/data/resume.yml) file.
@@ -70,3 +70,7 @@ Install all dependencies:
 Launch the previewing server:
 
     bundle exec middleman
+
+## Resume instructions
+
+Sections
