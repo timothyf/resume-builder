@@ -9,14 +9,10 @@
   <% data.resume.jobs.each do |job| %>
     <% if !(job.key?("include")) || (job.include === true) %>
       <div class="item">
-          <div class="meta">
-            <%= partial 'experience/company_name', :locals => {:job => job} %>
-            <%= partial 'experience/company_location', :locals => {:job => job} %>
-            <%= partial 'experience/job_title', :locals => {:job => job} %>
-          </div>
-          <div class="details">
-              <p><%= Maruku.new(job.desc).to_html %></p>
-          </div>
+        <%= partial 'experience/job_meta', :locals => {:job => job} %>
+        <div class="details">
+            <p><%= Maruku.new(job.desc).to_html %></p>
+        </div>
       </div>
     <% end %>
   <% end %>

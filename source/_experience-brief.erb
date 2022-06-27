@@ -10,11 +10,7 @@
     <% if !(job.key?("include")) || (job.include === true) %>
       <% if job.brief %>
         <div class="item">
-            <div class="meta">
-              <%= partial 'experience/company_name', :locals => {:job => job} %>
-              <%= partial 'experience/company_location', :locals => {:job => job} %>
-              <%= partial 'experience/job_title', :locals => {:job => job} %>
-            </div>
+          <%= partial 'experience/job_meta', :locals => {:job => job} %>
             <div class="details">
                 <p><%= Maruku.new(job.desc).to_html %></p>
             </div>
@@ -26,25 +22,7 @@
   <% data.resume.jobs.each do |job| %>
     <% if !job.brief %>
       <div class="item">
-          <div class="meta">
-            <%= partial 'experience/company_name', :locals => {:job => job} %>
-            <div class="company-location">
-              <% if job.location.city %>
-                <%= job.location.city %>, <%= job.location.state %>
-              <% else %>
-                <%= job.location.state %>
-              <% end %>
-              <% if !job.title %>
-                <% if job.dates %>
-                  <div class="time">
-                      <span class="dtstart" title="<%= job.dates.start %>"><%= display_date(job.dates.start) %></span> -
-                      <span class="dtend" title="<%= job.dates.end %>"><%= display_date(job.dates.end) %></span>
-                  </div>
-                <% end %>
-              <% end %>
-            </div>
-            <%= partial 'experience/job_title', :locals => {:job => job} %>
-          </div>
+        <%= partial 'experience/job_meta', :locals => {:job => job} %>
       </div>
     <% end %>
   <% end %>

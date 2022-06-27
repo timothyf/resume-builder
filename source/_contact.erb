@@ -1,25 +1,20 @@
 <div class="contact-container container-block">
     <ul class="list-unstyled contact-list">
         <li class="address">
-          <%= data.resume.info.address.street %><br/>
-          <%= data.resume.info.address.city %>,
-          <%= data.resume.info.address.state %>&nbsp;&nbsp;
-          <%= data.resume.info.address.postal_code %>
+          <%= data.resume.contact_info.address.street %><br/>
+          <%= data.resume.contact_info.address.city %>,
+          <%= data.resume.contact_info.address.state %>&nbsp;&nbsp;
+          <%= data.resume.contact_info.address.postal_code %>
         </li>
-        <li class="email"><i class="fa fa-envelope"></i><a href="mailto:<%= data.resume.info.email %>"><%= data.resume.info.email %></a></li>
-        <% if data.resume.info.phone %>
-            <li class="phone"><i class="fa fa-phone"></i><a href="tel:<%= data.resume.info.phone %>"><%= data.resume.info.phone %></a></li>
+        <li class="email"><i class="fa fa-envelope"></i><a href="mailto:<%= data.resume.contact_info.email %>"><%= data.resume.contact_info.email %></a></li>
+        <% if data.resume.contact_info.phone %>
+            <li class="phone"><i class="fa fa-phone"></i><a href="tel:<%= data.resume.contact_info.phone %>"><%= data.resume.contact_info.phone %></a></li>
         <% end %>
-        <% if data.resume.info.homepage? || data.resume.links? %>
+        <% if data.resume.contact_info.homepage? || data.resume.links? %>
           <hr/>
         <% end %>
-        <% if data.resume.info.homepage? %>
-            <li class="website"><i class="fa fa-globe"></i><a href="<%= data.resume.info.homepage %>" target="_blank"><%= data.resume.info.homepage %></a></li>
-        <% end %>
-        <% %w[linkedin github twitter].each do |site| %>
-            <% if data.resume.info.include?(site) %>
-                <li class="<%= site %>"><i class="fa fa-<%= site %>"></i><a href="<%= data.resume.info[site] %>" target="_blank"><%= data.resume.info[site].gsub(/^https?\:\/\//, "") %></a></li>
-            <% end %>
+        <% if data.resume.contact_info.homepage? %>
+            <li class="website"><i class="fa fa-globe"></i><a href="<%= data.resume.contact_info.homepage %>" target="_blank"><%= data.resume.contact_info.homepage %></a></li>
         <% end %>
         <% if data.resume.links? %>
             <% data.resume.links.each do |link| %>

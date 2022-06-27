@@ -10,52 +10,58 @@ headers:
     skills: Skills
     download: Download PDF
 
-info:
+contact_info:
     name: Timothy Fisher
     photo: false
     email: timothyf@gmail.com
     phone: (734) 790-7235
-    github: https://github.com/timothyf
-    linkedin: https://linkedin.com/in/timothyfisher/
-    twitter: http://twitter.com/tfisher
     address:
         street: 25296 Hunter Lane
         city: Flat Rock
         state: MI
         postal_code: 48134
-    desc:
-      developer:
-        I am a passionate developer and leader with nearly 30 years of industry experience in roles that include
-        both hands-on and leadership positions across organizations that range from small startups to large enterprises.
-        <br/><br/>
-        Development is my passion and I have always sought to remain very close to technology. Nearly all of my
-        roles have included hands-on development responsibilities. However, I also do enjoy opportunities to provide
-        leadership, mentorship, and strategic vision to an organization.
-        <br/><br/>
-        In addition to expertise in hands-on development, my skill-set includes business and management experience as
-        well as team and project leadership and mentoring experience. I am also passionate about innovation, growing
-        and leading teams and setting a technical vision for a company. I have a great deal of experience in the areas
-        of full-stack web development, mobile development and scalable architecture. I am also well versed in Agile
-        methodologies.
-        <br/><br/>
-        I have been an
-        evangelist for great software development in the Detroit area for many years. I am the founder and organizer of
-        the Technology Mentorship Community for Michigan. I also enjoy technical writing. I am the author of two published
-        books, the Java Phrasebook and the Ruby on Rails Bible.
-      leader:
-        I am a passionate developer and leader with 29 years of software development experience in roles
-        including Chief Technology Officer, VP of Engineering, Chief Architect, and Director of Mobile Development,
-        along with many years of hands-on development experience.
-        <br/><br/>
-        My skill-set ranges from business and management experience and knowledge to hands-on development expertise.
-        While at heart I will always be a developer, I am also passionate about innovation, growing and leading teams
-        and setting a technical vision for a company. I have a great deal of experience in the areas of full-stack
-        web development, mobile development and scalable architecture. I am also well versed in Agile methodologies.
-        <br/><br/>
-        I am also passionate about educating, mentoring, and building communities of practice. I have been an
-        evangelist for great software development in the Detroit area for many years. I am the founder and organizer of
-        the Technology Mentorship Community for Michigan. I also enjoy technical writing. I am the author of two published
-        books, the Java Phrasebook and the Ruby on Rails Bible.
+
+links:
+    - name: Github
+      url: https://github.com/timothyf
+    - name: Linkedin
+      url: https://linkedin.com/in/timothyfisher/
+    - name: Twitter
+      url: http://twitter.com/tfisher
+
+summary:
+    developer:
+      I am a passionate developer and leader with nearly 30 years of industry experience in roles that include
+      both hands-on and leadership positions across organizations that range from small startups to large enterprises.
+      <br/><br/>
+      Development is my passion and I have always sought to remain very close to technology. Nearly all of my
+      roles have included hands-on development responsibilities. However, I also do enjoy opportunities to provide
+      leadership, mentorship, and strategic vision to an organization.
+      <br/><br/>
+      In addition to expertise in hands-on development, my skill-set includes business and management experience as
+      well as team and project leadership and mentoring experience. I am also passionate about innovation, growing
+      and leading teams and setting a technical vision for a company. I have a great deal of experience in the areas
+      of full-stack web development, mobile development and scalable architecture. I am also well versed in Agile
+      methodologies.
+      <br/><br/>
+      I have been an evangelist for great software development in the Detroit area for many years.
+      I am the founder and organizer of the Technology Mentorship Community for Michigan. I also
+      enjoy technical writing. I am the author of two published books, the Java Phrasebook and the
+      Ruby on Rails Bible.
+    leader:
+      I am a passionate developer and leader with 29 years of software development experience in roles
+      including Chief Technology Officer, VP of Engineering, Chief Architect, and Director of Mobile Development,
+      along with many years of hands-on development experience.
+      <br/><br/>
+      My skill-set ranges from business and management experience and knowledge to hands-on development expertise.
+      While at heart I will always be a developer, I am also passionate about innovation, growing and leading teams
+      and setting a technical vision for a company. I have a great deal of experience in the areas of full-stack
+      web development, mobile development and scalable architecture. I am also well versed in Agile methodologies.
+      <br/><br/>
+      I am also passionate about educating, mentoring, and building communities of practice. I have been an
+      evangelist for great software development in the Detroit area for many years. I am the founder and organizer of
+      the Technology Mentorship Community for Michigan. I also enjoy technical writing. I am the author of two published
+      books, the Java Phrasebook and the Ruby on Rails Bible.
 
 
 skills:
@@ -76,6 +82,7 @@ jobs:
     - title:
       company: Roostify
       brief: true
+      include: full # (full, brief, none)
       location:
         city:
         state: Remote
@@ -134,7 +141,7 @@ jobs:
 
     - title: Chief Technology Officer
       company: Connect Space
-      include: false
+      include: none
       brief: true
       location:
         city: Ann Arbor
@@ -260,6 +267,7 @@ jobs:
     - title: Senior Java Architect
       company: LogicaCMG
       brief: false
+      include: brief
       location:
         city: Southfield
         state: MI
