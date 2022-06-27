@@ -6,7 +6,8 @@ It has the following features:
 
  * Separation between content and style, all your resume content is a YAML
    file.
- * Uses your Gravatar picture. (OPTIONAL)
+ * Supports 13 different resume section types
+ * Can optionally include a gravatar photo
  * Markdown/HTML for formatting of the longer paragraphs.
  * You can preview your changes with Middleman's included server (with livereload).
  * Automatic PDF generation using [wkhtmltopdf](http://wkhtmltopdf.org).
@@ -118,6 +119,8 @@ headers:
 ```
 
 #### Contact Info
+
+This section is used to provide basic contact infor for the resume user.
 
 ```yaml
 contact_info:
