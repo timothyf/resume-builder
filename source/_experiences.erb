@@ -1,13 +1,13 @@
 <section class="section experiences-section">
   <h2 class="section-title">
-    <% if data.resume.pdf.useicons %>
+    <% if @resume_data.pdf.useicons %>
       <i class="fa fa-briefcase"></i>
     <% end %>
-    <%= data.resume.headers.jobs %>
+    <%= @resume_data.headers.jobs %>
   </h2>
 
-  <% data.resume.jobs.each do |job| %>
-    <% if !(job.key?("include")) || (job.include === true) %>
+  <% @resume_data.jobs.each do |job| %>
+    <% if !(job.key?("include")) || (job.include === true) || (job.include === 'full')%>
       <div class="item">
         <%= partial 'experience/job_meta', :locals => {:job => job} %>
         <div class="details">

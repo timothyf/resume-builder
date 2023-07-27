@@ -1,9 +1,9 @@
-<% if data.resume.skills? %>
+<% if @resume_data.skills? %>
   <div class="interests-container container-block">
-      <h2 class="container-block-title"><%= data.resume.headers.skills %></h2>
+      <h2 class="container-block-title"><%= @resume_data.headers.skills %></h2>
 
       <ul class="list-unstyled interests-list">
-          <% data.resume.skills.each do |skill| %>
+          <% @resume_data.skills.each do |skill| %>
               <li><%= skill %></li>
           <% end %>
       </ul>

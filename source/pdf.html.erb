@@ -2,8 +2,11 @@
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+
+<% partial(:data, :locals => { :resume_data => nil }) %>
+
 <head>
-    <title><%= data.resume.contact_info.name || "Resume" %></title>
+    <title><%= @resume_data.contact_info.name || "Resume" %></title>
     <!-- Meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -42,10 +45,10 @@
         <div class="main-wrapper">
             <%= partial 'summary' %>
             <%= partial 'experiences', locals: {brief: false} %>
-            <% if data.resume.projects? %>
+            <% if @resume_data.projects? %>
               <%= partial 'projects' %>
             <% end %>
-            <% if data.resume.volunteering %>
+            <% if @resume_data.volunteering %>
               <%= partial 'volunteering' %>
             <% end %>
         </div>

@@ -1,7 +1,7 @@
-<% if data.resume.education? %>
+<% if @resume_data.education? %>
 <div class="education-container container-block">
-    <h2 class="container-block-title"><%= data.resume.headers.education %></h2>
-    <% data.resume.education.each do |edu| %>
+    <h2 class="container-block-title"><%= @resume_data.headers.education %></h2>
+    <% @resume_data.education.each do |edu| %>
         <div class="item">
             <div class="degree-name"><%= edu.degree %> &nbsp; <%= edu.grade if edu.grade? %></div>
             <% if edu.url? %>

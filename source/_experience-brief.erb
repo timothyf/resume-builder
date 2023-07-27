@@ -1,12 +1,12 @@
 <section class="section experiences-section">
   <h2 class="section-title">
-    <% if data.resume.pdf.useicons %>
+    <% if @resume_data.pdf.useicons %>
       <i class="fa fa-briefcase"></i>
     <% end %>
-    <%= data.resume.headers.jobs %>
+    <%= @resume_data.headers.jobs %>
   </h2>
 
-  <% data.resume.jobs.each do |job| %>
+  <% @resume_data.jobs.each do |job| %>
     <% if !(job.key?("include")) || (job.include === true) %>
       <% if job.brief %>
         <div class="item">
@@ -19,7 +19,7 @@
     <% end %>
   <% end %>
   <div id="additionalExperience">Additional Past Experiences</div>
-  <% data.resume.jobs.each do |job| %>
+  <% @resume_data.jobs.each do |job| %>
     <% if !job.brief %>
       <div class="item">
         <%= partial 'experience/job_meta', :locals => {:job => job} %>

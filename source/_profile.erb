@@ -1,7 +1,7 @@
 <div class="profile-container">
-    <% if data.resume.contact_info.photo == true %>
-      <img class="profile" src="<%= gravatar_url data.resume.contact_info.email %>" alt="" />
+    <% if @resume_data.contact_info.photo == true %>
+      <img class="profile" src="<%= gravatar_url @resume_data.contact_info.email %>" alt="" />
     <% end %>
-    <h1 class="name"><%= data.resume.contact_info.name %></h1>
-    <h3 class="tagline"><%= data.resume.contact_info.shortdesc %></h3>
+    <h1 class="name"><%= @resume_data.contact_info.name %></h1>
+    <h3 class="tagline"><%= @resume_data.contact_info.shortdesc %></h3>
 </div>

@@ -2,28 +2,27 @@
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+
+<% partial(:data, :locals => { :resume_data => nil }) %>
+
 <%= partial 'header' %>
 
 <body>
     <div class="menu-bar">
       <i class="fa fa-file"></i>
-      <a href="<%= data.resume.pdf.filename %>.pdf"><%= data.resume.headers.download %></a>
+      <a href="<%= @resume_data.pdf.filename %>.pdf"><%= @resume_data.headers.download %></a>
     </div>
     <div class="wrapper">
         <div class="sidebar-wrapper">
-            <%= partial 'profile' %>
-            <%= partial 'contact' %>
-            <%= partial 'education' %>
-            <%= partial 'skills' %>
-            <%= partial 'languages' %>
-            <%= partial 'interests' %>
-            <%= partial 'download' %>
+          <% data.layout.content.right.each do |section| %>
+            <%= partial section %>
+          <% end %>
         </div>
 
         <div class="main-wrapper">
-            <%= partial 'summary' %>
-            <%= partial 'experience-brief' %>
-            <%= partial 'projects' %>
+          <% data.layout.content.center.each do |section| %>
+            <%= partial section %>
+          <% end %>
         </div>
     </div>
     <%= partial 'footer' %>

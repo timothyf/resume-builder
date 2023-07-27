@@ -1,0 +1,27 @@
+labels:
+    profile: Summary
+    jobs: Experience
+    education: Education
+    skills: Skills
+    download: Download PDF
+
+content:
+  header:
+
+  center:
+    - summary
+    - experiences
+    - projects
+    - volunteering
+
+  right:
+    - profile
+    - contact
+    - education
+    - skills
+    - certifications
+    - languages
+    - interests
+    - download
+
+  footer:

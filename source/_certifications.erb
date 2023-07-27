@@ -1,7 +1,7 @@
-<% if data.resume.certifications? %>
+<% if @resume_data.certifications? %>
 <div class="education-container container-block">
     <h2 class="container-block-title">Certifications</h2>
-    <% data.resume.certifications.each do |cert| %>
+    <% @resume_data.certifications.each do |cert| %>
       <div class="item">
         <div class="degree-name"><%= cert.title %></div>
       </div>

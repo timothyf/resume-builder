@@ -1,8 +1,8 @@
-<% if data.resume.projects? %>
+<% if @resume_data.projects? %>
     <section class="section projects-section">
-        <h2 class="section-title"><i class="fa fa-archive"></i><%= data.resume.headers.projects %></h2>
+        <h2 class="section-title"><i class="fa fa-archive"></i><%= @resume_data.headers.projects %></h2>
 
-        <% data.resume.projects.each do |project| %>
+        <% @resume_data.projects.each do |project| %>
             <div class="item">
             <% if project.url? %>
               <span class="project-title fn url org"><a href="<%= project.url %>" target=_blank><%= project.name %></a></span>

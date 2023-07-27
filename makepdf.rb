@@ -1,7 +1,10 @@
+
 module PdfMaker
   class << self
     def registered(app)
       app.after_build do |builder|
+        active_resume = data.active_resume.name
+        @resume_data = eval("data.#{active_resume}")
         begin
           require 'pdfkit'
 
@@ -13,8 +16,8 @@ module PdfMaker
                       :print_media_type => false
                     )
 
-          kit.to_file("build/#{data.resume.pdf.filename}.pdf")
-          builder.say_status "PDF Maker",  "PDF file available at build/#{data.resume.pdf.filename}.pdf"
+          kit.to_file("build/#{@resume_data.pdf.filename}.pdf")
+          builder.say_status "PDF Maker",  "PDF file available at build/#{@resume_data.pdf.filename}.pdf"
         rescue Exception =>e
             builder.say_status "PDF Maker",  "Error: #{e.message}", Thor::Shell::Color::RED
             raise
@@ -29,8 +32,8 @@ module PdfMaker
                       :print_media_type => false
                     )
 
-          kit.to_file("build/#{data.resume.pdf.filename}-brief.pdf")
-          builder.say_status "PDF Maker",  "PDF file available at build/#{data.resume.pdf.filename}-brief.pdf"
+          kit.to_file("build/#{@resume_data.pdf.filename}-brief.pdf")
+          builder.say_status "PDF Maker",  "PDF file available at build/#{@resume_data.pdf.filename}-brief.pdf"
           rescue Exception =>e
               builder.say_status "PDF Maker",  "Error: #{e.message}", Thor::Shell::Color::RED
               raise
