@@ -1,5 +1,5 @@
 <% summary_name = @resume_data.summary.file %>
-<% @summary = (eval("data.summaries.#{summary_name}")).summary %>
+<% @summary = (eval("data.#{@active_resume_user}.summaries.#{summary_name}")).summary %>
 
 <section class="section summary-section">
   <% if @resume_data.pdf.useicons %>
