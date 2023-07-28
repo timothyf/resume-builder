@@ -5,10 +5,7 @@
     <h2 class="section-title"><%= @resume_data.headers.profile %></h2>
   <% end %>
   <div class="summary">
-      <% if @resume_data.pdf.role == 'developer' %>
-        <p><%= Maruku.new(@resume_data.summary.developer).to_html %></p>
-      <% else %>
-        <p><%= Maruku.new(@resume_data.summary.leader).to_html %></p>
-      <% end %>
+    <% summary = @resume_data.summary.find{ |summary| summary.type == @resume_data.pdf.role} %>
+    <p><%= Maruku.new(summary.text).to_html %></p>
   </div>
 </section>
