@@ -68,9 +68,11 @@ configure :build do
 end
 
 after_build do |builder|
-  active_resume = data.active_resume.name
-  @resume_data = eval("data.#{active_resume}")
-  new_dir_path = "./dist/#{@resume_data.name}"
+  active_resume_user = data.active_resume.user
+  active_resume_name = data.active_resume.name
+  @resume_data = eval("data.#{active_resume_user}.#{active_resume_name}")
+
+  new_dir_path = "./dist/#{active_resume_user}/#{@resume_data.name}"
 
   root = "./build"
   Dir.glob(File.join(root, "**", "*.html")).each do |html_file|
@@ -81,6 +83,11 @@ after_build do |builder|
 
   begin
     Dir.mkdir("./dist")
+  rescue
+    # do nothing if dir already exists
+  end
+  begin
+    Dir.mkdir("./dist/#{active_resume_user}")
   rescue
     # do nothing if dir already exists
   end
