@@ -1,3 +1,3 @@
-<% active_resume_user = data.active_resume.user %>
-<% active_resume_name = data.active_resume.name %>
-<% @resume_data = eval("data.#{active_resume_user}.#{active_resume_name}") %>
+<% @active_resume_user = data.active_resume.user %>
+<% @active_resume_name = data.active_resume.name %>
+<% @resume_data = eval("data.#{@active_resume_user}.#{@active_resume_name}") %>
