@@ -117,11 +117,15 @@ end
 after_build do |builder|
   active_resume = data.active_resume.name
   @resume_data = eval("data.#{active_resume}")
-  new_dir_path = "./build/#{@resume_data.name}"
+  new_dir_path = "./dist/#{@resume_data.name}"
+  begin
+    Dir.mkdir("./dist")
+  rescue
+    # do nothing if dir already exists
+  end
   begin
     Dir.mkdir(new_dir_path)
   rescue
-    # do nothing if dir already exists
   end
   File.rename("./build/stylesheets", "#{new_dir_path}/stylesheets")
   File.rename("./build/index.html", "#{new_dir_path}/index-#{@resume_data.name}.html")
