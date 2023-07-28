@@ -37,11 +37,6 @@ helpers do
         end
     end
 
-    def display_age(birthday)
-        now = Date.today
-        now.year - birthday.year - (Date.new(now.year, birthday.month, birthday.day) > now ? 1 : 0)
-    end
-
     def gravatar_url(email)
       hash = Digest::MD5.hexdigest email.downcase
       "https://www.gravatar.com/avatar/#{hash}?s=130&d=mm"
