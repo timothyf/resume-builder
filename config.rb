@@ -1,55 +1,21 @@
 ## Used for parsing markdown docs in the resume.yml
 require 'maruku'
-## Pdfmaker custom extension
-#require 'makepdf'
+
 ## For generating gravatar hash
 require 'digest/md5'
 
 
 #activate :livereload
 
-###
-# Compass
-###
-
-# Susy grids in Compass
-# First: gem install susy
-# require 'susy'
-
-# Change Compass configuration
-# compass_config do |config|
-#   config.output_style = :compact
-# end
-
-###
-# Page options, layouts, aliases and proxies
-###
-
 # Per-page layout changes:
 #
 # With no layout
 page "index.html", :layout => false
 page "pdf.html", :layout => false
-#
-# With alternative layout
-# page "/path/to/file.html", :layout => :otherlayout
-#
-# A path which all have the same layout
-# with_layout :admin do
-#   page "/admin/*"
-# end
-
-# Proxy (fake) files
-# page "/this-page-has-no-template.html", :proxy => "/template-file.html" do
-#   @which_fake_page = "Rendering a fake page with a variable"
-# end
 
 ###
 # Helpers
 ###
-
-# Automatic image dimensions on image_tag helper
-# activate :automatic_image_sizes
 
 # Methods defined in the helpers block are available in templates
 # helpers do
@@ -102,22 +68,22 @@ configure :build do
   # Use relative URLs
   activate :relative_assets
 
-  # Compress PNGs after build
-  # First: gem install middleman-smusher
-  # require "middleman-smusher"
-  # activate :smusher
-
   # Or use a different image path
   # set :http_path, "/Content/images/"
-
-  # Disable this if you don't want PDF generation
-#  activate :pdfmaker
 end
 
 after_build do |builder|
   active_resume = data.active_resume.name
   @resume_data = eval("data.#{active_resume}")
   new_dir_path = "./dist/#{@resume_data.name}"
+
+  root = "./build"
+  Dir.glob(File.join(root, "**", "*.html")).each do |html_file|
+    inline_css(html_file, root)
+  end
+
+  FileUtils.remove_dir(new_dir_path, true)
+
   begin
     Dir.mkdir("./dist")
   rescue
@@ -127,6 +93,7 @@ after_build do |builder|
     Dir.mkdir(new_dir_path)
   rescue
   end
+
   File.rename("./build/stylesheets", "#{new_dir_path}/stylesheets")
   File.rename("./build/index.html", "#{new_dir_path}/index-#{@resume_data.name}.html")
   File.rename("./build/index-brief.html", "#{new_dir_path}/index-brief-#{@resume_data.name}.html")
@@ -136,4 +103,29 @@ end
 
 activate :deploy do |deploy|
   deploy.method = :git
+end
+
+require "pathname"
+
+def inline_css(html_file, root)
+  doc = File.open(html_file) { |f| Nokogiri::HTML(f) }
+
+  stylesheet_tags = doc.css("link[id=theme-style]")
+  puts "Inlining css in #{html_file}" if stylesheet_tags.any?
+
+  stylesheet_tags.each do |stylesheet_tag|
+    href = stylesheet_tag["href"]
+    href = href[1..-1] if Pathname.new(href).absolute?
+
+    css_file_path = File.expand_path(href, root)
+    css = File.read(css_file_path)
+
+    style_tag = Nokogiri::XML::Node.new "style", doc
+    style_tag.content = css
+
+    stylesheet_tag.add_previous_sibling style_tag
+    stylesheet_tag.remove
+  end
+
+  File.write(html_file, doc.to_s)
 end
