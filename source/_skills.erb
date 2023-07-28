@@ -1,6 +1,6 @@
 <% if @resume_data.skills? %>
   <div class="interests-container container-block">
-      <h2 class="container-block-title"><%= @resume_data.headers.skills %></h2>
+      <h2 class="container-block-title"><%= display_name %></h2>
 
       <ul class="list-unstyled interests-list">
           <% @resume_data.skills.each do |skill| %>

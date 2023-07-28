@@ -3,7 +3,7 @@
     <% if @resume_data.pdf.useicons %>
       <i class="fa fa-briefcase"></i>
     <% end %>
-    <%= @resume_data.headers.jobs %>
+    <%= display_name %>
   </h2>
 
   <% @resume_data.jobs.each do |job| %>

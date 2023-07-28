@@ -1,6 +1,6 @@
 <% if @resume_data.education? %>
 <div class="education-container container-block">
-    <h2 class="container-block-title"><%= @resume_data.headers.education %></h2>
+    <h2 class="container-block-title"><%= display_name %></h2>
     <% @resume_data.education.each do |edu| %>
         <div class="item">
             <div class="degree-name"><%= edu.degree %> &nbsp; <%= edu.grade if edu.grade? %></div>

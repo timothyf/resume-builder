@@ -3,9 +3,9 @@
 
 <section class="section summary-section">
   <% if @resume_data.pdf.useicons %>
-    <h2 class="section-title"><i class="fa fa-user"></i><%= @resume_data.headers.profile %></h2>
+    <h2 class="section-title"><i class="fa fa-user"></i><%= display_name %></h2>
   <% else %>
-    <h2 class="section-title"><%= @resume_data.headers.profile %></h2>
+    <h2 class="section-title"><%= display_name %></h2>
   <% end %>
   <div class="summary">
     <p><%= Maruku.new(@summary.text).to_html %></p>

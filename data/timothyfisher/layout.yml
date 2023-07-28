@@ -9,19 +9,21 @@ content:
   header:
 
   center:
-    - summary
-    - experiences
-    - projects
-    - volunteering
+    - display_name: Summary
+      template: summary
+    - display_name: Experience
+      template: experiences
 
   right:
-    - profile
-    - contact
-    - education
-    - skills
-    - certifications
-    - languages
-    - interests
-    - download
+    - display_name:
+      template: profile
+    - display_name:
+      template: contact
+    - display_name: Education
+      template: education
+    - display_name: Skills
+      template: skills
+    - display_name: Download PDF
+      template: download
 
   footer:
