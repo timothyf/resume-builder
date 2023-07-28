@@ -13,6 +13,7 @@ module PdfMaker
                       :viewport_size => '2480x3508',
                       :zoom => 0.7,
                       # :dpi => 300
+                      :encoding => 'TEXT',
                       :print_media_type => false
                     )
 

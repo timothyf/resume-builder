@@ -1,8 +1,8 @@
 /* ======= Base ======= */
 body {
     font-family: 'Roboto', sans-serif;
-    color: @text-color-secondary;
-    background: @smoky-white;
+    color: var(--text-color-secondary);
+    background: var(--smoky-white);
     font-size: 14px;
     padding: 30px;
     -webkit-font-smoothing: antialiased;
@@ -13,17 +13,17 @@ h1, h2, h3, h4, h5, h6  {
     font-weight: 700;
 }
 
-a {
-    color: darken(@theme-color, 15%);
-    .transition (all 0.4s ease-in-out);
-    &:hover {
-        text-decoration: underline;
-        color: darken(@theme-color, 30%);
-    }
-    &:focus {
-        text-decoration: none;
-    }
-}
+// a {
+//     color: darken(@theme-color, 15%);
+//     .transition (all 0.4s ease-in-out);
+//     &:hover {
+//         text-decoration: underline;
+//         color: darken(@theme-color, 30%);
+//     }
+//     &:focus {
+//         text-decoration: none;
+//     }
+// }
 
 p {
     line-height: 1.5;

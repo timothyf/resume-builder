@@ -21,7 +21,7 @@
 
         <div class="main-wrapper">
           <% data.layout.content.center.each do |section| %>
-            <%= partial section %>
+            <%= partial section, locals: {:brief => true} %>
           <% end %>
         </div>
     </div>

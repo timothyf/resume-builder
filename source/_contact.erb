@@ -1,20 +1,21 @@
+<% contact_info = @resume_data.contact_info %>
 <div class="contact-container container-block">
     <ul class="list-unstyled contact-list">
         <li class="address">
-          <%= @resume_data.contact_info.address.street %><br/>
-          <%= @resume_data.contact_info.address.city %>,
-          <%= @resume_data.contact_info.address.state %>&nbsp;&nbsp;
-          <%= @resume_data.contact_info.address.postal_code %>
+          <%= contact_info.address.street %><br/>
+          <%= contact_info.address.city %>,
+          <%= contact_info.address.state %>&nbsp;&nbsp;
+          <%= contact_info.address.postal_code %>
         </li>
-        <li class="email"><i class="fa fa-envelope"></i><a href="mailto:<%= @resume_data.contact_info.email %>"><%= @resume_data.contact_info.email %></a></li>
-        <% if @resume_data.contact_info.phone %>
-            <li class="phone"><i class="fa fa-phone"></i><a href="tel:<%= @resume_data.contact_info.phone %>"><%= @resume_data.contact_info.phone %></a></li>
+        <li class="email"><i class="fa fa-envelope"></i><a href="mailto:<%= contact_info.email %>"><%= contact_info.email %></a></li>
+        <% if contact_info.phone %>
+            <li class="phone"><i class="fa fa-phone"></i><a href="tel:<%= contact_info.phone %>"><%= contact_info.phone %></a></li>
         <% end %>
-        <% if @resume_data.contact_info.homepage? || @resume_data.links? %>
+        <% if contact_info.homepage? || @resume_data.links? %>
           <hr/>
         <% end %>
-        <% if @resume_data.contact_info.homepage? %>
-            <li class="website"><i class="fa fa-globe"></i><a href="<%= @resume_data.contact_info.homepage %>" target="_blank"><%= @resume_data.contact_info.homepage %></a></li>
+        <% if contact_info.homepage? %>
+            <li class="website"><i class="fa fa-globe"></i><a href="<%= contact_info.homepage %>" target="_blank"><%= contact_info.homepage %></a></li>
         <% end %>
         <% if @resume_data.links? %>
             <% @resume_data.links.each do |link| %>

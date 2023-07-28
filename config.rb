@@ -1,11 +1,12 @@
 ## Used for parsing markdown docs in the resume.yml
 require 'maruku'
 ## Pdfmaker custom extension
-require 'makepdf'
+#require 'makepdf'
 ## For generating gravatar hash
 require 'digest/md5'
 
-activate :livereload
+
+#activate :livereload
 
 ###
 # Compass
@@ -90,7 +91,7 @@ configure :build do
   # For example, change the Compass output style for deployment
   activate :minify_css
 
-  activate :asset_hash
+  #activate :asset_hash
 
   # Minify Javascript on build
   # activate :minify_javascript
@@ -110,7 +111,7 @@ configure :build do
   # set :http_path, "/Content/images/"
 
   # Disable this if you don't want PDF generation
-  activate :pdfmaker
+#  activate :pdfmaker
 end
 
 activate :deploy do |deploy|

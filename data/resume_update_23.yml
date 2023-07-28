@@ -1,0 +1,164 @@
+pdf:
+  #filename: TimothyFisher-Resume-developer
+  filename: TimothyFisher-Resume-leader
+  useicons: true
+  #role: developer
+  role: leader
+
+headers:
+    profile: Summary
+    jobs: Experience
+    education: Education
+    skills: Skills
+    download: Download PDF
+
+contact_info:
+    name: Timothy Fisher
+    photo: false
+    email: timothyf@gmail.com
+    phone: (734) 790-7235
+    address:
+        street: 25296 Hunter Lane
+        city: Flat Rock
+        state: MI
+        postal_code: 48134
+
+links:
+    - name: Github
+      url: https://github.com/timothyf
+    - name: Linkedin
+      url: https://linkedin.com/in/timothyfisher/
+    - name: Twitter
+      url: http://twitter.com/tfisher
+
+summary:
+    developer:
+      I am a passionate developer and leader with over 30 years of industry experience in roles that include
+      both hands-on and leadership positions across organizations that range from small startups to large enterprises.
+      <br/><br/>
+      Development is my passion and I have always sought to remain very close to technology. Nearly all of my
+      roles have included hands-on development responsibilities. However, I also do enjoy opportunities to provide
+      leadership, mentorship, and strategic vision to an organization.
+      <br/><br/>
+      In addition to expertise in hands-on development, my skill-set includes business and management experience as
+      well as team and project leadership and mentoring experience. I am also passionate about innovation, growing
+      and leading teams and setting a technical vision for a company. I have a great deal of experience in the areas
+      of full-stack web development, mobile development and scalable architecture. I am also well versed in Agile
+      methodologies.
+      <br/><br/>
+      I have been an evangelist for great software development in the Detroit area for many years.
+      I am the founder and organizer of the Technology Mentorship Community for Michigan. I also
+      enjoy technical writing. I am the author of two published books, the Java Phrasebook and the
+      Ruby on Rails Bible.
+    leader:
+      I am a passionate software engineering leader with over 30 years of development industry experience in roles
+      including Chief Technology Officer, VP of Engineering, Chief Architect, and Director of Mobile Development,
+      along with many years of hands-on development experience.
+      <br/><br/>
+      My skill-set ranges from business and management experience and knowledge to hands-on development expertise.
+      I am passionate about innovation, growing and leading teams
+      and setting a technical vision for a company. I have a great deal of experience in the areas of full-stack
+      web development, mobile development and scalable architecture. I am also well versed in Agile methodologies.
+      <br/><br/>
+      I am also passionate about educating, mentoring, and building communities of practice. I have been an
+      evangelist for great software development in the Detroit area for many years. I am the founder and organizer of
+      the Technology Mentorship Community for Michigan. I also enjoy technical writing. I am the author of two published
+      books, the Java Phrasebook and the Ruby on Rails Bible.
+
+
+skills:
+    - Team Leadership & Management
+    - Mentorship
+    - Agile Process Management
+    - Web & Mobile Development
+    - Web & Mobile Scalability
+    - Microservices Architecture
+    - Amazon Web Services (AWS), Heroku, EngineYard
+    - Ruby, Rails, JavaScript, Node.js, React, ReactNative, Java, Swift, HTML, CSS
+    - GraphQL, JSON
+    - Internet of Things (IOT)
+    - Security (Encryption, Digital Signature, PKI)
+    - eCommerce (Shopify, Stripe)
+
+jobs:
+    - id: nyt_sem
+      title: Senior Engineering Manager
+      company: The New York Times
+      brief: true
+      include: true # (full, brief, none)
+      location:
+        city:
+        state: Remote
+      dates:
+          start: 2022, August
+          end: Present
+      desc: |
+        Managed the Web Platforms team which is responsible for developing, and
+        maintaining the core web application that serves the New York Times web
+        content. My responsibilities included:
+          <ul>
+            <li>Provide leadership in defining strategy and vision for the team</li>
+            <li>Conducting 1-on-1 meetings with my team members to build relationships,
+            assist with challenges, and provide mentorship and growth opportunities</li>
+            <li>Work closely with Project Managers and Product owners to manage deliverables</li>
+            <li>Assist team with technical challenges that occur during development</li>
+            <li>Interview and hire additional team members</li>
+            <li>Provide continuing feedback to team members along with semi-annual reviews</li>
+            <li>Plan for salary, raises and promotions for team members</li>
+          </ul>
+    - file: jobs
+      id: roo_em
+      brief: true
+    - file: jobs
+      id: aj_tld
+      brief: true
+    - file: jobs
+      id: cs_cto
+      brief: true
+      include: false
+    - file: jobs
+      id: pow_vpe
+      brief: true
+    - file: jobs
+      id: qky_vpe
+      brief: true
+    - file: jobs
+      id: cpw_dev
+      brief: true
+    - file: jobs
+      id: log_sja
+      brief: false
+    - file: jobs
+      id: med_dtl
+      brief: false
+    - file: jobs
+      id: sph_sja
+      brief: false
+    - file: jobs
+      id: pwc_sc
+      brief: false
+    - file: jobs
+      id: cyc_dev
+      brief: false
+    - file: jobs
+      id: mot_dev
+      brief: false
+
+education:
+    - name: University of Michigan
+      degree: B.S. Electrical Engineering
+      dates:
+          start: Sept 1986
+          end: May 1991
+
+    - name: Capella University
+      degree: M.S. Education
+      dates:
+          start: Sept 2001
+          end: May 2003
+
+    - name: Arizona State University
+      degree: M.S. Computer Science
+      dates:
+          start: Sept 1992
+          end: May 1994
