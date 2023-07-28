@@ -25,7 +25,7 @@
     <% @resume_data.jobs.each do |job| %>
       <% if !job.brief && job.include != false %>
         <% if job.file %>
-          <% job = data.jobs.jobs.find{ |ajob| ajob.id == job.id }%>
+          <% job = data.jobs.jobs.find{ |ajob| ajob.id == job.id } %>
           <div class="item">
             <%= partial 'experience/job_meta', :locals => {:job => job} %>
           </div>
