@@ -23,11 +23,8 @@ contact_info:
 
 links:
     - name: Github
-      url: https://github.com/timothyf
     - name: Linkedin
-      url: https://linkedin.com/in/timothyfisher/
     - name: Twitter
-      url: http://twitter.com/tfisher
 
 summary:
     file: summary_leader
@@ -125,6 +122,7 @@ education:
 
     - name: Arizona State University
       degree: M.S. Computer Science
+      status: incomplete
       dates:
           start: Sept 1992
           end: May 1994

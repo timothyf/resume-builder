@@ -12,26 +12,17 @@
 
 <body>
     <div class="wrapper">
-        <div class="sidebar-wrapper">
-            <%= partial 'profile' %>
-            <%= partial 'contact' %>
-            <%= partial 'education' %>
-            <%= partial 'skills' %>
-            <%= partial 'certifications' %>
-            <%= partial 'languages' %>
-            <%= partial 'interests' %>
-        </div>
+      <div class="sidebar-wrapper">
+        <% data.layout.content.right.each do |section| %>
+          <%= partial section %>
+        <% end %>
+      </div>
 
-        <div class="main-wrapper">
-            <%= partial 'summary' %>
-            <%= partial 'experiences', locals: {brief: false} %>
-            <% if @resume_data.projects? %>
-              <%= partial 'projects' %>
-            <% end %>
-            <% if @resume_data.volunteering %>
-              <%= partial 'volunteering' %>
-            <% end %>
-        </div>
+      <div class="main-wrapper">
+        <% data.layout.content.center.each do |section| %>
+          <%= partial section, locals: {brief: false} %>
+        <% end %>
+      </div>
     </div>
     <%= partial 'footer' %>
 </body>

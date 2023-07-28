@@ -23,11 +23,8 @@ contact_info:
 
 links:
     - name: Github
-      url: https://github.com/timothyf
     - name: Linkedin
-      url: https://linkedin.com/in/timothyfisher/
     - name: Twitter
-      url: http://twitter.com/tfisher
 
 summary:
     file: summary_developer

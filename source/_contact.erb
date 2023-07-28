@@ -19,7 +19,8 @@
         <% end %>
         <% if @resume_data.links? %>
             <% @resume_data.links.each do |link| %>
-                <li><i class="fa fa-link"></i><a href="<%= link.url %>" target="_blank"><%= link.name %></a></li>
+              <% @link = data.links.links.find{ |alink| alink.name == link.name } %>
+                <li><i class="fa fa-link"></i><a href="<%= @link.url %>" target="_blank"><%= @link.name %></a></li>
             <% end %>
         <% end %>
         <hr/>
