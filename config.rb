@@ -114,6 +114,22 @@ configure :build do
 #  activate :pdfmaker
 end
 
+after_build do |builder|
+  active_resume = data.active_resume.name
+  @resume_data = eval("data.#{active_resume}")
+  new_dir_path = "./build/#{@resume_data.name}"
+  begin
+    Dir.mkdir(new_dir_path)
+  rescue
+    # do nothing if dir already exists
+  end
+  File.rename("./build/stylesheets", "#{new_dir_path}/stylesheets")
+  File.rename("./build/index.html", "#{new_dir_path}/index-#{@resume_data.name}.html")
+  File.rename("./build/index-brief.html", "#{new_dir_path}/index-brief-#{@resume_data.name}.html")
+  File.rename("./build/pdf.html", "#{new_dir_path}/pdf-#{@resume_data.name}.html")
+  File.rename("./build/pdf-brief.html", "#{new_dir_path}/pdf-brief-#{@resume_data.name}.html")
+end
+
 activate :deploy do |deploy|
   deploy.method = :git
 end

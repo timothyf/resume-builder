@@ -1,3 +1,6 @@
+<% summary_name = @resume_data.summary.file %>
+<% @summary = (eval("data.#{summary_name}")).summary %>
+
 <section class="section summary-section">
   <% if @resume_data.pdf.useicons %>
     <h2 class="section-title"><i class="fa fa-user"></i><%= @resume_data.headers.profile %></h2>
@@ -5,7 +8,6 @@
     <h2 class="section-title"><%= @resume_data.headers.profile %></h2>
   <% end %>
   <div class="summary">
-    <% summary = @resume_data.summary.find{ |summary| summary.type == @resume_data.pdf.role} %>
-    <p><%= Maruku.new(summary.text).to_html %></p>
+    <p><%= Maruku.new(@summary.text).to_html %></p>
   </div>
 </section>
