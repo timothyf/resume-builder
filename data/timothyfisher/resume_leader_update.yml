@@ -1,15 +1,7 @@
-name: leader
-layout: layout
+name: resume_leader_update
+layout: layout2
 pdf:
-  filename: TimothyFisher-Resume-leader
   useicons: true
-
-headers:
-    profile: Summary
-    jobs: Experience
-    education: Education
-    skills: Skills
-    download: Download PDF
 
 contact_info:
     name: Timothy Fisher
@@ -58,11 +50,6 @@ jobs:
       brief: true
       section: experiences
     - file: jobs
-      id: cs_cto
-      brief: true
-      include: false
-      section: experiences
-    - file: jobs
       id: pow_vpe
       brief: true
       section: experiences
@@ -73,31 +60,7 @@ jobs:
     - file: jobs
       id: cpw_dev
       brief: true
-      section: experiences
-    - file: jobs
-      id: log_sja
-      brief: false
-      section: experiences
-    - file: jobs
-      id: med_dtl
-      brief: false
-      section: experiences
-    - file: jobs
-      id: sph_sja
-      brief: false
-      section: experiences
-    - file: jobs
-      id: pwc_sc
-      brief: false
-      section: experiences
-    - file: jobs
-      id: cyc_dev
-      brief: false
-      section: experiences
-    - file: jobs
-      id: mot_dev
-      brief: false
-      section: experiences
+      section: experience_other
 
 education:
     - name: University of Michigan

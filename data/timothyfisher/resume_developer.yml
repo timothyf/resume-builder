@@ -1,4 +1,5 @@
 name: developer
+layout: layout
 pdf:
   filename: TimothyFisher-Resume-developer
   useicons: true

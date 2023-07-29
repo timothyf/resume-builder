@@ -4,7 +4,6 @@
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
 
 <% partial(:data, :locals => { :resume_data => nil }) %>
-
 <head>
   <%= partial 'header' %>
 </head>
@@ -23,7 +22,7 @@
 
         <div class="main-wrapper">
           <% @layout_data.content.center.each do |section| %>
-            <%= partial section.template, locals: {brief: false, display_name: section.display_name} %>
+            <%= partial section.template, locals: {brief: true, display_name: section.display_name} %>
           <% end %>
         </div>
     </div>

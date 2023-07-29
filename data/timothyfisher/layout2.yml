@@ -12,9 +12,12 @@ content:
     - name: summary
       display_name: Summary
       template: summary
-    - name: experience
-      display_name: Experience
-      template: experiences
+    - name: experience_highlights
+      display_name: Experience Highlights
+      template: experience_highlights
+    - name: experience_other
+      display_name: Other Experience
+      template: experience_other
 
   right:
     - display_name:

@@ -13,6 +13,11 @@ require 'digest/md5'
 page "index.html", :layout => false
 page "pdf.html", :layout => false
 
+if data.active_resume.generate_brief == false
+  ignore "/index-brief.html"
+  ignore "/pdf-brief.html"
+end
+
 ###
 # Helpers
 ###
@@ -98,9 +103,15 @@ after_build do |builder|
 
   File.rename("./build/stylesheets", "#{new_dir_path}/stylesheets")
   File.rename("./build/index.html", "#{new_dir_path}/index-#{@resume_data.name}.html")
-  File.rename("./build/index-brief.html", "#{new_dir_path}/index-brief-#{@resume_data.name}.html")
+  begin
+    File.rename("./build/index-brief.html", "#{new_dir_path}/index-brief-#{@resume_data.name}.html")
+  rescue
+  end
   File.rename("./build/pdf.html", "#{new_dir_path}/pdf-#{@resume_data.name}.html")
-  File.rename("./build/pdf-brief.html", "#{new_dir_path}/pdf-brief-#{@resume_data.name}.html")
+  begin
+    File.rename("./build/pdf-brief.html", "#{new_dir_path}/pdf-brief-#{@resume_data.name}.html")
+  rescue
+  end
 end
 
 activate :deploy do |deploy|
