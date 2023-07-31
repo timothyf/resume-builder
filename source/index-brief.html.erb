@@ -16,13 +16,13 @@
     <div class="wrapper">
         <div class="sidebar-wrapper">
           <% @layout_data.content.right.each do |section| %>
-            <%= partial section.template, locals: {display_name: section.display_name} %>
+            <%= partial "templates/#{section.template}", locals: {display_name: section.display_name} %>
           <% end %>
         </div>
 
         <div class="main-wrapper">
           <% @layout_data.content.center.each do |section| %>
-            <%= partial section.template, locals: {brief: true, display_name: section.display_name} %>
+            <%= partial "templates/#{section.template}", locals: {brief: true, display_name: section.display_name} %>
           <% end %>
         </div>
     </div>
