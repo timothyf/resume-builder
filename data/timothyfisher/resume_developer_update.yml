@@ -1,8 +1,8 @@
-name: resume_leader_update
+name: resume_developer_update
 layout: layout2
 pdf:
   useicons: true
-  filename: pdf/TimothyFisher-Res-Lead
+  filename: TimothyFisher-Res-Dev
 
 contact_info:
     name: Timothy Fisher
@@ -21,31 +21,31 @@ links:
     - name: Twitter
 
 summary:
-    file: summary_leader
+    file: summary_developer
 
 skills:
   - name: Leadership
     skills:
       - 1
       - 2
-      - 14
-      - 15
       - 3
   - name: Development
     skills:
+      - 4
       - 13
       - 5
-      - 6
       - 7
-      - 16
+      - 8
+      - 6
       - 9
+      - 11
       - 12
 
 jobs:
     - file: jobs
       id: nyt_sem
       brief: true
-      section: experiences
+      section: experience_other
     - file: jobs
       id: roo_em
       brief: true
@@ -53,11 +53,11 @@ jobs:
     - file: jobs
       id: aj_tld
       brief: true
-      section: experience_other
+      section: experiences
     - file: jobs
       id: pow_vpe
       brief: true
-      section: experiences
+      section: experience_other
     - file: jobs
       id: qky_vpe
       brief: true

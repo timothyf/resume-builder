@@ -10,9 +10,6 @@
 - id: 4
   label: Web & Mobile Development
   category: Development
-- id: 13
-  label: Full Stack Web Development
-  category: Development
 - id: 5
   label: Performance & Scalability
   category: Development
@@ -36,4 +33,16 @@
   category: Development
 - id: 12
   label: eCommerce (Shopify, Stripe)
+  category: Development
+- id: 13
+  label: Full Stack Web Development
+  category: Development
+- id: 14
+  label: Performance Reviews
+  category: Leadership
+- id: 15
+  label: Interviewing & Hiring
+  category: Leadership
+- id: 16
+  label: JavaScript, Node.js, React, Ruby, Rails, Python, Java
   category: Development
