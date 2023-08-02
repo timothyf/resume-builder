@@ -95,6 +95,13 @@ The following section types are currently supported:
 
 #### PDF
 
+To generate a PDF from  your HTML file, I recommend this free online conversion
+site:  
+https://www.freeconvert.com/html-to-pdf  
+Use the following settings:  
+Page Size: Letter  
+Margin: 60
+
 The pdf section is used to describe details of the resume PDF that will be generated.
 ```yaml
 pdf:

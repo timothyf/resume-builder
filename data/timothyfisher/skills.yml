@@ -1,0 +1,39 @@
+- id: 1
+  label: Team Management
+  category: Leadership
+- id: 2
+  label: Mentorship & Coaching
+  category: Leadership
+- id: 3
+  label: Agile Process Management
+  category: Leadership
+- id: 4
+  label: Web & Mobile Development
+  category: Development
+- id: 13
+  label: Full Stack Web Development
+  category: Development
+- id: 5
+  label: Performance & Scalability
+  category: Development
+- id: 6
+  label: SQL, MySql, PostgreSQL
+  category: Development
+- id: 7
+  label: Amazon Web Services (AWS), Google Cloud (GCP), Heroku
+  category: Development
+- id: 8
+  label: JavaScript, Node.js, React, Ruby, Rails, Python, Java, HTML, CSS
+  category: Development
+- id: 9
+  label: GraphQL, REST, JSON
+  category: Development
+- id: 10
+  label: Internet of Things (IOT, MQTT)
+  category: Development
+- id: 11
+  label: Security (Encryption, Digital Signature, PKI)
+  category: Development
+- id: 12
+  label: eCommerce (Shopify, Stripe)
+  category: Development

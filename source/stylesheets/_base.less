@@ -1,8 +1,8 @@
 /* ======= Base ======= */
 body {
     font-family: 'Roboto', sans-serif;
-    color: var(--text-color-secondary);
-    background: var(--smoky-white);
+    color: @text-color-secondary;
+    background: @smoky-white;
     font-size: 14px;
     padding: 30px;
     -webkit-font-smoothing: antialiased;
@@ -183,6 +183,11 @@ p {
     }
 
     .experiences-section {
+        .item {
+            margin-bottom: 30px;
+        }
+    }
+    .experience-other-section {
         .item {
             margin-bottom: 30px;
         }

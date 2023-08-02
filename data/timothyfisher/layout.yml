@@ -1,10 +1,3 @@
-labels:
-    profile: Summary
-    jobs: Experience
-    education: Education
-    skills: Skills
-    download: Download PDF
-
 content:
   header:
 

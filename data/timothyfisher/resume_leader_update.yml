@@ -23,18 +23,22 @@ summary:
     file: summary_leader
 
 skills:
-    - Team Leadership & Management
-    - Mentorship
-    - Agile Process Management
-    - Web & Mobile Development
-    - Web & Mobile Scalability
-    - Microservices Architecture
-    - Amazon Web Services (AWS), Heroku, EngineYard
-    - Ruby, Rails, JavaScript, Node.js, React, ReactNative, Java, Swift, HTML, CSS
-    - GraphQL, JSON
-    - Internet of Things (IOT)
-    - Security (Encryption, Digital Signature, PKI)
-    - eCommerce (Shopify, Stripe)
+  - name: Leadership
+    skills:
+      - 1
+      - 2
+      - 3
+  - name: Development
+    skills:
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      - 10
+      - 11
+      - 12
 
 jobs:
     - file: jobs
@@ -60,6 +64,30 @@ jobs:
     - file: jobs
       id: cpw_dev
       brief: true
+      section: experience_other
+    - file: jobs
+      id: log_sja
+      brief: false
+      section: experience_other
+    - file: jobs
+      id: med_dtl
+      brief: false
+      section: experience_other
+    - file: jobs
+      id: sph_sja
+      brief: false
+      section: experience_other
+    - file: jobs
+      id: pwc_sc
+      brief: false
+      section: experience_other
+    - file: jobs
+      id: cyc_dev
+      brief: false
+      section: experience_other
+    - file: jobs
+      id: mot_dev
+      brief: false
       section: experience_other
 
 education:

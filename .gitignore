@@ -7,9 +7,6 @@
 # Ignore bundler config
 /.bundle
 
-# Ignore the build directory
-# /build
-
 # Ignore Sass' cache
 /.sass-cache
 
@@ -21,3 +18,6 @@
 
 .DS_store
 source/CNAME
+/dist
+/build
+/node_modules

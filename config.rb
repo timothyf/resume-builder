@@ -100,6 +100,11 @@ after_build do |builder|
     Dir.mkdir(new_dir_path)
   rescue
   end
+  # generate pdf directory
+  begin
+    Dir.mkdir("#{new_dir_path}/pdf")
+  rescue
+  end
 
   File.rename("./build/stylesheets", "#{new_dir_path}/stylesheets")
   File.rename("./build/index.html", "#{new_dir_path}/index-#{@resume_data.name}.html")

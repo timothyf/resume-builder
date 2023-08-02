@@ -1,10 +1,3 @@
-labels:
-    profile: Summary
-    jobs: Experience
-    education: Education
-    skills: Skills
-    download: Download PDF
-
 content:
   header:
 
@@ -24,10 +17,10 @@ content:
       template: profile
     - display_name:
       template: contact
-    - display_name: Education
-      template: education
     - display_name: Skills
       template: skills
+    - display_name: Education
+      template: education
     - display_name: Download PDF
       template: download
 

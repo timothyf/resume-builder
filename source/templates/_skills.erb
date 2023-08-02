@@ -3,9 +3,13 @@
       <h2 class="container-block-title"><%= display_name %></h2>
 
       <ul class="list-unstyled interests-list">
-          <% @resume_data.skills.each do |skill| %>
-              <li><%= skill %></li>
+        <% @resume_data.skills.each do |category| %>
+          <li class="skillCategory"><%= category.name %></li>
+          <% category.skills.each do |skill_id| %>
+            <% skill = @skills_data.find{ |a_skill| a_skill.id == skill_id } %>
+            <li class="skillLabel"><%= skill.label %></li>
           <% end %>
+        <% end %>
       </ul>
   </div>
 <% end %>

@@ -1,4 +1,4 @@
-<section class="section experiences-section">
+<section class="section experience-other-section">
   <h2 class="section-title">
     <% if @resume_data.pdf.useicons %>
       <i class="fa fa-briefcase"></i>
@@ -11,10 +11,16 @@
       <% if job.file && (job.brief || !brief) %>
         <% job_data = eval("data.#{@active_resume_user}.jobs") %>
         <% job = job_data.find{ |ajob| ajob.id == job.id } %>
-        <%= partial 'experience/job_meta', :locals => {:job => job} %>
+        <div class="meta">
+          <%= partial 'templates/experience/company_name', :locals => {:job => job} %>
+          <%= partial 'templates/experience/job_title', :locals => {:job => job} %>
+        </div>
       <% else %>
         <% if !(job.key?("include")) || (job.include === true) %>
-          <%= partial 'experience/job_meta', :locals => {:job => job} %>
+          <div class="meta">
+            <%= partial 'templates/experience/company_name', :locals => {:job => job} %>
+            <%= partial 'templates/experience/job_title', :locals => {:job => job} %>
+          </div>
         <% end %>
       <% end %>
     <% end %>

@@ -26,7 +26,7 @@
       </ul>
 
 - id: roo_em
-  title:
+  title: Senior Developer / Engineering Manager
   company: Roostify
   brief: true
   include: true # (full, brief, none)
@@ -50,16 +50,20 @@
     <div class="job-title">Software Engineering Manager</div>
     In this management role, I had a team of 6-10 software developers and QA
     engineers reporting to me. My responsibilities included:
-      <ul>
-        <li>Conducting 1-on-1 meetings with my team members to build relationships,
-        assist with challenges, and provide mentorship and growth opportunities.</li>
-        <li>Manage an agile (scrum) development process</li>
-        <li>Work with team to provide estimates and schedules for new projects</li>
-        <li>Assist team with technical challenges that occur during development</li>
-        <li>Interview and hire additional team members</li>
-        <li>Provide continuing feedback to team members along with periodic reviews</li>
-        <li>Plan for salary, raises and promotions for team members.</li>
-      </ul>
+    <ul>
+      <li>Conducting 1-on-1 meetings with my team members to build relationships,
+      assist with challenges, and provide mentorship and growth opportunities.</li>
+      <li>Manage an agile (scrum) development process</li>
+      <li>Work with team to provide estimates and schedules for new projects</li>
+      <li>Assist team with technical challenges that occur during development</li>
+      <li>Interview and hire additional team members</li>
+      <li>Provide continuing feedback to team members along with periodic reviews</li>
+      <li>Plan for salary, raises and promotions for team members.</li>
+    </ul>
+    <div class="skillsUsed">
+      Tech Skills Used: Ruby, Rails, Full-Stack Development, REST, JSON, AWS, GCP, JavaScript,
+      React
+    </div>
 
 - id: aj_tld
   title: Technical Lead / Developer
@@ -85,6 +89,10 @@
     Projects that I developed in this role include an online learning portal, an e-commerce site,
     and a healthcare application. Clients I worked with include the University of Michigan, the
     Internet2 organization, and several startup companies.
+    <div class="skillsUsed">
+      Tech Skills Used: Ruby, Rails, Full-Stack Development, REST, JSON, AWS, JavaScript,
+      React, Angular, NextJS
+    </div>
 
 - id: cs_cto
   title: Chief Technology Officer
@@ -103,16 +111,20 @@
     initiatives and collaborating with the CEO in developing the strategic vision for the Connect Space product.
 
     Responsibilities included:
-      <ul>
-        <li>Leadership and management of the development and design teams.</li>
-        <li>Provide mentorship, guidance and create professional development opportunities for team members.</li>
-        <li>Hands-on coding. Our platform consists of a Ruby on Rails backend, a web interface, and native mobile
-          apps for iOS and Android.</li>
-        <li>Re-architect the Connect Space application for scalability and performance.</li>
-        <li>Define and manage development process</li>
-        <li>Responsibility for the management, design, architecture and operability of the complete technology platform,
-            ensuring scalability and performance while minimizing all operational risks.</li>
-      </ul>
+    <ul>
+      <li>Leadership and management of the development and design teams.</li>
+      <li>Provide mentorship, guidance and create professional development opportunities for team members.</li>
+      <li>Hands-on coding. Our platform consists of a Ruby on Rails backend, a web interface, and native mobile
+        apps for iOS and Android.</li>
+      <li>Re-architect the Connect Space application for scalability and performance.</li>
+      <li>Define and manage development process</li>
+      <li>Responsibility for the management, design, architecture and operability of the complete technology platform,
+          ensuring scalability and performance while minimizing all operational risks.</li>
+    </ul>
+    <div class="skillsUsed">
+      Tech Skills Used: Ruby, Rails, Full-Stack Development, REST, JSON, AWS, JavaScript,
+      React
+    </div>
 
 - id: pow_vpe
   title: VP of Engineering
@@ -133,11 +145,14 @@
     transparency into product development, and insure that the team is focused on strategic improvement efforts.
 
     Additional responsibilities included:
-      <ul>
-        <li>Manage development team of 20, including professional growth and mentoring.</li>
-        <li>Driving strategic improvement across the development team.</li>
-        <li>Drive solutions to tactical product issues.</li>
-      </ul>
+    <ul>
+      <li>Manage development team of 20, including professional growth and mentoring.</li>
+      <li>Driving strategic improvement across the development team.</li>
+      <li>Drive solutions to tactical product issues.</li>
+    </ul>
+    <div class="skillsUsed">
+      Tech Skills Used: Ruby, Rails, Full-Stack Development, REST, JSON, AWS, JavaScript
+    </div>
 
 - id: qky_vpe
   title: VP of Engineering
@@ -165,9 +180,12 @@
     Hands-on work included transitioning a large Ruby on Rails based monolith application into a microservices based
     architecture. Developing an auto-scaler microservice on AWS Lambda to manage server load on the Heroku platform.
     Using technologies including Ruby, Rails, Node.js, Heroku, AWS EC2, AWS SNS, AWS Lambda, AWS ECS, Redis, Memcached.
+    <div class="skillsUsed">
+      Tech Skills Used: JavaScript, Ruby, Rails, Full-Stack Development, REST, JSON, AWS, Heroku, GraphQL
+    </div>
 
 - id: cpw_dev
-  title:
+  title: Director/Architect/Developer
   company: Lochbridge / Compuware
   brief: true
   location:
@@ -214,6 +232,11 @@
 
     Also an active part of seeking new business through RFP responses and proposals. Defined solutions, work plans,
     and architecture for proposed business.
+
+    <div class="skillsUsed">
+      Tech Skills Used: Java, JavaScript, Ruby, Rails, Mobile Dev, Swift, Full-Stack Development,
+      REST, JSON, AWS
+    </div>
 
 - id: log_sja
   title: Senior Java Architect

@@ -5,9 +5,9 @@
         <div class="item">
             <div class="degree-name"><%= edu.degree %> &nbsp; <%= edu.grade if edu.grade? %></div>
             <% if edu.url? %>
-              <h5 class="meta fn url org"><a href="<%= edu.url %>"><%= edu.name %></a>,
+              <h5 class="degree-info meta fn url org"><a href="<%= edu.url %>"><%= edu.name %></a>,
             <% else %>
-              <h5 class="meta fn org"><%= edu.name %>,
+              <h5 class="degree-info meta fn org"><%= edu.name %>,
             <% end %>
             <div class="time">
               <% if edu.status %>
