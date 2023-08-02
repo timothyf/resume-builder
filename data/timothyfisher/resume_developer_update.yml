@@ -2,7 +2,7 @@ name: resume_developer_update
 layout: layout2
 pdf:
   useicons: true
-  filename: TimothyFisher-Res-Dev
+  filename: pdf/TimothyFisher-Res-Dev
 
 contact_info:
     name: Timothy Fisher

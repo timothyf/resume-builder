@@ -117,6 +117,9 @@ after_build do |builder|
     File.rename("./build/pdf-brief.html", "#{new_dir_path}/pdf-brief-#{@resume_data.name}.html")
   rescue
   end
+
+  # Copy deploy files back to build directory
+  FileUtils.cp("#{new_dir_path}/index-#{@resume_data.name}.html", "./build/index.html")
 end
 
 activate :deploy do |deploy|
