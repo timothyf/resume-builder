@@ -8,35 +8,8 @@
 
   <% @resume_data.jobs.each do |job| %>
     <% if job.section == 'experiences' && job.include != false %>
-      <% if job.file && ((job.brief == true) || !brief) %>
-        <% job_data = eval("data.#{@active_resume_user}.jobs") %>
-        <% job = job_data.find{ |ajob| ajob.id == job.id } %>
-        <%= partial 'templates/experience/job_full', :locals => {:job => job} %>
-      <% else %>
-        <% if !(job.key?("include")) || (job.include === true) %>
-          <% if job.brief %>
-            <%= partial 'templates/experience/job_full', :locals => {:job => job} %>
-          <% end %>
-        <% end %>
-      <% end %>
-    <% end %>
-  <% end %>
-  <% if brief %>
-    <div id="additionalExperience">Additional Past Experiences</div>
-    <% @resume_data.jobs.each do |job| %>
-      <% if !job.brief && job.include != false && job.section == 'experiences' %>
-        <% if job.file %>
-          <% job_data = eval("data.#{@active_resume_user}.jobs") %>
-          <% job = job_data.find{ |ajob| ajob.id == job.id } %>
-          <div class="item">
-            <%= partial 'templates/experience/job_meta', :locals => {:job => job} %>
-          </div>
-        <% else %>
-            <div class="item">
-              <%= partial 'templates/experience/job_meta', :locals => {:job => job} %>
-            </div>
-        <% end %>
-      <% end %>
+      <% job = @job_data.find{ |ajob| ajob.id == job.id } %>
+      <%= partial 'templates/experience/job_full', :locals => {:job => job} %>
     <% end %>
   <% end %>
 </section>

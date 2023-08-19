@@ -8,21 +8,11 @@
 
   <% @resume_data.jobs.each do |job| %>
     <% if job.section == 'experience_other' %>
-      <% if job.file && (job.brief || !brief) %>
-        <% job_data = eval("data.#{@active_resume_user}.jobs") %>
-        <% job = job_data.find{ |ajob| ajob.id == job.id } %>
+        <% job = @job_data.find{ |ajob| ajob.id == job.id } %>
         <div class="meta">
           <%= partial 'templates/experience/company_name', :locals => {:job => job} %>
           <%= partial 'templates/experience/job_title', :locals => {:job => job} %>
         </div>
-      <% else %>
-        <% if !(job.key?("include")) || (job.include === true) %>
-          <div class="meta">
-            <%= partial 'templates/experience/company_name', :locals => {:job => job} %>
-            <%= partial 'templates/experience/job_title', :locals => {:job => job} %>
-          </div>
-        <% end %>
-      <% end %>
     <% end %>
   <% end %>
 
