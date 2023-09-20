@@ -1,0 +1,23 @@
+<section class="section experience-other-section">
+  <h2 class="section-title">
+    <% if @resume_data.pdf.useicons %>
+      <i class="fa fa-briefcase"></i>
+    <% end %>
+    <%= display_name %>
+  </h2>
+
+  <% @resume_data.jobs.each do |job| %>
+    <% if job.section == 'experience_other' %>
+        <% job = @job_data.find{ |ajob| ajob.id == job.id } %>
+        <div class="meta">
+          <%= partial 'templates/experience/company_name', :locals => {:job => job} %>
+          <% if job.title %>
+            <div class="job-title-row">
+                <h3 class="job-title"><%= job.title %></h3>
+            </div>
+          <% end %>
+        </div>
+    <% end %>
+  <% end %>
+
+</section>

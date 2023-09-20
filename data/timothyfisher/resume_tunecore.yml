@@ -1,0 +1,94 @@
+name: resume_tunecore
+layout: layout2
+pdf:
+  useicons: true
+  filename: pdf/TimothyFisher-Res-TC
+
+contact_info:
+    name: Timothy Fisher
+    photo: false
+    email: timothyf@gmail.com
+    phone: (734) 790-7235
+    address:
+        street: 25296 Hunter Lane
+        city: Flat Rock
+        state: MI
+        postal_code: 48134
+
+links:
+    - name: Github
+    - name: Linkedin
+    - name: Twitter
+
+summary:
+    file: summary_developer
+
+skills:
+  - name: Leadership
+    skills:
+      - 1
+      - 2
+      - 3
+  - name: Development
+    skills:
+      - 4
+      - 13
+      - 5
+      - 7
+      - 26
+      - 6
+      - 9
+      - 11
+      - 12
+
+jobs_filename: jobs
+jobs:
+    - file: jobs
+      id: nyt_sem
+      section: experiences
+    - file: jobs
+      id: roo_em
+      section: experiences
+    - file: jobs
+      id: aj_tld
+      section: experiences
+    - file: jobs
+      id: pow_vpe
+      section: experiences
+    - file: jobs
+      id: qky_vpe
+      section: experiences
+    - file: jobs
+      id: cpw_dev
+      section: experiences
+    - file: jobs
+      id: log_sja
+      section: experience_other
+    - file: jobs
+      id: med_dtl
+      section: experience_other
+    - file: jobs
+      id: sph_sja
+      section: experience_other
+    - file: jobs
+      id: pwc_sc
+      section: experience_other
+    - file: jobs
+      id: cyc_dev
+      section: experience_other
+    - file: jobs
+      id: mot_dev
+      section: experience_other
+
+education:
+    - name: University of Michigan
+      degree: B.S. Electrical Engineering
+      dates:
+          start: Sept 1986
+          end: May 1991
+
+    - name: Capella University
+      degree: M.S. Education
+      dates:
+          start: Sept 2001
+          end: May 2003

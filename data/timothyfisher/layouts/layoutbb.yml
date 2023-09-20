@@ -1,0 +1,27 @@
+content:
+  header:
+
+  center:
+    - name: summary
+      display_name: Summary
+      template: summary
+    - name: experience_highlights
+      display_name: Management/Leadership Experience
+      template: experience_highlights
+    - name: experience_other
+      display_name: Other Experience
+      template: experience_other_bb
+
+  right:
+    - display_name:
+      template: profile
+    - display_name:
+      template: contact
+    - display_name: Skills
+      template: skills
+    - display_name: Education
+      template: education
+    - display_name: Download PDF
+      template: download
+
+  footer:

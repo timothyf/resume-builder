@@ -2,31 +2,34 @@
 - id: nyt_sem
   title: Senior Engineering Manager
   company: The New York Times
+  brief: true
   include: true # (full, brief, none)
   location:
     city:
     state: Remote
   dates:
-      start: 2022, July
+      start: 2022, August
       end: 2023, April
   desc: |
     Managed the Web Platforms team which is responsible for developing, and
     maintaining the core web application that serves the New York Times web
     content. My responsibilities included:
-      <ul>
-        <li>Provide leadership in defining strategy and vision for the team</li>
-        <li>Conducting 1-on-1 meetings with my team members to build relationships,
-        assist with challenges, and provide mentorship and growth opportunities</li>
-        <li>Work closely with Project Managers and Product owners to manage deliverables</li>
-        <li>Assist team with technical challenges that occur during development</li>
-        <li>Interview and hire additional team members</li>
-        <li>Provide continuing feedback to team members along with semi-annual reviews</li>
-        <li>Plan for salary, raises and promotions for team members</li>
-      </ul>
+    <ul>
+      <li>Provide leadership in defining strategy and vision for the team</li>
+      <li>Conducting 1-on-1 meetings with my team members to build relationships,
+      assist with challenges, and provide mentorship and growth opportunities</li>
+      <li>Work closely with Project Managers and Product owners to manage deliverables</li>
+      <li>Assist team with technical challenges that occur during development</li>
+      <li>Interview and hire additional team members</li>
+      <li>Provide continuing feedback and recognition to team members along with
+      semi-annual performance reviews</li>
+      <li>Plan for salary, raises and promotions for team members</li>
+    </ul>
 
 - id: roo_em
-  title: Senior Developer / Engineering Manager
+  title: Engineering Manager
   company: Roostify
+  brief: true
   include: true # (full, brief, none)
   location:
     city:
@@ -35,37 +38,25 @@
       start: 2021, February
       end: 2022, June
   desc: |
-    I was hired into Roostify as a Senior Developer and was promoted to the
-    role of Engineering Manager in October, 2021. The Roostify product is
-    a mortgage application and processing engine that is white-labeled by financial
-    customers including Chase Bank. The tech stack used consists of Ruby on Rails,
-    JavaScript, React, AWS, and Heroku.
-
-    <div class="job-title">Senior Developer</div>
-    As a senior developer, I was responsible for leading and developing the
-    implementation of new features within the core Roostify platform.
-
-    <div class="job-title">Software Engineering Manager</div>
-    In this management role, I had a team of 6-10 software developers and QA
+    Roostify is a provider of mortgage application intake and processing software
+    used by banks such as Chase and TD Bank. In this management role, I had a team of 6-10 software developers and QA
     engineers reporting to me. My responsibilities included:
     <ul>
       <li>Conducting 1-on-1 meetings with my team members to build relationships,
       assist with challenges, and provide mentorship and growth opportunities.</li>
-      <li>Manage an agile (scrum) development process</li>
+      <li>Manage an agile development process</li>
       <li>Work with team to provide estimates and schedules for new projects</li>
       <li>Assist team with technical challenges that occur during development</li>
       <li>Interview and hire additional team members</li>
-      <li>Provide continuing feedback to team members along with periodic reviews</li>
+      <li>Provide continuing feedback to team members along with periodic
+      performance reviews</li>
       <li>Plan for salary, raises and promotions for team members.</li>
     </ul>
-    <div class="skillsUsed">
-      Tech Skills Used: Ruby, Rails, Full-Stack Development, REST, JSON, AWS, GCP, JavaScript,
-      React
-    </div>
 
 - id: aj_tld
   title: Technical Lead / Developer
   company: Alfa Jango
+  brief: true
   include: true
   location:
     city: Ann Arbor
@@ -95,6 +86,7 @@
   title: Chief Technology Officer
   company: Connect Space
   include: none
+  brief: true
   location:
     city: Ann Arbor
     state: MI
@@ -110,21 +102,16 @@
     <ul>
       <li>Leadership and management of the development and design teams.</li>
       <li>Provide mentorship, guidance and create professional development opportunities for team members.</li>
-      <li>Hands-on coding. Our platform consists of a Ruby on Rails backend, a web interface, and native mobile
-        apps for iOS and Android.</li>
       <li>Re-architect the Connect Space application for scalability and performance.</li>
       <li>Define and manage development process</li>
       <li>Responsibility for the management, design, architecture and operability of the complete technology platform,
           ensuring scalability and performance while minimizing all operational risks.</li>
     </ul>
-    <div class="skillsUsed">
-      Tech Skills Used: Ruby, Rails, Full-Stack Development, REST, JSON, AWS, JavaScript,
-      React
-    </div>
 
 - id: pow_vpe
   title: VP of Engineering
   company: Powerley
+  brief: true
   location:
     city: Royal Oak
     state: MI
@@ -145,13 +132,11 @@
       <li>Driving strategic improvement across the development team.</li>
       <li>Drive solutions to tactical product issues.</li>
     </ul>
-    <div class="skillsUsed">
-      Tech Skills Used: Ruby, Rails, Full-Stack Development, REST, JSON, AWS, JavaScript
-    </div>
 
 - id: qky_vpe
   title: VP of Engineering
   company: Quikly
+  brief: true
   location:
     city: Detroit
     state: MI
@@ -159,7 +144,9 @@
       start: 2016, March
       end: 2017, August
   desc: |
-    Quikly is a start-up in the retail promotional marketing space, based in Detroit. As VP of Engineering, my
+    Quikly is a start-up in the retail promotional marketing space, based in Detroit.
+    The Quikly platform has powered promotions for clients including Mcdonalds, Dominoes,
+    Pet Supplies Plus, and others. As VP of Engineering, my
     responsibilities included:
     <ul>
       <li>Architect scalability into the Quikly platform</li>
@@ -167,20 +154,14 @@
       <li>Manage the development team. Hire, evaluate, and mentor new teams members</li>
       <li>Driving force behind creating a technical roadmap plan with dates and targets for future features and
           functionality for the product.</li>
-      <li>Ruby, Rails, Node.js, AWS hands-on development</li>
       <li>Establishing a learning-centric culture with the goal of making Quikly an awesome place for technologists
           to work.</li>
     </ul>
-    Hands-on work included transitioning a large Ruby on Rails based monolith application into a microservices based
-    architecture. Developing an auto-scaler microservice on AWS Lambda to manage server load on the Heroku platform.
-    Using technologies including Ruby, Rails, Node.js, Heroku, AWS EC2, AWS SNS, AWS Lambda, AWS ECS, Redis, Memcached.
-    <div class="skillsUsed">
-      Tech Skills Used: JavaScript, Ruby, Rails, Full-Stack Development, REST, JSON, AWS, Heroku, GraphQL
-    </div>
 
 - id: cpw_dev
   title: Director/Architect/Developer
   company: Lochbridge / Compuware
+  brief: true
   location:
     city: Detroit
     state: MI
@@ -188,7 +169,7 @@
       start: 2006, May
       end: 2016, March
   desc: |
-    Spent nearly 10 years with Compuware, which later became Lochbridge, in a variety of roles within both product
+    I spent nearly 10 years with Compuware, which later became Lochbridge, in a variety of roles within both product
     and professional services divisions. Highlights of that experience are below.
 
     <div class="job-title">Director of Mobile Development</div>
@@ -204,36 +185,10 @@
     prospective customers. Work alongside sales team to engage new customers and pitch solutions and services.
     Identify new opportunities for mobile business and manage pipeline and asset planning.
 
-    <div class="job-title">Principal Architect - Advanced Solutions &amp; Innovation</div>
-    As a member of the Advanced Solutions & Innovation Group, I led company-wide efforts related to open source
-    initiatives and collaborative innovation. As a part of this team, I developed an internal Innovation Forum
-    portal allowing Lochbridge to adopt more of an internal open source culture to build assets, share knowledge,
-    and innovate on advanced technologies that we can successfully bring to market. This web app was built using
-    Ruby and the Ruby on Rails framework. The Advanced Solutions & Innovation Group is part of a CTO office within
-    Lochbridge.
-
-    <div class="job-title">Technical Architect</div>
-    I as a technical architect across several organizations within Compuware. These included the Compuware
-    products team, the professional services group, the CTO office, and the Covisint subsidiary.
-
-    With the professional services group, I primarily worked with automotive clients including GM, GM Onstar, and
-    Chrysler. This included experience developing and leading development of mobile apps for the headunits of GM
-    vehicles.
-
-    My experience here included development roles utilized Java, Ruby, Perl, and JavaScript.  Also team management
-    and leadership responsibilities along with leading architecture on many professional services projects.
-
-    Also an active part of seeking new business through RFP responses and proposals. Defined solutions, work plans,
-    and architecture for proposed business.
-
-    <div class="skillsUsed">
-      Tech Skills Used: Java, JavaScript, Ruby, Rails, Mobile Dev, Swift, Full-Stack Development,
-      REST, JSON, AWS
-    </div>
-
 - id: log_sja
   title: Senior Java Architect
   company: LogicaCMG
+  brief: false
   include: brief
   location:
     city: Southfield
@@ -253,6 +208,7 @@
 - id: med_dtl
   title: Development Team Lead
   company: MedCharge
+  brief: false
   location:
     city: Ann Arbor
     state: MI
@@ -271,6 +227,7 @@
 - id: sph_sja
   title: Senior Java Architect
   company: Spherion
+  brief: false
   location:
     city: Troy
     state: MI
@@ -286,6 +243,7 @@
 - id: pwc_sc
   title: Security Consultant
   company: PriceWaterhouseCoopers
+  brief: false
   location:
     city: Detroit
     state: MI
@@ -302,6 +260,7 @@
 - id: cyc_dev
   title: Lead Developer & Architect
   company: Cyclone Commerce
+  brief: false
   location:
     city: Scottsdale
     state: AZ
@@ -325,6 +284,7 @@
 - id: mot_dev
   title: Senior Software Engineer
   company: Motorola
+  brief: false
   location:
     city: Chandler
     state: AZ

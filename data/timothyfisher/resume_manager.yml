@@ -1,0 +1,78 @@
+name: resume_manager
+layout: layoutbb
+pdf:
+  useicons: true
+  filename: pdf/TimothyFisher-Mgr
+
+contact_info:
+    name: Timothy Fisher
+    photo: false
+    email: timothyf@gmail.com
+    phone: (734) 790-7235
+    address:
+        street: 25296 Hunter Lane
+        city: Flat Rock
+        state: MI
+        postal_code: 48134
+
+summary:
+    file: summary_manager
+
+skills:
+  - name: Leadership
+    skills:
+      - 1
+      - 27
+      - 15
+      - 17
+      - 25
+  - name: Technology
+    skills:
+      - 19
+      - 18
+      - 23
+      - 24
+
+jobs_filename: jobs_bestbuy
+jobs:
+    - id: nyt_sem
+      brief: true
+      section: experiences
+    - id: roo_em
+      brief: true
+      section: experiences
+    - id: aj_tld
+      brief: true
+      section: experience_other
+    - id: pow_vpe
+      brief: true
+      section: experiences
+    - id: qky_vpe
+      brief: true
+      section: experiences
+    - id: cpw_dev
+      brief: true
+      section: experiences
+    - id: med_dtl
+      brief: false
+      section: experience_other
+    - id: pwc_sc
+      brief: false
+      section: experience_other
+    - id: mot_dev
+      brief: false
+      section: experience_other
+
+
+education:
+    - name: University of Michigan
+      degree: B.S. Electrical Engineering
+      dates:
+          start: Sept 1986
+          end: May 1991
+
+    - name: Capella University
+      degree: M.S. Education
+      dates:
+          start: Sept 2001
+          end: May 2003

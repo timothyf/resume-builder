@@ -3,5 +3,9 @@ user: timothyfisher
 #name: resume_developer
 #name: resume_developer_update
 #name: resume_leader_update
-name: resume_bestbuy
+#name: resume_bestbuy
+#name: resume_bn
+#name: resume_tunecore
+#name: resume_manager
+name: resume_main_dev
 generate_brief: false

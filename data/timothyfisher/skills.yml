@@ -1,48 +1,54 @@
 - id: 1
   label: Team Management
-  category: Leadership
 - id: 2
   label: Mentorship & Coaching
-  category: Leadership
 - id: 3
   label: Agile Process Management
-  category: Leadership
 - id: 4
   label: Web & Mobile Development
-  category: Development
 - id: 5
   label: Performance & Scalability
-  category: Development
 - id: 6
   label: SQL, MySql, PostgreSQL
-  category: Development
 - id: 7
   label: Amazon Web Services (AWS), Google Cloud (GCP), Heroku
-  category: Development
 - id: 8
   label: JavaScript, Node.js, React, Ruby, Rails, Python, Java, HTML, CSS
-  category: Development
 - id: 9
   label: GraphQL, REST, JSON
-  category: Development
 - id: 10
   label: Internet of Things (IOT, MQTT)
-  category: Development
 - id: 11
   label: Security (Encryption, Digital Signature, PKI)
-  category: Development
 - id: 12
   label: eCommerce (Shopify, Stripe)
-  category: Development
 - id: 13
   label: Full Stack Web Development
-  category: Development
 - id: 14
   label: Performance Reviews
-  category: Leadership
 - id: 15
   label: Interviewing & Hiring
-  category: Leadership
 - id: 16
   label: JavaScript, Node.js, React, Ruby, Rails, Python, Java
-  category: Development
+- id: 17
+  label: Remote Workforce Management
+- id: 18
+  label: MacOSX, MS Windows, Apple iOS, Google Android
+- id: 19
+  label: Mobile, Desktop, Server, Technologies
+- id: 20
+  label: Web Development
+- id: 21
+  label: eCommerce
+- id: 22
+  label: Smarthome, IoT Technologies
+- id: 23
+  label: Computer Setup & Configuration
+- id: 24
+  label: Software Installation & Configuration
+- id: 25
+  label: Cross-functional Relationship Building
+- id: 26
+  label: Ruby, Rails, JavaScript, Node.js, React, Python, Java
+- id: 27
+  label: Coaching & Mentorship
