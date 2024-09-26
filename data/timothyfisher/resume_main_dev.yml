@@ -20,28 +20,40 @@ links:
     - name: Linkedin
 
 summary:
-    file: summary_developer2
+    file: summary_developer3
 
 skills:
   - name: Leadership
     skills:
-      - 1
-      - 2
-      - 3
+      - 49
+      - 50
   - name: Development
     skills:
-      - 4
-      - 13
-      - 5
-      - 7
-      - 26
-      - 6
-      - 9
-      - 11
-      - 12
+      - 32
+      - 34
+      - 42
+      - 43
+      - 51
+  - name: Cloud
+    skills:
+      - 36
+      - 37
+      - 38
+  - name: Languages
+    skills:
+      - 39
+      - 40
+  - name: Security & E-Commerce
+    skills:
+      - 45
+      - 46
+      - 48
 
 jobs_filename: jobs
 jobs:
+    - file: jobs
+      id: wsn
+      section: experiences
     - file: jobs
       id: nyt_sem
       section: experiences
@@ -50,9 +62,6 @@ jobs:
       section: experiences
     - file: jobs
       id: aj_tld
-      section: experiences
-    - file: jobs
-      id: pow_vpe
       section: experiences
     - file: jobs
       id: qky_vpe

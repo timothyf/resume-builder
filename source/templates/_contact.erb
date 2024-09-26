@@ -17,13 +17,17 @@
         <% if contact_info.homepage? %>
             <li class="website"><i class="fa fa-globe"></i><a href="<%= contact_info.homepage %>" target="_blank"><%= contact_info.homepage %></a></li>
         <% end %>
+        </ul>
         <% if @resume_data.links? %>
+        <ul class="list-unstyled contact-list links">
             <% @resume_data.links.each do |link| %>
               <% link_data = eval("data.#{@active_resume_user}.links.links") %>
               <% @link = link_data.find{ |aLink| aLink.name == link.name } %>
-                <li><i class="fa fa-link"></i><a href="<%= @link.url %>" target="_blank"><%= @link.name %></a></li>
+                <% if @link %>
+                  <li><i class="fa fa-link"></i><a href="<%= @link.url %>" target="_blank"><%= @link.name %></a></li>
+                <% end %>
             <% end %>
+        </ul>
+        <hr class="hr-links" />
         <% end %>
-        <hr/>
-    </ul>
 </div>

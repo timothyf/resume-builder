@@ -13,7 +13,7 @@ require 'digest/md5'
 page "index.html", :layout => false
 page "pdf.html", :layout => false
 
-if data.active_resume.generate_brief == false
+if @app.data.active_resume.generate_brief == false
   ignore "/index-brief.html"
   ignore "/pdf-brief.html"
 end
@@ -73,11 +73,13 @@ configure :build do
 end
 
 after_build do |builder|
-  active_resume_user = data.active_resume.user
-  active_resume_name = data.active_resume.name
-  @resume_data = eval("data.#{active_resume_user}.#{active_resume_name}")
+  active_resume_user = @app.data.active_resume.user
+  active_resume_name = @app.data.active_resume.name
+  #@resume_data = eval("#{@app}.data.#{active_resume_user}.#{active_resume_name}")
+  @resume_data_name = @app.data.active_resume.user + @app.data.active_resume.name
+  @resume_data = "@app.data.#{@resume_data_name}"
 
-  new_dir_path = "./dist/#{active_resume_user}/#{@resume_data.name}"
+  new_dir_path = "./dist/#{active_resume_user}/#{active_resume_name}"
 
   root = "./build"
   Dir.glob(File.join(root, "**", "*.html")).each do |html_file|
@@ -107,24 +109,24 @@ after_build do |builder|
   end
 
   File.rename("./build/stylesheets", "#{new_dir_path}/stylesheets")
-  File.rename("./build/index.html", "#{new_dir_path}/index-#{@resume_data.name}.html")
+  File.rename("./build/index.html", "#{new_dir_path}/index.html")
   begin
     File.rename("./build/index-brief.html", "#{new_dir_path}/index-brief-#{@resume_data.name}.html")
   rescue
   end
-  File.rename("./build/pdf.html", "#{new_dir_path}/pdf-#{@resume_data.name}.html")
+  File.rename("./build/pdf.html", "#{new_dir_path}/pdf.html")
   begin
-    File.rename("./build/pdf-brief.html", "#{new_dir_path}/pdf-brief-#{@resume_data.name}.html")
+    File.rename("./build/pdf-brief.html", "#{new_dir_path}/pdf-brief-#{@resume_data}.html")
   rescue
   end
 
   # Copy deploy files back to build directory
-  FileUtils.cp("#{new_dir_path}/index-#{@resume_data.name}.html", "./build/index.html")
+  FileUtils.cp("#{new_dir_path}/index.html", "./build/index.html")
 end
 
-activate :deploy do |deploy|
-  deploy.method = :git
-end
+# activate :deploy do |deploy|
+#   deploy.method = :git
+# end
 
 require "pathname"
 

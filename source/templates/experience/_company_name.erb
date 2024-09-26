@@ -1,7 +1,7 @@
 <div class="company">
     <% if job.url? %>
-      <h2 class="location"><a href="<%= job.url%>" target=_blank><%= job.company %></a></h2>
+      <h2 class="company-name"><a href="<%= job.url%>" target=_blank><%= job.company %></a></h2>
     <% else %>
-      <h2 class="location"><%= job.company %></h2>
+      <h2 class="company-name"><%= job.company %></h2>
     <% end %>
 </div>

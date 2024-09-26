@@ -1,7 +1,7 @@
 name: developer
 layout: layout
 pdf:
-  filename: TimothyFisher-Resume-developer
+  filename: pdf/TimothyFisher-Resume-developer
   useicons: true
 
 headers:

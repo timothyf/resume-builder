@@ -1,6 +1,6 @@
 user: timothyfisher
 #name: resume_leader
-#name: resume_developer
+#name: resume_developer_update
 #name: resume_developer_update
 #name: resume_leader_update
 #name: resume_bestbuy
@@ -8,4 +8,5 @@ user: timothyfisher
 #name: resume_tunecore
 #name: resume_manager
 name: resume_main_dev
+#name: resume_main_mgr
 generate_brief: false

@@ -49,6 +49,54 @@
 - id: 25
   label: Cross-functional Relationship Building
 - id: 26
-  label: Ruby, Rails, JavaScript, Node.js, React, Python, Java
+  label: Ruby, Rails, JavaScript, Node.js, React, Vue.js, Python, Java
 - id: 27
   label: Coaching & Mentorship
+- id: 28
+  label: Team Management
+- id: 29
+  label: Agile (Scrum, Kanban)
+- id: 30
+  label: Mentorship
+- id: 31
+  label: Hiring & Talent Development
+- id: 32
+  label: Full-Stack Web & Mobile
+- id: 33
+  label: Web & Mobile
+- id: 34
+  label: Performance & Scalability
+- id: 35
+  label: DevOps & Continuous Integration (CI/CD)
+- id: 36
+  label: Amazon Web Services (AWS), Google Cloud Platform (GCP), Heroku
+- id: 37
+  label: Microservices Architecture
+- id: 38
+  label: Serverless Applications
+- id: 39
+  label: Ruby, Rails, Python, Java
+- id: 40
+  label: JavaScript, Node.js, React, Vue.js
+- id: 41
+  label: Python, Java
+- id: 42
+  label: SQL, MySQL, PostgreSQL
+- id: 43
+  label: GraphQL, REST, JSON
+- id: 44
+  label: Data Modeling & API Design
+- id: 45
+  label: Encryption, Digital Signatures, PKI
+- id: 46
+  label: Data Privacy & Compliance (GDPR, HIPAA)
+- id: 47
+  label: Shopify, Stripe
+- id: 48
+  label: Payment Processing & Integration (Shopify, Stripe)
+- id: 49
+  label: Team mangement, mentorship
+- id: 50
+  label: Technical Strategy & Vision
+- id: 51
+  label: Agile Processes (Scrum, Kanban)

@@ -1,6 +1,30 @@
+- id: wsn
+  title: Senior Web Developer, Baseball R&D
+  company: Washington Nationals
+  include: true
+  location:
+    city:
+    state: Remote
+  dates:
+    start: 2023, November
+    end: 2024, September
+  desc: |
+    <p>
+    Led the development of a Big Data-driven internal web application supporting key aspects of baseball operations, 
+    including player data analytics, scouting, and player development. This application handled vast volumes of player 
+    and game data, enabling front-office leadership, coaching staff, and player development teams to analyze team and 
+    player performance for both the Nationals and opposing teams.
+    </p>
+    <ul>
+      <li>Developed and optimized features that integrated large datasets from internal and external sources, processing 
+      millions of data points to deliver actionable insights through interactive visualizations such as graphs, sortable 
+      tables, and exportable formats.</li>
+      <li>Worked on both front-end and back-end systems, ensuring seamless functionality and user experience across the application.</li>
+    </ul>
+    Tech stack: Ruby on Rails, Postgres, MySQL, AWS, Vue.js
 
 - id: nyt_sem
-  title: Senior Engineering Manager
+  title: Senior Engineering Manager, Web Platforms
   company: The New York Times
   include: true # (full, brief, none)
   location:
@@ -10,22 +34,23 @@
       start: 2022, July
       end: 2023, April
   desc: |
-    Managed the Web Platforms team which is responsible for developing, and
-    maintaining the core web application that serves the New York Times web
-    content. My responsibilities included:
+      <p>
+      Led the Web Platforms team responsible for the development and maintenance of the core web 
+      application delivering New York Times web content. Spearheaded strategic direction, team 
+      development, and collaboration to ensure timely and high-quality deliverables.
+      </p>
       <ul>
-        <li>Provide leadership in defining strategy and vision for the team</li>
-        <li>Conducting 1-on-1 meetings with my team members to build relationships,
-        assist with challenges, and provide mentorship and growth opportunities</li>
-        <li>Work closely with Project Managers and Product owners to manage deliverables</li>
-        <li>Assist team with technical challenges that occur during development</li>
-        <li>Interview and hire additional team members</li>
-        <li>Provide continuing feedback to team members along with semi-annual reviews</li>
-        <li>Plan for salary, raises and promotions for team members</li>
+      <li>Defined and executed the team's strategy and vision, aligning it with broader company objectives.</li>
+      <li>Conducted regular 1-on-1 meetings to mentor team members, address challenges, and foster professional growth.</li>
+      <li>Collaborated closely with Project Managers and Product Owners to manage timelines, deliverables, and team priorities.</li>
+      <li>Assisted team members in overcoming technical challenges, ensuring efficient problem-solving and high productivity.</li>
+      <li>Led the recruitment, hiring, and onboarding of new team members, fostering a strong, cohesive development environment.</li>
+      <li>Provided continuous feedback and conducted formal reviews, driving performance improvements and career advancement.</li>
+      <li>Planned and executed salary adjustments, promotions, and growth plans based on team member performance.</li>
       </ul>
 
 - id: roo_em
-  title: Senior Developer / Engineering Manager
+  title: Senior Developer & Engineering Manager
   company: Roostify
   include: true # (full, brief, none)
   location:
@@ -35,33 +60,35 @@
       start: 2021, February
       end: 2022, June
   desc: |
-    I was hired into Roostify as a Senior Developer and was promoted to the
-    role of Engineering Manager in October, 2021. The Roostify product is
-    a mortgage application and processing engine that is white-labeled by financial
-    customers including Chase Bank. The tech stack used consists of Ruby on Rails,
-    JavaScript, React, AWS, and Heroku.
-
-    <div class="job-title">Senior Developer</div>
-    As a senior developer, I was responsible for leading and developing the
-    implementation of new features within the core Roostify platform.
-
-    <div class="job-title">Software Engineering Manager</div>
-    In this management role, I had a team of 6-10 software developers and QA
-    engineers reporting to me. My responsibilities included:
+    <p>
+    Joined Roostify as a Senior Developer and was promoted to Engineering Manager in October 2021. 
+    Led the development of Roostify's mortgage application and processing engine, a white-labeled 
+    platform used by major financial institutions, including Chase Bank.
+    </p>
+    <p>
+    Senior Developer:<br/>
+    Led the design and implementation of new features within the core Roostify platform, ensuring 
+    high performance and scalability to meet client needs.
+    </p>
+    <p>
+    Engineering Manager:<br/>
+    Managed a cross-functional team of 6-10 software developers and QA engineers. Drove the team's 
+    success through leadership, technical guidance, and process improvements.
+    </p>
     <ul>
-      <li>Conducting 1-on-1 meetings with my team members to build relationships,
-      assist with challenges, and provide mentorship and growth opportunities.</li>
-      <li>Manage an agile (scrum) development process</li>
-      <li>Work with team to provide estimates and schedules for new projects</li>
-      <li>Assist team with technical challenges that occur during development</li>
-      <li>Interview and hire additional team members</li>
-      <li>Provide continuing feedback to team members along with periodic reviews</li>
-      <li>Plan for salary, raises and promotions for team members.</li>
+    <li>Conducted regular 1-on-1 meetings to mentor and support team members, fostering growth and 
+    collaboration.</li>
+    <li>Oversaw an agile (scrum) development process, facilitating efficient sprint planning, estimation, 
+    and project delivery.</li>
+    <li>Assisted the team with technical challenges during development, ensuring smooth, high-quality deliverables.</li>
+    <li>Led recruitment, onboarding, and talent management, including salary planning, performance reviews, 
+    and career progression for team members.</li>
     </ul>
-    <div class="skillsUsed">
-      Tech Skills Used: Ruby, Rails, Full-Stack Development, REST, JSON, AWS, GCP, JavaScript,
-      React
-    </div>
+    <p>
+    Tech Stack: Ruby, Rails, Full-Stack Development, REST, JSON, AWS, GCP, JavaScript, React, Heroku
+    </p>
+
+
 
 - id: aj_tld
   title: Technical Lead / Developer
@@ -74,22 +101,24 @@
       start: 2018, November
       end: 2020, September
   desc: |
-    Alfa Jango provides services to startups around the globe. We specifically offer experienced
-    development, CTO as-a-service, technical strategy and leadership consulting. In my role as a
-    Technical Lead, my responsibilities include:
-      <ul>
-        <li>Meeting with entrepreneurs to assess technical challenges</li>
-        <li>Estimation of POC and MVP product development</li>
-        <li>Development, primarily in Ruby and JavaScript</li>
-        <li>Provide CTO services to startup companies</li>
-      </ul>
-    Projects that I developed in this role include an online learning portal, an e-commerce site,
-    and a healthcare application. Clients I worked with include the University of Michigan, the
-    Internet2 organization, and several startup companies.
-    <div class="skillsUsed">
-      Tech Skills Used: Ruby, Rails, Full-Stack Development, REST, JSON, AWS, JavaScript,
-      React, Angular, NextJS
-    </div>
+    <p>
+    Led technical strategy, development, and consulting services for startups around the globe, 
+    offering CTO-as-a-service, technical leadership, and strategic guidance.
+    </p>
+    <ul>
+    <li>Collaborated with entrepreneurs to assess technical challenges, providing tailored solutions 
+    and roadmaps for product development.</li>
+    <li>Estimated and led the development of Proof of Concept (POC) and Minimum Viable Product (MVP) projects, 
+    ensuring timely delivery and scalable architecture.</li>
+    <li>Developed applications using Ruby and JavaScript, focusing on full-stack development and delivering 
+    robust solutions for various industries.</li>
+    <li>Provided CTO services to startup clients, guiding them through technical decisions, architecture
+    planning, and development processes.</li>
+    <li>Notable projects include an online learning portal, an e-commerce platform, and a healthcare 
+    application. Worked with prestigious clients such as the University of Michigan, Internet2, and 
+    multiple emerging startups.</li>
+    </ul>
+    Tech Stack: Ruby, Rails, Full-Stack Development, REST, JSON, AWS, JavaScript, React, Angular, NextJS
 
 - id: cs_cto
   title: Chief Technology Officer
@@ -159,24 +188,23 @@
       start: 2016, March
       end: 2017, August
   desc: |
-    Quikly is a start-up in the retail promotional marketing space, based in Detroit. As VP of Engineering, my
-    responsibilities included:
+    <p>
+    Led the engineering team at Quikly, a retail promotional marketing startup, driving 
+    the technical vision and scaling the platform for future growth.
+    </p>
     <ul>
-      <li>Architect scalability into the Quikly platform</li>
-      <li>Define, execute and deliver on a vision and roadmap for the future growth of Quikly.</li>
-      <li>Manage the development team. Hire, evaluate, and mentor new teams members</li>
-      <li>Driving force behind creating a technical roadmap plan with dates and targets for future features and
-          functionality for the product.</li>
-      <li>Ruby, Rails, Node.js, AWS hands-on development</li>
-      <li>Establishing a learning-centric culture with the goal of making Quikly an awesome place for technologists
-          to work.</li>
+    <li>Architected and implemented scalability solutions, transitioning the Ruby on Rails monolithic 
+    application to a microservices-based architecture.</li>
+    <li>Defined and executed the product roadmap, aligning technical strategy with business goals 
+    to support long-term scalability and feature growth.</li>
+    <li>Led recruitment, hiring, and mentorship of the development team, fostering a learning-centric 
+    culture focused on innovation and continuous improvement.</li>
+    <li>Developed an auto-scaling microservice on AWS Lambda to dynamically manage server load on the Heroku 
+    platform, optimizing performance and reducing operational costs.</li>
+    <li>Established a detailed technical roadmap with clear timelines and targets for product feature 
+    releases and infrastructure improvements, driving the platform’s future development.</li>
     </ul>
-    Hands-on work included transitioning a large Ruby on Rails based monolith application into a microservices based
-    architecture. Developing an auto-scaler microservice on AWS Lambda to manage server load on the Heroku platform.
-    Using technologies including Ruby, Rails, Node.js, Heroku, AWS EC2, AWS SNS, AWS Lambda, AWS ECS, Redis, Memcached.
-    <div class="skillsUsed">
-      Tech Skills Used: JavaScript, Ruby, Rails, Full-Stack Development, REST, JSON, AWS, Heroku, GraphQL
-    </div>
+    Tech Stack: JavaScript, Ruby, Rails, Node.js, REST, JSON, AWS, Heroku, GraphQL
 
 - id: cpw_dev
   title: Director/Architect/Developer
@@ -188,48 +216,41 @@
       start: 2006, May
       end: 2016, March
   desc: |
-    Spent nearly 10 years with Compuware, which later became Lochbridge, in a variety of roles within both product
-    and professional services divisions. Highlights of that experience are below.
-
-    <div class="job-title">Director of Mobile Development</div>
-    Responsible for leading a team that delivers solutions for iOS, Android, Windows, and HTML5/Hybrid platforms
-    that run on phones, tablets, and in-vehicle systems. In this role I also served as the lead mobile architect.
-    Responsibilities included responding to RFPs, setting mobile technology direction for the company, conducting
-    regular 1-on-1 sessions with development staff, mentoring development staff, conducting performance reviews and
-    career planning sessions, architecting and estimating solutions, leading development projects, and participating
-    in mobile development coding. I was also responsible for identifying staffing needs, leading the interview process,
-    and hiring candidates.
-
-    I also regularly engaged with all levels of management and staff within Lochbridge, and with current and
-    prospective customers. Work alongside sales team to engage new customers and pitch solutions and services.
-    Identify new opportunities for mobile business and manage pipeline and asset planning.
-
-    <div class="job-title">Principal Architect - Advanced Solutions &amp; Innovation</div>
-    As a member of the Advanced Solutions & Innovation Group, I led company-wide efforts related to open source
-    initiatives and collaborative innovation. As a part of this team, I developed an internal Innovation Forum
-    portal allowing Lochbridge to adopt more of an internal open source culture to build assets, share knowledge,
-    and innovate on advanced technologies that we can successfully bring to market. This web app was built using
-    Ruby and the Ruby on Rails framework. The Advanced Solutions & Innovation Group is part of a CTO office within
-    Lochbridge.
-
-    <div class="job-title">Technical Architect</div>
-    I as a technical architect across several organizations within Compuware. These included the Compuware
-    products team, the professional services group, the CTO office, and the Covisint subsidiary.
-
-    With the professional services group, I primarily worked with automotive clients including GM, GM Onstar, and
-    Chrysler. This included experience developing and leading development of mobile apps for the headunits of GM
-    vehicles.
-
-    My experience here included development roles utilized Java, Ruby, Perl, and JavaScript.  Also team management
-    and leadership responsibilities along with leading architecture on many professional services projects.
-
-    Also an active part of seeking new business through RFP responses and proposals. Defined solutions, work plans,
-    and architecture for proposed business.
-
-    <div class="skillsUsed">
-      Tech Skills Used: Java, JavaScript, Ruby, Rails, Mobile Dev, Swift, Full-Stack Development,
-      REST, JSON, AWS
-    </div>
+    <p>
+    Led diverse teams and strategic initiatives across product and professional services divisions, 
+    focusing on mobile development, open-source innovation, and technical architecture for nearly a decade.
+    </p>
+    <p>
+    <h4>Director of Mobile Development:</h4>
+    Led a cross-functional team delivering solutions for iOS, Android, Windows, and HTML5/Hybrid platforms 
+    for mobile and in-vehicle systems.
+    </p>
+    <ul>
+    <li>Defined mobile technology direction, architected solutions, and led development projects for key clients.</li>
+    <li>Managed team development through 1-on-1 sessions, mentorship, performance reviews, and career planning.</li>
+    <li>Led the recruitment, staffing, and hiring process, ensuring alignment with business growth and technology needs.</li>
+    <li>Engaged with senior management and prospective clients, collaborating with the sales team to pitch solutions 
+    and drive new business opportunities in mobile development.</li>
+    </ul>
+    <p>
+    <h4>Principal Architect - Advanced Solutions &amp; Innovation:</h4>
+    Spearheaded company-wide open-source initiatives, driving collaborative innovation through the development 
+    of an internal Innovation Forum portal, enabling knowledge sharing and the creation of reusable assets 
+    across teams.
+    </p>
+    <ul>
+    <li>Played a key role in the CTO office, guiding strategic innovation efforts and adopting advanced technologies.</li>
+    </ul>
+    <h4>Technical Architect:</h4>
+    Provided technical leadership across multiple divisions, including the products team, professional services, 
+    and the Covisint subsidiary.
+    <ul>
+    <li>Delivered technical solutions for automotive clients such as GM, GM OnStar, and Chrysler, focusing on 
+    in-vehicle mobile app development.</li>
+    <li>Led efforts in defining solutions, work plans, and technical architecture for new business opportunities 
+    through RFP responses and proposals.</li>
+    </ul>
+    Tech Stack: Java, JavaScript, Ruby, Rails, Mobile Development, Swift, Full-Stack Development, REST, JSON, AWS
 
 - id: log_sja
   title: Senior Java Architect
