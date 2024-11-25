@@ -33,6 +33,7 @@ skills:
       - 34
       - 42
       - 43
+      - 52
       - 51
   - name: Cloud
     skills:
@@ -45,7 +46,6 @@ skills:
       - 40
   - name: Security & E-Commerce
     skills:
-      - 45
       - 46
       - 48
 

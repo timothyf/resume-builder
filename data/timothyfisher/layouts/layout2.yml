@@ -8,9 +8,9 @@ content:
     - name: experience_highlights
       display_name: Experience Highlights
       template: experience_highlights
-    - name: experience_other
-      display_name: Other Experience
-      template: experience_other
+    # - name: experience_other
+    #   display_name: Other Experience
+    #   template: experience_other
 
   right:
     - display_name:

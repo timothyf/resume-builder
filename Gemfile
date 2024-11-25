@@ -8,6 +8,7 @@ gem 'middleman-livereload'
 #gem 'middleman-deploy', '~> 0.2.4'
 #gem 'middleman-deploy', '~> 1.0'
 #gem 'middleman-deploy'
+gem 'middleman-deploy', '~> 2.0.0.pre.alpha'
 
 gem 'haml', '>= 4.0.5', '< 6.0'
 

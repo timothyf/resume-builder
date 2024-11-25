@@ -128,6 +128,10 @@ end
 #   deploy.method = :git
 # end
 
+activate :deploy do |deploy|
+  deploy.deploy_method = :git
+end
+
 require "pathname"
 
 def inline_css(html_file, root)

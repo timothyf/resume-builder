@@ -100,3 +100,5 @@
   label: Technical Strategy & Vision
 - id: 51
   label: Agile Processes (Scrum, Kanban)
+- id: 52
+  label: Elasticsearch, Redis, Memcached
