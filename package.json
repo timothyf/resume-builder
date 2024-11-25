@@ -1,5 +1,5 @@
 {
   "dependencies": {
-    "@anvilco/anvil": "^2.15.0"
+    "@anvilco/anvil": "^3.3.1"
   }
 }
