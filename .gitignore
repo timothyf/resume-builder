@@ -20,3 +20,7 @@
 source/CNAME
 /dist
 /node_modules
+
+books.yml
+kennedy.html
+generatePdf.*
