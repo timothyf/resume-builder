@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@anvilco/anvil": "^2.15.0"
+  }
+}
