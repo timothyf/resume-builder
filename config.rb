@@ -122,6 +122,7 @@ after_build do |builder|
 
   # Copy deploy files back to build directory
   FileUtils.cp("#{new_dir_path}/index.html", "./build/index.html")
+  FileUtils.cp("#{new_dir_path}/pdf.html", "./build/pdf.html")
 end
 
 # activate :deploy do |deploy|
