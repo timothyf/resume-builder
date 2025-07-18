@@ -10,7 +10,6 @@ It has the following features:
  * Can optionally include a gravatar photo
  * Markdown/HTML for formatting of the longer paragraphs.
  * You can preview your changes with Middleman's included server (with livereload).
- * Automatic PDF generation using [wkhtmltopdf](http://wkhtmltopdf.org).
 
 ## Installation
 
@@ -37,7 +36,7 @@ See the result: [sample resume](http://timothyf.github.com/resume-builder/).
 
 ### Build yor resume
 
-Build the static version of your resume, it'll also create the PDF version.
+Build the static version of your resume
 
     bundle exec middleman build
 
