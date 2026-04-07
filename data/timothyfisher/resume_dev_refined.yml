@@ -1,0 +1,105 @@
+name: resume_main_dev
+layout: layout2
+pdf:
+  useicons: true
+  filename: pdf/TimothyFisher-Res-Dev
+
+contact_info:
+    name: Timothy Fisher
+    photo: false
+    email: timothyf@gmail.com
+    phone: (734) 790-7235
+    address:
+        street: 25296 Hunter Lane
+        city: Flat Rock
+        state: MI
+        postal_code: 48134
+
+links:
+    - name: Github
+    - name: Linkedin
+
+summary:
+    file: summary_developer_refined
+
+skills:
+  - name: Leadership
+    skills:
+      - 49
+      - 50
+  - name: Development
+    skills:
+      - 32
+      - 34
+      - 42
+      - 43
+      - 52
+      - 51
+  - name: Cloud
+    skills:
+      - 36
+      - 37
+      - 38
+  - name: Languages
+    skills:
+      - 39
+      - 40
+  - name: Security & E-Commerce
+    skills:
+      - 46
+      - 48
+
+jobs_filename: jobs
+jobs:
+    - file: jobs
+      id: bdl
+      section: experiences
+    - file: jobs
+      id: wsn
+      section: experiences
+    - file: jobs
+      id: nyt_sem
+      section: experiences
+    - file: jobs
+      id: roo_em
+      section: experiences
+    - file: jobs
+      id: aj_tld
+      section: experiences
+    - file: jobs
+      id: qky_vpe
+      section: experiences
+    - file: jobs
+      id: cpw_dev
+      section: experiences
+    - file: jobs
+      id: log_sja
+      section: experience_other
+    - file: jobs
+      id: med_dtl
+      section: experience_other
+    - file: jobs
+      id: sph_sja
+      section: experience_other
+    - file: jobs
+      id: pwc_sc
+      section: experience_other
+    - file: jobs
+      id: cyc_dev
+      section: experience_other
+    - file: jobs
+      id: mot_dev
+      section: experience_other
+
+education:
+    - name: University of Michigan
+      degree: B.S. Electrical Engineering
+      dates:
+          start: Sept 1986
+          end: May 1991
+
+    - name: Capella University
+      degree: M.S. Education
+      dates:
+          start: Sept 2001
+          end: May 2003
