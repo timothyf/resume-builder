@@ -1,3 +1,3 @@
 <div class="details">
-    <p><%= Maruku.new(job.desc).to_html %></p>
+    <p><%= render_markdown(job.desc) %></p>
 </div>

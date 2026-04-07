@@ -16,7 +16,7 @@
         </div>
 
         <div class="details">
-          <p><%= Maruku.new(org.desc).to_html %></p>
+          <p><%= render_markdown(org.desc) %></p>
         </div>
       <% end %>
   </section>

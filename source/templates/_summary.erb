@@ -8,6 +8,6 @@
     <h2 class="section-title"><%= display_name %></h2>
   <% end %>
   <div class="summary">
-    <p><%= Maruku.new(@summary.text).to_html %></p>
+    <p><%= render_markdown(@summary.text) %></p>
   </div>
 </section>

@@ -1,5 +1,5 @@
 ## Used for parsing markdown docs in the resume.yml
-require 'maruku'
+require 'kramdown'
 
 ## For generating gravatar hash
 require 'digest/md5'
@@ -30,6 +30,10 @@ end
 # end
 
 helpers do
+    def render_markdown(text)
+        Kramdown::Document.new(text.to_s).to_html
+    end
+
     def display_date(date)
         if date.is_a?(Date)
             # Change this if you prefer another date format:

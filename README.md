@@ -23,9 +23,13 @@ It has the following features:
      git clone https://github.com/timothyf/resume-builder.git
      cd resume-builder
 
+ Install Ruby 3.4.9 with RVM and use the project gemset:
+
+     rvm install 3.4.9
+     rvm use 3.4.9@resume --create
+
  Install all dependencies:
 
-     sudo gem install bundler
      bundle install
 
 ## Preview
@@ -40,9 +44,17 @@ Build the static version of your resume
 
     bundle exec middleman build
 
+Or use the helper script, which loads the project RVM Ruby/gemset first:
+
+    ./build_resume.bash
+
 ### Deploy your resume
 
     bundle exec middleman deploy
+
+Or:
+
+    ./deploy_resume.bash
 
 Upload it to a Github page. Your resume will be available at `http://yourusername.github.com/resume`.
 
@@ -52,6 +64,9 @@ Upload it to a Github page. Your resume will be available at `http://yourusernam
 
     bundle exec middleman
 You can preview your resume at `http://localhost:4567/`
+
+When using RVM, entering the project directory will pick up `.ruby-version`
+and `.ruby-gemset` and use `ruby-3.4.9@resume`.
 
 ## Resume instructions
 

@@ -1,23 +1,16 @@
 source 'https://rubygems.org'
 
+ruby '3.4.9'
+
 # Gems to support Middleman
-#gem "middleman", "~>3.3.3"
-gem "middleman", "~>4.4.2"
-#gem 'middleman-livereload' , '~> 3.3.3'
-gem 'middleman-livereload'
+gem 'middleman', '~> 4.6'
+gem 'middleman-livereload', '~> 3.5'
 #gem 'middleman-deploy', '~> 0.2.4'
 #gem 'middleman-deploy', '~> 1.0'
 #gem 'middleman-deploy'
 gem 'middleman-deploy', '~> 2.0.0.pre.alpha'
 
-gem 'haml', '>= 4.0.5', '< 6.0'
-
-gem 'nokogiri', '~> 1.12.0'
-
-# A pure-Ruby Markdown-superset interpreter
-gem 'maruku', '~> 0.7.2'
+gem 'nokogiri', '~> 1.18'
 
 gem 'pdfkit', '~> 0.8.2'
-gem 'less', '~> 2.6.0'
-gem 'therubyracer'
 gem 'net-ftp'

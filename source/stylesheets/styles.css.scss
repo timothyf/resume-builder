@@ -1,24 +1,21 @@
-
-@import "_mixins.less";
 /* You can change the theme by selecting one of the following file:
-    _theme-default.less
-    _theme-fern.less
-    _theme-grey.less
-    _theme-orange.less
-    _theme-tapestry.less
-    _theme-tradewind.less
+    _theme-default.scss
+    _theme-fern.scss
+    _theme-grey.scss
+    _theme-orange.scss
+    _theme-tapestry.scss
+    _theme-tradewind.scss
 */
-@import "_theme-default.less";
-@import "_base.less";
-@import "_responsive.less";
-@import "_print.less";
-
+@import "theme-default";
+@import "base";
+@import "responsive";
+@import "print";
 
 .sidebar-wrapper .name {
-    font-size: 40px;
-    font-weight: 900;
-    margin-top: 0;
-    margin-bottom: 10px;
+  font-size: 40px;
+  font-weight: 900;
+  margin-top: 0;
+  margin-bottom: 10px;
 }
 
 .main-wrapper .company {
@@ -32,7 +29,6 @@
 
 .company-location {
   margin-bottom: 3px;
-  /* margin-top: 3px; */
   font-size: 15px;
   font-style: italic;
   position: relative;
@@ -43,13 +39,13 @@
 }
 
 .sidebar-wrapper .container-block {
-    padding: 30px;
-    padding-top: 10px;
-    padding-bottom: 7px;
+  padding: 30px;
+  padding-top: 10px;
+  padding-bottom: 7px;
 }
 
 .main-wrapper .section {
-    margin-bottom: 50px;
+  margin-bottom: 50px;
 }
 
 .main-wrapper .section p {
@@ -67,7 +63,7 @@
 }
 
 .sidebar-wrapper .profile-container {
-    padding-bottom: 20px;
+  padding-bottom: 20px;
 }
 
 #additionalExperience {
@@ -92,5 +88,5 @@
 
 h4 {
   font-size: 14px;
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
