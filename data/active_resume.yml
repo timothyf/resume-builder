@@ -7,6 +7,7 @@ user: timothyfisher
 #name: resume_bn
 #name: resume_tunecore
 #name: resume_manager
-name: resume_main_dev
+#name: resume_main_dev
 #name: resume_main_mgr
+name: resume_dev_refined
 generate_brief: false
