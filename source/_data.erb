@@ -4,5 +4,6 @@
 <% @resume_data = @resume_context[:resume] %>
 <% @layout_data = @resume_context[:layout] %>
 <% @skills_data = @resume_context[:skills] %>
+<% @skills_by_id = @skills_data.each_with_object({}) { |skill, index| index[skill.id.to_s] = skill } %>
 <% @job_data = @resume_context[:jobs] %>
 <% @jobs_by_id = @job_data.each_with_object({}) { |job, index| index[job.id.to_s] = job } %>

@@ -6,7 +6,7 @@
         <% @resume_data.skills.each do |category| %>
           <li class="skillCategory"><%= category.name %></li>
           <% category.skills.each do |skill_id| %>
-            <% skill = @skills_data.find{ |a_skill| a_skill.id == skill_id } %>
+            <% skill = @skills_by_id[skill_id.to_s] %>
             <li class="skillLabel"><%= skill.label %></li>
           <% end %>
         <% end %>
