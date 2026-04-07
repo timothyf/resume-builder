@@ -6,7 +6,6 @@ API_BASE = ENV.fetch('FREECONVERT_API_BASE', 'https://api.freeconvert.com')
 SOURCE_URL = ENV.fetch('FREECONVERT_SOURCE_URL', 'https://resume.timothyfisher.com/pdf.html')
 OUTPUT_PATH = ENV.fetch('FREECONVERT_OUTPUT_PATH', 'build/TimothyFisherResume.pdf')
 OUTPUT_FILENAME = ENV.fetch('FREECONVERT_OUTPUT_FILENAME', File.basename(OUTPUT_PATH))
-API_TOKEN = ENV['FREECONVERT_API_TOKEN']
 POLL_INTERVAL_SECONDS = Integer(ENV.fetch('FREECONVERT_POLL_INTERVAL_SECONDS', '5'))
 MAX_POLLS = Integer(ENV.fetch('FREECONVERT_MAX_POLLS', '120'))
 HTTP_TIMEOUT_SECONDS = Integer(ENV.fetch('FREECONVERT_HTTP_TIMEOUT_SECONDS', '30'))
@@ -91,7 +90,6 @@ def wait_for_completion(job_url)
     raise "Timed out waiting for job completion after #{MAX_POLLS} polls"
 end
 
-#abort 'Missing FREECONVERT_API_TOKEN environment variable' if API_TOKEN.to_s.strip.empty?
 
 input_body = {
     'tasks' => {
@@ -123,7 +121,6 @@ input_body = {
 headers = {
     'Content-Type' => 'application/json',
     'Accept' => 'application/json',
-    'Authorization' => "Bearer {access_token}" #API_TOKEN}"
 }
 
 uri = URI("#{API_BASE}/v1/process/jobs")
