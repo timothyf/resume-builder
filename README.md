@@ -52,9 +52,41 @@ Optional profile override:
 
     ./build_resume.bash --resume-user timothyfisher --resume-name resume_dev_refined
 
+Optional theme override:
+
+    ./build_resume.bash --theme theme-fern
+
 You can also use environment variables:
 
     ACTIVE_RESUME_USER=timothyfisher ACTIVE_RESUME_NAME=resume_dev_refined ./build_resume.bash
+    ACTIVE_RESUME_THEME=theme-orange ./build_resume.bash
+
+View current configured and effective active resume selection:
+
+    ./show_active_resume.bash
+
+With override preview:
+
+    ACTIVE_RESUME_USER=timothyfisher ACTIVE_RESUME_NAME=resume_main_mgr ./show_active_resume.bash
+
+Available themes:
+
+    theme-default, theme-fern, theme-grey, theme-orange, theme-tapestry, theme-tradewind
+
+Theme bundles are now full layout/style sets (not color-only overlays). Each theme
+has separate screen and PDF stylesheet bundles:
+
+    source/stylesheets/themes/_theme-default.screen.scss
+    source/stylesheets/themes/_theme-default.pdf.scss
+    ...
+
+To create a new complete layout theme:
+
+1. Duplicate one theme pair in `source/stylesheets/themes/`.
+2. Rename both files to `_theme-yourname.screen.scss` and `_theme-yourname.pdf.scss`.
+3. Update layout structure/styles in those files.
+4. Add `theme-yourname` to `AVAILABLE_THEMES` in `lib/resume_selection.rb`.
+5. Build with `./build_resume.bash --theme theme-yourname`.
 
 ### Deploy your resume
 
@@ -67,6 +99,10 @@ Or:
 Optional profile override:
 
     ./deploy_resume.bash --resume-user timothyfisher --resume-name resume_dev_refined
+
+Optional theme override:
+
+    ./deploy_resume.bash --theme theme-fern
 
 Upload it to a GitHub page. Your resume will be available at `http://yourusername.github.com/resume`.
 

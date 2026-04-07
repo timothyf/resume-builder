@@ -1,0 +1,8 @@
+<% active_theme = ENV.fetch('ACTIVE_RESUME_THEME', 'theme-default').strip %>
+<% active_theme = 'theme-default' if active_theme.empty? %>
+<% theme_path = File.expand_path("themes/_#{active_theme}.pdf.scss", __dir__) %>
+<% unless File.exist?(theme_path) %>
+<%   active_theme = 'theme-default' %>
+<%   theme_path = File.expand_path("themes/_#{active_theme}.pdf.scss", __dir__) %>
+<% end %>
+<%= File.read(theme_path) %>

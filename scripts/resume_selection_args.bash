@@ -6,6 +6,7 @@ parse_resume_selection_args() {
 
   local resume_user="${ACTIVE_RESUME_USER:-}"
   local resume_name="${ACTIVE_RESUME_NAME:-}"
+  local resume_theme="${ACTIVE_RESUME_THEME:-}"
 
   while [[ $# -gt 0 ]]; do
     case "$1" in
@@ -27,6 +28,15 @@ parse_resume_selection_args() {
         resume_name="$2"
         shift 2
         ;;
+      --theme)
+        if [[ $# -lt 2 || -z "${2:-}" ]]; then
+          echo "Missing value for --theme" >&2
+          echo "$usage_text" >&2
+          return 1
+        fi
+        resume_theme="$2"
+        shift 2
+        ;;
       *)
         echo "Unknown option: $1" >&2
         echo "$usage_text" >&2
@@ -41,5 +51,9 @@ parse_resume_selection_args() {
 
   if [[ -n "$resume_name" ]]; then
     export ACTIVE_RESUME_NAME="$resume_name"
+  fi
+
+  if [[ -n "$resume_theme" ]]; then
+    export ACTIVE_RESUME_THEME="$resume_theme"
   fi
 }

@@ -21,10 +21,11 @@ run_test() {
 
 test_sets_env_from_cli_args() {
   (
-    unset ACTIVE_RESUME_USER ACTIVE_RESUME_NAME
-    parse_resume_selection_args "usage" --resume-user alice --resume-name resume_a
+    unset ACTIVE_RESUME_USER ACTIVE_RESUME_NAME ACTIVE_RESUME_THEME
+    parse_resume_selection_args "usage" --resume-user alice --resume-name resume_a --theme theme-fern
     [[ "${ACTIVE_RESUME_USER:-}" == "alice" ]]
     [[ "${ACTIVE_RESUME_NAME:-}" == "resume_a" ]]
+    [[ "${ACTIVE_RESUME_THEME:-}" == "theme-fern" ]]
   )
 }
 
@@ -32,9 +33,11 @@ test_uses_existing_env_when_no_args() {
   (
     export ACTIVE_RESUME_USER="bob"
     export ACTIVE_RESUME_NAME="resume_b"
+    export ACTIVE_RESUME_THEME="theme-orange"
     parse_resume_selection_args "usage"
     [[ "${ACTIVE_RESUME_USER:-}" == "bob" ]]
     [[ "${ACTIVE_RESUME_NAME:-}" == "resume_b" ]]
+    [[ "${ACTIVE_RESUME_THEME:-}" == "theme-orange" ]]
   )
 }
 
@@ -74,11 +77,24 @@ test_unknown_option_fails() {
   )
 }
 
+test_missing_theme_value_fails() {
+  (
+    unset ACTIVE_RESUME_USER ACTIVE_RESUME_NAME ACTIVE_RESUME_THEME
+    set +e
+    output="$(parse_resume_selection_args "usage" --theme 2>&1)"
+    status=$?
+    set -e
+    [[ $status -ne 0 ]]
+    [[ "$output" == *"Missing value for --theme"* ]]
+  )
+}
+
 run_test "sets env from CLI args" test_sets_env_from_cli_args
 run_test "uses existing env with no args" test_uses_existing_env_when_no_args
 run_test "missing --resume-user value fails" test_missing_resume_user_value_fails
 run_test "missing --resume-name value fails" test_missing_resume_name_value_fails
 run_test "unknown option fails" test_unknown_option_fails
+run_test "missing --theme value fails" test_missing_theme_value_fails
 
 if [[ $failures -gt 0 ]]; then
   echo "Shell tests failed: $failures"

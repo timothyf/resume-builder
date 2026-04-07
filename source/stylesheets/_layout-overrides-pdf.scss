@@ -1,7 +1,3 @@
-@import "theme-default";
-@import "base";
-@import "print";
-
 p {
   line-height: 1.3;
   margin: 0 0 8px;
@@ -196,32 +192,4 @@ body {
 
 .main-wrapper .job-title-row .time {
   color: black;
-}
-
-.sidebar-wrapper .interests-list li {
-  margin-bottom: 4px;
-}
-
-.sidebar-wrapper .education-container .item {
-  margin-bottom: 10px;
-}
-
-.sidebar-wrapper .education-container .meta,
-.sidebar-wrapper .education-container .time {
-  color: dimgray;
-  font-weight: normal;
-}
-
-.degree-name {
-  font-weight: bold;
-}
-
-h4 {
-  font-size: 11px;
-  margin-bottom: 0;
-}
-
-ul.list-unstyled.contact-list.links,
-.hr-links {
-  display: none;
 }

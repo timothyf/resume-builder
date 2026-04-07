@@ -1,6 +1,15 @@
 module ResumeSelection
   module_function
 
+  AVAILABLE_THEMES = %w[
+    theme-default
+    theme-fern
+    theme-grey
+    theme-orange
+    theme-tapestry
+    theme-tradewind
+  ].freeze
+
   def truthy_string?(value)
     %w[1 true yes y on].include?(value.to_s.strip.downcase)
   end
@@ -29,6 +38,20 @@ module ResumeSelection
     }
   end
 
+  def active_theme(resume)
+    env_theme = ENV.fetch('ACTIVE_RESUME_THEME', '').strip
+    resume_theme = resume.respond_to?(:theme) ? resume.theme.to_s.strip : ''
+    theme = env_theme.empty? ? resume_theme : env_theme
+    theme = 'theme-default' if theme.empty?
+
+    unless AVAILABLE_THEMES.include?(theme)
+      raise ArgumentError,
+            "Invalid ACTIVE_RESUME_THEME '#{theme}'. Allowed: #{AVAILABLE_THEMES.join(', ')}"
+    end
+
+    theme
+  end
+
   def selection_context(active_resume, data_root)
     identifiers = active_resume_identifiers(active_resume)
     user_data = data_root.public_send(identifiers[:user])
@@ -45,7 +68,8 @@ module ResumeSelection
       name: identifiers[:name],
       user_data: user_data,
       resume: resume,
-      generate_brief: generate_brief
+      generate_brief: generate_brief,
+      theme: active_theme(resume)
     }
   end
 end

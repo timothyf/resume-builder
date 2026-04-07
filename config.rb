@@ -15,6 +15,7 @@ page "index.html", :layout => false
 page "pdf.html", :layout => false
 
 selection = ResumeSelection.selection_context(@app.data.active_resume, @app.data)
+ENV['ACTIVE_RESUME_THEME'] = selection[:theme]
 if selection[:generate_brief] == false
   ignore "/index-brief.html"
   ignore "/pdf-brief.html"
@@ -94,6 +95,7 @@ end
 set :css_dir, 'stylesheets'
 set :js_dir, 'javascripts'
 set :images_dir, 'images'
+set :sass, load_paths: [File.expand_path('source/stylesheets', __dir__)]
 
 # Build-specific configuration
 configure :build do
