@@ -27,3 +27,5 @@ generatePdf.*
 pdf/TimothyFisher-Res-Dev.pdf
 pdf/TimothyFisher-Res-Lead.pdf
 generate-html-output.pdf
+*.pdf
+
