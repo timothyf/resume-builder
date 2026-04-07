@@ -1,10 +1,6 @@
 #!/bin/bash
 
 set -euo pipefail
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-bundle_bin="bundle"
-if [ -x "$HOME/.rvm/wrappers/ruby-3.4.9@resume/bundle" ]; then
-  bundle_bin="$HOME/.rvm/wrappers/ruby-3.4.9@resume/bundle"
-fi
-
-"$bundle_bin" install
+"$script_dir/scripts/run_bundle.bash" install

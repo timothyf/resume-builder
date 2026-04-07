@@ -1,5 +1,9 @@
 {
     "chat.tools.terminal.autoApprove": {
-        "./build_resume.bash": true
+        "./build_resume.bash": true,
+        "/^ruby -c generatePdf\\.rb$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
     }
 }

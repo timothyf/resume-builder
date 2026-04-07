@@ -50,8 +50,10 @@ helpers do
   end
 
   def build_resume_context(active_resume)
-    user = active_resume.user
-    name = active_resume.name
+    env_user = ENV.fetch('ACTIVE_RESUME_USER', '').strip
+    env_name = ENV.fetch('ACTIVE_RESUME_NAME', '').strip
+    user = env_user.empty? ? active_resume.user : env_user
+    name = env_name.empty? ? active_resume.name : env_name
     user_data = resolve_data_path(data, user)
     resume = resolve_data_path(user_data, name)
     jobs_filename = resume.jobs_filename
@@ -125,8 +127,10 @@ rescue Errno::ENOENT
 end
 
 after_build do |builder|
-  active_resume_user = @app.data.active_resume.user
-  active_resume_name = @app.data.active_resume.name
+  env_user = ENV.fetch('ACTIVE_RESUME_USER', '').strip
+  env_name = ENV.fetch('ACTIVE_RESUME_NAME', '').strip
+  active_resume_user = env_user.empty? ? @app.data.active_resume.user : env_user
+  active_resume_name = env_name.empty? ? @app.data.active_resume.name : env_name
   user_data = @app.data.public_send(active_resume_user)
   resume_data = user_data.public_send(active_resume_name)
 

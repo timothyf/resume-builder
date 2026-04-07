@@ -1,107 +1,149 @@
-require 'net/http'
+require 'fileutils'
 require 'json'
+require 'net/http'
+
+API_BASE = ENV.fetch('FREECONVERT_API_BASE', 'https://api.freeconvert.com')
+SOURCE_URL = ENV.fetch('FREECONVERT_SOURCE_URL', 'https://resume.timothyfisher.com/pdf.html')
+OUTPUT_PATH = ENV.fetch('FREECONVERT_OUTPUT_PATH', 'build/TimothyFisherResume.pdf')
+OUTPUT_FILENAME = ENV.fetch('FREECONVERT_OUTPUT_FILENAME', File.basename(OUTPUT_PATH))
+API_TOKEN = ENV['FREECONVERT_API_TOKEN']
+POLL_INTERVAL_SECONDS = Integer(ENV.fetch('FREECONVERT_POLL_INTERVAL_SECONDS', '5'))
+MAX_POLLS = Integer(ENV.fetch('FREECONVERT_MAX_POLLS', '120'))
+HTTP_TIMEOUT_SECONDS = Integer(ENV.fetch('FREECONVERT_HTTP_TIMEOUT_SECONDS', '30'))
+HTTP_MAX_RETRIES = Integer(ENV.fetch('FREECONVERT_HTTP_MAX_RETRIES', '3'))
+HTTP_RETRY_BASE_DELAY_SECONDS = Float(ENV.fetch('FREECONVERT_HTTP_RETRY_BASE_DELAY_SECONDS', '1.0'))
+
+def parse_json_response(response)
+    JSON.parse(response.body)
+rescue JSON::ParserError => e
+    raise "Invalid JSON response (status #{response.code}): #{e.message}"
+end
+
+def perform_request(uri, request)
+    attempts = 0
+
+    begin
+        attempts += 1
+        http = Net::HTTP.new(uri.host, uri.port)
+        http.use_ssl = (uri.scheme == 'https')
+        http.open_timeout = HTTP_TIMEOUT_SECONDS
+        http.read_timeout = HTTP_TIMEOUT_SECONDS
+        http.request(request)
+    rescue Timeout::Error, Errno::ECONNRESET, Errno::ETIMEDOUT, EOFError, SocketError => e
+        if attempts <= HTTP_MAX_RETRIES
+            sleep_seconds = HTTP_RETRY_BASE_DELAY_SECONDS * (2**(attempts - 1))
+            warn "HTTP attempt #{attempts} failed: #{e.class} #{e.message}. Retrying in #{sleep_seconds.round(2)}s..."
+            sleep(sleep_seconds)
+            retry
+        end
+
+        raise "HTTP request failed after #{attempts} attempts: #{e.class} #{e.message}"
+    end
+end
+
+def find_export_url(tasks)
+    normalized = tasks.is_a?(Hash) ? tasks.values : Array(tasks)
+    export_task = normalized.find { |task| task['operation'] == 'export/url' && task.dig('result', 'url') }
+    export_task ||= normalized.find { |task| task.dig('result', 'url') }
+    export_task&.dig('result', 'url')
+end
+
+def download_file(download_url)
+    download_uri = URI(download_url)
+    download_request = Net::HTTP::Get.new(download_uri.request_uri)
+    response = perform_request(download_uri, download_request)
+
+    unless response.code == '200'
+        raise "Download failed with code #{response.code}: #{response.body}"
+    end
+
+    FileUtils.mkdir_p(File.dirname(OUTPUT_PATH))
+    File.open(OUTPUT_PATH, 'wb') { |file| file.write(response.body) }
+    puts "File downloaded to #{OUTPUT_PATH}"
+end
 
 def wait_for_completion(job_url)
-    uri = URI(job_url)
+    job_uri = URI(job_url)
 
-    # Create an HTTP GET request
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true # Use HTTPS
-    request = Net::HTTP::Get.new(uri.request_uri)
-    # Send the request and print the response
-    response = http.request(request)
-    if response.code == '200'
-        if JSON.parse(response.body)['status'] == 'completed'
-            puts "Job completed"
-            #puts response.body
-            # Download the file
-            download_uri = URI(JSON.parse(response.body)['tasks'][2]['result']['url'])
-            download_http = Net::HTTP.new(download_uri.host, download_uri.port)
-            download_http.use_ssl = true # Use HTTPS
-            download_request = Net::HTTP::Get.new(download_uri.request_uri)
-            download_response = download_http.request(download_request)
-            if download_response.code == '200'
-                File.open('build/TimothyFisherResume.pdf', 'wb') do |file|
-                    file.write(download_response.body)
-                end
-                puts "File downloaded"
-            else
-                puts "Download failed with code: #{download_response.code}"
-                puts download_response.body
-            end
-        elsif JSON.parse(response.body)['status'] == 'failed'
-            puts "Job failed"
-            puts response.body
+    (1..MAX_POLLS).each do |attempt|
+        response = perform_request(job_uri, Net::HTTP::Get.new(job_uri.request_uri))
+        raise "Job polling failed with code #{response.code}: #{response.body}" unless response.code == '200'
+
+        payload = parse_json_response(response)
+        status = payload['status']
+
+        case status
+        when 'completed'
+            puts 'Job completed'
+            export_url = find_export_url(payload['tasks'])
+            raise 'Could not locate export URL in completed job payload' unless export_url
+
+            download_file(export_url)
+            return
+        when 'failed'
+            raise "Job failed: #{response.body}"
         else
-            puts "Job pending"
-            #puts response.body
-            sleep(5)
-            wait_for_completion(job_url)
+            puts "Job pending (attempt #{attempt}/#{MAX_POLLS})"
+            sleep(POLL_INTERVAL_SECONDS)
         end
     end
-end 
 
-# Define the inputBody and headers
+    raise "Timed out waiting for job completion after #{MAX_POLLS} polls"
+end
+
+#abort 'Missing FREECONVERT_API_TOKEN environment variable' if API_TOKEN.to_s.strip.empty?
+
 input_body = {
-    "tasks"=> {
-        "import-3"=> {
-            "operation"=> "import/webpage",
-            "url"=> "https://resume.timothyfisher.com/pdf.html"
+    'tasks' => {
+        'import-3' => {
+            'operation' => 'import/webpage',
+            'url' => SOURCE_URL
         },
-        "convert-1"=> {
-            "operation"=> "convert",
-            "input"=> "import-3",
-            "input_format"=> "html",
-            "output_format"=> "pdf",
-            "options"=> {
-                "page_size"=> "letter",
-                "page_orientation"=> "portrait",
-                "margin"=> "60",
-                "hide_cookie"=> true,
-                "use_print_stylesheet"=> true
+        'convert-1' => {
+            'operation' => 'convert',
+            'input' => 'import-3',
+            'input_format' => 'html',
+            'output_format' => 'pdf',
+            'options' => {
+                'page_size' => 'letter',
+                'page_orientation' => 'portrait',
+                'margin' => '60',
+                'hide_cookie' => true,
+                'use_print_stylesheet' => true
             }
         },
-        "export-1"=> {
-            "operation"=> "export/url",
-            "input"=> [
-                "convert-1"
-            ],
-            "filename"=> "TimothyFisherResume.pdf"
+        'export-1' => {
+            'operation' => 'export/url',
+            'input' => ['convert-1'],
+            'filename' => OUTPUT_FILENAME
         }
     }
 }
 
 headers = {
-  'Content-Type' => 'application/json',
-  'Accept' => 'application/json',
-  'Authorization' => 'Bearer {access-token}'
+    'Content-Type' => 'application/json',
+    'Accept' => 'application/json',
+    'Authorization' => "Bearer {access_token}" #API_TOKEN}"
 }
 
-uri = URI('https://api.freeconvert.com/v1/process/jobs')
-
-# Create an HTTP POST request
-http = Net::HTTP.new(uri.host, uri.port)
-http.use_ssl = true # Use HTTPS
-
+uri = URI("#{API_BASE}/v1/process/jobs")
 request = Net::HTTP::Post.new(uri.request_uri)
 request.body = input_body.to_json
 headers.each { |key, value| request[key] = value }
 
-# Send the request and print the response
-response = http.request(request)
+response = perform_request(uri, request)
+payload = parse_json_response(response)
 
-if response.code == '200'
-  puts JSON.parse(response.body)
-elsif response.code == '201'
-    puts "Request accepted"
-    #puts response.body
-    payload = JSON.parse(response.body)
-    puts "Job ID: #{payload['id']}"
-    puts "Job Status: #{payload['status']}"
-    puts "Job URL: #{payload['links']['self']}"
-    wait_for_completion(payload['links']['self'])
+if response.code == '201' || response.code == '200'
+    puts 'Request accepted'
+    puts "Job ID: #{payload['id']}" if payload['id']
+    puts "Job Status: #{payload['status']}" if payload['status']
+
+    job_url = payload.dig('links', 'self')
+    raise 'Job URL not found in API response' unless job_url
+
+    wait_for_completion(job_url)
 else
-  puts "Request failed with code: #{response.code}"
-  puts response.body
+    raise "Request failed with code #{response.code}: #{response.body}"
 end
 
