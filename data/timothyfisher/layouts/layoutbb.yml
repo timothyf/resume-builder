@@ -10,7 +10,8 @@ content:
       template: experience_highlights
     - name: experience_other
       display_name: Other Experience
-      template: experience_other_bb
+      template: experience_other
+      compact_title: true
 
   right:
     - display_name:

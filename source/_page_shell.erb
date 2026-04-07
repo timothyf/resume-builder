@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+
+<head>
+  <%= partial 'header' %>
+  <% if theme_stylesheet %>
+    <link id="theme-style" rel="stylesheet" href="<%= theme_stylesheet %>">
+  <% end %>
+</head>
+
+<body<%= body_class ? " class=\"#{body_class}\"" : "" %>>
+  <% if show_menu %>
+    <div class="menu-bar">
+      <i class="fa fa-file"></i>
+      <a href="<%= @resume_data.pdf.filename %>.pdf">Download PDF</a>
+    </div>
+  <% end %>
+
+  <div class="wrapper">
+    <div class="sidebar-wrapper">
+      <% @layout_data.content.right.each do |section| %>
+        <%= partial "templates/#{section.template}", locals: {display_name: section.display_name, section: section} %>
+      <% end %>
+    </div>
+
+    <div class="main-wrapper">
+      <% @layout_data.content.center.each do |section| %>
+        <%= partial "templates/#{section.template}", locals: {
+          brief: brief,
+          display_name: section.display_name,
+          section: section,
+          compact_title: (section.respond_to?(:compact_title) ? section.compact_title : false)
+        } %>
+      <% end %>
+    </div>
+  </div>
+
+  <%= partial 'footer' %>
+</body>
+
+</html>

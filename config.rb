@@ -30,6 +30,42 @@ end
 # end
 
 helpers do
+  def resolve_data_segment(current, segment)
+    key = segment.to_s
+
+    return current.public_send(key) if current.respond_to?(key)
+
+    if current.respond_to?(:[])
+      return current[key] if current[key]
+
+      sym_key = key.to_sym
+      return current[sym_key] if current[sym_key]
+    end
+
+    raise KeyError, "Missing data segment '#{key}' while resolving resume context"
+  end
+
+  def resolve_data_path(root, *segments)
+    segments.reduce(root) { |current, segment| resolve_data_segment(current, segment) }
+  end
+
+  def build_resume_context(active_resume)
+    user = active_resume.user
+    name = active_resume.name
+    user_data = resolve_data_path(data, user)
+    resume = resolve_data_path(user_data, name)
+    jobs_filename = resume.jobs_filename
+
+    {
+      user: user,
+      name: name,
+      resume: resume,
+      layout: resolve_data_path(user_data, 'layouts', resume.layout),
+      skills: resolve_data_path(user_data, 'skills'),
+      jobs: resolve_data_path(user_data, jobs_filename)
+    }
+  end
+
     def render_markdown(text)
         Kramdown::Document.new(text.to_s).to_html
     end
@@ -76,12 +112,23 @@ configure :build do
   # set :http_path, "/Content/images/"
 end
 
+def ensure_directory(path)
+  Dir.mkdir(path)
+rescue Errno::EEXIST
+  nil
+end
+
+def copy_optional_file(source, destination, label)
+  FileUtils.cp(source, destination)
+rescue Errno::ENOENT
+  warn "Skipping optional #{label}: #{source} not found"
+end
+
 after_build do |builder|
   active_resume_user = @app.data.active_resume.user
   active_resume_name = @app.data.active_resume.name
-  #@resume_data = eval("#{@app}.data.#{active_resume_user}.#{active_resume_name}")
-  @resume_data_name = @app.data.active_resume.user + @app.data.active_resume.name
-  @resume_data = "@app.data.#{@resume_data_name}"
+  user_data = @app.data.public_send(active_resume_user)
+  resume_data = user_data.public_send(active_resume_name)
 
   new_dir_path = "./dist/#{active_resume_user}/#{active_resume_name}"
 
@@ -92,41 +139,25 @@ after_build do |builder|
 
   FileUtils.remove_dir(new_dir_path, true)
 
-  begin
-    Dir.mkdir("./dist")
-  rescue
-    # do nothing if dir already exists
-  end
-  begin
-    Dir.mkdir("./dist/#{active_resume_user}")
-  rescue
-    # do nothing if dir already exists
-  end
-  begin
-    Dir.mkdir(new_dir_path)
-  rescue
-  end
+  ensure_directory("./dist")
+  ensure_directory("./dist/#{active_resume_user}")
+  ensure_directory(new_dir_path)
   # generate pdf directory
-  begin
-    Dir.mkdir("#{new_dir_path}/pdf")
-  rescue
-  end
+  ensure_directory("#{new_dir_path}/pdf")
 
-  File.rename("./build/stylesheets", "#{new_dir_path}/stylesheets")
-  File.rename("./build/index.html", "#{new_dir_path}/index.html")
-  begin
-    File.rename("./build/index-brief.html", "#{new_dir_path}/index-brief-#{@resume_data.name}.html")
-  rescue
-  end
-  File.rename("./build/pdf.html", "#{new_dir_path}/pdf.html")
-  begin
-    File.rename("./build/pdf-brief.html", "#{new_dir_path}/pdf-brief-#{@resume_data}.html")
-  rescue
-  end
-
-  # Copy deploy files back to build directory
-  FileUtils.cp("#{new_dir_path}/index.html", "./build/index.html")
-  FileUtils.cp("#{new_dir_path}/pdf.html", "./build/pdf.html")
+  FileUtils.cp_r("./build/stylesheets", "#{new_dir_path}/stylesheets")
+  FileUtils.cp("./build/index.html", "#{new_dir_path}/index.html")
+  copy_optional_file(
+    "./build/index-brief.html",
+    "#{new_dir_path}/index-brief-#{resume_data.name}.html",
+    'index brief artifact'
+  )
+  FileUtils.cp("./build/pdf.html", "#{new_dir_path}/pdf.html")
+  copy_optional_file(
+    "./build/pdf-brief.html",
+    "#{new_dir_path}/pdf-brief-#{resume_data.name}.html",
+    'pdf brief artifact'
+  )
 end
 
 # activate :deploy do |deploy|

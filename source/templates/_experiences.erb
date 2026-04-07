@@ -8,7 +8,7 @@
 
   <% @resume_data.jobs.each do |job| %>
     <% if job.section == 'experiences' && job.include != false %>
-      <% job = @job_data.find{ |ajob| ajob.id == job.id } %>
+      <% job = @jobs_by_id[job.id.to_s] %>
       <%= partial 'templates/experience/job_full', :locals => {:job => job} %>
     <% end %>
   <% end %>

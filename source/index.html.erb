@@ -1,35 +1,7 @@
-<!DOCTYPE html>
-<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
-<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
-
 <% partial(:data, :locals => { :resume_data => nil }) %>
-
-<head>
-  <%= partial 'header' %>
-  <!-- Theme CSS -->
-  <link id="theme-style" rel="stylesheet" href="./stylesheets/styles.css">
-</head>
-
-<body>
-    <div class="menu-bar">
-      <i class="fa fa-file"></i>
-      <a href="<%= @resume_data.pdf.filename %>.pdf">Download PDF</a>
-    </div>
-    <div class="wrapper">
-        <div class="sidebar-wrapper">
-          <% @layout_data.content.right.each do |section| %>
-            <%= partial "templates/#{section.template}", locals: {display_name: section.display_name} %>
-          <% end %>
-        </div>
-
-        <div class="main-wrapper">
-          <% @layout_data.content.center.each do |section| %>
-            <%= partial "templates/#{section.template}", locals: {brief: false, display_name: section.display_name} %>
-          <% end %>
-        </div>
-    </div>
-    <%= partial 'footer' %>
-</body>
-
-</html>
+<%= partial 'page_shell', locals: {
+  theme_stylesheet: './stylesheets/styles.css',
+  body_class: nil,
+  show_menu: true,
+  brief: false
+} %>
