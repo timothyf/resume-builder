@@ -1,6 +1,6 @@
 # Resume Builder
 
-Resume Builder is an HTML and PDF resume builder made in Ruby with [Middleman](http://middlemanapp.com/). Allows you to keep your resume content in a text-based YAML file, that can be be rendered as an HTML view for the web, and as a PDF view for download and printing.
+Resume Builder is an HTML and PDF resume builder made in Ruby with [Middleman](http://middlemanapp.com/). It lets you keep resume content in YAML files and render it as HTML for the web and as PDF-ready HTML for download/printing.
 
 It has the following features:
 
@@ -38,15 +38,23 @@ See the result: [sample resume](http://timothyf.github.com/resume-builder/).
 
 ## Usage
 
-### Build yor resume
+### Build your resume
 
 Build the static version of your resume
 
     bundle exec middleman build
 
-Or use the helper script, which loads the project RVM Ruby/gemset first:
+Or use the helper script:
 
     ./build_resume.bash
+
+Optional profile override:
+
+    ./build_resume.bash --resume-user timothyfisher --resume-name resume_dev_refined
+
+You can also use environment variables:
+
+    ACTIVE_RESUME_USER=timothyfisher ACTIVE_RESUME_NAME=resume_dev_refined ./build_resume.bash
 
 ### Deploy your resume
 
@@ -56,21 +64,31 @@ Or:
 
     ./deploy_resume.bash
 
-Upload it to a Github page. Your resume will be available at `http://yourusername.github.com/resume`.
+Optional profile override:
+
+    ./deploy_resume.bash --resume-user timothyfisher --resume-name resume_dev_refined
+
+Upload it to a GitHub page. Your resume will be available at `http://yourusername.github.com/resume`.
 
 
 
-### Launch the previewing server:
+### Launch the preview server:
 
     bundle exec middleman
 You can preview your resume at `http://localhost:4567/`
 
-When using RVM, entering the project directory will pick up `.ruby-version`
+When using RVM, entering the project directory can pick up `.ruby-version`
 and `.ruby-gemset` and use `ruby-3.4.9@resume`.
+
+The helper scripts resolve `bundle` from your `PATH` by default. If needed,
+override with:
+
+    BUNDLE_BIN=/absolute/path/to/bundle ./build_resume.bash
 
 ## Resume instructions
 
-To create/update your resume, you'll just need to edit the [`data/resume.yml`](https://github.com/reefab/ResumeMan/blob/master/data/resume.yml) file.
+To create/update your resume, edit `data/active_resume.yml` and the selected
+resume file under `data/<user>/` (for example `data/timothyfisher/resume_dev_refined.yml`).
 All keys with a `desc: |` header can be Markdown formatted.
 
 Here is what it looks like:
@@ -89,7 +107,7 @@ contact_info:
 ```
 
 ### Sections
-Here is a description of each of the currently supported sections of a resume. A section is a content component that can be included in the resume yml data file.
+Here is a description of each of the currently supported sections of a resume. A section is a content component that can be included in the resume YAML data file.
 
 The following section types are currently supported:
 
@@ -109,14 +127,23 @@ The following section types are currently supported:
 
 #### PDF
 
-To generate a PDF from  your HTML file, I recommend this free online conversion
-site:  
-https://www.freeconvert.com/html-to-pdf  
-Use the following settings:  
-Page Size: Letter  
-Margin: 60
+This project uses `generatePdf.rb` to generate a PDF via the FreeConvert API.
 
-The pdf section is used to describe details of the resume PDF that will be generated.
+Run it with:
+
+    ruby generatePdf.rb
+
+Common environment overrides supported by the script:
+
+    FREECONVERT_SOURCE_URL=https://resume.timothyfisher.com/pdf.html
+    FREECONVERT_OUTPUT_PATH=build/TimothyFisherResume.pdf
+    FREECONVERT_POLL_INTERVAL_SECONDS=5
+    FREECONVERT_MAX_POLLS=120
+
+Note: `generatePdf.rb` currently contains an `Authorization` header placeholder.
+Set your API token there before running the script.
+
+The PDF section is used to describe details of the resume PDF that will be generated.
 ```yaml
 pdf:
   filename: TimothyFisher-Resume
@@ -127,8 +154,8 @@ pdf:
 #### Headers
 
 The headers section allows you to specify the names of sections that will be used within the resume. For example,
-given the headers section shown below, the profile section will be labeled as 'Summary' and the jobs sections
-will be labled as "Experience".
+given the headers section shown below, the profile section will be labeled as 'Summary' and the jobs section
+will be labeled as "Experience".
 
 ```yaml
 headers:
@@ -141,7 +168,7 @@ headers:
 
 #### Contact Info
 
-This section is used to provide basic contact infor for the resume user.
+This section is used to provide basic contact info for the resume user.
 
 ```yaml
 contact_info:
