@@ -85,6 +85,28 @@ override with:
 
     BUNDLE_BIN=/absolute/path/to/bundle ./build_resume.bash
 
+## Testing
+
+Install test dependencies:
+
+    bundle install
+
+Run unit tests:
+
+    bundle exec rspec spec/lib
+
+Run shell script tests:
+
+    ./spec/shell/run_shell_tests.bash
+
+Run all tests (integration test is skipped by default):
+
+    bundle exec rspec
+
+Run integration smoke test:
+
+    RUN_INTEGRATION=1 bundle exec rspec spec/integration/build_smoke_spec.rb
+
 ## Resume instructions
 
 To create/update your resume, edit `data/active_resume.yml` and the selected

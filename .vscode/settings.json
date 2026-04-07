@@ -4,6 +4,8 @@
         "/^ruby -c generatePdf\\.rb$/": {
             "approve": true,
             "matchCommandLine": true
-        }
+        },
+        "bundle": true,
+        "./bundle.bash": true
     }
 }

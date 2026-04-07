@@ -14,3 +14,7 @@ gem 'nokogiri', '~> 1.18'
 
 gem 'pdfkit', '~> 0.8.2'
 gem 'net-ftp'
+
+group :test do
+	gem 'rspec', '~> 3.13'
+end
