@@ -1,5 +1,10 @@
 {
+  "scripts": {
+    "editor:start": "node tools/local-editor/server.mjs"
+  },
   "dependencies": {
-    "@anvilco/anvil": "^2.15.0"
+    "@anvilco/anvil": "^2.15.0",
+    "express": "^4.21.2",
+    "js-yaml": "^4.1.0"
   }
 }

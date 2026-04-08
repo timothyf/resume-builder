@@ -1,9 +1,11 @@
 require 'fileutils'
 require 'json'
 require 'net/http'
+require 'shellwords'
 
 API_BASE = ENV.fetch('FREECONVERT_API_BASE', 'https://api.freeconvert.com')
-SOURCE_URL = ENV.fetch('FREECONVERT_SOURCE_URL', 'https://resume.timothyfisher.com/pdf.html')
+SOURCE_PATH = ENV.fetch('FREECONVERT_SOURCE_PATH', 'build/pdf.html')
+SOURCE_URL = ENV.fetch('FREECONVERT_SOURCE_URL', '').strip
 OUTPUT_PATH = ENV.fetch('FREECONVERT_OUTPUT_PATH', 'build/TimothyFisherResume.pdf')
 OUTPUT_FILENAME = ENV.fetch('FREECONVERT_OUTPUT_FILENAME', File.basename(OUTPUT_PATH))
 POLL_INTERVAL_SECONDS = Integer(ENV.fetch('FREECONVERT_POLL_INTERVAL_SECONDS', '5'))
@@ -11,6 +13,44 @@ MAX_POLLS = Integer(ENV.fetch('FREECONVERT_MAX_POLLS', '120'))
 HTTP_TIMEOUT_SECONDS = Integer(ENV.fetch('FREECONVERT_HTTP_TIMEOUT_SECONDS', '30'))
 HTTP_MAX_RETRIES = Integer(ENV.fetch('FREECONVERT_HTTP_MAX_RETRIES', '3'))
 HTTP_RETRY_BASE_DELAY_SECONDS = Float(ENV.fetch('FREECONVERT_HTTP_RETRY_BASE_DELAY_SECONDS', '1.0'))
+BUILD_BEFORE_CONVERT = ENV.fetch('FREECONVERT_BUILD_BEFORE_CONVERT', 'true').strip.downcase != 'false'
+
+def run_local_build_if_needed
+    return unless BUILD_BEFORE_CONVERT
+
+    build_script = File.expand_path('build_resume.bash', __dir__)
+    unless File.exist?(build_script)
+        raise "Build script not found: #{build_script}"
+    end
+
+    puts 'Building resume artifacts before PDF conversion...'
+    success = system(build_script)
+    raise 'Build failed. Fix build errors and run again.' unless success
+end
+
+def build_import_task
+    unless SOURCE_URL.empty?
+        puts "Using source URL: #{SOURCE_URL}"
+        return {
+            'operation' => 'import/webpage',
+            'url' => SOURCE_URL
+        }
+    end
+
+    source_path = SOURCE_PATH.strip.empty? ? 'build/pdf.html' : SOURCE_PATH
+    absolute_source_path = File.expand_path(source_path, __dir__)
+
+    raise "Local source file not found: #{absolute_source_path}" unless File.exist?(absolute_source_path)
+
+    puts "Using local source file: #{absolute_source_path}"
+    html_content = File.read(absolute_source_path)
+
+    {
+        'operation' => 'import/base64',
+        'file' => "data:text/html;base64,#{[html_content].pack('m0')}",
+        'filename' => File.basename(source_path)
+    }
+end
 
 def parse_json_response(response)
     JSON.parse(response.body)
@@ -93,10 +133,7 @@ end
 
 input_body = {
     'tasks' => {
-        'import-3' => {
-            'operation' => 'import/webpage',
-            'url' => SOURCE_URL
-        },
+        'import-3' => build_import_task,
         'convert-1' => {
             'operation' => 'convert',
             'input' => 'import-3',
@@ -117,6 +154,8 @@ input_body = {
         }
     }
 }
+
+run_local_build_if_needed
 
 headers = {
     'Content-Type' => 'application/json',

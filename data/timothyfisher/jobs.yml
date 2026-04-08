@@ -3,7 +3,7 @@
   company: Baseball Data Lab
   include: true
   location:
-    city:
+    city: null
     state: Remote
   dates:
     start: 2024, October
@@ -22,13 +22,12 @@
       <li>Integrate third-party APIs and services to enhance platform functionality and data richness.</li>
     </ul>
     Tech stack: Python, Django, PostgreSQL, Vue.js 
-
 - id: wsn
   title: Senior Web Developer, Baseball R&D
   company: Washington Nationals
   include: true
   location:
-    city:
+    city: null
     state: Remote
   dates:
     start: 2023, November
@@ -47,43 +46,41 @@
       <li>Worked on both front-end and back-end systems, ensuring seamless functionality and user experience across the application.</li>
     </ul>
     Tech stack: Ruby on Rails, Postgres, MySQL, AWS, Vue.js
-
 - id: nyt_sem
   title: Senior Engineering Manager, Web Platforms
   company: The New York Times
-  include: true # (full, brief, none)
+  include: true
   location:
-    city:
+    city: null
     state: Remote
   dates:
-      start: 2022, July
-      end: 2023, April
+    start: 2022, July
+    end: 2023, April
   desc: |
-      <p>
-      Led the Web Platforms team responsible for the development and maintenance of the core web 
-      application delivering New York Times web content. Spearheaded strategic direction, team 
-      development, and collaboration to ensure timely and high-quality deliverables.
-      </p>
-      <ul>
-      <li>Defined and executed the team's strategy and vision, aligning it with broader company objectives.</li>
-      <li>Conducted regular 1-on-1 meetings to mentor team members, address challenges, and foster professional growth.</li>
-      <li>Collaborated closely with Project Managers and Product Owners to manage timelines, deliverables, and team priorities.</li>
-      <li>Assisted team members in overcoming technical challenges, ensuring efficient problem-solving and high productivity.</li>
-      <li>Led the recruitment, hiring, and onboarding of new team members, fostering a strong, cohesive development environment.</li>
-      <li>Provided continuous feedback and conducted formal reviews, driving performance improvements and career advancement.</li>
-      <li>Planned and executed salary adjustments, promotions, and growth plans based on team member performance.</li>
-      </ul>
-
+    <p>
+    Led the Web Platforms team responsible for the development and maintenance of the core web 
+    application delivering New York Times web content. Spearheaded strategic direction, team 
+    development, and collaboration to ensure timely and high-quality deliverables.
+    </p>
+    <ul>
+    <li>Defined and executed the team's strategy and vision, aligning it with broader company objectives.</li>
+    <li>Conducted regular 1-on-1 meetings to mentor team members, address challenges, and foster professional growth.</li>
+    <li>Collaborated closely with Project Managers and Product Owners to manage timelines, deliverables, and team priorities.</li>
+    <li>Assisted team members in overcoming technical challenges, ensuring efficient problem-solving and high productivity.</li>
+    <li>Led the recruitment, hiring, and onboarding of new team members, fostering a strong, cohesive development environment.</li>
+    <li>Provided continuous feedback and conducted formal reviews, driving performance improvements and career advancement.</li>
+    <li>Planned and executed salary adjustments, promotions, and growth plans based on team member performance.</li>
+    </ul>
 - id: roo_em
   title: Senior Developer & Engineering Manager
   company: Roostify
-  include: true # (full, brief, none)
+  include: true
   location:
-    city:
+    city: null
     state: Remote
   dates:
-      start: 2021, February
-      end: 2022, June
+    start: 2021, February
+    end: 2022, June
   desc: |
     <p>
     Joined Roostify as a Senior Developer and was promoted to Engineering Manager in October 2021. 
@@ -112,9 +109,6 @@
     <p>
     Tech Stack: Ruby, Rails, Full-Stack Development, REST, JSON, AWS, GCP, JavaScript, React, Heroku
     </p>
-
-
-
 - id: aj_tld
   title: Technical Lead / Developer
   company: Alfa Jango
@@ -123,8 +117,8 @@
     city: Ann Arbor
     state: MI
   dates:
-      start: 2018, November
-      end: 2020, September
+    start: 2018, November
+    end: 2020, September
   desc: |
     <p>
     Led technical strategy, development, and consulting services for startups around the globe, 
@@ -144,7 +138,6 @@
     multiple emerging startups.</li>
     </ul>
     Tech Stack: Ruby, Rails, Full-Stack Development, REST, JSON, AWS, JavaScript, React, Angular, NextJS
-
 - id: cs_cto
   title: Chief Technology Officer
   company: Connect Space
@@ -153,8 +146,8 @@
     city: Ann Arbor
     state: MI
   dates:
-      start: 2018, March
-      end: 2018, October
+    start: 2018, March
+    end: 2018, October
   desc: |
     Connect Space is an Ann Arbor, MI based startup with a web and mobile opportunity ecosystem and event management
     platform. As CTO at Connect Space, I was responsible for leading all aspects of the company’s technology development
@@ -175,7 +168,6 @@
       Tech Skills Used: Ruby, Rails, Full-Stack Development, REST, JSON, AWS, JavaScript,
       React
     </div>
-
 - id: pow_vpe
   title: VP of Engineering
   company: Powerley
@@ -183,8 +175,8 @@
     city: Royal Oak
     state: MI
   dates:
-      start: 2017, September
-      end: 2018, March
+    start: 2017, September
+    end: 2018, March
   desc: |
     Powerley is a startup in the Smart Grid and Smart Home space. The Powerley platform includes a cloud-based web
     services infrastructure, native iOS and Android apps, and a dedicated in-home hardware platform, all able to
@@ -202,7 +194,6 @@
     <div class="skillsUsed">
       Tech Skills Used: Ruby, Rails, Full-Stack Development, REST, JSON, AWS, JavaScript
     </div>
-
 - id: qky_vpe
   title: VP of Engineering
   company: Quikly
@@ -210,8 +201,8 @@
     city: Detroit
     state: MI
   dates:
-      start: 2016, March
-      end: 2017, August
+    start: 2016, March
+    end: 2017, August
   desc: |
     <p>
     Led the engineering team at Quikly, a retail promotional marketing startup, driving 
@@ -230,7 +221,6 @@
     releases and infrastructure improvements, driving the platform’s future development.</li>
     </ul>
     Tech Stack: JavaScript, Ruby, Rails, Node.js, REST, JSON, AWS, Heroku, GraphQL
-
 - id: cpw_dev
   title: Director/Architect/Developer
   company: Lochbridge / Compuware
@@ -238,8 +228,8 @@
     city: Detroit
     state: MI
   dates:
-      start: 2006, May
-      end: 2016, March
+    start: 2006, May
+    end: 2016, March
   desc: |
     <p>
     Led diverse teams and strategic initiatives across product and professional services divisions, 
@@ -276,7 +266,6 @@
     through RFP responses and proposals.</li>
     </ul>
     Tech Stack: Java, JavaScript, Ruby, Rails, Mobile Development, Swift, Full-Stack Development, REST, JSON, AWS
-
 - id: log_sja
   title: Senior Java Architect
   company: LogicaCMG
@@ -285,8 +274,8 @@
     city: Southfield
     state: MI
   dates:
-      start: 2003, February
-      end: 2006, May
+    start: 2003, February
+    end: 2006, May
   desc: |
     Worked on a Web-based single login project for Ford Motor Company. Responsibilities include assisting with
     architecture, analysis, design, coding, and testing. Environment consisted of Websphere Application Server
@@ -295,7 +284,6 @@
     Software design architect on Ford APS (Authorization Policy Server) project. The intent of this project is
     to provide a web application authorization solution for corporate-wide use. Implemented in J2EE technology,
     IBM Websphere, IBM WSAD environment. My role included assisting with analysis, design, and coding.
-
 - id: med_dtl
   title: Development Team Lead
   company: MedCharge
@@ -303,8 +291,8 @@
     city: Ann Arbor
     state: MI
   dates:
-      start: 2002, February
-      end: 2003, January
+    start: 2002, February
+    end: 2003, January
   desc: |
     Led the J2EE development team at MedCharge, a startup whose product was a health care application
     used within the University of Michigan Medical Center. The product allows hospital staff to capture all
@@ -313,7 +301,6 @@
     serving as the lead java architect, software design, lead developer, task planning, mentoring, preparing
     and monitoring schedules. The web application featured a thin rich-client front-end that used dynamic HTML
     and AJAX techniques prior to the coining of the term AJAX.
-
 - id: sph_sja
   title: Senior Java Architect
   company: Spherion
@@ -321,14 +308,13 @@
     city: Troy
     state: MI
   dates:
-      start: 2001, May
-      end: 2002, January
+    start: 2001, May
+    end: 2002, January
   desc: |
     Lead architect on web based applications, primarily using J2EE technologies. Responsibilities included development,
     object modeling, managing development team, creating and monitoring development schedule, gathering requirements,
     turning business requirements into technical requirements, writing technical specifications, technical sales, and
     mentoring junior developers.
-
 - id: pwc_sc
   title: Security Consultant
   company: PriceWaterhouseCoopers
@@ -336,15 +322,14 @@
     city: Detroit
     state: MI
   dates:
-      start: 2000, October
-      end: 2001, May
+    start: 2000, October
+    end: 2001, May
   desc: |
     Provided consulting in the areas of information security and public key infrastructure (PKI) to clients of
     PricewaterhouseCoopers. Developed internal security and PKI educational presentations and training materials.
     Served as PKI subject matter expert within the midwest region. Clients included U.S. Postal service, K-Mart,
     and Transora e-commerce exchange. Provided review and consulting on web application security, web portal
     security, and Certification Practice Statement creation.
-
 - id: cyc_dev
   title: Lead Developer & Architect
   company: Cyclone Commerce
@@ -352,8 +337,8 @@
     city: Scottsdale
     state: AZ
   dates:
-      start: 1997, March
-      end: 2000, October
+    start: 1997, March
+    end: 2000, October
   desc: |
     Cyclone Commerce was an eCommerce technology startup. Cyclone’s product is a B2B
     integration engine which allowed businesses to securely exchange documents with partners. Responsible
@@ -367,7 +352,6 @@
 
     Day to day responsibilities included leading development team, creating and monitoring development
     schedule, technical architecture, and writing code.
-
 - id: mot_dev
   title: Senior Software Engineer
   company: Motorola
@@ -375,8 +359,8 @@
     city: Chandler
     state: AZ
   dates:
-      start: 1991, June
-      end: 1997, March
+    start: 1991, June
+    end: 1997, March
   desc: |
     Worked in the Government Electronics group of Motorola. Worked primarily on large C/C++ projects for
     aerospace and defense industries. Many projects were related to security. Designed and developed information
@@ -384,3 +368,27 @@
     as a Certificate Authority and a Registrar product. Served as technical and development lead on several projects.
     Integrated PKI into Motorola applications. Interfaced with customers, partners, and managed contractors
     on a regular basis.
+- id: ic1
+  title: Independent Technology Consultant
+  company: Detroit Radiator Company
+  include: true
+  location:
+    city: null
+    state: Remote
+  dates:
+    start: 2025, November
+    end: Present
+  desc: |
+    <p>
+    Provide technology consulting services to Detroit Radiator Company, a leading manufacturer of commercial and military radiators. As an independent consultant, I offer strategic guidance and technical expertise to support the company's technology initiatives and drive innovation.
+    </p>
+    <ul>
+      <li>Collaborate with Detroit Radiator's leadership team to assess technology needs, identify 
+      opportunities for improvement, and develop strategic roadmaps for technology adoption and 
+      innovation.</li>
+      <li>Provide guidance on architecture design, and technology selection to ensure scalable and 
+      efficient solutions that align with business goals.</li>
+      <li>Assist in the evaluation and implementation of new technologies, tools, and platforms to 
+      enhance operational efficiency and drive digital transformation within the organization.</li>
+    </ul>
+    Tech Stack: Technology Consulting, Network & Infrastructure Design, Technology Evaluation

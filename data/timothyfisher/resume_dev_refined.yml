@@ -52,6 +52,9 @@ skills:
 jobs_filename: jobs
 jobs:
     - file: jobs
+      id: ic1
+      section: experiences
+    - file: jobs
       id: bdl
       section: experiences
     - file: jobs

@@ -143,6 +143,33 @@ Run integration smoke test:
 
     RUN_INTEGRATION=1 bundle exec rspec spec/integration/build_smoke_spec.rb
 
+## Local YAML editor
+
+You can run a local-only editor UI for YAML data files (jobs and summaries)
+without exposing data to any external service.
+
+Install Node dependencies:
+
+    npm install
+
+Start the local editor:
+
+    npm run editor:start
+
+Open in browser:
+
+    http://127.0.0.1:4310
+
+The editor only reads/writes files inside `data/` and currently lists:
+
+- `jobs*.yml` files under each user folder
+- files under each user's `summaries/` folder
+
+Editor modes:
+
+- `Structured`: form-based editing for jobs and summaries
+- `Raw YAML`: direct text editing for full control
+
 ## Resume instructions
 
 To create/update your resume, edit `data/active_resume.yml` and the selected
@@ -191,9 +218,14 @@ Run it with:
 
     ruby generatePdf.rb
 
+By default, this command now runs a fresh local build first so changes in
+`source/` (including PDF layout overrides) are reflected in the generated PDF.
+
 Common environment overrides supported by the script:
 
-    FREECONVERT_SOURCE_URL=https://resume.timothyfisher.com/pdf.html
+    FREECONVERT_SOURCE_PATH=build/pdf.html
+    FREECONVERT_SOURCE_URL=https://resume.timothyfisher.com/pdf.html # optional override
+    FREECONVERT_BUILD_BEFORE_CONVERT=true
     FREECONVERT_OUTPUT_PATH=build/TimothyFisherResume.pdf
     FREECONVERT_POLL_INTERVAL_SECONDS=5
     FREECONVERT_MAX_POLLS=120

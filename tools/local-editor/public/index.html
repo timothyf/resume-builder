@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Local Resume YAML Editor</title>
+    <style>
+      :root {
+        --bg: #f7f7f2;
+        --card: #ffffff;
+        --ink: #1f2933;
+        --muted: #6b7280;
+        --brand: #0f766e;
+        --brand-2: #115e59;
+        --border: #d6d6cf;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 24px;
+        background: radial-gradient(circle at top right, #e6f5f3, var(--bg));
+        color: var(--ink);
+        font-family: "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+
+      .panel {
+        max-width: 1080px;
+        margin: 0 auto;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+      }
+
+      .header {
+        padding: 16px 20px;
+        border-bottom: 1px solid var(--border);
+        background: linear-gradient(120deg, #e8f7f5, #f7fbfa);
+      }
+
+      .header h1 {
+        margin: 0;
+        font-size: 20px;
+      }
+
+      .header p {
+        margin: 6px 0 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .controls {
+        display: grid;
+        grid-template-columns: 170px 1fr 140px auto auto;
+        gap: 10px;
+        padding: 16px 20px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      select,
+      button {
+        font-size: 14px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 10px 12px;
+      }
+
+      button {
+        background: var(--brand);
+        border-color: var(--brand);
+        color: #fff;
+        cursor: pointer;
+      }
+
+      button.secondary {
+        background: #fff;
+        color: var(--ink);
+      }
+
+      button:hover {
+        background: var(--brand-2);
+      }
+
+      button.secondary:hover {
+        background: #f3f4f6;
+      }
+
+      textarea {
+        width: 100%;
+        min-height: 70vh;
+        border: 0;
+        padding: 16px 20px;
+        font-size: 14px;
+        line-height: 1.45;
+        font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        resize: vertical;
+      }
+
+      .content {
+        padding: 16px 20px;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .group {
+        margin-bottom: 14px;
+      }
+
+      .group label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      .group input,
+      .group textarea,
+      .group select {
+        width: 100%;
+        font-size: 14px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 10px 12px;
+      }
+
+      .group textarea {
+        min-height: 160px;
+      }
+
+      .row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .structured-top {
+        display: grid;
+        grid-template-columns: 1fr auto auto;
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+
+      .info {
+        font-size: 13px;
+        color: var(--muted);
+        margin-bottom: 12px;
+      }
+
+      .status {
+        padding: 12px 20px;
+        border-top: 1px solid var(--border);
+        color: var(--muted);
+        font-size: 13px;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="panel">
+      <header class="header">
+        <h1>Local Resume YAML Editor</h1>
+        <p>Edit local YAML files for jobs and summaries, then save directly.</p>
+      </header>
+
+      <section class="controls">
+        <select id="categorySelect">
+          <option value="jobs">Jobs</option>
+          <option value="summaries">Summaries</option>
+        </select>
+
+        <select id="fileSelect"></select>
+
+        <select id="modeSelect">
+          <option value="structured">Structured</option>
+          <option value="raw">Raw YAML</option>
+        </select>
+
+        <button class="secondary" id="reloadBtn">Reload</button>
+        <button id="saveBtn">Save</button>
+      </section>
+
+      <section class="content" id="structuredRoot">
+        <div id="jobsEditor" class="hidden">
+          <div class="structured-top">
+            <input id="jobPickerInput" list="jobPickerList" placeholder="Type to find a job" />
+            <datalist id="jobPickerList"></datalist>
+            <button class="secondary" id="addJobBtn" type="button">Add Job</button>
+            <button class="secondary" id="removeJobBtn" type="button">Delete Job</button>
+          </div>
+
+          <div class="row">
+            <div class="group">
+              <label for="jobIdInput">ID</label>
+              <input id="jobIdInput" type="text" />
+            </div>
+            <div class="group">
+              <label for="jobIncludeInput">Include</label>
+              <select id="jobIncludeInput">
+                <option value="true">true</option>
+                <option value="false">false</option>
+                <option value="full">full</option>
+                <option value="brief">brief</option>
+                <option value="none">none</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="group">
+            <label for="jobTitleInput">Title</label>
+            <input id="jobTitleInput" type="text" />
+          </div>
+
+          <div class="group">
+            <label for="jobCompanyInput">Company</label>
+            <input id="jobCompanyInput" type="text" />
+          </div>
+
+          <div class="row">
+            <div class="group">
+              <label for="jobCityInput">City</label>
+              <input id="jobCityInput" type="text" />
+            </div>
+            <div class="group">
+              <label for="jobStateInput">State</label>
+              <input id="jobStateInput" type="text" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="group">
+              <label for="jobStartInput">Start (e.g. 2024, October)</label>
+              <input id="jobStartInput" type="text" />
+            </div>
+            <div class="group">
+              <label for="jobEndInput">End (e.g. Present)</label>
+              <input id="jobEndInput" type="text" />
+            </div>
+          </div>
+
+          <div class="group">
+            <label for="jobDescInput">Description (HTML allowed)</label>
+            <textarea id="jobDescInput" spellcheck="false"></textarea>
+          </div>
+        </div>
+
+        <div id="summaryEditor" class="hidden">
+          <div class="info">Edits `summary.type` and `summary.text` fields.</div>
+          <div class="group">
+            <label for="summaryTypeInput">Summary type</label>
+            <input id="summaryTypeInput" type="text" />
+          </div>
+          <div class="group">
+            <label for="summaryTextInput">Summary text (HTML allowed)</label>
+            <textarea id="summaryTextInput" spellcheck="false"></textarea>
+          </div>
+        </div>
+      </section>
+
+      <textarea id="editor" spellcheck="false" class="hidden"></textarea>
+      <footer class="status" id="statusText">Ready.</footer>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
