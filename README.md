@@ -161,6 +161,13 @@ Run integration smoke test:
 
     RUN_INTEGRATION=1 bundle exec rspec spec/integration/build_smoke_spec.rb
 
+The integration suite runs the full Cartesian build matrix: every resume listed
+as supported in `data/resume_support.yml`, every theme in
+`ResumeSelection::AVAILABLE_THEMES`, and brief generation both enabled and
+disabled. Each build verifies the screen and PDF entrypoints, theme CSS, and
+brief artifact behavior. This matrix also runs in the GitHub Pages workflow
+before the deployed resume is built.
+
 ## Local YAML editor
 
 You can run a local-only editor UI for YAML data files (jobs and summaries)
