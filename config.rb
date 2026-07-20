@@ -4,6 +4,9 @@ require 'kramdown'
 ## For generating gravatar hash
 require 'digest/md5'
 require_relative 'lib/resume_selection'
+require_relative 'lib/resume_data_validator'
+
+ResumeDataValidator.new(project_root: __dir__).validate!
 
 
 #activate :livereload

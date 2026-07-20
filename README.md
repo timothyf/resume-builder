@@ -131,6 +131,14 @@ Run unit tests:
 
     bundle exec rspec spec/lib
 
+Validate the configured active resume without running a build:
+
+    ./validate_resume.bash
+
+Validate a selected resume with overrides:
+
+    ./validate_resume.bash --resume-user timothyfisher --resume-name resume_dev_refined
+
 Run shell script tests:
 
     ./spec/shell/run_shell_tests.bash
@@ -175,6 +183,12 @@ Editor modes:
 To create/update your resume, edit `data/active_resume.yml` and the selected
 resume file under `data/<user>/` (for example `data/timothyfisher/resume_dev_refined.yml`).
 All keys with a `desc: |` header can be Markdown formatted.
+
+Every Middleman build and preview validates the effective active resume before
+rendering. Validation checks required nested fields, referenced jobs, skills,
+links and summaries, duplicate catalog IDs, and layout template files. All
+problems are reported together with their source paths. Use
+`./validate_resume.bash` for a faster validation-only check.
 
 Here is what it looks like:
 
