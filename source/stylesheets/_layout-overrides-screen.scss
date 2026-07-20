@@ -22,7 +22,14 @@
 }
 
 .job-title{
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #3F4650;
+}
+
+.main-wrapper .job-title-row .job-title 
+{
+  font-size: 16px;
 }
 
 .degree-name {
@@ -30,7 +37,7 @@
 }
 
 .sidebar-wrapper .container-block {
-  padding: 30px;
+  padding: 17px;
   padding-top: 10px;
   padding-bottom: 7px;
 }
