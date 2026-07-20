@@ -16,8 +16,8 @@ RSpec.describe 'Build smoke test', :integration do
     expect(File.exist?(File.join(root, 'dist', 'timothyfisher', 'resume_dev_refined', 'index.html'))).to be(true)
     deployed_html = File.read(File.join(root, 'dist', 'timothyfisher', 'resume_dev_refined', 'index.html'))
     expect(deployed_html).to include('Last deployed:')
-    expect(deployed_html).to include('datetime="2026-07-20T15:15:30-05:00"')
-    expect(deployed_html).to include('July 20, 2026 at 03:15 PM EST')
+    expect(deployed_html).to include('datetime="2026-07-20T16:15:30-04:00"')
+    expect(deployed_html).to include('July 20, 2026 at 04:15 PM EDT')
     expect(File.read(File.join(root, 'build', 'pdf.html'))).not_to include('Last deployed:')
     deployed_pdf = File.join(
       root,

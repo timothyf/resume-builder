@@ -4,6 +4,7 @@ require 'kramdown'
 ## For generating gravatar hash
 require 'digest/md5'
 require 'time'
+require 'tzinfo'
 require_relative 'lib/resume_selection'
 require_relative 'lib/resume_data_validator'
 
@@ -94,7 +95,7 @@ helpers do
       raw_timestamp = ENV.fetch('RESUME_DEPLOYED_AT', '').strip
       return nil if raw_timestamp.empty?
 
-      Time.iso8601(raw_timestamp).getlocal('-05:00')
+      TZInfo::Timezone.get('America/Detroit').to_local(Time.iso8601(raw_timestamp))
     rescue ArgumentError
       raise ArgumentError,
             "Invalid RESUME_DEPLOYED_AT '#{raw_timestamp}'. Expected an ISO 8601 timestamp."
