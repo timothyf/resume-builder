@@ -11,7 +11,6 @@
 /.sass-cache
 
 /tmp/
-/Gemfile.lock
 /.ruby-version
 /.ruby-gemset
 /vendor
