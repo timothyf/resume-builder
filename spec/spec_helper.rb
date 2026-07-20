@@ -15,8 +15,18 @@ RSpec.configure do |config|
   config.shared_context_metadata_behavior = :apply_to_host_groups
 
   config.before do
-    ENV.delete('ACTIVE_RESUME_USER')
-    ENV.delete('ACTIVE_RESUME_NAME')
-    ENV.delete('ACTIVE_RESUME_GENERATE_BRIEF')
+    %w[
+      ACTIVE_RESUME_USER
+      ACTIVE_RESUME_NAME
+      ACTIVE_RESUME_GENERATE_BRIEF
+      FREECONVERT_API_KEY
+      FREECONVERT_BUILD_BEFORE_CONVERT
+      FREECONVERT_OUTPUT_FILENAME
+      FREECONVERT_OUTPUT_PATH
+      FREECONVERT_PACKAGE_AFTER_CONVERT
+      FREECONVERT_SOURCE_PATH
+      FREECONVERT_SOURCE_URL
+      RESUME_SKIP_PDF_COPY
+    ].each { |name| ENV.delete(name) }
   end
 end

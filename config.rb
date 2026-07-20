@@ -130,6 +130,7 @@ rescue Errno::ENOENT
 end
 
 def copy_resume_pdf(resume_data, destination_root)
+  return if ResumeSelection.truthy_string?(ENV.fetch('RESUME_SKIP_PDF_COPY', ''))
   return unless resume_data.pdf.respond_to?(:source)
 
   source = resume_data.pdf.source.to_s.strip

@@ -218,20 +218,31 @@ Run it with:
 
     ruby generatePdf.rb
 
-By default, this command now runs a fresh local build first so changes in
-`source/` (including PDF layout overrides) are reflected in the generated PDF.
+Set a FreeConvert API key before running the command:
+
+    export FREECONVERT_API_KEY=your_api_key
+
+By default, the command resolves the active resume, builds its PDF HTML, sends
+that HTML to FreeConvert, saves the result to the resume's configured
+`pdf.source`, and runs the build again so `dist/` contains the new PDF.
 
 Common environment overrides supported by the script:
 
     FREECONVERT_SOURCE_PATH=build/pdf.html
     FREECONVERT_SOURCE_URL=https://resume.timothyfisher.com/pdf.html # optional override
     FREECONVERT_BUILD_BEFORE_CONVERT=true
-    FREECONVERT_OUTPUT_PATH=build/TimothyFisherResume.pdf
+    FREECONVERT_PACKAGE_AFTER_CONVERT=true
+    FREECONVERT_OUTPUT_PATH=/tmp/converted-resume.pdf # optional intermediate path
     FREECONVERT_POLL_INTERVAL_SECONDS=5
     FREECONVERT_MAX_POLLS=120
 
-Note: `generatePdf.rb` currently contains an `Authorization` header placeholder.
-Set your API token there before running the script.
+`FREECONVERT_OUTPUT_PATH` is optional. When provided, the downloaded file is
+copied back to `pdf.source` before packaging. The API key is sent using the
+FreeConvert-required bearer authorization header; do not commit it.
+
+GitHub Pages deployments use the committed `pdf.source` and do not call
+FreeConvert on every push. If automated conversion is added later, store the
+key as a GitHub Actions secret named `FREECONVERT_API_KEY`.
 
 The PDF section is used to describe details of the resume PDF that will be generated.
 ```yaml
