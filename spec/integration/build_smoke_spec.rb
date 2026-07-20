@@ -5,7 +5,8 @@ RSpec.describe 'Build smoke test', :integration do
     skip 'Set RUN_INTEGRATION=1 to run integration specs' unless ENV['RUN_INTEGRATION'] == '1'
 
     root = File.expand_path('../..', __dir__)
-    cmd = "cd #{root} && ./build_resume.bash --resume-user timothyfisher --resume-name resume_dev_refined"
+    cmd = "cd #{root} && RESUME_DEPLOYED_AT=2026-07-20T20:15:30Z " \
+          "./build_resume.bash --resume-user timothyfisher --resume-name resume_dev_refined"
     output = `#{cmd} 2>&1`
     status = $?.exitstatus
 
@@ -13,6 +14,11 @@ RSpec.describe 'Build smoke test', :integration do
     expect(File.exist?(File.join(root, 'build', 'index.html'))).to be(true)
     expect(File.exist?(File.join(root, 'build', 'pdf.html'))).to be(true)
     expect(File.exist?(File.join(root, 'dist', 'timothyfisher', 'resume_dev_refined', 'index.html'))).to be(true)
+    deployed_html = File.read(File.join(root, 'dist', 'timothyfisher', 'resume_dev_refined', 'index.html'))
+    expect(deployed_html).to include('Last deployed:')
+    expect(deployed_html).to include('datetime="2026-07-20T15:15:30-05:00"')
+    expect(deployed_html).to include('July 20, 2026 at 03:15 PM EST')
+    expect(File.read(File.join(root, 'build', 'pdf.html'))).not_to include('Last deployed:')
     deployed_pdf = File.join(
       root,
       'dist',

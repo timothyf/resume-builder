@@ -32,6 +32,9 @@ jobs:
           ruby-version: "3.4.9"
           bundler-cache: true
 
+      - name: Set deployment timestamp
+        run: echo "RESUME_DEPLOYED_AT=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> "$GITHUB_ENV"
+
       - name: Build resume
         run: ./build_resume.bash --resume-user timothyfisher --resume-name resume_dev_refined
 

@@ -1,7 +1,14 @@
-<footer class="footer">
+<% deployed_at = show_deployment_timestamp ? deployment_timestamp : nil %>
+<% if deployed_at %>
+  <footer class="footer deployment-footer">
     <div class="text-center">
+      <small class="deployment-timestamp">
+        Last deployed:
+        <time datetime="<%= deployed_at.iso8601 %>"><%= deployed_at.strftime('%B %d, %Y at %I:%M %p EST') %></time>
+      </small>
     </div>
-</footer>
+  </footer>
+<% end %>
 
 <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>

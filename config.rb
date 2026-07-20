@@ -3,6 +3,7 @@ require 'kramdown'
 
 ## For generating gravatar hash
 require 'digest/md5'
+require 'time'
 require_relative 'lib/resume_selection'
 require_relative 'lib/resume_data_validator'
 
@@ -87,6 +88,16 @@ helpers do
         else
             date
         end
+    end
+
+    def deployment_timestamp
+      raw_timestamp = ENV.fetch('RESUME_DEPLOYED_AT', '').strip
+      return nil if raw_timestamp.empty?
+
+      Time.iso8601(raw_timestamp).getlocal('-05:00')
+    rescue ArgumentError
+      raise ArgumentError,
+            "Invalid RESUME_DEPLOYED_AT '#{raw_timestamp}'. Expected an ISO 8601 timestamp."
     end
 
     def gravatar_url(email)

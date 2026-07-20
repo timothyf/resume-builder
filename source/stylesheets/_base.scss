@@ -271,6 +271,17 @@ p {
   padding: 30px;
   padding-top: 60px;
 
+  &.deployment-footer {
+    max-width: 960px;
+    margin: 0 auto;
+    padding-top: 18px;
+  }
+
+  .deployment-timestamp {
+    color: $text-color-secondary;
+    font-size: 12px;
+  }
+
   .copyright {
     line-height: 1.6;
     color: $text-color-secondary;
