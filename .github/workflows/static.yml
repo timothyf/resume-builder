@@ -35,6 +35,9 @@ jobs:
       - name: Build resume
         run: ./build_resume.bash --resume-user timothyfisher --resume-name resume_dev_refined
 
+      - name: Copy resume PDF
+        run: cp ./TimothyFisher-Res-Dev.pdf ./dist/timothyfisher/resume_dev_refined/pdf/TimothyFisher-Res-Dev.pdf
+
       - name: Set up Pages
         uses: actions/configure-pages@v5
 
