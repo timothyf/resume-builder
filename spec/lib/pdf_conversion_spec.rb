@@ -35,13 +35,13 @@ RSpec.describe PdfConversion do
       end
     end
 
-    it 'requires an API key before conversion' do
+    it 'allows conversion without an API key' do
       Dir.mktmpdir do |root|
         write_project_configuration(root)
         configuration = described_class.new(project_root: root, env: {})
 
-        expect { configuration.validate! }
-          .to raise_error(ArgumentError, /FREECONVERT_API_KEY is required/)
+        expect(configuration.api_key).to be_nil
+        expect(configuration.validate!).to be(true)
       end
     end
 
@@ -130,6 +130,26 @@ RSpec.describe PdfConversion do
 
       expect(runner).to receive(:perform_request) do |_uri, request|
         expect(request['Authorization']).to eq('Bearer secret-key')
+        response
+      end
+
+      expect(runner.submit_job('tasks' => {})).to eq('https://api.example.test/job/1')
+    end
+
+    it 'omits authorization when no API key is configured' do
+      configuration = PdfConversion::Configuration.new(
+        project_root: File.expand_path('../..', __dir__),
+        env: {}
+      )
+      runner = described_class.new(configuration)
+      response = instance_double(
+        Net::HTTPResponse,
+        code: '201',
+        body: '{"id":"job-1","links":{"self":"https://api.example.test/job/1"}}'
+      )
+
+      expect(runner).to receive(:perform_request) do |_uri, request|
+        expect(request['Authorization']).to be_nil
         response
       end
 

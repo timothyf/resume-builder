@@ -232,7 +232,9 @@ Run it with:
 
     ruby generatePdf.rb
 
-Set a FreeConvert API key before running the command:
+No API key is required for the current FreeConvert endpoint. If an API key is
+needed for an account or endpoint later, it can be supplied without changing
+the script:
 
     export FREECONVERT_API_KEY=your_api_key
 
@@ -251,8 +253,8 @@ Common environment overrides supported by the script:
     FREECONVERT_MAX_POLLS=120
 
 `FREECONVERT_OUTPUT_PATH` is optional. When provided, the downloaded file is
-copied back to `pdf.source` before packaging. The API key is sent using the
-FreeConvert-required bearer authorization header; do not commit it.
+copied back to `pdf.source` before packaging. When `FREECONVERT_API_KEY` is set,
+it is sent as a bearer token; otherwise the authorization header is omitted.
 
 GitHub Pages deployments use the committed `pdf.source` and do not call
 FreeConvert on every push. If automated conversion is added later, store the

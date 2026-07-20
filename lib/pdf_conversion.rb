@@ -41,9 +41,7 @@ module PdfConversion
     end
 
     def validate!
-      return unless @api_key.nil? || @api_key.empty?
-
-      raise ArgumentError, 'FREECONVERT_API_KEY is required'
+      true
     end
 
     private
@@ -226,7 +224,9 @@ module PdfConversion
 
     def authorized_request(request_class, uri)
       request_class.new(uri.request_uri).tap do |request|
-        request['Authorization'] = "Bearer #{@configuration.api_key}"
+        if @configuration.api_key
+          request['Authorization'] = "Bearer #{@configuration.api_key}"
+        end
       end
     end
 
