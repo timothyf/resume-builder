@@ -237,9 +237,16 @@ The PDF section is used to describe details of the resume PDF that will be gener
 ```yaml
 pdf:
   filename: TimothyFisher-Resume
+  source: TimothyFisher-Resume.pdf
   useicons: true
   role: developer
 ```
+
+`filename` is the public path without the `.pdf` extension. When `source` is
+present, it is resolved relative to the project root and copied into the built
+resume artifact at that public path. A configured source that does not exist
+causes the build to fail so a broken PDF link is not deployed. Resumes that do
+not provide `source` continue to build without copying a PDF.
 
 #### Headers
 

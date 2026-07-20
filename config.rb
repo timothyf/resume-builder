@@ -129,6 +129,28 @@ rescue Errno::ENOENT
   warn "Skipping optional #{label}: #{source} not found"
 end
 
+def copy_resume_pdf(resume_data, destination_root)
+  return unless resume_data.pdf.respond_to?(:source)
+
+  source = resume_data.pdf.source.to_s.strip
+  return if source.empty?
+
+  source_path = File.expand_path(source, __dir__)
+  destination_path = File.expand_path("#{resume_data.pdf.filename}.pdf", destination_root)
+  expanded_destination_root = File.expand_path(destination_root)
+
+  unless destination_path.start_with?("#{expanded_destination_root}#{File::SEPARATOR}")
+    raise ArgumentError, "PDF filename must resolve inside the resume artifact directory"
+  end
+
+  unless File.file?(source_path)
+    raise Errno::ENOENT, "Configured PDF source not found: #{source_path}"
+  end
+
+  FileUtils.mkdir_p(File.dirname(destination_path))
+  FileUtils.cp(source_path, destination_path)
+end
+
 after_build do |builder|
   selection = ResumeSelection.selection_context(@app.data.active_resume, @app.data)
   active_resume_user = selection[:user]
@@ -163,6 +185,7 @@ after_build do |builder|
     "#{new_dir_path}/pdf-brief-#{resume_data.name}.html",
     'pdf brief artifact'
   )
+  copy_resume_pdf(resume_data, new_dir_path)
 end
 
 # activate :deploy do |deploy|

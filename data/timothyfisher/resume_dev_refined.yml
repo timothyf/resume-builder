@@ -3,6 +3,7 @@ layout: layout2
 pdf:
   useicons: true
   filename: pdf/TimothyFisher-Res-Dev
+  source: TimothyFisher-Res-Dev.pdf
 
 contact_info:
     name: Timothy Fisher

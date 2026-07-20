@@ -13,5 +13,14 @@ RSpec.describe 'Build smoke test', :integration do
     expect(File.exist?(File.join(root, 'build', 'index.html'))).to be(true)
     expect(File.exist?(File.join(root, 'build', 'pdf.html'))).to be(true)
     expect(File.exist?(File.join(root, 'dist', 'timothyfisher', 'resume_dev_refined', 'index.html'))).to be(true)
+    deployed_pdf = File.join(
+      root,
+      'dist',
+      'timothyfisher',
+      'resume_dev_refined',
+      'pdf',
+      'TimothyFisher-Res-Dev.pdf'
+    )
+    expect(File.exist?(deployed_pdf)).to be(true)
   end
 end
