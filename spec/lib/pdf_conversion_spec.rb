@@ -6,6 +6,7 @@ require 'pdf_conversion'
 RSpec.describe PdfConversion do
   def write_project_configuration(root, pdf_source: 'Resume.pdf')
     FileUtils.mkdir_p(File.join(root, 'data', 'person'))
+    FileUtils.mkdir_p(File.join(root, 'build'))
     File.write(
       File.join(root, 'data', 'active_resume.yml'),
       "user: person\nname: resume\n"
@@ -18,6 +19,15 @@ RSpec.describe PdfConversion do
           source: #{pdf_source}
       YAML
     )
+    File.write(File.join(root, 'build', 'pdf.html'), '<html><body>Resume</body></html>')
+  end
+
+  def http_response(code, body)
+    instance_double(Net::HTTPResponse, code: code.to_s, body: body)
+  end
+
+  def json_response(code, payload)
+    http_response(code, JSON.generate(payload))
   end
 
   describe PdfConversion::Configuration do
@@ -54,9 +64,111 @@ RSpec.describe PdfConversion do
         end.to raise_error(ArgumentError, /pdf.source is required/)
       end
     end
+
+    it 'reports missing resume configuration files' do
+      Dir.mktmpdir do |root|
+        expect { described_class.new(project_root: root, env: {}) }
+          .to raise_error(ArgumentError, /Resume configuration not found/)
+      end
+    end
+
+    it 'rejects invalid boolean settings' do
+      Dir.mktmpdir do |root|
+        write_project_configuration(root)
+
+        %w[FREECONVERT_BUILD_BEFORE_CONVERT FREECONVERT_PACKAGE_AFTER_CONVERT].each do |name|
+          expect do
+            described_class.new(project_root: root, env: { name => 'sometimes' })
+          end.to raise_error(ArgumentError, /Invalid #{name} value/)
+        end
+      end
+    end
+
+    it 'rejects nonnumeric and out-of-range numeric settings' do
+      Dir.mktmpdir do |root|
+        write_project_configuration(root)
+        invalid_settings = {
+          'FREECONVERT_POLL_INTERVAL_SECONDS' => '-1',
+          'FREECONVERT_MAX_POLLS' => '0',
+          'FREECONVERT_HTTP_TIMEOUT_SECONDS' => 'not-a-number',
+          'FREECONVERT_HTTP_MAX_RETRIES' => '-1',
+          'FREECONVERT_HTTP_RETRY_BASE_DELAY_SECONDS' => '-0.1'
+        }
+
+        invalid_settings.each do |name, value|
+          expect do
+            described_class.new(project_root: root, env: { name => value })
+          end.to raise_error(ArgumentError, /Invalid #{name} value/)
+        end
+      end
+    end
   end
 
   describe PdfConversion::Runner do
+    it 'constructs a base64 import task from local PDF HTML' do
+      Dir.mktmpdir do |root|
+        write_project_configuration(root)
+        configuration = PdfConversion::Configuration.new(project_root: root, env: {})
+        runner = described_class.new(configuration)
+
+        task = runner.build_import_task
+        encoded_content = task.fetch('file').split(',', 2).last
+
+        expect(task['operation']).to eq('import/base64')
+        expect(task['filename']).to eq('pdf.html')
+        expect(encoded_content.unpack1('m0')).to eq('<html><body>Resume</body></html>')
+      end
+    end
+
+    it 'constructs a webpage import task when a source URL is configured' do
+      Dir.mktmpdir do |root|
+        write_project_configuration(root)
+        configuration = PdfConversion::Configuration.new(
+          project_root: root,
+          env: { 'FREECONVERT_SOURCE_URL' => 'https://example.test/resume.html' }
+        )
+        runner = described_class.new(configuration)
+
+        expect(runner.build_import_task).to eq(
+          'operation' => 'import/webpage',
+          'url' => 'https://example.test/resume.html'
+        )
+      end
+    end
+
+    it 'constructs the conversion and export task graph' do
+      Dir.mktmpdir do |root|
+        write_project_configuration(root)
+        configuration = PdfConversion::Configuration.new(project_root: root, env: {})
+        tasks = described_class.new(configuration).build_input_body.fetch('tasks')
+
+        expect(tasks.fetch('convert-1')).to include(
+          'operation' => 'convert',
+          'input_format' => 'html',
+          'output_format' => 'pdf'
+        )
+        expect(tasks.dig('convert-1', 'options')).to include(
+          'page_size' => 'letter',
+          'page_orientation' => 'portrait'
+        )
+        expect(tasks.fetch('export-1')).to include(
+          'operation' => 'export/url',
+          'filename' => 'PublicResume.pdf'
+        )
+      end
+    end
+
+    it 'fails clearly when local PDF HTML is missing' do
+      Dir.mktmpdir do |root|
+        write_project_configuration(root)
+        FileUtils.rm(File.join(root, 'build', 'pdf.html'))
+        configuration = PdfConversion::Configuration.new(project_root: root, env: {})
+
+        expect { described_class.new(configuration).build_import_task }
+          .to raise_error(RuntimeError, /Local source file not found/)
+      end
+    end
+
     it 'builds before reading input and packages after downloading' do
       configuration = PdfConversion::Configuration.new(
         project_root: File.expand_path('../..', __dir__),
@@ -95,6 +207,18 @@ RSpec.describe PdfConversion do
       end
     end
 
+    it 'raises when the local build command fails' do
+      Dir.mktmpdir do |root|
+        write_project_configuration(root)
+        File.write(File.join(root, 'build_resume.bash'), "#!/bin/sh\n")
+        configuration = PdfConversion::Configuration.new(project_root: root, env: {})
+        runner = described_class.new(configuration, command_runner: ->(*) { false })
+
+        expect { runner.run_local_build(allow_missing_pdf: true) }
+          .to raise_error(RuntimeError, /Build failed/)
+      end
+    end
+
     it 'copies an overridden output path back to the configured PDF source' do
       Dir.mktmpdir do |root|
         write_project_configuration(root)
@@ -121,19 +245,15 @@ RSpec.describe PdfConversion do
         project_root: File.expand_path('../..', __dir__),
         env: { 'FREECONVERT_API_KEY' => 'secret-key' }
       )
-      runner = described_class.new(configuration)
-      response = instance_double(
-        Net::HTTPResponse,
-        code: '201',
-        body: '{"id":"job-1","links":{"self":"https://api.example.test/job/1"}}'
-      )
-
-      expect(runner).to receive(:perform_request) do |_uri, request|
-        expect(request['Authorization']).to eq('Bearer secret-key')
-        response
+      captured_request = nil
+      adapter = lambda do |_uri, request|
+        captured_request = request
+        json_response(201, 'id' => 'job-1', 'links' => { 'self' => 'https://api.example.test/job/1' })
       end
+      runner = described_class.new(configuration, http_adapter: adapter)
 
       expect(runner.submit_job('tasks' => {})).to eq('https://api.example.test/job/1')
+      expect(captured_request['Authorization']).to eq('Bearer secret-key')
     end
 
     it 'omits authorization when no API key is configured' do
@@ -141,19 +261,213 @@ RSpec.describe PdfConversion do
         project_root: File.expand_path('../..', __dir__),
         env: {}
       )
-      runner = described_class.new(configuration)
-      response = instance_double(
-        Net::HTTPResponse,
-        code: '201',
-        body: '{"id":"job-1","links":{"self":"https://api.example.test/job/1"}}'
-      )
-
-      expect(runner).to receive(:perform_request) do |_uri, request|
-        expect(request['Authorization']).to be_nil
-        response
+      captured_request = nil
+      adapter = lambda do |_uri, request|
+        captured_request = request
+        json_response(201, 'id' => 'job-1', 'links' => { 'self' => 'https://api.example.test/job/1' })
       end
+      runner = described_class.new(configuration, http_adapter: adapter)
 
       expect(runner.submit_job('tasks' => {})).to eq('https://api.example.test/job/1')
+      expect(captured_request['Authorization']).to be_nil
+    end
+
+    it 'polls a pending job through completion and downloads the PDF' do
+      Dir.mktmpdir do |root|
+        write_project_configuration(root)
+        configuration = PdfConversion::Configuration.new(
+          project_root: root,
+          env: { 'FREECONVERT_POLL_INTERVAL_SECONDS' => '2' }
+        )
+        responses = [
+          json_response(200, 'status' => 'processing'),
+          json_response(
+            200,
+            'status' => 'completed',
+            'tasks' => {
+              'export-1' => {
+                'operation' => 'export/url',
+                'result' => { 'url' => 'https://download.example.test/resume.pdf' }
+              }
+            }
+          ),
+          http_response(200, '%PDF-downloaded')
+        ]
+        requested_urls = []
+        sleeps = []
+        adapter = lambda do |uri, _request|
+          requested_urls << uri.to_s
+          responses.shift || raise('Unexpected HTTP request')
+        end
+        runner = described_class.new(
+          configuration,
+          http_adapter: adapter,
+          sleeper: ->(seconds) { sleeps << seconds }
+        )
+
+        runner.wait_for_completion('https://api.example.test/job/1')
+
+        expect(sleeps).to eq([2])
+        expect(requested_urls).to eq([
+          'https://api.example.test/job/1',
+          'https://api.example.test/job/1',
+          'https://download.example.test/resume.pdf'
+        ])
+        expect(File.binread(File.join(root, 'Resume.pdf'))).to eq('%PDF-downloaded')
+      end
+    end
+
+    it 'raises when a conversion job fails' do
+      configuration = PdfConversion::Configuration.new(
+        project_root: File.expand_path('../..', __dir__),
+        env: {}
+      )
+      adapter = ->(*) { json_response(200, 'status' => 'failed', 'error' => 'conversion failed') }
+      runner = described_class.new(configuration, http_adapter: adapter)
+
+      expect { runner.wait_for_completion('https://api.example.test/job/1') }
+        .to raise_error(RuntimeError, /Job failed/)
+    end
+
+    it 'times out after the configured number of polls' do
+      configuration = PdfConversion::Configuration.new(
+        project_root: File.expand_path('../..', __dir__),
+        env: {
+          'FREECONVERT_MAX_POLLS' => '2',
+          'FREECONVERT_POLL_INTERVAL_SECONDS' => '0'
+        }
+      )
+      polls = 0
+      sleeps = []
+      adapter = lambda do |_uri, _request|
+        polls += 1
+        json_response(200, 'status' => 'processing')
+      end
+      runner = described_class.new(
+        configuration,
+        http_adapter: adapter,
+        sleeper: ->(seconds) { sleeps << seconds }
+      )
+
+      expect { runner.wait_for_completion('https://api.example.test/job/1') }
+        .to raise_error(RuntimeError, /Timed out waiting for job completion after 2 polls/)
+      expect(polls).to eq(2)
+      expect(sleeps).to eq([0])
+    end
+
+    it 'reports malformed JSON responses' do
+      configuration = PdfConversion::Configuration.new(
+        project_root: File.expand_path('../..', __dir__),
+        env: {}
+      )
+      runner = described_class.new(
+        configuration,
+        http_adapter: ->(*) { http_response(200, 'not-json') }
+      )
+
+      expect { runner.submit_job('tasks' => {}) }
+        .to raise_error(RuntimeError, /Invalid JSON response \(status 200\)/)
+    end
+
+    it 'reports job submission and polling HTTP errors' do
+      configuration = PdfConversion::Configuration.new(
+        project_root: File.expand_path('../..', __dir__),
+        env: {}
+      )
+
+      submit_runner = described_class.new(
+        configuration,
+        http_adapter: ->(*) { json_response(422, 'error' => 'invalid job') }
+      )
+      expect { submit_runner.submit_job('tasks' => {}) }
+        .to raise_error(RuntimeError, /Request failed with code 422/)
+
+      poll_runner = described_class.new(
+        configuration,
+        http_adapter: ->(*) { http_response(503, 'unavailable') }
+      )
+      expect { poll_runner.wait_for_completion('https://api.example.test/job/1') }
+        .to raise_error(RuntimeError, /Job polling failed with code 503/)
+    end
+
+    it 'retries transient HTTP failures and then succeeds' do
+      configuration = PdfConversion::Configuration.new(
+        project_root: File.expand_path('../..', __dir__),
+        env: {
+          'FREECONVERT_HTTP_MAX_RETRIES' => '2',
+          'FREECONVERT_HTTP_RETRY_BASE_DELAY_SECONDS' => '0.5'
+        }
+      )
+      attempts = 0
+      sleeps = []
+      adapter = lambda do |_uri, _request|
+        attempts += 1
+        raise SocketError, 'temporary failure' if attempts < 3
+
+        json_response(201, 'links' => { 'self' => 'https://api.example.test/job/1' })
+      end
+      runner = described_class.new(
+        configuration,
+        http_adapter: adapter,
+        sleeper: ->(seconds) { sleeps << seconds }
+      )
+
+      expect(runner.submit_job('tasks' => {})).to eq('https://api.example.test/job/1')
+      expect(attempts).to eq(3)
+      expect(sleeps).to eq([0.5, 1.0])
+    end
+
+    it 'raises after transient HTTP retries are exhausted' do
+      configuration = PdfConversion::Configuration.new(
+        project_root: File.expand_path('../..', __dir__),
+        env: {
+          'FREECONVERT_HTTP_MAX_RETRIES' => '2',
+          'FREECONVERT_HTTP_RETRY_BASE_DELAY_SECONDS' => '0'
+        }
+      )
+      attempts = 0
+      adapter = lambda do |_uri, _request|
+        attempts += 1
+        raise SocketError, 'still unavailable'
+      end
+      runner = described_class.new(configuration, http_adapter: adapter, sleeper: ->(_seconds) {})
+
+      expect { runner.submit_job('tasks' => {}) }
+        .to raise_error(RuntimeError, /HTTP request failed after 3 attempts: SocketError still unavailable/)
+      expect(attempts).to eq(3)
+    end
+
+    it 'raises when a completed job has no export URL' do
+      configuration = PdfConversion::Configuration.new(
+        project_root: File.expand_path('../..', __dir__),
+        env: {}
+      )
+      adapter = lambda do |_uri, _request|
+        json_response(200, 'status' => 'completed', 'tasks' => [{ 'operation' => 'convert' }])
+      end
+      runner = described_class.new(configuration, http_adapter: adapter)
+
+      expect { runner.wait_for_completion('https://api.example.test/job/1') }
+        .to raise_error(RuntimeError, /Could not locate export URL/)
+    end
+
+    it 'raises when the exported PDF download fails' do
+      configuration = PdfConversion::Configuration.new(
+        project_root: File.expand_path('../..', __dir__),
+        env: {}
+      )
+      responses = [
+        json_response(
+          200,
+          'status' => 'completed',
+          'tasks' => [{ 'operation' => 'export/url', 'result' => { 'url' => 'https://download.example.test/resume.pdf' } }]
+        ),
+        http_response(502, 'bad gateway')
+      ]
+      runner = described_class.new(configuration, http_adapter: ->(*) { responses.shift })
+
+      expect { runner.wait_for_completion('https://api.example.test/job/1') }
+        .to raise_error(RuntimeError, /Download failed with code 502/)
     end
   end
 end

@@ -33,11 +33,15 @@ module PdfConversion
       @api_key = env_value('FREECONVERT_API_KEY')
       @build_before_convert = boolean_value('FREECONVERT_BUILD_BEFORE_CONVERT', true)
       @package_after_convert = boolean_value('FREECONVERT_PACKAGE_AFTER_CONVERT', true)
-      @poll_interval_seconds = integer_value('FREECONVERT_POLL_INTERVAL_SECONDS', 5)
-      @max_polls = integer_value('FREECONVERT_MAX_POLLS', 120)
-      @http_timeout_seconds = integer_value('FREECONVERT_HTTP_TIMEOUT_SECONDS', 30)
-      @http_max_retries = integer_value('FREECONVERT_HTTP_MAX_RETRIES', 3)
-      @http_retry_base_delay_seconds = float_value('FREECONVERT_HTTP_RETRY_BASE_DELAY_SECONDS', 1.0)
+      @poll_interval_seconds = integer_value('FREECONVERT_POLL_INTERVAL_SECONDS', 5, minimum: 0)
+      @max_polls = integer_value('FREECONVERT_MAX_POLLS', 120, minimum: 1)
+      @http_timeout_seconds = integer_value('FREECONVERT_HTTP_TIMEOUT_SECONDS', 30, minimum: 1)
+      @http_max_retries = integer_value('FREECONVERT_HTTP_MAX_RETRIES', 3, minimum: 0)
+      @http_retry_base_delay_seconds = float_value(
+        'FREECONVERT_HTTP_RETRY_BASE_DELAY_SECONDS',
+        1.0,
+        minimum: 0.0
+      )
     end
 
     def validate!
@@ -70,20 +74,33 @@ module PdfConversion
       raise ArgumentError, "Invalid #{name} value: '#{value}'. Use true/false."
     end
 
-    def integer_value(name, default)
-      Integer(env_value(name) || default)
+    def integer_value(name, default, minimum:)
+      raw_value = env_value(name) || default
+      value = Integer(raw_value)
+      return value if value >= minimum
+
+      raise ArgumentError
+    rescue ArgumentError, TypeError
+      raise ArgumentError, "Invalid #{name} value: '#{raw_value}'. Expected an integer >= #{minimum}."
     end
 
-    def float_value(name, default)
-      Float(env_value(name) || default)
+    def float_value(name, default, minimum:)
+      raw_value = env_value(name) || default
+      value = Float(raw_value)
+      return value if value.finite? && value >= minimum
+
+      raise ArgumentError
+    rescue ArgumentError, TypeError
+      raise ArgumentError, "Invalid #{name} value: '#{raw_value}'. Expected a number >= #{minimum}."
     end
   end
 
   class Runner
-    def initialize(configuration, command_runner: nil, sleeper: nil)
+    def initialize(configuration, command_runner: nil, sleeper: nil, http_adapter: nil)
       @configuration = configuration
       @command_runner = command_runner || lambda { |environment, *command| system(environment, *command) }
       @sleeper = sleeper || ->(seconds) { sleep(seconds) }
+      @http_adapter = http_adapter || method(:net_http_request)
     end
 
     def run
@@ -181,7 +198,7 @@ module PdfConversion
           raise "Job failed: #{response.body}"
         else
           puts "Job pending (attempt #{attempt}/#{@configuration.max_polls})"
-          @sleeper.call(@configuration.poll_interval_seconds)
+          @sleeper.call(@configuration.poll_interval_seconds) if attempt < @configuration.max_polls
         end
       end
 
@@ -241,11 +258,7 @@ module PdfConversion
 
       begin
         attempts += 1
-        http = Net::HTTP.new(uri.host, uri.port)
-        http.use_ssl = (uri.scheme == 'https')
-        http.open_timeout = @configuration.http_timeout_seconds
-        http.read_timeout = @configuration.http_timeout_seconds
-        http.request(request)
+        @http_adapter.call(uri, request)
       rescue Timeout::Error, Errno::ECONNRESET, Errno::ETIMEDOUT, EOFError, SocketError => e
         if attempts <= @configuration.http_max_retries
           delay = @configuration.http_retry_base_delay_seconds * (2**(attempts - 1))
@@ -256,6 +269,14 @@ module PdfConversion
 
         raise "HTTP request failed after #{attempts} attempts: #{e.class} #{e.message}"
       end
+    end
+
+    def net_http_request(uri, request)
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = (uri.scheme == 'https')
+      http.open_timeout = @configuration.http_timeout_seconds
+      http.read_timeout = @configuration.http_timeout_seconds
+      http.request(request)
     end
 
     def find_export_url(tasks)
