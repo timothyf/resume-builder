@@ -1,0 +1,31 @@
+supported:
+  - user: timothyfisher
+    name: resume_bestbuy
+  - user: timothyfisher
+    name: resume_bn
+  - user: timothyfisher
+    name: resume_dev_refined
+  - user: timothyfisher
+    name: resume_developer
+  - user: timothyfisher
+    name: resume_developer_update
+  - user: timothyfisher
+    name: resume_leader
+  - user: timothyfisher
+    name: resume_leader_update
+  - user: timothyfisher
+    name: resume_main_dev
+  - user: timothyfisher
+    name: resume_main_mgr
+  - user: timothyfisher
+    name: resume_manager
+  - user: timothyfisher
+    name: resume_tunecore
+
+archived:
+  - user: kerryfisher
+    name: resume_kerry
+    reason: Legacy monolithic resume predating layouts and shared job, skill, and summary catalogs.
+  - user: timothyfisher
+    name: resume_tim
+    reason: Legacy monolithic resume superseded by the targeted Timothy Fisher resume definitions.

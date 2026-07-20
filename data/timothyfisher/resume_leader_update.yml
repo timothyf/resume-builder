@@ -16,8 +16,8 @@ contact_info:
         postal_code: 48134
 
 links:
-    - name: Github
-    - name: Linkedin
+    - name: github.com/timothyf
+    - name: linkedin.com/in/timothyfisher
     - name: Twitter
 
 summary:
@@ -41,6 +41,7 @@ skills:
       - 9
       - 12
 
+jobs_filename: jobs
 jobs:
     - file: jobs
       id: nyt_sem

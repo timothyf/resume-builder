@@ -139,6 +139,16 @@ Validate a selected resume with overrides:
 
     ./validate_resume.bash --resume-user timothyfisher --resume-name resume_dev_refined
 
+Validate the complete supported-resume matrix:
+
+    ./validate_supported_resumes.bash
+
+The matrix in `data/resume_support.yml` explicitly classifies every stored
+`data/<user>/resume*.yml` definition as either supported or archived. Supported
+definitions must pass the current schema validator. Archived definitions are
+not buildable under the current schema and must include a reason. A new resume
+definition must be added to one of these lists or matrix validation will fail.
+
 Run shell script tests:
 
     ./spec/shell/run_shell_tests.bash
@@ -188,7 +198,10 @@ Every Middleman build and preview validates the effective active resume before
 rendering. Validation checks required nested fields, referenced jobs, skills,
 links and summaries, duplicate catalog IDs, and layout template files. All
 problems are reported together with their source paths. Use
-`./validate_resume.bash` for a faster validation-only check.
+`./validate_resume.bash` for a faster validation-only check, or
+`./validate_supported_resumes.bash` to validate every supported definition.
+The GitHub Pages workflow runs the full supported-resume validation before it
+builds the deployed resume.
 
 Here is what it looks like:
 

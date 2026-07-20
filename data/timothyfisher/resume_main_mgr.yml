@@ -16,8 +16,8 @@ contact_info:
         postal_code: 48134
 
 links:
-    - name: Linkedin
-    - name: Github
+    - name: linkedin.com/in/timothyfisher
+    - name: github.com/timothyf
 
 summary:
     file: summary_mgr_main

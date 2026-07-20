@@ -23,8 +23,8 @@ contact_info:
         postal_code: 48134
 
 links:
-    - name: Github
-    - name: Linkedin
+    - name: github.com/timothyf
+    - name: linkedin.com/in/timothyfisher
     - name: Twitter
 
 summary:
@@ -48,8 +48,10 @@ skills:
       - 11
       - 12
 
+jobs_filename: jobs
 jobs:
     - id: nyt_sem
+      section: experiences
       title: Senior Engineering Manager
       company: The New York Times
       brief: true
@@ -76,40 +78,52 @@ jobs:
           </ul>
     - file: jobs
       id: roo_em
+      section: experiences
       brief: true
     - file: jobs
       id: aj_tld
+      section: experiences
       brief: true
     - file: jobs
       id: cs_cto
+      section: experiences
       brief: true
       include: false
     - file: jobs
       id: pow_vpe
+      section: experiences
       brief: true
     - file: jobs
       id: qky_vpe
+      section: experiences
       brief: true
     - file: jobs
       id: cpw_dev
+      section: experiences
       brief: true
     - file: jobs
       id: log_sja
+      section: experience_other
       brief: false
     - file: jobs
       id: med_dtl
+      section: experience_other
       brief: false
     - file: jobs
       id: sph_sja
+      section: experience_other
       brief: false
     - file: jobs
       id: pwc_sc
+      section: experience_other
       brief: false
     - file: jobs
       id: cyc_dev
+      section: experience_other
       brief: false
     - file: jobs
       id: mot_dev
+      section: experience_other
       brief: false
 
 education:

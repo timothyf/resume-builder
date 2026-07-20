@@ -7,5 +7,9 @@
 <% end %>
 
 <% @layout_data.content.center.each do |section| %>
-  <%= partial "templates/#{section.template}", locals: {brief: false, display_name: section.display_name} %>
+  <%= partial "templates/#{section.template}", locals: {
+    brief: false,
+    display_name: section.display_name,
+    compact_title: (section.respond_to?(:compact_title) ? section.compact_title : false)
+  } %>
 <% end %>
