@@ -3,6 +3,7 @@ layout: layout
 pdf:
   filename: pdf/TimothyFisher-Resume-developer
   useicons: true
+  source: TimothyFisher-Res-Dev.pdf
 
 headers:
     profile: Summary

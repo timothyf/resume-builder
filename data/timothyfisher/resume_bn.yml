@@ -3,6 +3,7 @@ layout: layoutbb
 pdf:
   filename: TimothyFisher-Resume-BN
   useicons: true
+  source: TimothyFisher-Res-Lead.pdf
 
 headers:
     profile: Summary

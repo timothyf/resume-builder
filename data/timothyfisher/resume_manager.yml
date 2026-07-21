@@ -3,6 +3,7 @@ layout: layoutbb
 pdf:
   useicons: true
   filename: pdf/TimothyFisher-Mgr
+  source: TimothyFisher-Res-Lead.pdf
 
 contact_info:
     name: Timothy Fisher
