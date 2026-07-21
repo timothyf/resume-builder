@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "editor:start": "node tools/local-editor/server.mjs"
+    "editor:start": "node tools/local-editor/server.mjs",
+    "editor:test": "node --test tools/local-editor/test/*.test.mjs"
   },
   "dependencies": {
     "@anvilco/anvil": "^2.15.0",

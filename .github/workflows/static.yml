@@ -62,6 +62,9 @@ jobs:
       - name: Test supported resume build matrix
         run: RUN_INTEGRATION=1 bundle exec rspec spec/integration/build_smoke_spec.rb
 
+      - name: Test local YAML editor
+        run: npm run editor:test
+
       - name: Test visual regression
         run: RUN_VISUAL=1 bundle exec rspec spec/visual/visual_regression_spec.rb
 

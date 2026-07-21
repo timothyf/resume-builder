@@ -4,6 +4,8 @@ const modeSelect = document.getElementById('modeSelect');
 const editor = document.getElementById('editor');
 const statusText = document.getElementById('statusText');
 const reloadBtn = document.getElementById('reloadBtn');
+const revertBtn = document.getElementById('revertBtn');
+const validateBtn = document.getElementById('validateBtn');
 const saveBtn = document.getElementById('saveBtn');
 
 const structuredRoot = document.getElementById('structuredRoot');
@@ -31,7 +33,11 @@ const summaryTextInput = document.getElementById('summaryTextInput');
 let filesByCategory = { jobs: [], summaries: [] };
 let currentRawContent = '';
 let currentStructuredData = null;
+let originalStructuredData = null;
 let currentJobIndex = -1;
+let dirty = false;
+let selectedCategory = categorySelect.value;
+let selectedFile = '';
 
 function setStatus(text, isError = false) {
   statusText.textContent = text;
@@ -43,10 +49,37 @@ async function fetchJson(url, options) {
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.error || 'Request failed');
+    throw new Error(data.error || data.errors?.join('\n') || 'Request failed');
   }
 
   return data;
+}
+
+function setDirty(value = true) {
+  dirty = value;
+  document.title = `${dirty ? '* ' : ''}Local Resume YAML Editor`;
+  saveBtn.disabled = !dirty;
+}
+
+function structuredSnapshot() {
+  return JSON.stringify(currentStructuredData);
+}
+
+function refreshDirtyState() {
+  const changed = modeSelect.value === 'raw'
+    ? editor.value !== currentRawContent
+    : structuredSnapshot() !== originalStructuredData;
+  setDirty(changed);
+}
+
+function confirmDiscard() {
+  return !dirty || window.confirm('Discard your unsaved changes?');
+}
+
+function currentPayload() {
+  return modeSelect.value === 'raw'
+    ? { path: fileSelect.value, content: editor.value }
+    : { path: fileSelect.value, data: currentStructuredData };
 }
 
 function refreshFileSelect() {
@@ -70,6 +103,7 @@ function refreshFileSelect() {
     option.textContent = filePath;
     fileSelect.appendChild(option);
   });
+  selectedFile = fileSelect.value;
 }
 
 function toggleModeUI() {
@@ -248,9 +282,12 @@ async function loadCurrentFile() {
     ]);
     currentRawContent = rawData.content;
     currentStructuredData = structuredData.data;
+    originalStructuredData = structuredSnapshot();
     editor.value = currentRawContent;
     renderStructuredEditor();
     setStatus(`Loaded ${filePath}`);
+    setDirty(false);
+    selectedFile = filePath;
   } catch (error) {
     setStatus(error.message, true);
   }
@@ -278,14 +315,15 @@ async function saveCurrentFile() {
     setStatus(`Saving ${filePath}...`);
 
     if (modeSelect.value === 'raw') {
-      await fetchJson('/api/file', {
+      const result = await fetchJson('/api/file', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ path: filePath, content: editor.value })
       });
       currentRawContent = editor.value;
+      setStatus(`Saved ${filePath}; backup: ${result.backupPath}`);
     } else {
-      await fetchJson('/api/file-structured', {
+      const result = await fetchJson('/api/file-structured', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ path: filePath, data: currentStructuredData })
@@ -293,26 +331,66 @@ async function saveCurrentFile() {
       const rawData = await fetchJson(`/api/file?path=${encodeURIComponent(filePath)}`);
       currentRawContent = rawData.content;
       editor.value = currentRawContent;
+      originalStructuredData = structuredSnapshot();
+      setStatus(`Saved ${filePath}; backup: ${result.backupPath}`);
     }
+    setDirty(false);
+  } catch (error) {
+    setStatus(error.message, true);
+  }
+}
 
-    setStatus(`Saved ${filePath}`);
+async function validateCurrentFile() {
+  if (!fileSelect.value) return setStatus('No file selected', true);
+  try {
+    setStatus(`Validating ${fileSelect.value}...`);
+    await fetchJson('/api/validate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(currentPayload())
+    });
+    setStatus(`${fileSelect.value} is valid`);
   } catch (error) {
     setStatus(error.message, true);
   }
 }
 
 categorySelect.addEventListener('change', async () => {
+  if (!confirmDiscard()) {
+    categorySelect.value = selectedCategory;
+    return;
+  }
+  selectedCategory = categorySelect.value;
   refreshFileSelect();
   await loadCurrentFile();
 });
 
 modeSelect.addEventListener('change', () => {
+  if (!confirmDiscard()) {
+    modeSelect.value = modeSelect.value === 'raw' ? 'structured' : 'raw';
+    return;
+  }
   toggleModeUI();
+  refreshDirtyState();
 });
 
-fileSelect.addEventListener('change', loadCurrentFile);
-reloadBtn.addEventListener('click', refreshFileLists);
+fileSelect.addEventListener('change', async () => {
+  if (!confirmDiscard()) {
+    fileSelect.value = selectedFile;
+    return;
+  }
+  await loadCurrentFile();
+});
+reloadBtn.addEventListener('click', () => { if (confirmDiscard()) refreshFileLists(); });
+revertBtn.addEventListener('click', () => { if (confirmDiscard()) loadCurrentFile(); });
+validateBtn.addEventListener('click', validateCurrentFile);
 saveBtn.addEventListener('click', saveCurrentFile);
+editor.addEventListener('input', refreshDirtyState);
+window.addEventListener('beforeunload', (event) => {
+  if (!dirty) return;
+  event.preventDefault();
+  event.returnValue = '';
+});
 
 jobPickerInput.addEventListener('change', syncJobSelectionFromPicker);
 jobPickerInput.addEventListener('input', syncJobSelectionFromPicker);
@@ -330,6 +408,7 @@ addJobBtn.addEventListener('click', () => {
   });
   renderJobSelector(currentStructuredData.length - 1);
   renderJobForm();
+  refreshDirtyState();
 });
 
 removeJobBtn.addEventListener('click', () => {
@@ -342,6 +421,7 @@ removeJobBtn.addEventListener('click', () => {
   currentStructuredData.splice(index, 1);
   renderJobSelector(Math.max(0, index - 1));
   renderJobForm();
+  refreshDirtyState();
 });
 
 function updateCurrentJob(mutator) {
@@ -350,6 +430,7 @@ function updateCurrentJob(mutator) {
   const selectedIndex = Number(currentJobIndex);
   mutator(job);
   renderJobSelector(selectedIndex);
+  refreshDirtyState();
 }
 
 jobIdInput.addEventListener('input', () => updateCurrentJob((job) => {
@@ -395,12 +476,15 @@ jobDescInput.addEventListener('input', () => updateCurrentJob((job) => {
 summaryTypeInput.addEventListener('input', () => {
   ensureSummaryData();
   currentStructuredData.summary.type = summaryTypeInput.value;
+  refreshDirtyState();
 });
 
 summaryTextInput.addEventListener('input', () => {
   ensureSummaryData();
   currentStructuredData.summary.text = summaryTextInput.value;
+  refreshDirtyState();
 });
 
 toggleModeUI();
+setDirty(false);
 refreshFileLists();

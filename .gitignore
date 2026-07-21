@@ -11,6 +11,7 @@
 /.sass-cache
 
 /tmp/
+/.local-editor-backups/
 /.ruby-version
 /.ruby-gemset
 /vendor
@@ -27,4 +28,3 @@ pdf/TimothyFisher-Res-Dev.pdf
 pdf/TimothyFisher-Res-Lead.pdf
 generate-html-output.pdf
 *.pdf
-

@@ -3,7 +3,8 @@
 require_relative '../lib/resume_support_matrix'
 
 begin
-  matrix = ResumeSupportMatrix.new(project_root: File.expand_path('..', __dir__))
+  project_root = ENV.fetch('RESUME_PROJECT_ROOT', File.expand_path('..', __dir__))
+  matrix = ResumeSupportMatrix.new(project_root: project_root)
   matrix.validate!
   puts "Supported resume data is valid (#{matrix.supported.length} supported, #{matrix.archived.length} archived)."
 rescue ResumeSupportMatrix::ValidationError => e

@@ -267,6 +267,20 @@ Editor modes:
 - `Structured`: form-based editing for jobs and summaries
 - `Raw YAML`: direct text editing for full control
 
+Before either mode saves, the editor parses the candidate YAML and validates a
+temporary copy against the complete supported-resume matrix. Invalid content is
+reported without changing the source file. A successful save first copies the
+previous version to `.local-editor-backups/<timestamp>/` and then replaces the
+source atomically. Backups are local and gitignored.
+
+The editor marks unsaved changes in the browser title and warns before file,
+category, or mode changes, reloads, and browser navigation. Use **Validate** to
+check without saving and **Revert** to reload the version currently on disk.
+
+Run the editor API and headless-browser tests with:
+
+    npm run editor:test
+
 ## Resume instructions
 
 To create/update your resume, edit `data/active_resume.yml` and the selected
