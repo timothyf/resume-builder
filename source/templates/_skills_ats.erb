@@ -1,0 +1,17 @@
+<% if @resume_data.skills? %>
+  <section class="section ats-skills-section">
+    <h2 class="section-title"><%= display_name %></h2>
+    <div class="ats-skills-list">
+      <% @resume_data.skills.each do |category| %>
+        <div class="ats-skill-row">
+          <div class="ats-skill-category"><%= category.name %></div>
+          <div class="ats-skill-values">
+            <% category.skills.each do |skill_id| %>
+              <div><%= @skills_by_id[skill_id.to_s].label %></div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </section>
+<% end %>

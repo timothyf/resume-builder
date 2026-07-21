@@ -1,0 +1,24 @@
+content:
+  header:
+
+  center:
+    - display_name:
+      template: profile
+    - display_name:
+      template: contact_ats
+    - name: summary
+      display_name: Summary
+      template: summary
+    - display_name: Skills
+      template: skills_ats
+    - name: experience_highlights
+      display_name: Experience Highlights
+      template: experience_highlights
+    - display_name: Education
+      template: education
+    - display_name: Download PDF
+      template: download
+
+  right: []
+
+  footer:

@@ -10,7 +10,8 @@
   <% end %>
 </head>
 
-<body<%= body_class ? " class=\"#{body_class}\"" : "" %>>
+<% page_classes = [body_class, "layout-#{@resume_data.layout}"].compact.reject(&:empty?).join(' ') %>
+<body class="<%= page_classes %>">
   <% if show_menu %>
     <div class="menu-bar">
       <i class="fa fa-file"></i>

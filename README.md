@@ -21,9 +21,9 @@ It has the following features:
 
 The active deployment is `timothyfisher/resume_dev_refined`, selected in
 `data/active_resume.yml`, with brief generation disabled. The repository
-currently contains 11 supported resume definitions and 2 explicitly archived
+currently contains 13 supported resume definitions and 2 explicitly archived
 legacy definitions. Supported resumes are exercised across all 6 themes with
-brief generation both enabled and disabled, for a total of 132 integration
+brief generation both enabled and disabled, for a total of 156 integration
 builds.
 
 Every build writes Middleman's intermediate files to `build/` and packages the
@@ -108,6 +108,28 @@ Available themes:
 
     theme-default, theme-fern, theme-grey, theme-orange, theme-tapestry, theme-tradewind
 
+### ATS single-column layout
+
+`data/timothyfisher/layouts/layout_ats.yml` provides a text-first,
+single-column layout modeled on a conventional ATS resume. It renders a
+centered identity and contact header followed by summary, skills, experience,
+and education. The layout uses semantic HTML, standard fonts, black text,
+simple headings, and no sidebar, icon dependency, tables, or decorative content
+that could interfere with resume parsers.
+
+Select it in a resume definition with:
+
+```yaml
+layout: layout_ats
+pdf:
+  useicons: false
+```
+
+The ATS layout is independent of the selected color theme and has dedicated
+responsive and Letter-print rules. It is also available in the Local YAML
+Editor layout selector. The active deployed resume is not switched to this
+layout automatically.
+
 Theme bundles are now full layout/style sets (not color-only overlays). Each theme
 has separate screen and PDF stylesheet bundles:
 
@@ -132,7 +154,7 @@ brief files are included as well.
 
 The primary deployment path is the GitHub Pages workflow in
 `.github/workflows/static.yml`. A push to `main` validates all supported resume
-definitions, runs the 132-build integration matrix, runs visual regression
+definitions, runs the 156-build integration matrix, runs visual regression
 coverage, builds `timothyfisher/resume_dev_refined`, and deploys its packaged
 artifact.
 
@@ -193,7 +215,7 @@ The matrix in `data/resume_support.yml` explicitly classifies every stored
 definitions must pass the current schema validator. Archived definitions are
 not buildable under the current schema and must include a reason. A new resume
 definition must be added to one of these lists or matrix validation will fail.
-The current matrix contains 11 supported and 2 archived definitions.
+The current matrix contains 13 supported and 2 archived definitions.
 
 Run shell script tests:
 

@@ -1,0 +1,17 @@
+<% contact_info = @resume_data.contact_info %>
+<div class="contact-container ats-contact-container">
+  <div class="ats-contact-line">
+    <span><%= contact_info.address.city %>, <%= contact_info.address.state %> <%= contact_info.address.postal_code %></span>
+    <span><a href="mailto:<%= contact_info.email %>"><%= contact_info.email %></a></span>
+    <% if contact_info.phone %><span><a href="tel:<%= contact_info.phone %>"><%= contact_info.phone %></a></span><% end %>
+  </div>
+  <% if @resume_data.links? %>
+    <div class="ats-contact-line ats-links">
+      <% link_data = data.public_send(@active_resume_user).links.links %>
+      <% @resume_data.links.each do |link| %>
+        <% resolved_link = link_data.find { |candidate| candidate.name == link.name } %>
+        <% if resolved_link %><span><a href="<%= resolved_link.url %>"><%= resolved_link.name %></a></span><% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

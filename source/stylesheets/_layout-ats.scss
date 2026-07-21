@@ -1,0 +1,315 @@
+/* Single-column, text-first layout intended for ATS parsing and printing. */
+.layout-layout_ats {
+  background: #fff;
+  color: #111;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  padding: 24px;
+
+  .menu-bar,
+  .footer {
+    max-width: 900px;
+  }
+
+  .wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #fff;
+    box-shadow: none;
+  }
+
+  .sidebar-wrapper {
+    display: none;
+  }
+
+  .main-wrapper {
+    padding: 34px 42px;
+    background: #fff;
+  }
+
+  .profile-container {
+    padding: 0 0 8px;
+    text-align: center;
+    border-bottom: 1px solid #2468c9;
+
+    .name {
+      margin: 0;
+      color: #111;
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 1.15;
+    }
+
+    .tagline,
+    .profile {
+      display: none;
+    }
+  }
+
+  .contact-container {
+    padding: 5px 0 16px;
+    text-align: center;
+
+    .contact-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2px 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .contact-list li {
+      margin: 0;
+    }
+
+    .contact-list li:not(:last-child)::after {
+      content: " |";
+      color: #111;
+    }
+
+    .address br,
+    hr,
+    .fa {
+      display: none;
+    }
+
+    a {
+      color: #111;
+      text-decoration: none;
+    }
+  }
+
+  .ats-contact-line {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0 8px;
+
+    span:not(:last-child)::after {
+      content: " |";
+    }
+  }
+
+  .main-wrapper .section,
+  .interests-container,
+  .education-container {
+    margin: 0 0 16px;
+    padding: 0;
+  }
+
+  .main-wrapper .section-title,
+  .container-block-title {
+    margin: 0 0 7px;
+    color: #111;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.2;
+    text-transform: uppercase;
+
+    .fa {
+      display: none;
+    }
+  }
+
+  p {
+    margin: 0 0 7px;
+    color: #111;
+    line-height: 1.28;
+  }
+
+  ul {
+    margin-top: 3px;
+    margin-bottom: 8px;
+    padding-left: 24px;
+  }
+
+  .interests-list {
+    display: grid;
+    grid-template-columns: 190px 1fr;
+    column-gap: 16px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .ats-skills-list {
+    display: grid;
+    gap: 2px;
+  }
+
+  .ats-skill-row {
+    display: grid;
+    grid-template-columns: 190px 1fr;
+    column-gap: 16px;
+    line-height: 1.2;
+  }
+
+  .ats-skill-category {
+    font-weight: 700;
+  }
+
+  .interests-list li {
+    margin: 0 0 2px;
+    line-height: 1.2;
+  }
+
+  .interests-list .skillCategory {
+    grid-column: 1;
+    font-weight: 700;
+  }
+
+  .interests-list .skillLabel {
+    grid-column: 2;
+    padding: 0;
+  }
+
+  .experiences-section .item,
+  .experience-other-section .item {
+    margin-bottom: 13px;
+    break-inside: auto;
+  }
+
+  .company-name {
+    margin: 0 0 2px;
+    color: #111;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.15;
+  }
+
+  .main-wrapper .job-title-row {
+    display: flex;
+    justify-content: flex-start;
+    gap: 4px;
+    margin: 0;
+  }
+
+  .main-wrapper .job-title-row .job-title,
+  .main-wrapper .job-title-row .time {
+    margin: 0;
+    color: #111;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .main-wrapper .job-title-row .time::before {
+    content: " | ";
+  }
+
+  .company-location {
+    margin: 1px 0 5px;
+    color: #111;
+    font-size: 13px;
+    font-style: italic;
+  }
+
+  .details {
+    color: #111;
+  }
+
+  .education-container .item {
+    margin: 0 0 7px;
+  }
+
+  .degree-name,
+  .degree-info,
+  .education-container .time {
+    margin: 0;
+    color: #111;
+    font-size: 14px;
+    line-height: 1.2;
+  }
+
+  .degree-name {
+    font-weight: 700;
+  }
+
+  .degree-info,
+  .education-container .time {
+    font-weight: 400;
+  }
+
+  .align-bottom {
+    padding: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .layout-layout_ats {
+    padding: 0;
+
+    .main-wrapper {
+      padding: 24px 20px;
+    }
+
+    .contact-container .contact-list,
+    .ats-contact-line,
+    .main-wrapper .job-title-row {
+      display: block;
+    }
+
+    .contact-container .contact-list li::after,
+    .main-wrapper .job-title-row .time::before {
+      content: none;
+    }
+
+    .interests-list {
+      grid-template-columns: 1fr;
+    }
+
+    .interests-list .skillCategory,
+    .interests-list .skillLabel {
+      grid-column: 1;
+    }
+
+    .interests-list .skillLabel {
+      padding-left: 14px;
+    }
+
+    .ats-skill-row {
+      grid-template-columns: 1fr;
+    }
+
+    .ats-skill-values {
+      padding-left: 14px;
+    }
+  }
+}
+
+@media print {
+  .layout-layout_ats {
+    padding: 0;
+    font-size: 10pt;
+
+    .main-wrapper {
+      padding: 0.4in 0.55in;
+    }
+
+    .profile-container .name {
+      font-size: 22pt;
+    }
+
+    .main-wrapper .section-title,
+    .container-block-title {
+      font-size: 12pt;
+    }
+
+    .company-name,
+    .main-wrapper .job-title-row .job-title,
+    .main-wrapper .job-title-row .time {
+      font-size: 10pt;
+    }
+
+    .company-location {
+      font-size: 9.5pt;
+    }
+
+    .footer,
+    .align-bottom {
+      display: none;
+    }
+  }
+}

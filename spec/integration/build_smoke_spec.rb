@@ -17,7 +17,7 @@ RSpec.describe 'Supported resume build matrix', :integration do
 
   if ENV['RUN_INTEGRATION'] != '1'
     it 'runs only when integration testing is enabled' do
-      skip 'Set RUN_INTEGRATION=1 to run the 132-build integration matrix'
+      skip "Set RUN_INTEGRATION=1 to run the #{build_matrix.length}-build integration matrix"
     end
   else
     before(:context) do
