@@ -140,9 +140,14 @@
         gap: 10px;
       }
 
+      .resume-job-row {
+        grid-template-columns: 1fr 1fr 1fr auto auto auto;
+        margin-bottom: 8px;
+      }
+
       .structured-top {
         display: grid;
-        grid-template-columns: 1fr auto auto;
+        grid-template-columns: 1fr repeat(5, auto);
         gap: 10px;
         margin-bottom: 14px;
       }
@@ -159,6 +164,11 @@
         color: var(--muted);
         font-size: 13px;
       }
+
+      @media (max-width: 760px) {
+        body { padding: 8px; }
+        .controls, .structured-top, .row, .resume-job-row { grid-template-columns: 1fr; }
+      }
     </style>
   </head>
   <body>
@@ -172,6 +182,7 @@
         <select id="categorySelect">
           <option value="jobs">Jobs</option>
           <option value="summaries">Summaries</option>
+          <option value="resumes">Resumes</option>
         </select>
 
         <select id="fileSelect"></select>
@@ -193,6 +204,9 @@
             <input id="jobPickerInput" list="jobPickerList" placeholder="Type to find a job" />
             <datalist id="jobPickerList"></datalist>
             <button class="secondary" id="addJobBtn" type="button">Add Job</button>
+            <button class="secondary" id="duplicateJobBtn" type="button">Duplicate</button>
+            <button class="secondary" id="moveJobUpBtn" type="button">Move Up</button>
+            <button class="secondary" id="moveJobDownBtn" type="button">Move Down</button>
             <button class="secondary" id="removeJobBtn" type="button">Delete Job</button>
           </div>
 
@@ -204,11 +218,20 @@
             <div class="group">
               <label for="jobIncludeInput">Include</label>
               <select id="jobIncludeInput">
+                <option value="">(unset)</option>
                 <option value="true">true</option>
                 <option value="false">false</option>
                 <option value="full">full</option>
                 <option value="brief">brief</option>
                 <option value="none">none</option>
+              </select>
+            </div>
+            <div class="group">
+              <label for="jobBriefInput">Brief</label>
+              <select id="jobBriefInput">
+                <option value="">(unset)</option>
+                <option value="true">true</option>
+                <option value="false">false</option>
               </select>
             </div>
           </div>
@@ -260,6 +283,63 @@
           <div class="group">
             <label for="summaryTextInput">Summary text (HTML allowed)</label>
             <textarea id="summaryTextInput" spellcheck="false"></textarea>
+          </div>
+        </div>
+
+        <div id="resumeEditor" class="hidden">
+          <div id="activeResumeFields" class="hidden">
+            <div class="info">Controls the default resume selected by builds and previews.</div>
+            <div class="row">
+              <div class="group"><label for="activeUserInput">User</label><select id="activeUserInput"></select></div>
+              <div class="group"><label for="activeNameInput">Resume</label><select id="activeNameInput"></select></div>
+            </div>
+            <div class="group"><label for="activeBriefInput">Generate brief</label><select id="activeBriefInput"><option value="true">true</option><option value="false">false</option></select></div>
+          </div>
+
+          <div id="resumeDefinitionFields" class="hidden">
+            <div class="info">Reference choices are loaded from this resume user's catalogs.</div>
+            <div class="row">
+              <div class="group"><label for="resumeNameInput">Artifact name</label><input id="resumeNameInput" /></div>
+              <div class="group"><label for="resumeThemeInput">Theme</label><select id="resumeThemeInput"></select></div>
+            </div>
+            <div class="row">
+              <div class="group"><label for="resumeLayoutInput">Layout</label><select id="resumeLayoutInput"></select></div>
+              <div class="group"><label for="resumeJobsFileInput">Jobs catalog</label><select id="resumeJobsFileInput"></select></div>
+            </div>
+            <div class="row">
+              <div class="group"><label for="resumeSummaryInput">Summary</label><select id="resumeSummaryInput"></select></div>
+              <div class="group"><label for="resumePdfIconsInput">PDF icons</label><select id="resumePdfIconsInput"><option value="true">true</option><option value="false">false</option></select></div>
+            </div>
+            <div class="row">
+              <div class="group"><label for="resumePdfFilenameInput">Public PDF filename</label><input id="resumePdfFilenameInput" /></div>
+              <div class="group"><label for="resumePdfSourceInput">PDF source</label><input id="resumePdfSourceInput" /></div>
+            </div>
+            <h3>Contact</h3>
+            <div class="row">
+              <div class="group"><label for="resumeContactNameInput">Name</label><input id="resumeContactNameInput" /></div>
+              <div class="group"><label for="resumeContactEmailInput">Email</label><input id="resumeContactEmailInput" /></div>
+            </div>
+            <div class="row">
+              <div class="group"><label for="resumeContactPhoneInput">Phone</label><input id="resumeContactPhoneInput" /></div>
+              <div class="group"><label for="resumeContactStreetInput">Street</label><input id="resumeContactStreetInput" /></div>
+            </div>
+            <div class="row">
+              <div class="group"><label for="resumeContactCityInput">City</label><input id="resumeContactCityInput" /></div>
+              <div class="group"><label for="resumeContactStateInput">State</label><input id="resumeContactStateInput" /></div>
+            </div>
+            <div class="group"><label for="resumeContactPostalInput">Postal code</label><input id="resumeContactPostalInput" /></div>
+            <h3>Job references</h3>
+            <div id="resumeJobsList"></div>
+            <button class="secondary" id="addResumeJobBtn" type="button">Add Job Reference</button>
+            <h3>Links</h3>
+            <div id="resumeLinksList"></div>
+            <button class="secondary" id="addResumeLinkBtn" type="button">Add Link</button>
+            <h3>Skill groups</h3>
+            <div id="resumeSkillsList"></div>
+            <button class="secondary" id="addResumeSkillGroupBtn" type="button">Add Skill Group</button>
+            <h3>Education</h3>
+            <div id="resumeEducationList"></div>
+            <button class="secondary" id="addResumeEducationBtn" type="button">Add Education</button>
           </div>
         </div>
       </section>

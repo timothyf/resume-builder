@@ -242,7 +242,8 @@ upload current screenshots and rendered PDF pages as diagnostic artifacts.
 
 ## Local YAML editor
 
-You can run a local-only editor UI for YAML data files (jobs and summaries)
+You can run a local-only editor UI for YAML data files (jobs, summaries, resume
+definitions, and the active-resume selection)
 without exposing data to any external service.
 
 Install Node dependencies:
@@ -264,8 +265,23 @@ The editor only reads/writes files inside `data/` and currently lists:
 
 Editor modes:
 
-- `Structured`: form-based editing for jobs and summaries
+- `Structured`: form-based editing for jobs, summaries, resumes, and active selection
 - `Raw YAML`: direct text editing for full control
+
+The structured resume editor uses the selected user's real catalogs to populate
+layouts, themes, summaries, job files and IDs, links, and skills. It edits PDF
+settings, contact information, ordered job references, link references, skill
+groups, and education entries. The active-resume form selects a valid user and
+resume definition and controls brief generation. Sections not represented by a
+form are retained unchanged during structured saves.
+
+The structured job editor supports searching by job ID, title, or company;
+editing all job fields currently used by the repository (`id`, `include`,
+`brief`, title, company, location, dates, and description); duplicating jobs
+with a generated unique ID; reordering jobs; and guarded deletion. Optional
+`include` and `brief` values can be explicitly unset, blank locations are stored
+as `null`, and unrecognized job fields are retained during structured saves.
+Validation rejects missing required job fields and duplicate job IDs.
 
 Before either mode saves, the editor parses the candidate YAML and validates a
 temporary copy against the complete supported-resume matrix. Invalid content is

@@ -80,6 +80,61 @@ export function createEditorApp(options = {}) {
   return files.sort();
   }
 
+  async function listResumeFiles() {
+    const entries = await fs.readdir(dataRoot, { withFileTypes: true });
+    const files = ['data/active_resume.yml'];
+    for (const entry of entries.filter((item) => item.isDirectory())) {
+      const yamlFiles = await collectYamlFiles(path.join(dataRoot, entry.name));
+      for (const filePath of yamlFiles) {
+        if (/\/resume[^/]*\.ya?ml$/i.test(filePath.replace(/\\/g, '/'))) {
+          files.push(path.relative(repoRoot, filePath).replace(/\\/g, '/'));
+        }
+      }
+    }
+    return files.sort((left, right) => left === 'data/active_resume.yml' ? -1 : left.localeCompare(right));
+  }
+
+  async function loadYamlIfPresent(filePath, fallback) {
+    try { return yaml.load(await fs.readFile(filePath, 'utf8')) ?? fallback; }
+    catch (error) { if (error.code === 'ENOENT') return fallback; throw error; }
+  }
+
+  async function resumeOptions(relativePath) {
+    const segments = relativePath.replace(/\\/g, '/').split('/');
+    let user = segments.length >= 3 ? segments[1] : '';
+    const users = (await fs.readdir(dataRoot, { withFileTypes: true }))
+      .filter((entry) => entry.isDirectory()).map((entry) => entry.name).sort();
+    if (!user && relativePath.replace(/\\/g, '/') === 'data/active_resume.yml') {
+      const active = await loadYamlIfPresent(path.join(dataRoot, 'active_resume.yml'), {});
+      user = String(active?.user ?? '');
+    }
+    if (!user) user = users[0] || '';
+    const userRoot = path.join(dataRoot, user);
+    const userFiles = await collectYamlFiles(userRoot);
+    const resumes = userFiles.filter((file) => /\/resume[^/]*\.ya?ml$/i.test(file.replace(/\\/g, '/')))
+      .map((file) => path.basename(file, path.extname(file))).sort();
+    const jobFiles = {};
+    for (const file of userFiles.filter((item) => /\/jobs[^/]*\.ya?ml$/i.test(item.replace(/\\/g, '/')))) {
+      const key = path.basename(file, path.extname(file));
+      const jobs = await loadYamlIfPresent(file, []);
+      jobFiles[key] = Array.isArray(jobs) ? jobs.map((job) => String(job?.id ?? '')).filter(Boolean) : [];
+    }
+    const layoutsDir = path.join(userRoot, 'layouts');
+    const summariesDir = path.join(userRoot, 'summaries');
+    const layouts = (await collectYamlFiles(layoutsDir).catch(() => []))
+      .map((file) => path.basename(file, path.extname(file))).sort();
+    const summaries = (await collectYamlFiles(summariesDir).catch(() => []))
+      .map((file) => path.basename(file, path.extname(file))).sort();
+    const skills = await loadYamlIfPresent(path.join(userRoot, 'skills.yml'), []);
+    const linksData = await loadYamlIfPresent(path.join(userRoot, 'links.yml'), {});
+    return {
+      user, users, resumes, layouts, summaries, jobFiles,
+      skills: Array.isArray(skills) ? skills.map(({ id, label }) => ({ id, label })) : [],
+      links: Array.isArray(linksData?.links) ? linksData.links.map(({ name, url }) => ({ name, url })) : [],
+      themes: ['theme-default', 'theme-fern', 'theme-grey', 'theme-orange', 'theme-tapestry', 'theme-tradewind']
+    };
+  }
+
   function candidateContent(body) {
     if (Object.prototype.hasOwnProperty.call(body || {}, 'content')) return String(body.content ?? '');
     if (Object.prototype.hasOwnProperty.call(body || {}, 'data')) {
@@ -97,8 +152,43 @@ export function createEditorApp(options = {}) {
     }
 
     const normalizedPath = relativePath.replace(/\\/g, '/');
+    if (normalizedPath === 'data/active_resume.yml') {
+      const user = String(parsed?.user ?? '').trim();
+      const name = String(parsed?.name ?? '').trim();
+      const errors = [];
+      if (!user) errors.push('Active resume requires user');
+      if (!name) errors.push('Active resume requires name');
+      if (user && name) {
+        const resumePath = path.join(dataRoot, user, `${name}.yml`);
+        try { await fs.access(resumePath); } catch { errors.push(`Active resume does not exist: data/${user}/${name}.yml`); }
+      }
+      if (errors.length) return { valid: false, errors };
+    }
     if (/\/jobs[^/]*\.ya?ml$/i.test(normalizedPath) && !Array.isArray(parsed)) {
       return { valid: false, errors: ['Job catalog YAML must contain a top-level array'] };
+    }
+    if (/\/jobs[^/]*\.ya?ml$/i.test(normalizedPath) && Array.isArray(parsed)) {
+      const errors = [];
+      const ids = new Map();
+      parsed.forEach((job, index) => {
+        if (!job || typeof job !== 'object' || Array.isArray(job)) {
+          errors.push(`Job ${index + 1} must be a mapping`);
+          return;
+        }
+        const id = String(job.id ?? '').trim();
+        if (!id) errors.push(`Job ${index + 1} requires a non-empty id`);
+        else if (ids.has(id)) errors.push(`Duplicate job id '${id}' at jobs ${ids.get(id)} and ${index + 1}`);
+        else ids.set(id, index + 1);
+        for (const field of ['title', 'company', 'desc']) {
+          if (!String(job[field] ?? '').trim()) errors.push(`Job '${id || index + 1}' requires ${field}`);
+        }
+        for (const nested of ['location', 'dates']) {
+          if (!job[nested] || typeof job[nested] !== 'object' || Array.isArray(job[nested])) {
+            errors.push(`Job '${id || index + 1}' requires a ${nested} mapping`);
+          }
+        }
+      });
+      if (errors.length) return { valid: false, errors };
     }
     if (/\/summaries\/[^/]+\.ya?ml$/i.test(normalizedPath)) {
       const summary = parsed?.summary;
@@ -158,11 +248,22 @@ export function createEditorApp(options = {}) {
 
   app.get('/api/files', async (_req, res) => {
   try {
-    const [jobs, summaries] = await Promise.all([listJobsFiles(), listSummaryFiles()]);
-    res.json({ jobs, summaries });
+    const [jobs, summaries, resumes] = await Promise.all([listJobsFiles(), listSummaryFiles(), listResumeFiles()]);
+    res.json({ jobs, summaries, resumes });
   } catch (error) {
     res.status(500).json({ error: error.message || 'Failed to list files' });
   }
+  });
+
+  app.get('/api/resume-options', async (req, res) => {
+    try {
+      const relativePath = String(req.query.path || '');
+      if (!relativePath) return res.status(400).json({ error: 'Missing path query parameter' });
+      normalizeWithinData(relativePath);
+      return res.json(await resumeOptions(relativePath));
+    } catch (error) {
+      return res.status(400).json({ error: error.message || 'Failed to load resume options' });
+    }
   });
 
   app.get('/api/file', async (req, res) => {

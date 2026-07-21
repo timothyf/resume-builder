@@ -13,9 +13,22 @@ test('lists editor files and rejects paths outside data', async (t) => {
   const files = await (await fetch(`${baseUrl}/api/files`)).json();
   assert.deepEqual(files.jobs, ['data/person/jobs.yml']);
   assert.deepEqual(files.summaries, ['data/person/summaries/summary.yml']);
+  assert.deepEqual(files.resumes, ['data/active_resume.yml', 'data/person/resume_test.yml']);
+
+  const options = await (await fetch(`${baseUrl}/api/resume-options?path=data/person/resume_test.yml`)).json();
+  assert.deepEqual(options.layouts, ['layout']);
+  assert.deepEqual(options.summaries, ['summary']);
+  assert.deepEqual(options.jobFiles.jobs, ['original']);
 
   const traversal = await fetch(`${baseUrl}/api/file?path=${encodeURIComponent('../secret.yml')}`);
   assert.equal(traversal.status, 400);
+
+  const missingActive = await fetch(`${baseUrl}/api/validate`, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ path: 'data/active_resume.yml', data: { user: 'person', name: 'missing' } })
+  });
+  assert.equal(missingActive.status, 422);
+  assert.match((await missingActive.json()).errors.join(' '), /does not exist/);
 });
 
 test('validates before saving, creates a backup, and writes atomically', async (t) => {
@@ -45,14 +58,24 @@ test('validates before saving, creates a backup, and writes atomically', async (
   assert.match((await wrongShape.json()).errors[0], /top-level array/);
   assert.equal(await fs.readFile(filePath, 'utf8'), original);
 
+  const duplicateIds = await fetch(`${baseUrl}/api/file`, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      path: 'data/person/jobs.yml',
+      content: '- &job\n  id: duplicate\n  title: One\n  company: Example\n  location: {}\n  dates: {}\n  desc: One\n- <<: *job\n  title: Two\n'
+    })
+  });
+  assert.equal(duplicateIds.status, 422);
+  assert.match((await duplicateIds.json()).errors.join(' '), /Duplicate job id/);
+
   const rejected = await fetch(`${baseUrl}/api/file`, {
     method: 'POST', headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ path: 'data/person/jobs.yml', content: '- title: invalid-title\n' })
+    body: JSON.stringify({ path: 'data/person/jobs.yml', content: '- id: rejected\n  title: invalid-title\n  company: Example\n  location: {}\n  dates: {}\n  desc: Description\n' })
   });
   assert.equal(rejected.status, 422);
   assert.equal(await fs.readFile(filePath, 'utf8'), original);
 
-  const replacement = '- id: changed\n  title: Safe title\n';
+  const replacement = '- id: changed\n  title: Safe title\n  company: Example\n  location: {}\n  dates: {}\n  desc: Description\n';
   const saved = await fetch(`${baseUrl}/api/file`, {
     method: 'POST', headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ path: 'data/person/jobs.yml', content: replacement })
