@@ -21,6 +21,10 @@ supported:
     name: resume_manager
   - user: timothyfisher
     name: resume_tunecore
+  - user: timothyfisher
+    name: resume_dev_playon
+  - user: timothyfisher
+    name: resume_tread
 
 archived:
   - user: kerryfisher

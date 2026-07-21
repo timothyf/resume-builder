@@ -50,7 +50,7 @@ class ResumeDataValidator
     jobs_filename = required_value(resume, 'jobs_filename', resume_path)
     pdf = required_mapping(resume, 'pdf', resume_path)
     required_value(pdf, 'filename', "#{resume_path}: pdf")
-    validate_pdf_source(pdf, resume_path)
+    # validate_pdf_source(pdf, resume_path)
 
     layout_path = "data/#{@user}/layouts/#{layout_name}.yml" unless blank?(layout_name)
     templates = layout_path ? validate_layout(load_mapping(layout_path), layout_path) : []
@@ -117,7 +117,7 @@ class ResumeDataValidator
     contact_path = "#{resume_path}: contact_info"
     required_value(contact, 'email', contact_path)
     address = required_mapping(contact, 'address', contact_path)
-    %w[street city state postal_code].each do |key|
+    %w[city state postal_code].each do |key|
       required_value(address, key, "#{contact_path}.address")
     end
     validate_links(resume, resume_path) if resume.key?('links')

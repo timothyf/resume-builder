@@ -75,11 +75,29 @@
     start: 2021, February
     end: 2022, June
   desc: |
+    <p>
+    Joined Roostify as a Senior Developer and was promoted to Engineering Manager in October 2021. 
+    Led the development of Roostify's mortgage application and processing engine, a white-labeled 
+    platform used by major financial institutions, including Chase Bank.
+    </p>
+    <p>
+    Senior Developer:<br/>
+    Led the design and implementation of new features within the core Roostify platform, ensuring 
+    high performance and scalability to meet client needs.
+    </p>
+    <p>
+    Engineering Manager:<br/>
+    Managed a cross-functional team of 6-10 software developers and QA engineers. Drove the team's 
+    success through leadership, technical guidance, and process improvements.
+    </p>
     <ul>
-      <li>Led design and implementation of scalable features for a white-labeled mortgage application and processing platform used by major financial institutions.</li>
-      <li>Promoted from Senior Developer to Engineering Manager, combining hands-on technical leadership with responsibility for a cross-functional team of 6–10 engineers and QA professionals.</li>
-      <li>Guided architecture, design, estimation, and delivery while helping engineers resolve complex implementation challenges.</li>
-      <li>Improved planning, execution, mentorship, and engineering quality across the team.</li>
+    <li>Conducted regular 1-on-1 meetings to mentor and support team members, fostering growth and 
+    collaboration.</li>
+    <li>Oversaw an agile (scrum) development process, facilitating efficient sprint planning, estimation, 
+    and project delivery.</li>
+    <li>Assisted the team with technical challenges during development, ensuring smooth, high-quality deliverables.</li>
+    <li>Led recruitment, onboarding, and talent management, including salary planning, performance reviews, 
+    and career progression for team members.</li>
     </ul>
     <p>
     Tech Stack: Ruby, Rails, Full-Stack Development, REST, JSON, AWS, GCP, JavaScript, React, Heroku
@@ -362,3 +380,4 @@
       saved the company money</li>
       <li>Plan and develop strategy for cloud migration and digital transformation initiatives</li>
     </ul>
+    Tech Stack: Technology Consulting, Network & Infrastructure Design, Technology Evaluation

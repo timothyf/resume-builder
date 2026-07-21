@@ -95,10 +95,15 @@
 - id: 48
   label: Payment Processing & Integration (Shopify, Stripe)
 - id: 49
-  label: Team mangement, mentorship
+  label: Team management, mentorship
 - id: 50
   label: Technical Strategy & Vision
 - id: 51
-  label: Agile Processes (Scrum, Kanban)
+  label: Agile Processes
 - id: 52
   label: Elasticsearch, Redis, Memcached
+- id: 53
+  label: GitHub Copilot, ChatGPT, Claude, Cursor
+- id: 54
+  label: Code generation, debugging, test development, technical documentation
+
