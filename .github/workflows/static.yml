@@ -32,6 +32,27 @@ jobs:
           ruby-version: "3.4.9"
           bundler-cache: true
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install visual test dependencies
+        run: npm ci
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install PDF inspection dependencies
+        run: |
+          pip install -r requirements-visual.txt
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+
       - name: Set deployment timestamp
         run: echo "RESUME_DEPLOYED_AT=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> "$GITHUB_ENV"
 
@@ -40,6 +61,19 @@ jobs:
 
       - name: Test supported resume build matrix
         run: RUN_INTEGRATION=1 bundle exec rspec spec/integration/build_smoke_spec.rb
+
+      - name: Test visual regression
+        run: RUN_VISUAL=1 bundle exec rspec spec/visual/visual_regression_spec.rb
+
+      - name: Upload visual regression diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-regression-diagnostics
+          path: |
+            tmp/visual-regression/current
+            tmp/pdfs/visual-regression
+          if-no-files-found: ignore
 
       - name: Build resume
         run: ./build_resume.bash --resume-user timothyfisher --resume-name resume_dev_refined

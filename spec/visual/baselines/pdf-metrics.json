@@ -1,0 +1,26 @@
+{
+  "page_count": 3,
+  "pages": [
+    {
+      "page": 1,
+      "width": 612,
+      "height": 792,
+      "characters": 3794,
+      "ink_fraction": 0.360994
+    },
+    {
+      "page": 2,
+      "width": 612,
+      "height": 792,
+      "characters": 3487,
+      "ink_fraction": 0.376859
+    },
+    {
+      "page": 3,
+      "width": 612,
+      "height": 792,
+      "characters": 2907,
+      "ink_fraction": 0.343182
+    }
+  ]
+}

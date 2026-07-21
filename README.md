@@ -168,6 +168,26 @@ disabled. Each build verifies the screen and PDF entrypoints, theme CSS, and
 brief artifact behavior. This matrix also runs in the GitHub Pages workflow
 before the deployed resume is built.
 
+Run visual regression coverage after installing the Node and Python test
+dependencies (`npm ci` and `pip install -r requirements-visual.txt`):
+
+    RUN_VISUAL=1 bundle exec rspec spec/visual/visual_regression_spec.rb
+
+Visual coverage compares desktop screenshots for every supported theme, a
+mobile-width screenshot, and the first rendered print/PDF page against the PNG
+baselines in `spec/visual/baselines/`. It also renders every generated PDF page
+under `tmp/pdfs/visual-regression/` and checks the expected page count, text
+bounds, rendered content, and unexpected blank pages.
+
+After intentionally changing layout or styles, inspect the current images and
+update the committed baselines with:
+
+    RUN_VISUAL=1 UPDATE_VISUAL=1 bundle exec rspec spec/visual/visual_regression_spec.rb
+
+Set `VISUAL_CHROME_BIN`, `VISUAL_NODE_BIN`, or `VISUAL_PYTHON_BIN` when those
+executables are not discoverable from their standard locations. Failed CI runs
+upload current screenshots and rendered PDF pages as diagnostic artifacts.
+
 ## Local YAML editor
 
 You can run a local-only editor UI for YAML data files (jobs and summaries)
