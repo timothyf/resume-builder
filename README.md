@@ -4,12 +4,32 @@ Resume Builder is an HTML and PDF resume builder made in Ruby with [Middleman](h
 
 It has the following features:
 
- * Separation between content and style, all your resume content is a YAML
-   file.
- * Supports 13 different resume section types
- * Can optionally include a gravatar photo
- * Markdown/HTML for formatting of the longer paragraphs.
- * You can preview your changes with Middleman's included server (with livereload).
+- YAML-based resume content with layouts and styles kept separately.
+- Thirteen resume section types and six complete screen/print themes.
+- Multiple selectable resume definitions, with explicit supported and archived lists.
+- Optional brief versions, Gravatar photos, and Markdown/HTML descriptions.
+- Schema validation before rendering, including referenced jobs, skills, links,
+  summaries, layouts, templates, and PDF sources.
+- Static HTML and PDF-ready HTML generation, plus a downloadable PDF copied from
+  each resume's configured source.
+- Unit, shell, full build-matrix, rendered-content, PDF-conversion, and visual
+  regression coverage.
+- Automated GitHub Pages deployment to
+  [resume.timothyfisher.com](https://resume.timothyfisher.com/).
+
+## Current project state
+
+The active deployment is `timothyfisher/resume_dev_refined`, selected in
+`data/active_resume.yml`, with brief generation disabled. The repository
+currently contains 11 supported resume definitions and 2 explicitly archived
+legacy definitions. Supported resumes are exercised across all 6 themes with
+brief generation both enabled and disabled, for a total of 132 integration
+builds.
+
+Every build writes Middleman's intermediate files to `build/` and packages the
+selected deployable resume under `dist/<user>/<resume-name>/`. The packaged
+artifact contains the screen and PDF HTML entrypoints, stylesheets, optional
+brief entrypoints, and the configured downloadable PDF.
 
 ## Installation
 
@@ -28,13 +48,24 @@ It has the following features:
      rvm install 3.4.9
      rvm use 3.4.9@resume --create
 
- Install all dependencies:
+ Install Ruby dependencies:
 
      bundle install
 
+Node.js 22, Python 3.12, and Poppler are also required to run the complete
+visual regression suite. Install the project-managed Node and Python packages
+with:
+
+    npm ci
+    pip install -r requirements-visual.txt
+
+Install `poppler-utils` with your operating system package manager so
+`pdftoppm` is available.
+
 ## Preview
 
-See the result: [sample resume](http://timothyf.github.com/resume-builder/).
+See the deployed resume at
+[resume.timothyfisher.com](https://resume.timothyfisher.com/).
 
 ## Usage
 
@@ -60,6 +91,10 @@ You can also use environment variables:
 
     ACTIVE_RESUME_USER=timothyfisher ACTIVE_RESUME_NAME=resume_dev_refined ./build_resume.bash
     ACTIVE_RESUME_THEME=theme-orange ./build_resume.bash
+
+Optional brief-generation override:
+
+    ACTIVE_RESUME_GENERATE_BRIEF=true ./build_resume.bash
 
 View current configured and effective active resume selection:
 
@@ -88,11 +123,20 @@ To create a new complete layout theme:
 4. Add `theme-yourname` to `AVAILABLE_THEMES` in `lib/resume_selection.rb`.
 5. Build with `./build_resume.bash --theme theme-yourname`.
 
+The packaged result is written to `dist/<user>/<resume-name>/`. Its primary
+entrypoints are `index.html` for the screen resume and `pdf.html` for the print
+layout. If brief generation is enabled, corresponding named screen and PDF
+brief files are included as well.
+
 ### Deploy your resume
 
-    bundle exec middleman deploy
+The primary deployment path is the GitHub Pages workflow in
+`.github/workflows/static.yml`. A push to `main` validates all supported resume
+definitions, runs the 132-build integration matrix, runs visual regression
+coverage, builds `timothyfisher/resume_dev_refined`, and deploys its packaged
+artifact.
 
-Or:
+For a manual deployment using the Middleman Git deploy configuration:
 
     ./deploy_resume.bash
 
@@ -104,9 +148,10 @@ Optional theme override:
 
     ./deploy_resume.bash --theme theme-fern
 
-Upload it to a GitHub page. Your resume will be available at `http://yourusername.github.com/resume`.
-
-
+The workflow sets `RESUME_DEPLOYED_AT` to the UTC deployment time. The screen
+resume converts it to `America/Detroit` local time and displays the correct
+`EST` or `EDT` abbreviation below the resume. The timestamp is intentionally
+omitted from the PDF entrypoint.
 
 ### Launch the preview server:
 
@@ -148,6 +193,7 @@ The matrix in `data/resume_support.yml` explicitly classifies every stored
 definitions must pass the current schema validator. Archived definitions are
 not buildable under the current schema and must include a reason. A new resume
 definition must be added to one of these lists or matrix validation will fail.
+The current matrix contains 11 supported and 2 archived definitions.
 
 Run shell script tests:
 
@@ -179,8 +225,14 @@ baselines in `spec/visual/baselines/`. It also renders every generated PDF page
 under `tmp/pdfs/visual-regression/` and checks the expected page count, text
 bounds, rendered content, and unexpected blank pages.
 
-After intentionally changing layout or styles, inspect the current images and
-update the committed baselines with:
+The screenshots currently render the active resume rather than a fixed
+test-only content fixture. Normal resume edits can therefore change wrapping,
+document height, or PDF pagination and cause an intentional visual failure.
+Review the generated images before updating baselines; do not update them
+automatically merely to make the test pass.
+
+After intentionally changing layout, styles, or resume content, inspect the
+current images and update the committed baselines with:
 
     RUN_VISUAL=1 UPDATE_VISUAL=1 bundle exec rspec spec/visual/visual_regression_spec.rb
 
@@ -195,7 +247,7 @@ without exposing data to any external service.
 
 Install Node dependencies:
 
-    npm install
+    npm ci
 
 Start the local editor:
 
@@ -280,7 +332,8 @@ the script:
 
 By default, the command resolves the active resume, builds its PDF HTML, sends
 that HTML to FreeConvert, saves the result to the resume's configured
-`pdf.source`, and runs the build again so `dist/` contains the new PDF.
+`pdf.source`, and runs the build again so `dist/` contains the new PDF. On
+completion it prints the directory containing the saved source PDF.
 
 Common environment overrides supported by the script:
 
@@ -309,11 +362,11 @@ pdf:
   role: developer
 ```
 
-`filename` is the public path without the `.pdf` extension. When `source` is
-present, it is resolved relative to the project root and copied into the built
-resume artifact at that public path. A configured source that does not exist
-causes the build to fail so a broken PDF link is not deployed. Resumes that do
-not provide `source` continue to build without copying a PDF.
+`filename` is the public path without the `.pdf` extension. `source` is resolved
+relative to the project root and copied into the built resume artifact at that
+public path. A configured source that does not exist causes validation/building
+to fail so a broken PDF link is not deployed. All currently supported resume
+definitions provide a PDF source.
 
 #### Headers
 
