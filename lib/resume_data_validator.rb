@@ -239,7 +239,7 @@ class ResumeDataValidator
     required_value(job, 'company', job_path)
     required_value(job, 'title', job_path)
     location = required_mapping(job, 'location', job_path)
-    required_value(location, 'state', "#{job_path}.location")
+    #required_value(location, 'state', "#{job_path}.location")
     dates = required_mapping(job, 'dates', job_path)
     required_value(dates, 'start', "#{job_path}.dates")
     required_value(dates, 'end', "#{job_path}.dates")
