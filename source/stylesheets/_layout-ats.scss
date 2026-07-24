@@ -99,6 +99,28 @@
     padding: 0;
   }
 
+  .main-wrapper .section {
+    margin-bottom: 30px;
+    padding: 0;
+  }
+
+  .education-items {
+    display: flex;
+    gap: 2rem;
+}
+
+.education-items .item {
+    flex: 1;
+    min-width: 0;
+}
+
+@media (max-width: 600px) {
+    .education-items {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
   .main-wrapper .section-title,
   .container-block-title {
     margin: 0 0 7px;
@@ -207,7 +229,7 @@
   }
 
   .details {
-    color: #111;
+    color: #545E6C
   }
 
   .education-container .item {

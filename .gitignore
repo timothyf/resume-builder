@@ -32,3 +32,5 @@ generate-html-output.pdf
 # Keep personal resume data local. Public examples belong under data/johndoe/.
 /data/timothyfisher/
 /data/kerryfisher/
+/data/active_resume.yml
+/data/resume_support.yml

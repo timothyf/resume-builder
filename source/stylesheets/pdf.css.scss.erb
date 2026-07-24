@@ -8,5 +8,10 @@
 <%= File.read(theme_variables_path) %>
 <%= File.read(File.expand_path('_base.scss', __dir__)) %>
 <%= File.read(File.expand_path('_print.scss', __dir__)) %>
-<%= File.read(File.expand_path('_layout-overrides-pdf.scss', __dir__)) %>
-<%= File.read(File.expand_path('_layout-ats.scss', __dir__)) %>
+<% if ENV.fetch('ACTIVE_RESUME_LAYOUT', '').strip == 'layout_ats' %>
+    <%= File.read(File.expand_path('_layout-ats.scss', __dir__)) %>
+    <%= File.read(File.expand_path('_layout-overrides-pdf-ats.scss', __dir__)) %>
+<% else %>
+    <%= File.read(File.expand_path('_layout-overrides-pdf.scss', __dir__)) %>
+<% end %>
+
