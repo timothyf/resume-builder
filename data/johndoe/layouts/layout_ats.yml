@@ -2,23 +2,20 @@ content:
   header:
 
   center:
+    - template: profile
+    - template: contact_ats
     - name: summary
       display_name: Summary
       template: summary
-    - name: experience
-      display_name: Experience
+    - display_name: Skills
+      template: skills_ats
+    - display_name: Experience
       template: experiences
-
-  right:
-    - display_name:
-      template: profile
-    - display_name:
-      template: contact
     - display_name: Education
       template: education
-    - display_name: Skills
-      template: skills
     - display_name: Download PDF
       template: download
+
+  right: []
 
   footer:

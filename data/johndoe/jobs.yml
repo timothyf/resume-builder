@@ -1,0 +1,24 @@
+- id: example-developer
+  title: Software Developer
+  company: Example Company
+  location:
+    city: Example City
+    state: MI
+  dates:
+    start: January 2021
+    end: Present
+  desc: |
+    Builds reliable web applications, collaborates with product partners,
+    and improves automated test coverage.
+
+- id: example-intern
+  title: Software Engineering Intern
+  company: Sample Labs
+  location:
+    city: Example City
+    state: MI
+  dates:
+    start: May 2020
+    end: August 2020
+  desc: |
+    Created internal tools and documented common development workflows.

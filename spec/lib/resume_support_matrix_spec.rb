@@ -50,6 +50,26 @@ RSpec.describe ResumeSupportMatrix do
     end
   end
 
+  it 'does not require Git-ignored local resumes to be classified' do
+    Dir.mktmpdir do |root|
+      write_resume(root, 'johndoe', 'resume_sample')
+      write_resume(root, 'privateperson', 'resume_private')
+      write_yaml(root, 'data/resume_support.yml', {
+        'supported' => [{ 'user' => 'johndoe', 'name' => 'resume_sample' }],
+        'archived' => []
+      })
+      File.write(File.join(root, '.gitignore'), "/data/privateperson/\n")
+      system('git', 'init', '--quiet', root, exception: true)
+
+      matrix = described_class.new(
+        project_root: root,
+        validator_factory: passing_validator_factory
+      )
+
+      expect(matrix.validate!).to be(true)
+    end
+  end
+
   it 'rejects stale and duplicate classifications' do
     Dir.mktmpdir do |root|
       write_resume(root, 'person', 'resume_current')

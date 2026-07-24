@@ -19,12 +19,10 @@ It has the following features:
 
 ## Current project state
 
-The active deployment is `timothyfisher/resume_dev_refined`, selected in
-`data/active_resume.yml`, with brief generation disabled. The repository
-currently contains 13 supported resume definitions and 2 explicitly archived
-legacy definitions. Supported resumes are exercised across all 6 themes with
-brief generation both enabled and disabled, for a total of 156 integration
-builds.
+The tracked example deployment is `johndoe/resume_sample`, selected in
+`data/active_resume.yml`, with brief generation disabled. Supported resumes are
+exercised across all six themes with brief generation both enabled and
+disabled.
 
 Every build writes Middleman's intermediate files to `build/` and packages the
 selected deployable resume under `dist/<user>/<resume-name>/`. The packaged
@@ -81,7 +79,7 @@ Or use the helper script:
 
 Optional profile override:
 
-    ./build_resume.bash --resume-user timothyfisher --resume-name resume_dev_refined
+    ./build_resume.bash --resume-user johndoe --resume-name resume_sample
 
 Optional theme override:
 
@@ -89,7 +87,7 @@ Optional theme override:
 
 You can also use environment variables:
 
-    ACTIVE_RESUME_USER=timothyfisher ACTIVE_RESUME_NAME=resume_dev_refined ./build_resume.bash
+    ACTIVE_RESUME_USER=johndoe ACTIVE_RESUME_NAME=resume_sample ./build_resume.bash
     ACTIVE_RESUME_THEME=theme-orange ./build_resume.bash
 
 Optional brief-generation override:
@@ -102,7 +100,7 @@ View current configured and effective active resume selection:
 
 With override preview:
 
-    ACTIVE_RESUME_USER=timothyfisher ACTIVE_RESUME_NAME=resume_main_mgr ./show_active_resume.bash
+    ACTIVE_RESUME_USER=johndoe ACTIVE_RESUME_NAME=resume_sample ./show_active_resume.bash
 
 Available themes:
 
@@ -110,7 +108,7 @@ Available themes:
 
 ### ATS single-column layout
 
-`data/timothyfisher/layouts/layout_ats.yml` provides a text-first,
+`data/johndoe/layouts/layout_ats.yml` provides a text-first,
 single-column layout modeled on a conventional ATS resume. It renders a
 centered identity and contact header followed by summary, skills, experience,
 and education. The layout uses semantic HTML, standard fonts, black text,
@@ -154,8 +152,8 @@ brief files are included as well.
 
 The primary deployment path is the GitHub Pages workflow in
 `.github/workflows/static.yml`. A push to `main` validates all supported resume
-definitions, runs the 156-build integration matrix, runs visual regression
-coverage, builds `timothyfisher/resume_dev_refined`, and deploys its packaged
+definitions, runs the integration matrix, runs visual regression
+coverage, builds `johndoe/resume_sample`, and deploys its packaged
 artifact.
 
 For a manual deployment using the Middleman Git deploy configuration:
@@ -164,7 +162,7 @@ For a manual deployment using the Middleman Git deploy configuration:
 
 Optional profile override:
 
-    ./deploy_resume.bash --resume-user timothyfisher --resume-name resume_dev_refined
+    ./deploy_resume.bash --resume-user johndoe --resume-name resume_sample
 
 Optional theme override:
 
@@ -204,7 +202,7 @@ Validate the configured active resume without running a build:
 
 Validate a selected resume with overrides:
 
-    ./validate_resume.bash --resume-user timothyfisher --resume-name resume_dev_refined
+    ./validate_resume.bash --resume-user johndoe --resume-name resume_sample
 
 Validate the complete supported-resume matrix:
 
@@ -215,7 +213,7 @@ The matrix in `data/resume_support.yml` explicitly classifies every stored
 definitions must pass the current schema validator. Archived definitions are
 not buildable under the current schema and must include a reason. A new resume
 definition must be added to one of these lists or matrix validation will fail.
-The current matrix contains 13 supported and 2 archived definitions.
+The tracked matrix contains the supported John Doe example.
 
 Run shell script tests:
 
@@ -322,7 +320,7 @@ Run the editor API and headless-browser tests with:
 ## Resume instructions
 
 To create/update your resume, edit `data/active_resume.yml` and the selected
-resume file under `data/<user>/` (for example `data/timothyfisher/resume_dev_refined.yml`).
+resume file under `data/<user>/` (for example `data/johndoe/resume_sample.yml`).
 All keys with a `desc: |` header can be Markdown formatted.
 
 Every Middleman build and preview validates the effective active resume before

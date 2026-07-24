@@ -1,0 +1,46 @@
+layout: layout
+
+pdf:
+  filename: pdf/JohnDoe-Resume
+  source: data/johndoe/JohnDoe-Resume.pdf
+
+contact_info:
+  name: John Doe
+  email: john.doe@example.com
+  phone: (555) 010-1234
+  address:
+    city: Example City
+    state: MI
+    postal_code: "48000"
+
+links:
+  - name: GitHub
+  - name: LinkedIn
+
+summary:
+  file: summary
+
+skills:
+  - name: Development
+    skills:
+      - ruby
+      - javascript
+      - testing
+  - name: Practices
+    skills:
+      - collaboration
+      - delivery
+
+jobs_filename: jobs
+jobs:
+  - id: example-developer
+    section: experiences
+  - id: example-intern
+    section: experiences
+
+education:
+  - name: Example University
+    degree: B.S. Computer Science
+    dates:
+      start: "2014"
+      end: "2018"

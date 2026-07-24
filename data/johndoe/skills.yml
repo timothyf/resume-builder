@@ -1,0 +1,10 @@
+- id: ruby
+  label: Ruby
+- id: javascript
+  label: JavaScript
+- id: testing
+  label: Automated testing
+- id: collaboration
+  label: Cross-functional collaboration
+- id: delivery
+  label: Continuous delivery
