@@ -1,15 +1,3 @@
-user: timothyfisher
-#name: resume_leader
-#name: resume_developer_update
-#name: resume_developer_update
-#name: resume_leader_update
-#name: resume_bestbuy
-#name: resume_bn
-#name: resume_tunecore
-#name: resume_manager
-#name: resume_main_dev
-#name: resume_main_mgr
-#name: resume_dev_refined
-#name: resume_dev_playon
-name: resume_tread
+user: johndoe
+name: resume_sample
 generate_brief: false

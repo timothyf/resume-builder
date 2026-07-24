@@ -1,0 +1,10 @@
+content:
+  center:
+    - template: summary
+    - template: experiences
+  right:
+    - template: profile
+    - template: contact
+    - template: skills
+    - template: education
+    - template: download

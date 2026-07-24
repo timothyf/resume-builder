@@ -1,3 +1,4 @@
+require 'open3'
 require 'yaml'
 require_relative 'resume_data_validator'
 
@@ -122,10 +123,27 @@ class ResumeSupportMatrix
 
   def discovered_resume_keys
     pattern = File.join(@project_root, 'data', '*', 'resume*.yml')
-    Dir.glob(pattern).sort.map do |path|
+    Dir.glob(pattern).sort.reject { |path| ignored_by_git?(path) }.map do |path|
       relative = path.delete_prefix(File.join(@project_root, 'data') + File::SEPARATOR)
       relative.delete_suffix('.yml')
     end
+  end
+
+  def ignored_by_git?(path)
+    relative_path = path.delete_prefix(@project_root + File::SEPARATOR)
+    _stdout, _stderr, status = Open3.capture3(
+      'git',
+      '-C',
+      @project_root,
+      'check-ignore',
+      '--no-index',
+      '--quiet',
+      '--',
+      relative_path
+    )
+    status.success?
+  rescue Errno::ENOENT
+    false
   end
 
   def validate_supported_resumes

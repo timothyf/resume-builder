@@ -79,7 +79,7 @@ jobs:
           if-no-files-found: ignore
 
       - name: Build resume
-        run: ./build_resume.bash --resume-user timothyfisher --resume-name resume_dev_refined
+        run: ./build_resume.bash --resume-user johndoe --resume-name resume_sample
 
       - name: Set up Pages
         uses: actions/configure-pages@v5
@@ -87,7 +87,7 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist/timothyfisher/resume_dev_refined
+          path: ./dist/johndoe/resume_sample
 
       - name: Deploy to Pages
         id: deployment

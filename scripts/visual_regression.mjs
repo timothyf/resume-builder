@@ -15,8 +15,8 @@ const THEMES = [
   'theme-tapestry',
   'theme-tradewind'
 ];
-const RESUME_USER = 'timothyfisher';
-const RESUME_NAME = 'resume_dev_refined';
+const RESUME_USER = 'johndoe';
+const RESUME_NAME = 'resume_sample';
 const MAX_CHANGED_PIXEL_FRACTION = Number(process.env.VISUAL_MAX_CHANGED_PIXELS || '0.03');
 const MAX_MEAN_COLOR_DELTA = Number(process.env.VISUAL_MAX_COLOR_DELTA || '0.01');
 const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));

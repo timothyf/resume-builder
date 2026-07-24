@@ -28,3 +28,7 @@ pdf/TimothyFisher-Res-Dev.pdf
 pdf/TimothyFisher-Res-Lead.pdf
 generate-html-output.pdf
 *.pdf
+
+# Keep personal resume data local. Public examples belong under data/johndoe/.
+/data/timothyfisher/
+/data/kerryfisher/

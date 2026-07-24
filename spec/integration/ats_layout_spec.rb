@@ -18,7 +18,7 @@ RSpec.describe 'ATS layout', :integration do
       entries = Dir.children(source_root).reject { |entry| excluded.include?(entry) }
       FileUtils.cp_r(entries.map { |entry| File.join(source_root, entry) }, test_root)
 
-      resume_path = File.join(test_root, 'data', 'timothyfisher', 'resume_dev_refined.yml')
+      resume_path = File.join(test_root, 'data', 'johndoe', 'resume_sample.yml')
       resume = YAML.safe_load_file(resume_path, aliases: true)
       resume['layout'] = 'layout_ats'
       resume['pdf']['useicons'] = false
@@ -26,18 +26,18 @@ RSpec.describe 'ATS layout', :integration do
 
       stdout, stderr, status = Open3.capture3(
         './build_resume.bash',
-        '--resume-user', 'timothyfisher',
-        '--resume-name', 'resume_dev_refined',
+        '--resume-user', 'johndoe',
+        '--resume-name', 'resume_sample',
         chdir: test_root
       )
       expect(status).to be_success, "ATS build failed:\n#{stdout}\n#{stderr}"
 
-      artifact_root = File.join(test_root, 'dist', 'timothyfisher', 'resume_dev_refined')
+      artifact_root = File.join(test_root, 'dist', 'johndoe', 'resume_sample')
       %w[index.html pdf.html].each do |filename|
         document = Nokogiri::HTML5.parse(File.read(File.join(artifact_root, filename)))
         expect(document.at_css('body')['class']).to include('layout-layout_ats')
         expect(document.css('.sidebar-wrapper > *')).to be_empty
-        expect(document.at_css('.main-wrapper .profile-container .name').text).to include('Timothy Fisher')
+        expect(document.at_css('.main-wrapper .profile-container .name').text).to include('John Doe')
         expect(document.at_css('.ats-contact-container')).not_to be_nil
         expect(document.at_css('.ats-skills-section')).not_to be_nil
         expect(document.at_css('.experiences-section')).not_to be_nil
