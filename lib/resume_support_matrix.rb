@@ -4,6 +4,7 @@ require_relative 'resume_data_validator'
 
 class ResumeSupportMatrix
   MANIFEST_PATH = 'data/resume_support.yml'.freeze
+  EXAMPLE_MANIFEST_PATH = 'data/resume_support.yml.example'.freeze
   ENTRY_PATTERN = /\A[a-zA-Z0-9_-]+\z/
 
   attr_reader :archived, :supported
@@ -111,14 +112,33 @@ class ResumeSupportMatrix
     end
 
     declared = classifications.keys
+    classified = (declared + example_classification_keys).uniq
     discovered = discovered_resume_keys
 
-    (discovered - declared).each do |key|
+    (discovered - classified).each do |key|
       add_error("#{key} is not classified as supported or archived in #{MANIFEST_PATH}")
     end
-    (declared - discovered).each do |key|
+    declared.reject { |key| File.file?(File.join(@project_root, 'data', "#{key}.yml")) }.each do |key|
       add_error("#{key} is declared in #{MANIFEST_PATH} but data/#{key}.yml does not exist")
     end
+  end
+
+  def example_classification_keys
+    absolute_path = File.join(@project_root, EXAMPLE_MANIFEST_PATH)
+    return [] unless File.file?(absolute_path)
+
+    manifest = YAML.safe_load_file(absolute_path, aliases: false)
+    return [] unless manifest.is_a?(Hash)
+
+    %w[supported archived].flat_map { |section| Array(manifest[section]) }.filter_map do |entry|
+      next unless entry.is_a?(Hash)
+
+      user = entry['user']
+      name = entry['name']
+      "#{user}/#{name}" if user.is_a?(String) && name.is_a?(String)
+    end
+  rescue Psych::SyntaxError
+    []
   end
 
   def discovered_resume_keys
