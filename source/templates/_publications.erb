@@ -1,0 +1,19 @@
+<% if @resume_data.publications? %>
+  <div class="education-container container-block">
+      <h2 class="container-block-title"><%= display_name %></h2>
+      <div class="education-items">
+      <% @resume_data.publications.each do |publication_id| %>
+        <% publication = @publications_by_id[publication_id.to_s] %>
+        <div class="item">
+          <div class="degree-name"><%= publication.title %></div>
+          <h5 class="degree-info meta">
+            <%= publication.role %>
+            <% if publication.published_date? %>
+              <span class="time">(<%= display_date(publication.published_date) %>)</span>
+            <% end %>
+          </h5>
+        </div>
+      <% end %>
+      </div>
+  </div>
+<% end %>

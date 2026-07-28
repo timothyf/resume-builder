@@ -59,6 +59,8 @@ class ResumeDataValidator
     validate_contact(resume, resume_path) if templates.include?('contact')
     validate_summary(resume, resume_path) if templates.include?('summary')
     validate_skills(resume, resume_path) if templates.include?('skills')
+    validate_publications(resume, resume_path) if templates.include?('publications')
+    validate_community(resume, resume_path) if templates.include?('community_leadership')
     validate_jobs(resume, resume_path, jobs_filename) if templates.any? { |name| experience_template?(name) }
     validate_education(resume, resume_path) if templates.include?('education')
   end
@@ -191,6 +193,50 @@ class ResumeDataValidator
         elsif !skill_ids.include?(skill_id.to_s)
           add_error("#{category_path}.skills[#{skill_index}] references missing skill '#{skill_id}' in #{skills_path}")
         end
+      end
+    end
+  end
+
+  def validate_publications(resume, resume_path)
+    return unless resume.key?('publications')
+
+    references = required_array(resume, 'publications', resume_path)
+    publications_path = "data/#{@user}/publications.yml"
+    catalog = load_array(publications_path)
+    publication_ids = catalog.filter_map do |publication|
+      publication['id'].to_s if publication.is_a?(Hash) && !blank?(publication['id'])
+    end
+    validate_catalog(catalog, publications_path, required_keys: %w[id role title published_date])
+    validate_duplicate_ids(publication_ids, publications_path)
+
+    references.each_with_index do |publication_id, index|
+      path = "#{resume_path}: publications[#{index}]"
+      if blank?(publication_id)
+        add_error("#{path} is required")
+      elsif !publication_ids.include?(publication_id.to_s)
+        add_error("#{path} references missing publication '#{publication_id}' in #{publications_path}")
+      end
+    end
+  end
+
+  def validate_community(resume, resume_path)
+    return unless resume.key?('community')
+
+    references = required_array(resume, 'community', resume_path)
+    community_path = "data/#{@user}/community.yml"
+    catalog = load_array(community_path)
+    community_ids = catalog.filter_map do |community|
+      community['id'].to_s if community.is_a?(Hash) && !blank?(community['id'])
+    end
+    validate_catalog(catalog, community_path, required_keys: %w[id role organization])
+    validate_duplicate_ids(community_ids, community_path)
+
+    references.each_with_index do |community_id, index|
+      path = "#{resume_path}: community[#{index}]"
+      if blank?(community_id)
+        add_error("#{path} is required")
+      elsif !community_ids.include?(community_id.to_s)
+        add_error("#{path} references missing community leadership '#{community_id}' in #{community_path}")
       end
     end
   end

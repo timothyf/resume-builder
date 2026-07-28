@@ -1,0 +1,19 @@
+<% if @resume_data.community? %>
+  <div class="education-container container-block">
+      <h2 class="container-block-title"><%= display_name %></h2>
+
+      <div class="education-items">
+        <div class="degree-name"><%= @resume_data.community_title %></div>
+        <% @resume_data.community.each do |community_id| %>
+          <% community = @community_by_id[community_id.to_s] %>
+          <div class="item">
+            <div class="degree-name"><%= community.organization %></div>
+            <h5 class="degree-info meta"><%= community.role %></h5>
+            <% if community.description? %>
+              <div class="publication-description"><%= render_markdown(community.description) %></div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+  </div>
+<% end %>

@@ -58,6 +58,12 @@ helpers do
     segments.reduce(root) { |current, segment| resolve_data_segment(current, segment) }
   end
 
+  def optional_data_path(root, *segments)
+    resolve_data_path(root, *segments)
+  rescue KeyError
+    []
+  end
+
   def build_resume_context(active_resume)
     selection = ResumeSelection.selection_context(active_resume, data)
     user = selection[:user]
@@ -72,6 +78,8 @@ helpers do
       resume: resume,
       layout: resolve_data_path(user_data, 'layouts', resume.layout),
       skills: resolve_data_path(user_data, 'skills'),
+      publications: optional_data_path(user_data, 'publications'),
+      community: optional_data_path(user_data, 'community'),
       jobs: resolve_data_path(user_data, jobs_filename)
     }
   end

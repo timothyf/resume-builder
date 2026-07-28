@@ -6,5 +6,8 @@ content:
     - template: profile
     - template: contact
     - template: skills
+    - template: publications
+    - display_name: Community Leadership
+      template: community_leadership
     - template: education
     - template: download
