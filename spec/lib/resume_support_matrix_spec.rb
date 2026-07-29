@@ -11,8 +11,12 @@ RSpec.describe ResumeSupportMatrix do
     File.write(path, YAML.dump(value))
   end
 
-  def write_resume(root, user, name)
-    write_yaml(root, "data/#{user}/#{name}.yml", { 'placeholder' => true })
+  def write_resume(root, user, name, structured: false)
+    if structured
+      write_yaml(root, "data/#{user}/resumes/#{name}/resume.yml", { 'placeholder' => true })
+    else
+      write_yaml(root, "data/#{user}/#{name}.yml", { 'placeholder' => true })
+    end
   end
 
   def passing_validator_factory
@@ -104,6 +108,23 @@ RSpec.describe ResumeSupportMatrix do
       })
       write_yaml(root, 'data/resume_support.yml.example', {
         'supported' => [{ 'user' => 'johndoe', 'name' => 'resume_sample' }],
+        'archived' => []
+      })
+
+      matrix = described_class.new(
+        project_root: root,
+        validator_factory: passing_validator_factory
+      )
+
+      expect(matrix.validate!).to be(true)
+    end
+  end
+
+  it 'discovers structured resume definitions' do
+    Dir.mktmpdir do |root|
+      write_resume(root, 'person', 'resume_current', structured: true)
+      write_yaml(root, 'data/resume_support.yml', {
+        'supported' => [{ 'user' => 'person', 'name' => 'resume_current' }],
         'archived' => []
       })
 

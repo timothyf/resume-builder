@@ -35,9 +35,9 @@ class ResumeDataValidator
       raise_validation_error
     end
 
-    resume_path = "data/#{@user}/#{@resume_name}.yml"
-    resume = load_mapping(resume_path)
-    validate_resume(resume, resume_path)
+    resume_paths = resolve_resume_paths(@user, @resume_name)
+    resume = load_mapping(resume_paths.fetch(:resume))
+    validate_resume(resume, resume_paths)
     raise_validation_error unless @errors.empty?
 
     true
@@ -45,7 +45,8 @@ class ResumeDataValidator
 
   private
 
-  def validate_resume(resume, resume_path)
+  def validate_resume(resume, resume_paths)
+    resume_path = resume_paths.fetch(:resume)
     layout_name = required_value(resume, 'layout', resume_path)
     jobs_filename = required_value(resume, 'jobs_filename', resume_path)
     pdf = required_mapping(resume, 'pdf', resume_path)
@@ -57,11 +58,11 @@ class ResumeDataValidator
 
     validate_profile(resume, resume_path) if templates.include?('profile')
     validate_contact(resume, resume_path) if templates.include?('contact')
-    validate_summary(resume, resume_path) if templates.include?('summary')
+    validate_summary(resume, resume_path, resume_paths) if templates.include?('summary')
     validate_skills(resume, resume_path) if templates.include?('skills')
     validate_publications(resume, resume_path) if templates.include?('publications')
     validate_community(resume, resume_path) if templates.include?('community_leadership')
-    validate_jobs(resume, resume_path, jobs_filename) if templates.any? { |name| experience_template?(name) }
+    validate_jobs(resume, resume_path, jobs_filename, resume_paths) if templates.any? { |name| experience_template?(name) }
     validate_education(resume, resume_path) if templates.include?('education')
   end
 
@@ -157,12 +158,10 @@ class ResumeDataValidator
     end
   end
 
-  def validate_summary(resume, resume_path)
+  def validate_summary(resume, resume_path, resume_paths)
     summary = required_mapping(resume, 'summary', resume_path)
     summary_name = required_value(summary, 'file', "#{resume_path}: summary")
-    return if blank?(summary_name)
-
-    summary_path = "data/#{@user}/summaries/#{summary_name}.yml"
+    summary_path = resolve_summary_path(resume_paths, summary_name)
     summary_data = load_mapping(summary_path)
     summary_content = required_mapping(summary_data, 'summary', summary_path)
     required_value(summary_content, 'text', "#{summary_path}: summary")
@@ -241,11 +240,9 @@ class ResumeDataValidator
     end
   end
 
-  def validate_jobs(resume, resume_path, jobs_filename)
+  def validate_jobs(resume, resume_path, jobs_filename, resume_paths)
     references = required_array(resume, 'jobs', resume_path)
-    return if blank?(jobs_filename)
-
-    jobs_path = "data/#{@user}/#{jobs_filename}.yml"
+    jobs_path = resolve_jobs_path(resume_paths, jobs_filename)
     catalog = load_array(jobs_path)
     job_ids = catalog.filter_map do |job|
       job['id'].to_s if job.is_a?(Hash) && !blank?(job['id'])
@@ -326,6 +323,50 @@ class ResumeDataValidator
     ids.tally.each do |id, count|
       add_error("#{path} contains duplicate id '#{id}'") if count > 1
     end
+  end
+
+  def resolve_resume_paths(user, resume_name)
+    structured_root = "data/#{user}/resumes/#{resume_name}"
+    structured_resume_path = "#{structured_root}/resume.yml"
+    legacy_resume_path = "data/#{user}/#{resume_name}.yml"
+
+    if project_file?(structured_resume_path)
+      {
+        mode: :structured,
+        root: structured_root,
+        resume: structured_resume_path,
+        jobs: "#{structured_root}/jobs.yml",
+        summary: "#{structured_root}/summary.yml"
+      }
+    else
+      {
+        mode: :legacy,
+        root: "data/#{user}",
+        resume: legacy_resume_path,
+        jobs: nil,
+        summary: nil
+      }
+    end
+  end
+
+  def resolve_jobs_path(resume_paths, jobs_filename)
+    if resume_paths.fetch(:mode) == :structured && project_file?(resume_paths.fetch(:jobs))
+      return resume_paths.fetch(:jobs)
+    end
+
+    return "data/#{@user}/.missing-jobs.yml" if blank?(jobs_filename)
+
+    "data/#{@user}/#{jobs_filename}.yml"
+  end
+
+  def resolve_summary_path(resume_paths, summary_name)
+    if resume_paths.fetch(:mode) == :structured && project_file?(resume_paths.fetch(:summary))
+      return resume_paths.fetch(:summary)
+    end
+
+    return "data/#{@user}/summaries/.missing-summary.yml" if blank?(summary_name)
+
+    "data/#{@user}/summaries/#{summary_name}.yml"
   end
 
   def experience_template?(name)

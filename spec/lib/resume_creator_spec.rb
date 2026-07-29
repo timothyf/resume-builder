@@ -32,14 +32,14 @@ RSpec.describe ResumeCreator do
 
       result = described_class.new(project_root: root).create!(name: 'new_role')
 
-      expect(result.fetch(:resume)).to eq('data/person/resume_new_role.yml')
-      expect(read_yaml(root, 'data/person/resume_new_role.yml')).to include(
+      expect(result.fetch(:resume)).to eq('data/person/resumes/resume_new_role/resume.yml')
+      expect(read_yaml(root, 'data/person/resumes/resume_new_role/resume.yml')).to include(
         'name' => 'resume_new_role',
-        'jobs_filename' => 'jobs_new_role',
-        'summary' => { 'file' => 'summary_new_role' }
+        'jobs_filename' => 'jobs',
+        'summary' => { 'file' => 'summary' }
       )
-      expect(read_yaml(root, 'data/person/jobs_new_role.yml')).to eq([])
-      expect(read_yaml(root, 'data/person/summaries/summary_new_role.yml')).to eq(
+      expect(read_yaml(root, 'data/person/resumes/resume_new_role/jobs.yml')).to eq([])
+      expect(read_yaml(root, 'data/person/resumes/resume_new_role/summary.yml')).to eq(
         'summary' => { 'text' => 'Add a focused summary for this resume.' }
       )
       expect(read_yaml(root, 'data/resume_support.yml').fetch('supported')).to include(
@@ -55,6 +55,10 @@ RSpec.describe ResumeCreator do
       write_yaml(root, 'data/person/resume_source.yml', {
         'name' => 'resume_source',
         'layout' => 'layout_ats',
+        'pdf' => {
+          'filename' => 'pdf/resume_master',
+          'source' => 'resume_master.pdf'
+        },
         'summary' => { 'file' => 'summary_source' },
         'jobs_filename' => 'jobs_source',
         'jobs' => [{ 'id' => 'job-1', 'section' => 'experiences' }]
@@ -66,14 +70,18 @@ RSpec.describe ResumeCreator do
 
       described_class.new(project_root: root).create!(name: 'target', from: 'resume_source')
 
-      expect(read_yaml(root, 'data/person/resume_target.yml')).to include(
+      expect(read_yaml(root, 'data/person/resumes/resume_target/resume.yml')).to include(
         'name' => 'resume_target',
         'layout' => 'layout_ats',
-        'summary' => { 'file' => 'summary_target' },
-        'jobs_filename' => 'jobs_target'
+        'pdf' => {
+          'filename' => 'pdf/resume_target',
+          'source' => 'resume_target.pdf'
+        },
+        'summary' => { 'file' => 'summary' },
+        'jobs_filename' => 'jobs'
       )
-      expect(read_yaml(root, 'data/person/jobs_target.yml')).to eq([{ 'id' => 'job-1' }])
-      expect(read_yaml(root, 'data/person/summaries/summary_target.yml')).to eq(
+      expect(read_yaml(root, 'data/person/resumes/resume_target/jobs.yml')).to eq([{ 'id' => 'job-1' }])
+      expect(read_yaml(root, 'data/person/resumes/resume_target/summary.yml')).to eq(
         'summary' => { 'text' => 'Source summary.' }
       )
     end
@@ -82,7 +90,7 @@ RSpec.describe ResumeCreator do
   it 'refuses to overwrite generated files by default' do
     Dir.mktmpdir do |root|
       build_project(root)
-      write_yaml(root, 'data/person/resume_existing.yml', {})
+      write_yaml(root, 'data/person/resumes/resume_existing/resume.yml', {})
 
       expect do
         described_class.new(project_root: root).create!(name: 'existing')

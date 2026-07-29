@@ -118,8 +118,11 @@ class ResumeSupportMatrix
     (discovered - classified).each do |key|
       add_error("#{key} is not classified as supported or archived in #{MANIFEST_PATH}")
     end
-    declared.reject { |key| File.file?(File.join(@project_root, 'data', "#{key}.yml")) }.each do |key|
-      add_error("#{key} is declared in #{MANIFEST_PATH} but data/#{key}.yml does not exist")
+    declared.reject { |key| resume_definition_exists?(key) }.each do |key|
+      add_error(
+        "#{key} is declared in #{MANIFEST_PATH} but neither data/#{key}.yml " \
+        "nor data/#{key.split('/').first}/resumes/#{key.split('/').last}/resume.yml exists"
+      )
     end
   end
 
@@ -142,11 +145,25 @@ class ResumeSupportMatrix
   end
 
   def discovered_resume_keys
-    pattern = File.join(@project_root, 'data', '*', 'resume*.yml')
-    Dir.glob(pattern).sort.reject { |path| ignored_by_git?(path) }.map do |path|
+    legacy_pattern = File.join(@project_root, 'data', '*', 'resume*.yml')
+    structured_pattern = File.join(@project_root, 'data', '*', 'resumes', 'resume*', 'resume.yml')
+    paths = Dir.glob([legacy_pattern, structured_pattern]).sort.reject { |path| ignored_by_git?(path) }
+
+    paths.map do |path|
       relative = path.delete_prefix(File.join(@project_root, 'data') + File::SEPARATOR)
-      relative.delete_suffix('.yml')
-    end
+      if relative.include?('/resumes/') && relative.end_with?('/resume.yml')
+        segments = relative.split(File::SEPARATOR)
+        "#{segments[0]}/#{segments[2]}"
+      else
+        relative.delete_suffix('.yml')
+      end
+    end.uniq
+  end
+
+  def resume_definition_exists?(key)
+    legacy_path = File.join(@project_root, 'data', "#{key}.yml")
+    structured_path = File.join(@project_root, 'data', key.split('/').first, 'resumes', key.split('/').last, 'resume.yml')
+    File.file?(legacy_path) || File.file?(structured_path)
   end
 
   def ignored_by_git?(path)
@@ -169,7 +186,7 @@ class ResumeSupportMatrix
   def validate_supported_resumes
     @supported.each do |entry|
       key = resume_key(entry)
-      next unless File.file?(File.join(@project_root, 'data', "#{key}.yml"))
+      next unless resume_definition_exists?(key)
 
       begin
         validation_env = @env.to_h.merge(

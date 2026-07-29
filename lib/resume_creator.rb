@@ -14,8 +14,6 @@ class ResumeCreator
     @user = normalize_entry(user || active_user, 'user')
     @slug = normalize_slug(name)
     @resume_name = "resume_#{@slug}"
-    @jobs_name = "jobs_#{@slug}"
-    @summary_name = "summary_#{@slug}"
     @force = force
 
     source = from ? source_components(from) : nil
@@ -45,7 +43,7 @@ class ResumeCreator
 
   def source_components(source_name)
     source_user, source_resume_name = parse_source(source_name)
-    source_resume_path = data_path(source_user, "#{source_resume_name}.yml")
+    source_resume_path, source_jobs_path, source_summary_path = resolve_source_paths(source_user, source_resume_name)
     raise Error, "Source resume does not exist: #{relative_path(source_resume_path)}" unless File.file?(source_resume_path)
 
     source_resume = load_yaml_path(source_resume_path)
@@ -54,17 +52,10 @@ class ResumeCreator
     source_jobs_name = source_resume['jobs_filename']
     source_summary_name = source_resume.dig('summary', 'file')
 
-    unless source_jobs_name.is_a?(String) && !source_jobs_name.strip.empty?
-      raise Error, "Source resume is missing jobs_filename: #{relative_path(source_resume_path)}"
-    end
-    unless source_summary_name.is_a?(String) && !source_summary_name.strip.empty?
-      raise Error, "Source resume is missing summary.file: #{relative_path(source_resume_path)}"
-    end
-
     {
       resume: source_resume,
-      jobs: load_existing_yaml(data_path(source_user, "#{source_jobs_name}.yml"), 'Source jobs file'),
-      summary: load_existing_yaml(data_path(source_user, 'summaries', "#{source_summary_name}.yml"), 'Source summary file')
+      jobs: load_existing_yaml(resolve_jobs_source_path(source_user, source_jobs_path, source_jobs_name), 'Source jobs file'),
+      summary: load_existing_yaml(resolve_summary_source_path(source_user, source_summary_path, source_summary_name), 'Source summary file')
     }
   end
 
@@ -85,9 +76,12 @@ class ResumeCreator
     if source
       resume = source.fetch(:resume).dup
       resume['name'] = @resume_name
-      resume['jobs_filename'] = @jobs_name
+      resume['jobs_filename'] = 'jobs'
       resume['summary'] = (resume['summary'].is_a?(Hash) ? resume['summary'].dup : {})
-      resume['summary']['file'] = @summary_name
+      resume['summary']['file'] = 'summary'
+      resume['pdf'] = (resume['pdf'].is_a?(Hash) ? resume['pdf'].dup : {})
+      resume['pdf']['filename'] = "pdf/#{@resume_name}"
+      resume['pdf']['source'] = "#{@resume_name}.pdf"
     else
       resume = starter_resume
     end
@@ -115,9 +109,9 @@ class ResumeCreator
           'postal_code' => '00000'
         }
       },
-      'summary' => { 'file' => @summary_name },
+      'summary' => { 'file' => 'summary' },
       'skills' => [],
-      'jobs_filename' => @jobs_name,
+      'jobs_filename' => 'jobs',
       'jobs' => [],
       'education' => []
     }
@@ -154,8 +148,7 @@ class ResumeCreator
   end
 
   def create_directories
-    FileUtils.mkdir_p(user_dir)
-    FileUtils.mkdir_p(File.join(user_dir, 'summaries'))
+    FileUtils.mkdir_p(resume_dir)
   end
 
   def ensure_writable!(path)
@@ -216,15 +209,56 @@ class ResumeCreator
   end
 
   def resume_path
-    data_path(@user, "#{@resume_name}.yml")
+    data_path(@user, 'resumes', @resume_name, 'resume.yml')
   end
 
   def jobs_path
-    data_path(@user, "#{@jobs_name}.yml")
+    data_path(@user, 'resumes', @resume_name, 'jobs.yml')
   end
 
   def summary_path
-    data_path(@user, 'summaries', "#{@summary_name}.yml")
+    data_path(@user, 'resumes', @resume_name, 'summary.yml')
+  end
+
+  def resume_dir
+    data_path(@user, 'resumes', @resume_name)
+  end
+
+  def resolve_source_paths(source_user, source_resume_name)
+    structured_resume_path = data_path(source_user, 'resumes', source_resume_name, 'resume.yml')
+    if File.file?(structured_resume_path)
+      return [
+        structured_resume_path,
+        data_path(source_user, 'resumes', source_resume_name, 'jobs.yml'),
+        data_path(source_user, 'resumes', source_resume_name, 'summary.yml')
+      ]
+    end
+
+    [
+      data_path(source_user, "#{source_resume_name}.yml"),
+      nil,
+      nil
+    ]
+  end
+
+  def resolve_jobs_source_path(source_user, structured_jobs_path, source_jobs_name)
+    return structured_jobs_path if structured_jobs_path && File.file?(structured_jobs_path)
+
+    unless source_jobs_name.is_a?(String) && !source_jobs_name.strip.empty?
+      raise Error, 'Source resume is missing jobs_filename and no structured jobs.yml was found.'
+    end
+
+    data_path(source_user, "#{source_jobs_name}.yml")
+  end
+
+  def resolve_summary_source_path(source_user, structured_summary_path, source_summary_name)
+    return structured_summary_path if structured_summary_path && File.file?(structured_summary_path)
+
+    unless source_summary_name.is_a?(String) && !source_summary_name.strip.empty?
+      raise Error, 'Source resume is missing summary.file and no structured summary.yml was found.'
+    end
+
+    data_path(source_user, 'summaries', "#{source_summary_name}.yml")
   end
 
   def support_path

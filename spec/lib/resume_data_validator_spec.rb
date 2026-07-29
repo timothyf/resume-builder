@@ -15,12 +15,28 @@ RSpec.describe ResumeDataValidator do
     YAML.safe_load_file(File.join(root, relative_path), aliases: true)
   end
 
-  def build_valid_project(root)
+  def build_valid_project(root, structured: false)
     write_yaml(root, 'data/active_resume.yml', {
       'user' => 'person',
       'name' => 'resume'
     })
-    write_yaml(root, 'data/person/resume.yml', {
+    resume_path = if structured
+      'data/person/resumes/resume/resume.yml'
+    else
+      'data/person/resume.yml'
+    end
+    jobs_path = if structured
+      'data/person/resumes/resume/jobs.yml'
+    else
+      'data/person/jobs.yml'
+    end
+    summary_path = if structured
+      'data/person/resumes/resume/summary.yml'
+    else
+      'data/person/summaries/summary.yml'
+    end
+
+    write_yaml(root, resume_path, {
       'layout' => 'layout',
       'pdf' => {
         'filename' => 'pdf/Resume',
@@ -61,7 +77,7 @@ RSpec.describe ResumeDataValidator do
         end
       }
     })
-    write_yaml(root, 'data/person/summaries/summary.yml', {
+    write_yaml(root, summary_path, {
       'summary' => { 'text' => 'Experienced developer.' }
     })
     write_yaml(root, 'data/person/skills.yml', [
@@ -83,7 +99,7 @@ RSpec.describe ResumeDataValidator do
         'description' => 'Builds a supportive community for technologists.'
       }
     ])
-    write_yaml(root, 'data/person/jobs.yml', [
+    write_yaml(root, jobs_path, [
       {
         'id' => 'job-1',
         'title' => 'Developer',
@@ -111,6 +127,14 @@ RSpec.describe ResumeDataValidator do
   it 'accepts a complete resume data graph' do
     Dir.mktmpdir do |root|
       build_valid_project(root)
+
+      expect(described_class.new(project_root: root).validate!).to be(true)
+    end
+  end
+
+  it 'accepts a complete structured resume data graph' do
+    Dir.mktmpdir do |root|
+      build_valid_project(root, structured: true)
 
       expect(described_class.new(project_root: root).validate!).to be(true)
     end

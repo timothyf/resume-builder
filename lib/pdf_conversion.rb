@@ -18,7 +18,7 @@ module PdfConversion
       active_resume = load_yaml(File.join(@project_root, 'data', 'active_resume.yml'))
       @resume_user = env_value('ACTIVE_RESUME_USER') || active_resume.fetch('user')
       @resume_name = env_value('ACTIVE_RESUME_NAME') || active_resume.fetch('name')
-      resume = load_yaml(File.join(@project_root, 'data', @resume_user, "#{@resume_name}.yml"))
+      resume = load_resume_configuration(@resume_user, @resume_name)
       pdf = resume.fetch('pdf')
       pdf_source = pdf.fetch('source').to_s.strip
       raise ArgumentError, "pdf.source is required for #{@resume_user}/#{@resume_name}" if pdf_source.empty?
@@ -54,6 +54,19 @@ module PdfConversion
       YAML.safe_load_file(path, aliases: true) || {}
     rescue Errno::ENOENT
       raise ArgumentError, "Resume configuration not found: #{path}"
+    end
+
+    def load_resume_configuration(user, resume_name)
+      structured_path = File.join(@project_root, 'data', user, 'resumes', resume_name, 'resume.yml')
+      legacy_path = File.join(@project_root, 'data', user, "#{resume_name}.yml")
+
+      path = if File.file?(structured_path)
+        structured_path
+      else
+        legacy_path
+      end
+
+      load_yaml(path)
     end
 
     def env_value(name)

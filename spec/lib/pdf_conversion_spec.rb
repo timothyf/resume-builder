@@ -22,6 +22,24 @@ RSpec.describe PdfConversion do
     File.write(File.join(root, 'build', 'pdf.html'), '<html><body>Resume</body></html>')
   end
 
+  def write_structured_project_configuration(root, pdf_source: 'Resume.pdf')
+    FileUtils.mkdir_p(File.join(root, 'data', 'person', 'resumes', 'resume'))
+    FileUtils.mkdir_p(File.join(root, 'build'))
+    File.write(
+      File.join(root, 'data', 'active_resume.yml'),
+      "user: person\nname: resume\n"
+    )
+    File.write(
+      File.join(root, 'data', 'person', 'resumes', 'resume', 'resume.yml'),
+      <<~YAML
+        pdf:
+          filename: pdf/PublicResume
+          source: #{pdf_source}
+      YAML
+    )
+    File.write(File.join(root, 'build', 'pdf.html'), '<html><body>Resume</body></html>')
+  end
+
   def http_response(code, body)
     instance_double(Net::HTTPResponse, code: code.to_s, body: body)
   end
@@ -69,6 +87,17 @@ RSpec.describe PdfConversion do
       Dir.mktmpdir do |root|
         expect { described_class.new(project_root: root, env: {}) }
           .to raise_error(ArgumentError, /Resume configuration not found/)
+      end
+    end
+
+    it 'loads structured resume configuration files' do
+      Dir.mktmpdir do |root|
+        write_structured_project_configuration(root)
+        configuration = described_class.new(project_root: root, env: {})
+
+        expect(configuration.resume_user).to eq('person')
+        expect(configuration.resume_name).to eq('resume')
+        expect(configuration.output_filename).to eq('PublicResume.pdf')
       end
     end
 

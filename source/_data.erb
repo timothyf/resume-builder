@@ -3,6 +3,7 @@
 <% @active_resume_name = @resume_context[:name] %>
 <% @resume_data = @resume_context[:resume] %>
 <% @layout_data = @resume_context[:layout] %>
+<% @summary_data = @resume_context[:summary] %>
 <% @skills_data = @resume_context[:skills] %>
 <% @skills_by_id = @skills_data.each_with_object({}) { |skill, index| index[skill.id.to_s] = skill } %>
 <% @publications_data = @resume_context[:publications] %>

@@ -195,6 +195,12 @@ body {
     margin-bottom: 30px;
   }
 
+  .main-wrapper .experiences-section  .item {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+
   .main-wrapper .job-title-row .time {
     color: black;
     font-size: 11px;

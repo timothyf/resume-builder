@@ -69,8 +69,27 @@ helpers do
     user = selection[:user]
     name = selection[:name]
     user_data = selection[:user_data]
+    resume_scope = selection[:resume_scope]
     resume = selection[:resume]
-    jobs_filename = resume.jobs_filename
+    jobs_filename = resume.respond_to?(:jobs_filename) ? resume.jobs_filename : nil
+
+    jobs_data = if resume_scope&.respond_to?(:jobs)
+      resume_scope.public_send(:jobs)
+    elsif jobs_filename.to_s.strip.empty?
+      []
+    else
+      resolve_data_path(user_data, jobs_filename)
+    end
+
+    summary_data = if resume_scope&.respond_to?(:summary)
+      scope_summary = resume_scope.public_send(:summary)
+      scope_summary.respond_to?(:summary) ? scope_summary.public_send(:summary) : scope_summary
+    elsif resume.respond_to?(:summary) && resume.summary.respond_to?(:file)
+      summary_name = resume.summary.file
+      resolve_data_path(user_data, 'summaries', summary_name, 'summary')
+    else
+      {}
+    end
 
     {
       user: user,
@@ -80,7 +99,8 @@ helpers do
       skills: resolve_data_path(user_data, 'skills'),
       publications: optional_data_path(user_data, 'publications'),
       community: optional_data_path(user_data, 'community'),
-      jobs: resolve_data_path(user_data, jobs_filename)
+      summary: summary_data,
+      jobs: jobs_data
     }
   end
 
@@ -169,7 +189,8 @@ def copy_resume_pdf(resume_data, destination_root)
   end
 
   unless File.file?(source_path)
-    raise Errno::ENOENT, "Configured PDF source not found: #{source_path}"
+    warn "Skipping PDF copy: configured PDF source not found: #{source_path}"
+    return
   end
 
   FileUtils.mkdir_p(File.dirname(destination_path))
