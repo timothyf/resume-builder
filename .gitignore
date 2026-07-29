@@ -19,6 +19,7 @@
 .DS_store
 source/CNAME
 /dist
+/build
 /node_modules
 
 books.yml
