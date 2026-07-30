@@ -1,0 +1,43 @@
+<% if @resume_data.education? %>
+  <div class="education-container container-block">
+    <h2 class="container-block-title"><%= display_name %></h2>
+
+    <div class="education-items">
+      <% @resume_data.education.each do |edu| %>
+        <div class="item">
+          <div class="degree-name">
+            <%= edu.degree %>
+            <%= edu.grade if edu.grade? %>
+          </div>
+
+          <% if edu.url? %>
+            <h5 class="degree-info meta fn url org">
+              <a href="<%= edu.url %>"><%= edu.name %></a>
+            </h5>
+          <% else %>
+            <h5 class="degree-info meta fn org">
+              <%= edu.name %>
+            </h5>
+          <% end %>
+
+          <div class="time">
+            <% if edu.status %>
+              <%= edu.status %>
+            <% else %>
+              <span class="dtstart" title="<%= edu.dates.start %>">
+                <%= display_date(edu.dates.start) %>
+              </span>
+
+              <% if edu.dates.end? %>
+                -
+                <span class="dtend" title="<%= edu.dates.end %>">
+                  <%= display_date(edu.dates.end) %>
+                </span>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>

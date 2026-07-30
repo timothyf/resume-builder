@@ -50,6 +50,14 @@ brief entrypoints, and the configured downloadable PDF.
 
      bundle install
 
+ Create local configuration files from the tracked examples:
+
+     cp data/active_resume.yml.example data/active_resume.yml
+     cp data/resume_support.yml.example data/resume_support.yml
+
+ These local configuration files are ignored by Git so private resume
+ selections and support-matrix entries are not committed accidentally.
+
 Node.js 22, Python 3.12, and Poppler are also required to run the complete
 visual regression suite. Install the project-managed Node and Python packages
 with:

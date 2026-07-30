@@ -4,6 +4,7 @@ require_relative 'resume_data_validator'
 
 class ResumeSupportMatrix
   MANIFEST_PATH = 'data/resume_support.yml'.freeze
+  EXAMPLE_MANIFEST_PATH = 'data/resume_support.yml.example'.freeze
   ENTRY_PATTERN = /\A[a-zA-Z0-9_-]+\z/
 
   attr_reader :archived, :supported
@@ -111,22 +112,58 @@ class ResumeSupportMatrix
     end
 
     declared = classifications.keys
+    classified = (declared + example_classification_keys).uniq
     discovered = discovered_resume_keys
 
-    (discovered - declared).each do |key|
+    (discovered - classified).each do |key|
       add_error("#{key} is not classified as supported or archived in #{MANIFEST_PATH}")
     end
-    (declared - discovered).each do |key|
-      add_error("#{key} is declared in #{MANIFEST_PATH} but data/#{key}.yml does not exist")
+    declared.reject { |key| resume_definition_exists?(key) }.each do |key|
+      add_error(
+        "#{key} is declared in #{MANIFEST_PATH} but neither data/#{key}.yml " \
+        "nor data/#{key.split('/').first}/resumes/#{key.split('/').last}/resume.yml exists"
+      )
     end
   end
 
-  def discovered_resume_keys
-    pattern = File.join(@project_root, 'data', '*', 'resume*.yml')
-    Dir.glob(pattern).sort.reject { |path| ignored_by_git?(path) }.map do |path|
-      relative = path.delete_prefix(File.join(@project_root, 'data') + File::SEPARATOR)
-      relative.delete_suffix('.yml')
+  def example_classification_keys
+    absolute_path = File.join(@project_root, EXAMPLE_MANIFEST_PATH)
+    return [] unless File.file?(absolute_path)
+
+    manifest = YAML.safe_load_file(absolute_path, aliases: false)
+    return [] unless manifest.is_a?(Hash)
+
+    %w[supported archived].flat_map { |section| Array(manifest[section]) }.filter_map do |entry|
+      next unless entry.is_a?(Hash)
+
+      user = entry['user']
+      name = entry['name']
+      "#{user}/#{name}" if user.is_a?(String) && name.is_a?(String)
     end
+  rescue Psych::SyntaxError
+    []
+  end
+
+  def discovered_resume_keys
+    legacy_pattern = File.join(@project_root, 'data', '*', 'resume*.yml')
+    structured_pattern = File.join(@project_root, 'data', '*', 'resumes', 'resume*', 'resume.yml')
+    paths = Dir.glob([legacy_pattern, structured_pattern]).sort.reject { |path| ignored_by_git?(path) }
+
+    paths.map do |path|
+      relative = path.delete_prefix(File.join(@project_root, 'data') + File::SEPARATOR)
+      if relative.include?('/resumes/') && relative.end_with?('/resume.yml')
+        segments = relative.split(File::SEPARATOR)
+        "#{segments[0]}/#{segments[2]}"
+      else
+        relative.delete_suffix('.yml')
+      end
+    end.uniq
+  end
+
+  def resume_definition_exists?(key)
+    legacy_path = File.join(@project_root, 'data', "#{key}.yml")
+    structured_path = File.join(@project_root, 'data', key.split('/').first, 'resumes', key.split('/').last, 'resume.yml')
+    File.file?(legacy_path) || File.file?(structured_path)
   end
 
   def ignored_by_git?(path)
@@ -149,7 +186,7 @@ class ResumeSupportMatrix
   def validate_supported_resumes
     @supported.each do |entry|
       key = resume_key(entry)
-      next unless File.file?(File.join(@project_root, 'data', "#{key}.yml"))
+      next unless resume_definition_exists?(key)
 
       begin
         validation_env = @env.to_h.merge(
