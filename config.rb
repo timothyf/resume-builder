@@ -54,6 +54,8 @@ helpers do
     raise KeyError, "Missing data segment '#{key}' while resolving resume context"
   end
 
+  # Resolves a data path by traversing through nested data segments
+  # Starts with a root object and sequentially resolves each segment
   def resolve_data_path(root, *segments)
     segments.reduce(root) { |current, segment| resolve_data_segment(current, segment) }
   end
@@ -81,13 +83,18 @@ helpers do
       resolve_data_path(user_data, jobs_filename)
     end
 
+    # Build summary data by checking multiple sources in order of preference
     summary_data = if resume_scope&.respond_to?(:summary)
+      # First, try to get summary from the resume scope if it exists
       scope_summary = resume_scope.public_send(:summary)
+      # If the summary has a nested summary method, call it; otherwise use the summary directly
       scope_summary.respond_to?(:summary) ? scope_summary.public_send(:summary) : scope_summary
     elsif resume.respond_to?(:summary) && resume.summary.respond_to?(:file)
+      # Fallback to resume's summary if it has a file reference
       summary_name = resume.summary.file
       resolve_data_path(user_data, 'summaries', summary_name, 'summary')
     else
+      # If no summary is found, return an empty hash
       {}
     end
 
