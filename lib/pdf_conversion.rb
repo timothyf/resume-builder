@@ -9,22 +9,23 @@ module PdfConversion
                 :http_retry_base_delay_seconds, :http_timeout_seconds, :max_polls,
                 :output_filename, :output_path, :package_after_convert,
                 :pdf_source_path, :poll_interval_seconds, :project_root,
-                :resume_name, :resume_user, :source_path, :source_url
+                :resume_name, :resume_user, :source_path, :source_url,
+                :pdf_source
 
     def initialize(project_root:, env: ENV)
       @project_root = File.expand_path(project_root)
       @env = env
 
-      active_resume = load_yaml(File.join(@project_root, 'data', 'active_resume.yml'))
+      active_resume = load_active_resume
       @resume_user = env_value('ACTIVE_RESUME_USER') || active_resume.fetch('user')
       @resume_name = env_value('ACTIVE_RESUME_NAME') || active_resume.fetch('name')
       resume = load_resume_configuration(@resume_user, @resume_name)
       pdf = resume.fetch('pdf')
-      pdf_source = pdf.fetch('source').to_s.strip
-      raise ArgumentError, "pdf.source is required for #{@resume_user}/#{@resume_name}" if pdf_source.empty?
+      @pdf_source = pdf.fetch('source').to_s.strip
+      raise ArgumentError, "@pdf.source is required for #{@resume_user}/#{@resume_name}" if pdf_source.empty?
 
-      @pdf_source_path = expand_project_path(pdf_source)
-      @output_path = expand_project_path(env_value('FREECONVERT_OUTPUT_PATH') || pdf_source)
+      @pdf_source_path = expand_project_path(@pdf_source)
+      @output_path = expand_project_path(env_value('FREECONVERT_OUTPUT_PATH') || @pdf_source)
       public_pdf_filename = "#{pdf.fetch('filename')}.pdf"
       @output_filename = env_value('FREECONVERT_OUTPUT_FILENAME') || File.basename(public_pdf_filename)
       @source_path = expand_project_path(env_value('FREECONVERT_SOURCE_PATH') || 'build/pdf.html')
@@ -54,6 +55,14 @@ module PdfConversion
       YAML.safe_load_file(path, aliases: true) || {}
     rescue Errno::ENOENT
       raise ArgumentError, "Resume configuration not found: #{path}"
+    end
+
+    def load_active_resume
+      user = env_value('ACTIVE_RESUME_USER')
+      name = env_value('ACTIVE_RESUME_NAME')
+      return { 'user' => user, 'name' => name } if user && name
+
+      load_yaml(File.join(@project_root, 'data', 'active_resume.yml'))
     end
 
     def load_resume_configuration(user, resume_name)
@@ -306,9 +315,10 @@ module PdfConversion
         raise "Download failed with code #{response.code}: #{response.body}"
       end
 
-      FileUtils.mkdir_p(File.dirname(@configuration.output_path))
-      File.binwrite(@configuration.output_path, response.body)
-      puts "File downloaded to #{@configuration.output_path}"
+      output_path = "output/" + @configuration.pdf_source
+      FileUtils.mkdir_p(File.dirname(output_path))
+      File.binwrite(output_path, response.body)
+      puts "File downloaded to #{output_path}"
     end
   end
 end

@@ -1,6 +1,6 @@
 <% if @resume_data.languages? %>
   <div class="languages-container container-block">
-      <h2 class="container-block-title"><%= @resume_data.headers.languages %></h2>
+      <h2 class="section-title"><%= @resume_data.headers.languages %></h2>
       <ul class="list-unstyled interests-list">
           <% @resume_data.languages.each do |lang| %>
               <li><%= lang.name %><span class="lang-desc">&nbsp;[<%= lang.level %>]</span></li>

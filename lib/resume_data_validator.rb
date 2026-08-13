@@ -27,9 +27,15 @@ class ResumeDataValidator
 
   def validate!
     active_path = 'data/active_resume.yml'
-    active_resume = load_mapping(active_path)
-    @user = env_value('ACTIVE_RESUME_USER') || required_value(active_resume, 'user', active_path)
-    @resume_name = env_value('ACTIVE_RESUME_NAME') || required_value(active_resume, 'name', active_path)
+    explicit_user = env_value('ACTIVE_RESUME_USER')
+    explicit_name = env_value('ACTIVE_RESUME_NAME')
+    active_resume = if explicit_user && explicit_name
+      {}
+    else
+      load_mapping(active_path)
+    end
+    @user = explicit_user || required_value(active_resume, 'user', active_path)
+    @resume_name = explicit_name || required_value(active_resume, 'name', active_path)
 
     if blank?(@user) || blank?(@resume_name)
       raise_validation_error

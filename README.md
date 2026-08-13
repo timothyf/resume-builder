@@ -382,6 +382,10 @@ Run it with:
 
     ruby generatePdf.rb
 
+To generate a specific user's resume without changing `data/active_resume.yml`:
+
+    ruby generatePdf.rb --resume-user johndoe --resume-name resume_sample
+
 No API key is required for the current FreeConvert endpoint. If an API key is
 needed for an account or endpoint later, it can be supplied without changing
 the script:

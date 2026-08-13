@@ -1,6 +1,6 @@
 <% if @resume_data.publications? %>
   <div class="education-container container-block">
-      <h2 class="container-block-title"><%= display_name %></h2>
+      <h2 class="section-title"><%= display_name %></h2>
       <div class="education-items">
       <% @resume_data.publications.each do |publication_id| %>
         <% publication = @publications_by_id[publication_id.to_s] %>

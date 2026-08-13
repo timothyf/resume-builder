@@ -5,6 +5,7 @@ require 'kramdown'
 require 'digest/md5'
 require 'time'
 require 'tzinfo'
+require 'ostruct'
 require_relative 'lib/resume_selection'
 require_relative 'lib/resume_data_validator'
 
@@ -19,7 +20,19 @@ ResumeDataValidator.new(project_root: __dir__).validate!
 page "index.html", :layout => false
 page "pdf.html", :layout => false
 
-selection = ResumeSelection.selection_context(@app.data.active_resume, @app.data)
+active_resume_for = lambda do |data_root|
+  if data_root.respond_to?(:active_resume)
+    data_root.active_resume
+  else
+    OpenStruct.new(
+      user: ENV.fetch('ACTIVE_RESUME_USER'),
+      name: ENV.fetch('ACTIVE_RESUME_NAME'),
+      generate_brief: false
+    )
+  end
+end
+
+selection = ResumeSelection.selection_context(active_resume_for.call(@app.data), @app.data)
 ENV['ACTIVE_RESUME_THEME'] = selection[:theme]
 ENV['ACTIVE_RESUME_LAYOUT'] = selection[:resume].layout.to_s
 if selection[:generate_brief] == false
@@ -39,6 +52,16 @@ end
 # end
 
 helpers do
+  def configured_active_resume
+    return data.active_resume if data.respond_to?(:active_resume)
+
+    OpenStruct.new(
+      user: ENV.fetch('ACTIVE_RESUME_USER'),
+      name: ENV.fetch('ACTIVE_RESUME_NAME'),
+      generate_brief: false
+    )
+  end
+
   def resolve_data_segment(current, segment)
     key = segment.to_s
 
@@ -205,7 +228,7 @@ def copy_resume_pdf(resume_data, destination_root)
 end
 
 after_build do |builder|
-  selection = ResumeSelection.selection_context(@app.data.active_resume, @app.data)
+  selection = ResumeSelection.selection_context(active_resume_for.call(@app.data), @app.data)
   active_resume_user = selection[:user]
   active_resume_name = selection[:name]
   resume_data = selection[:resume]
