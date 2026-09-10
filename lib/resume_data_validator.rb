@@ -65,7 +65,7 @@ class ResumeDataValidator
     validate_profile(resume, resume_path) if templates.include?('profile')
     validate_contact(resume, resume_path) if templates.include?('contact')
     validate_summary(resume, resume_path, resume_paths) if templates.include?('summary')
-    validate_skills(resume, resume_path) if templates.include?('skills')
+    validate_skills(resume, resume_path, resume_paths) if templates.include?('skills')
     validate_publications(resume, resume_path) if templates.include?('publications')
     validate_community(resume, resume_path) if templates.include?('community_leadership')
     validate_jobs(resume, resume_path, jobs_filename, resume_paths) if templates.any? { |name| experience_template?(name) }
@@ -173,9 +173,9 @@ class ResumeDataValidator
     required_value(summary_content, 'text', "#{summary_path}: summary")
   end
 
-  def validate_skills(resume, resume_path)
+  def validate_skills(resume, resume_path, resume_paths)
     categories = required_array(resume, 'skills', resume_path)
-    skills_path = "data/#{@user}/skills.yml"
+    skills_path = resolve_skills_path(resume_paths)
     catalog = load_array(skills_path)
     skill_ids = catalog.filter_map do |skill|
       skill['id'].to_s if skill.is_a?(Hash) && !blank?(skill['id'])
@@ -342,7 +342,8 @@ class ResumeDataValidator
         root: structured_root,
         resume: structured_resume_path,
         jobs: "#{structured_root}/jobs.yml",
-        summary: "#{structured_root}/summary.yml"
+        summary: "#{structured_root}/summary.yml",
+        skills: "#{structured_root}/skills.yml"
       }
     else
       {
@@ -350,9 +351,18 @@ class ResumeDataValidator
         root: "data/#{user}",
         resume: legacy_resume_path,
         jobs: nil,
-        summary: nil
+        summary: nil,
+        skills: nil
       }
     end
+  end
+
+  def resolve_skills_path(resume_paths)
+    if resume_paths.fetch(:mode) == :structured && project_file?(resume_paths.fetch(:skills))
+      return resume_paths.fetch(:skills)
+    end
+
+    "data/#{@user}/skills.yml"
   end
 
   def resolve_jobs_path(resume_paths, jobs_filename)

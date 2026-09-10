@@ -121,12 +121,18 @@ helpers do
       {}
     end
 
+    skills_data = if resume_scope&.respond_to?(:skills)
+      resume_scope.public_send(:skills)
+    else
+      resolve_data_path(user_data, 'skills')
+    end
+
     {
       user: user,
       name: name,
       resume: resume,
       layout: resolve_data_path(user_data, 'layouts', resume.layout),
-      skills: resolve_data_path(user_data, 'skills'),
+      skills: skills_data,
       publications: optional_data_path(user_data, 'publications'),
       community: optional_data_path(user_data, 'community'),
       summary: summary_data,

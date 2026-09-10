@@ -140,6 +140,23 @@ RSpec.describe ResumeDataValidator do
     end
   end
 
+  it 'prefers a resume-local skills catalog over the user-level catalog' do
+    Dir.mktmpdir do |root|
+      build_valid_project(root, structured: true)
+      write_yaml(root, 'data/person/skills.yml', [
+        { 'id' => 1, 'label' => 'Parent catalog skill' }
+      ])
+      write_yaml(root, 'data/person/resumes/resume/skills.yml', [
+        { 'id' => 2, 'label' => 'Resume-local skill' }
+      ])
+      resume = read_yaml(root, 'data/person/resumes/resume/resume.yml')
+      resume['skills'] = [{ 'name' => 'Development', 'skills' => [2] }]
+      write_yaml(root, 'data/person/resumes/resume/resume.yml', resume)
+
+      expect(described_class.new(project_root: root).validate!).to be(true)
+    end
+  end
+
   it 'aggregates missing references, templates, and nested values' do
     Dir.mktmpdir do |root|
       build_valid_project(root)
