@@ -22,6 +22,7 @@ RSpec.describe 'ATS layout', :integration do
       resume = YAML.safe_load_file(resume_path, aliases: true)
       resume['layout'] = 'layout_ats'
       resume['pdf']['useicons'] = false
+      resume['contact_info']['shortdesc'] = 'Sample resume tagline'
       File.write(resume_path, YAML.dump(resume))
 
       stdout, stderr, status = Open3.capture3(
@@ -38,6 +39,7 @@ RSpec.describe 'ATS layout', :integration do
         expect(document.at_css('body')['class']).to include('layout-layout_ats')
         expect(document.css('.sidebar-wrapper > *')).to be_empty
         expect(document.at_css('.main-wrapper .profile-container .name').text).to include('John Doe')
+        expect(document.at_css('.main-wrapper .profile-container .tagline').text).to include('Sample resume tagline')
         expect(document.at_css('.ats-contact-container')).not_to be_nil
         expect(document.at_css('.ats-skills-section')).not_to be_nil
         expect(document.at_css('.experiences-section')).not_to be_nil

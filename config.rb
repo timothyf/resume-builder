@@ -5,6 +5,7 @@ require 'kramdown'
 require 'digest/md5'
 require 'time'
 require 'tzinfo'
+require 'ostruct'
 require_relative 'lib/resume_selection'
 require_relative 'lib/resume_data_validator'
 
@@ -19,8 +20,21 @@ ResumeDataValidator.new(project_root: __dir__).validate!
 page "index.html", :layout => false
 page "pdf.html", :layout => false
 
-selection = ResumeSelection.selection_context(@app.data.active_resume, @app.data)
+active_resume_for = lambda do |data_root|
+  if data_root.respond_to?(:active_resume)
+    data_root.active_resume
+  else
+    OpenStruct.new(
+      user: ENV.fetch('ACTIVE_RESUME_USER'),
+      name: ENV.fetch('ACTIVE_RESUME_NAME'),
+      generate_brief: false
+    )
+  end
+end
+
+selection = ResumeSelection.selection_context(active_resume_for.call(@app.data), @app.data)
 ENV['ACTIVE_RESUME_THEME'] = selection[:theme]
+ENV['ACTIVE_RESUME_LAYOUT'] = selection[:resume].layout.to_s
 if selection[:generate_brief] == false
   ignore "/index-brief.html"
   ignore "/pdf-brief.html"
@@ -38,6 +52,16 @@ end
 # end
 
 helpers do
+  def configured_active_resume
+    return data.active_resume if data.respond_to?(:active_resume)
+
+    OpenStruct.new(
+      user: ENV.fetch('ACTIVE_RESUME_USER'),
+      name: ENV.fetch('ACTIVE_RESUME_NAME'),
+      generate_brief: false
+    )
+  end
+
   def resolve_data_segment(current, segment)
     key = segment.to_s
 
@@ -53,8 +77,16 @@ helpers do
     raise KeyError, "Missing data segment '#{key}' while resolving resume context"
   end
 
+  # Resolves a data path by traversing through nested data segments
+  # Starts with a root object and sequentially resolves each segment
   def resolve_data_path(root, *segments)
     segments.reduce(root) { |current, segment| resolve_data_segment(current, segment) }
+  end
+
+  def optional_data_path(root, *segments)
+    resolve_data_path(root, *segments)
+  rescue KeyError
+    []
   end
 
   def build_resume_context(active_resume)
@@ -62,16 +94,49 @@ helpers do
     user = selection[:user]
     name = selection[:name]
     user_data = selection[:user_data]
+    resume_scope = selection[:resume_scope]
     resume = selection[:resume]
-    jobs_filename = resume.jobs_filename
+    jobs_filename = resume.respond_to?(:jobs_filename) ? resume.jobs_filename : nil
+
+    jobs_data = if resume_scope&.respond_to?(:jobs)
+      resume_scope.public_send(:jobs)
+    elsif jobs_filename.to_s.strip.empty?
+      []
+    else
+      resolve_data_path(user_data, jobs_filename)
+    end
+
+    # Build summary data by checking multiple sources in order of preference
+    summary_data = if resume_scope&.respond_to?(:summary)
+      # First, try to get summary from the resume scope if it exists
+      scope_summary = resume_scope.public_send(:summary)
+      # If the summary has a nested summary method, call it; otherwise use the summary directly
+      scope_summary.respond_to?(:summary) ? scope_summary.public_send(:summary) : scope_summary
+    elsif resume.respond_to?(:summary) && resume.summary.respond_to?(:file)
+      # Fallback to resume's summary if it has a file reference
+      summary_name = resume.summary.file
+      resolve_data_path(user_data, 'summaries', summary_name, 'summary')
+    else
+      # If no summary is found, return an empty hash
+      {}
+    end
+
+    skills_data = if resume_scope&.respond_to?(:skills)
+      resume_scope.public_send(:skills)
+    else
+      resolve_data_path(user_data, 'skills')
+    end
 
     {
       user: user,
       name: name,
       resume: resume,
       layout: resolve_data_path(user_data, 'layouts', resume.layout),
-      skills: resolve_data_path(user_data, 'skills'),
-      jobs: resolve_data_path(user_data, jobs_filename)
+      skills: skills_data,
+      publications: optional_data_path(user_data, 'publications'),
+      community: optional_data_path(user_data, 'community'),
+      summary: summary_data,
+      jobs: jobs_data
     }
   end
 
@@ -160,7 +225,8 @@ def copy_resume_pdf(resume_data, destination_root)
   end
 
   unless File.file?(source_path)
-    raise Errno::ENOENT, "Configured PDF source not found: #{source_path}"
+    warn "Skipping PDF copy: configured PDF source not found: #{source_path}"
+    return
   end
 
   FileUtils.mkdir_p(File.dirname(destination_path))
@@ -168,7 +234,7 @@ def copy_resume_pdf(resume_data, destination_root)
 end
 
 after_build do |builder|
-  selection = ResumeSelection.selection_context(@app.data.active_resume, @app.data)
+  selection = ResumeSelection.selection_context(active_resume_for.call(@app.data), @app.data)
   active_resume_user = selection[:user]
   active_resume_name = selection[:name]
   resume_data = selection[:resume]

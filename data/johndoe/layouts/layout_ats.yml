@@ -9,6 +9,10 @@ content:
       template: summary
     - display_name: Skills
       template: skills_ats
+    - display_name: Publications
+      template: publications
+    - display_name: Community Leadership
+      template: community_leadership
     - display_name: Experience
       template: experiences
     - display_name: Education

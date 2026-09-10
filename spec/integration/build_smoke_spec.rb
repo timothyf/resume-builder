@@ -63,7 +63,7 @@ RSpec.describe 'Supported resume build matrix', :integration do
           #{stderr}
         MESSAGE
 
-        resume = load_yaml('data', user, "#{resume_name}.yml")
+        resume = load_resume_yaml(user, resume_name)
         artifact_name = resume.fetch('name')
         build_root = File.join(@test_root, 'build')
         artifact_root = File.join(@test_root, 'dist', user, resume_name)
@@ -143,6 +143,40 @@ RSpec.describe 'Supported resume build matrix', :integration do
     @yaml_cache[path] ||= YAML.safe_load_file(path, aliases: true)
   end
 
+  def resume_structured_root(user, resume_name)
+    File.join('data', user, 'resumes', resume_name)
+  end
+
+  def load_resume_yaml(user, resume_name)
+    structured_path = File.join(resume_structured_root(user, resume_name), 'resume.yml')
+    if File.file?(File.join(@test_root, structured_path))
+      load_yaml(structured_path)
+    else
+      load_yaml('data', user, "#{resume_name}.yml")
+    end
+  end
+
+  def load_jobs_yaml(user, resume)
+    resume_name = resume.fetch('name')
+    structured_path = File.join(resume_structured_root(user, resume_name), 'jobs.yml')
+    if File.file?(File.join(@test_root, structured_path))
+      load_yaml(structured_path)
+    else
+      load_yaml('data', user, "#{resume.fetch('jobs_filename')}.yml")
+    end
+  end
+
+  def load_summary_yaml(user, resume)
+    resume_name = resume.fetch('name')
+    structured_path = File.join(resume_structured_root(user, resume_name), 'summary.yml')
+    if File.file?(File.join(@test_root, structured_path))
+      load_yaml(structured_path)
+    else
+      summary_name = resume.fetch('summary').fetch('file')
+      load_yaml('data', user, 'summaries', "#{summary_name}.yml")
+    end
+  end
+
   def parse_valid_html(path)
     document = Nokogiri::HTML5.parse(File.read(path))
     expect(document.errors).to be_empty, "Invalid HTML in #{path}:\n#{document.errors.join("\n")}"
@@ -189,8 +223,7 @@ RSpec.describe 'Supported resume build matrix', :integration do
   def assert_summary(document_text, user, layout, resume)
     return unless layout_templates(layout).include?('summary')
 
-    summary_name = resume.fetch('summary').fetch('file')
-    summary = load_yaml('data', user, 'summaries', "#{summary_name}.yml").fetch('summary').fetch('text')
+    summary = load_summary_yaml(user, resume).fetch('summary').fetch('text')
     rendered_summary = Nokogiri::HTML5.fragment(Kramdown::Document.new(summary.to_s).to_html).text
     expect(document_text).to include(normalized_text(rendered_summary))
   end
@@ -220,7 +253,7 @@ RSpec.describe 'Supported resume build matrix', :integration do
     experience_templates = layout_templates(layout) & %w[experiences experience_highlights experience_other]
     return if experience_templates.empty?
 
-    jobs_by_id = load_yaml('data', user, "#{resume.fetch('jobs_filename')}.yml")
+    jobs_by_id = load_jobs_yaml(user, resume)
       .to_h { |job| [job.fetch('id').to_s, job] }
 
     experience_templates.each do |template|

@@ -1,7 +1,7 @@
 <div class="company-location">
   <% if job.location.city %>
     <%= job.location.city %>, <%= job.location.state %>
-  <% else %>
+  <% elsif job.location.state %>
     <%= job.location.state %>
   <% end %>
   <% if !job.title %>

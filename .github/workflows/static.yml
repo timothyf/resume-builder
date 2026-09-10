@@ -53,6 +53,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y poppler-utils
 
+      - name: Prepare example resume configuration
+        run: |
+          cp data/active_resume.yml.example data/active_resume.yml
+          cp data/resume_support.yml.example data/resume_support.yml
+
       - name: Set deployment timestamp
         run: echo "RESUME_DEPLOYED_AT=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> "$GITHUB_ENV"
 

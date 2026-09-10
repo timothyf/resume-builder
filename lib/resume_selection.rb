@@ -55,7 +55,7 @@ module ResumeSelection
   def selection_context(active_resume, data_root)
     identifiers = active_resume_identifiers(active_resume)
     user_data = data_root.public_send(identifiers[:user])
-    resume = user_data.public_send(identifiers[:name])
+    resume_scope, resume = resolve_resume_payload(user_data, identifiers[:name])
     brief_override = brief_override_value
     generate_brief = if brief_override.nil?
       active_resume.generate_brief != false
@@ -67,9 +67,26 @@ module ResumeSelection
       user: identifiers[:user],
       name: identifiers[:name],
       user_data: user_data,
+      resume_scope: resume_scope,
       resume: resume,
       generate_brief: generate_brief,
       theme: active_theme(resume)
     }
+  end
+
+  def resolve_resume_payload(user_data, resume_name)
+    return [nil, user_data.public_send(resume_name)] if user_data.respond_to?(resume_name)
+
+    if user_data.respond_to?(:resumes)
+      resumes = user_data.public_send(:resumes)
+      if resumes.respond_to?(resume_name)
+        resume_scope = resumes.public_send(resume_name)
+        if resume_scope.respond_to?(:resume)
+          return [resume_scope, resume_scope.public_send(:resume)]
+        end
+      end
+    end
+
+    raise KeyError, "Could not resolve resume '#{resume_name}' from selected user data"
   end
 end

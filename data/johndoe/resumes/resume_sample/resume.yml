@@ -31,6 +31,12 @@ skills:
       - collaboration
       - delivery
 
+publications:
+  - rails-bible
+
+community:
+  - michigan-mentorship
+
 jobs_filename: jobs
 jobs:
   - id: example-developer

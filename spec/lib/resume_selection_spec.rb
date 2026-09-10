@@ -3,8 +3,10 @@ require 'spec_helper'
 RSpec.describe ResumeSelection do
   ActiveResume = Struct.new(:user, :name, :generate_brief, keyword_init: true)
   ResumePayload = Struct.new(:layout, :jobs_filename, :theme, keyword_init: true)
-  UserData = Struct.new(:resume_dev_refined, :override_resume, keyword_init: true)
+  UserData = Struct.new(:resume_dev_refined, :override_resume, :resumes, keyword_init: true)
   DataRoot = Struct.new(:timothyfisher, :override_user, keyword_init: true)
+  StructuredResumeScope = Struct.new(:resume, keyword_init: true)
+  StructuredResumes = Struct.new(:resume_structured, keyword_init: true)
 
   let(:active_resume) do
     ActiveResume.new(user: 'timothyfisher', name: 'resume_dev_refined', generate_brief: false)
@@ -62,6 +64,21 @@ RSpec.describe ResumeSelection do
 
       result = described_class.selection_context(active_resume, data_root)
       expect(result[:theme]).to eq('theme-orange')
+    end
+
+    it 'resolves structured resume payloads when not present at user root' do
+      structured_payload = ResumePayload.new(layout: 'layout', jobs_filename: 'jobs', theme: nil)
+      structured_scope = StructuredResumeScope.new(resume: structured_payload)
+      structured_user_data = UserData.new(
+        override_resume: override_resume_payload,
+        resumes: StructuredResumes.new(resume_structured: structured_scope)
+      )
+      structured_root = DataRoot.new(timothyfisher: structured_user_data, override_user: override_user_data)
+      structured_active = ActiveResume.new(user: 'timothyfisher', name: 'resume_structured', generate_brief: true)
+
+      result = described_class.selection_context(structured_active, structured_root)
+      expect(result[:resume]).to eq(structured_payload)
+      expect(result[:resume_scope]).to eq(structured_scope)
     end
 
     it 'raises on unsupported theme values' do
